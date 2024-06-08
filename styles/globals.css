@@ -1,0 +1,80 @@
+html, body {
+  height: 100%;
+  background: rgb(249,248,252);
+  background: linear-gradient(234deg, rgba(249,248,252,1) 0%, rgba(205,205,225,1) 50%, rgba(253,253,255,1) 100%);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  font-family: "Assistant", sans-serif;
+}
+
+.layout {
+  background-size: cover;
+  min-height: 100vh;
+}
+
+h1 {
+  color: #7E8EF1;
+  margin: 0;
+  padding: 0;
+}
+
+h5 {
+  color: #7E8EF1;
+}
+
+/* buttons */
+
+.btn {
+  background-color:  #7E8EF1;
+  color: #fafafa;
+}
+
+.btn:hover {
+  transform: scale(1.07);
+  background-color:  #b1bcff;
+}
+
+/* icons */
+.social-icons {
+  color: #7E8EF1;
+  font-size: 20px;
+}
+
+/* icons */
+.social-icon {
+  color: #b1bcff;
+  font-size: 20px;
+}
+
+.button-icon {
+  font-size: 20px;
+}
+
+.icon {
+  font-size: 10px;
+}
+
+.card-icon {
+  color: #7E8EF1;
+  font-size: 20px;
+}
+  
+.social-icon:hover {
+  color: #7E8EF1;
+}  
+
+.input-icons i {
+  position: absolute;
+}
+
+/* footer */
+
+.footer {
+  height: 60vh;
+  font-size:20px;
+  background-color: #0b0a0b;
+  font-family: "BenchNine", sans-serif;
+  color: white;
+  padding: 3rem;  
+}
