@@ -34,8 +34,8 @@ const Calendar = () => {
     const dateFormat = 'MMMM yyyy';
 
     return (
-      <div className="container">
-        <div className="header">
+      <div className="">
+        <div className="header py-3">
           <button className="btn btn-sm" onClick={() => prevMonth()}>
             <i className="fa-solid fa-arrow-left"></i>
           </button>
@@ -56,14 +56,14 @@ const Calendar = () => {
 
     for (let i = 0; i < 7; i++) {
       days.push(
-        <div className="day" key={i}>
+        <div className="day container-fluid  " key={i}>
           {daysOfWeek[i]}
         </div>
       );
     }
 
     return (
-      <div className="container">
+      <div className="">
         <div className="daysRow">{days}</div>
       </div>
     );
@@ -146,7 +146,8 @@ const Calendar = () => {
   const prevYear = () => {
     setCurrentDate(subYears(currentDate, 1));
   };
-
+  {
+    /*
   const renderToday = () => {
     const todayDateFormat = 'MM/dd/yyyy';
     return (
@@ -156,13 +157,18 @@ const Calendar = () => {
     );
   };
 
+*/
+  }
+
   return (
     <div className="">
       <div className="calendar">
+        {/* 
+        {renderToday()}
+         */}
         {renderHeader()}
         {renderDays()}
         {renderCells()}
-        {renderToday()}
       </div>
     </div>
   );

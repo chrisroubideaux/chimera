@@ -9,8 +9,12 @@ html, body {
 }
 
 .layout {
+  background: rgb(249,248,252);
+  background: linear-gradient(234deg, rgba(249,248,252,1) 0%, rgba(205,205,225,1) 50%, rgba(253,253,255,1) 100%);
+  background-repeat: no-repeat;
+  background-position: center;
   background-size: cover;
-  min-height: 100vh;
+  height: 100%;
 }
 
 h1 {
@@ -32,7 +36,7 @@ h5 {
 
 .btn:hover {
   transform: scale(1.07);
-  background-color:  #b1bcff;
+  background-color:  rgb(177, 188, 255);
 }
 
 /* icons */
@@ -56,7 +60,7 @@ h5 {
 }
 
 .card-icon {
-  color: #7E8EF1;
+  color: #2be890;
   font-size: 20px;
 }
   

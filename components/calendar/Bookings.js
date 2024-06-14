@@ -17,8 +17,8 @@ export default function Bookings() {
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <div className="modal-header">
-              <h1 className="modal-title fs-5" id="exampleModalToggleLabel">
-                Modal 1
+              <h1 className=" fs-5" id="exampleModalToggleLabel">
+                Calendar
               </h1>
               <button
                 type="button"
@@ -36,7 +36,7 @@ export default function Bookings() {
                 data-bs-target="#exampleModalToggle2"
                 data-bs-toggle="modal"
               >
-                Open second modal
+                View Meetings
               </button>
             </div>
           </div>
@@ -71,7 +71,7 @@ export default function Bookings() {
                 data-bs-target="#exampleModalToggle"
                 data-bs-toggle="modal"
               >
-                Back to first
+                Back to Calendar
               </button>
             </div>
           </div>
