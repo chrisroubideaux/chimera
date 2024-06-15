@@ -18,10 +18,36 @@
   border-radius: 10px;   
 }
 
+td {
+  background: rgb(249,248,252);
+  background: linear-gradient(234deg, rgba(249,248,252,1) 0%, rgba(205,205,225,1) 50%, rgba(253,253,255,1) 100%);  
+  object-fit: contain;
+  border-style: none;
+ 
+}
 .day-chart {
   background: rgb(249,248,252);
   background: linear-gradient(234deg, rgba(249,248,252,1) 0%, rgba(205,205,225,1) 50%, rgba(253,253,255,1) 100%);   
   box-shadow: 0.1rem 0.1rem 0.8rem #b3b2b2;
-  border-radius: 10px;  
+  border-radius: 10px;   
 }
 
+.appetizers {
+  color: #b1bcff;
+}
+
+.entrees {
+  color: #68D2E8;
+}
+
+.desserts {
+  color: #89eef9;
+}
+
+.alcohol {
+  color: #f8ee5f;
+}
+
+.gift-card {
+  color: #D862BC;
+}

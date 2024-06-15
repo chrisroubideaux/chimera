@@ -108,10 +108,10 @@ export default function DayChart() {
   }, []);
 
   return (
-    <div className=" text-center">
+    <div className="mt-4 text-center">
       <h5>{currentTime}</h5>
-      <div className="box container-fluid " style={{ height: '400px' }}>
-        <Bar options={options} data={data} />
+      <div className="day-chart">
+        <Bar className="" options={options} data={data} />
       </div>
       <div className="card-footer text-body-secondary">2 days ago</div>
     </div>

@@ -93,7 +93,7 @@ export default function Revenue() {
             <h1 className="fs-4 mb-0 mt-3">Previous Week</h1>
             <h2 className="fw-normal mb-3">
               <small className="mdi mdi-checkbox-blank-circle text-success align-middle me-1"></small>
-              <span>$58k</span>
+              <span>$72k</span>
             </h2>
           </div>
         </div>

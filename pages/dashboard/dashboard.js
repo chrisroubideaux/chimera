@@ -4,6 +4,9 @@ import Bookings from '@/components/calendar/Bookings';
 import Chart from '@/components/charts/chart';
 import DayChart from '@/components/charts/DayChart';
 import Revenue from '@/components/charts/Revenue';
+import TopSeller from '@/components/charts/TopSeller';
+import Totals from '@/components/charts/Totals';
+import Activity from '@/components/messages/Activity';
 
 export default function dashboard() {
   return (
@@ -38,6 +41,7 @@ export default function dashboard() {
             <div className="col-lg-6">
               <div className="row">
                 <div className="col-6 col-sm-6 mb-3">
+                  {/*card start */}
                   <div className="card">
                     <div className="card-body">
                       <div className="float-end">
@@ -110,6 +114,8 @@ export default function dashboard() {
                       </p>
                     </div>
                   </div>
+
+                  {/* card end */}
                 </div>
               </div>
             </div>
@@ -133,6 +139,19 @@ export default function dashboard() {
                   <DayChart />
                 </div>
               </div>
+            </div>
+            {/*sales by hour */}
+          </div>
+          {/*top sales */}
+          <div className="row">
+            <div className="col-xl-6 col-lg-12 order-lg-2 order-xl-1">
+              <TopSeller />
+            </div>
+            <div className="col-xl-3 col-lg-6 order-lg-1">
+              <Totals />
+            </div>
+            <div className="col-xl-3 col-lg-6 order-lg-1">
+              <Activity />
             </div>
           </div>
           {/*sales by hour */}
