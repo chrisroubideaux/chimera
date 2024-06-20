@@ -29,7 +29,7 @@ export default function Navbar() {
                 //  onClick={handleSearch}
               >
                 <span className="">
-                  <i class="fa-solid fa-magnifying-glass"></i>
+                  <i className="fa-solid fa-magnifying-glass"></i>
                 </span>
               </button>
             </div>
@@ -77,7 +77,7 @@ export default function Navbar() {
 
                 <li className="nav-item d-flex align-items-center">
                   <i className="social-icons fs-5 fa-solid fa-calendar-days me-2"></i>
-                  <Link className="nav-link" href="/">
+                  <Link className="nav-link" href="/calendar/calendar/">
                     Calendar
                   </Link>
                 </li>

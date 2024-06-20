@@ -47,6 +47,16 @@ export default function Chat() {
                   >
                     <i className="social-icon fa-solid fa-video"></i>
                   </a>
+
+                  <a
+                    href="#!"
+                    className="icon-md me-2 px-2"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    title="Video call"
+                  >
+                    <i className="social-icon fa-solid fa-square-pen"></i>
+                  </a>
                   <div className="dropdown">
                     <a
                       className="icon-md rounded-circle me-2 px-2"

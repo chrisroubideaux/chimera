@@ -1,17 +1,17 @@
-// sidebar component
+// sidebar component for calendar page
 import Link from 'next/link';
 
-export default function SideBar() {
+export default function Sidebar() {
   return (
     <>
       <div
         className="d-flex flex-column align-items-stretch flex-shrink-0 sidebar "
         style={{ width: '380px' }}
       >
-        <h6 className="mt-3 fs-5">
-          Active chats
+        <h6 className="mt-3">
+          Upcoming events
           <span className="badge bg-success bg-opacity-10 text-success me-2">
-            6
+            5
           </span>
         </h6>
         <div className="d-flex flex-column flex-md-row p-4 gap-4 py-md-3 align-items-center justify-content-center">
