@@ -34,9 +34,14 @@ h5 {
   color: #fafafa;
 }
 
+.btn-avatar {
+  border-radius: 50%;
+  color:  #b1bcff;
+}
+
 .btn:hover {
   transform: scale(1.07);
-  background-color:  rgb(177, 188, 255);
+  background-color:  #b1bcff;
 }
 
 /* icons */

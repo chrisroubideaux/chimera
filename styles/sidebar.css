@@ -1,0 +1,7 @@
+.sidebar {
+  border-radius: 10px;
+  background: rgb(249,248,252);
+  background: linear-gradient(234deg, rgba(249,248,252,1) 0%, rgba(205,205,225,1) 50%, rgba(253,253,255,1) 100%);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+

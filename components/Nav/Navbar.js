@@ -83,14 +83,14 @@ export default function Navbar() {
                 </li>
                 <li className="nav-item d-flex align-items-center">
                   <i className="social-icons fs-5 fa-solid fa-message me-2"></i>
-                  <Link className="nav-link" href="/">
+                  <Link className="nav-link" href="/messages/messages/">
                     Chat
                   </Link>
                 </li>
                 <li className="nav-item d-flex align-items-center">
                   <i className="social-icons fs-5 fa-solid fa-people-roof me-2"></i>
 
-                  <Link className="nav-link" href="/">
+                  <Link className="nav-link" href="/messages/messages/">
                     Meettings
                   </Link>
                 </li>
