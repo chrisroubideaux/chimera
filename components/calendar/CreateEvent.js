@@ -39,11 +39,15 @@ export default function CreateEvent() {
               <Form />
             </div>
             <div className="modal-footer">
-              <button type="button" class="btn btn-md" data-bs-dismiss="modal">
+              <button
+                type="button"
+                className="btn btn-md"
+                data-bs-dismiss="modal"
+              >
                 Cancel
               </button>
-              <button type="button" class="btn btn-md">
-                Save changes
+              <button type="button" className="btn btn-md">
+                Add Event
               </button>
             </div>
           </div>
