@@ -1,4 +1,6 @@
-// chat component
+// Chat component
+import Link from 'next/link';
+
 export default function Chat() {
   return (
     <div className="chat-container">
@@ -86,23 +88,23 @@ export default function Chat() {
                         </a>
                       </li>
                       <li>
-                        <a className="dropdown-item" href="#">
+                        <Link className="dropdown-item" href="/profile/profile">
                           <i className="social-icon fs-6 fa-solid fa-user-check"></i>
                           Profile
-                        </a>
+                        </Link>
                       </li>
                       <li>
-                        <a className="dropdown-item" href="#">
+                        <Link className="dropdown-item" href="/">
                           <i className="social-icon fs-6 fa-solid fa-trash"></i>
                           Delete chat
-                        </a>
+                        </Link>
                       </li>
                       <li className="dropdown-divider"></li>
                       <li>
-                        <a className="dropdown-item" href="#">
+                        <Link className="dropdown-item" href="/">
                           <i className="social-icon fs-6 fa-solid fa-box-archive"></i>
                           Archive chat
-                        </a>
+                        </Link>
                       </li>
                     </ul>
                   </div>

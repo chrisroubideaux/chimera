@@ -7,6 +7,7 @@ import '@/styles/form.css';
 import '@/styles/calendar.css';
 import '@/styles/graph.css';
 import '@/styles/modal.css'
+import '@/styles/avatar.css';
 
 import type { AppProps } from "next/app";
 

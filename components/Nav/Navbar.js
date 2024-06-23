@@ -1,4 +1,4 @@
-//navbar component
+// Navbar component
 import Link from 'next/link';
 //import Image from 'next/image';
 
@@ -97,7 +97,6 @@ export default function Navbar() {
 
                 <li className="nav-item d-flex align-items-center">
                   <i className="social-icons fs-5 fa-solid fa-user me-2"></i>
-
                   <Link className="nav-link" href="/login/login/">
                     Login
                   </Link>

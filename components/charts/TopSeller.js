@@ -1,4 +1,4 @@
-// card component
+// Card component
 
 export default function TopSeller() {
   return (
@@ -19,16 +19,16 @@ export default function TopSeller() {
                   <span className="text-muted">Add current date here</span>
                 </td>
                 <td>
-                  <h5 class="font-14 my-1 fw-normal">$28.49</h5>
-                  <span class="text-muted font-13">Price</span>
+                  <h5 className="font-14 my-1 fw-normal">$28.49</h5>
+                  <span className="text-muted font-13">Price</span>
                 </td>
                 <td>
-                  <h5 class="font-14 my-1 fw-normal">69</h5>
-                  <span class="text-muted font-13">Quantity</span>
+                  <h5 className="font-14 my-1 fw-normal">69</h5>
+                  <span className="text-muted font-13">Quantity</span>
                 </td>
                 <td>
-                  <h5 class="font-14 my-1 fw-normal">$1,965.81</h5>
-                  <span class="text-muted font-13">Amount</span>
+                  <h5 className="font-14 my-1 fw-normal">$1,965.81</h5>
+                  <span className="text-muted font-13">Amount</span>
                 </td>
               </tr>
 
@@ -40,16 +40,16 @@ export default function TopSeller() {
                   </span>
                 </td>
                 <td>
-                  <h5 class="font-14 my-1 fw-normal">$28.49</h5>
-                  <span class="text-muted font-13">Price</span>
+                  <h5 className="font-14 my-1 fw-normal">$28.49</h5>
+                  <span className="text-muted font-13">Price</span>
                 </td>
                 <td>
-                  <h5 class="font-14 my-1 fw-normal">69</h5>
-                  <span class="text-muted font-13">Quantity</span>
+                  <h5 className="font-14 my-1 fw-normal">69</h5>
+                  <span className="text-muted font-13">Quantity</span>
                 </td>
                 <td>
-                  <h5 class="font-14 my-1 fw-normal">$1,965.81</h5>
-                  <span class="text-muted font-13">Amount</span>
+                  <h5 className="font-14 my-1 fw-normal">$1,965.81</h5>
+                  <span className="text-muted font-13">Amount</span>
                 </td>
               </tr>
             </tbody>

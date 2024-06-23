@@ -22,6 +22,12 @@ transition: transform 0.5s;
 .nav-item :hover {
   color: #b1bcff;
 }
+
+
+.nav-vertical {
+  display: flex;
+  flex-direction: column;
+}
         
 li a {
   color: #7E8EF1; 

@@ -1,4 +1,4 @@
-// form component
+// Form component
 
 import { format } from 'date-fns';
 export default function Form() {
@@ -6,7 +6,7 @@ export default function Form() {
   return (
     <>
       <div>
-        <select class="form-select" aria-label="Default select example">
+        <select className="form-select" aria-label="Default select example">
           <option selected>Create Event</option>
           <option value="1">Video Call</option>
           <option value="2">Meeting</option>
@@ -14,7 +14,7 @@ export default function Form() {
         </select>
       </div>
       <div className="mt-2">
-        <select class="form-select" aria-label="Default select example">
+        <select className="form-select" aria-label="Default select example">
           <option selected>Select Time</option>
           <option value="1"></option>
           <option value="2">Meeting</option>

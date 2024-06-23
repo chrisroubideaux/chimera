@@ -1,4 +1,4 @@
-// recent activity component
+// Recent activity component
 export default function Totals() {
   return (
     <div className="card">

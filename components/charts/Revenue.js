@@ -1,3 +1,4 @@
+// Component for revenue chart
 import { Line } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -10,7 +11,6 @@ import {
   Legend,
 } from 'chart.js';
 
-// Register necessary components for the line chart
 ChartJS.register(
   CategoryScale,
   LinearScale,

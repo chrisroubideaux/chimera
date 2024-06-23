@@ -1,4 +1,5 @@
-// tab component
+// Tab component
+
 import Link from 'next/link';
 import CreateEvent from './CreateEvent';
 

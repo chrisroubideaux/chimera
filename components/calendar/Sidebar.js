@@ -1,4 +1,4 @@
-// sidebar component for calendar page
+// Sidebar component for calendar page
 import Link from 'next/link';
 
 export default function Sidebar() {

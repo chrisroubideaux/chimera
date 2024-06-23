@@ -1,4 +1,4 @@
-// sidebar component
+// Sidebar component
 import Link from 'next/link';
 
 export default function SideBar() {

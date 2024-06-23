@@ -1,4 +1,4 @@
-// components/Dates.js
+// Component for currnent day
 
 import { format } from 'date-fns';
 

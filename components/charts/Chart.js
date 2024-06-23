@@ -1,3 +1,4 @@
+// Monthly Chart component
 import { Bar } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -10,7 +11,6 @@ import {
 } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 
-// Register the necessary components and the datalabels plugin
 ChartJS.register(
   CategoryScale,
   LinearScale,

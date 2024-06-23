@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+// Component for current day of the week
+import { useState, useEffect } from 'react';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -9,10 +10,8 @@ import {
   Legend,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
-
 import { format } from 'date-fns';
 
-// Register necessary components for the bar chart
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -50,7 +49,7 @@ export const options = {
     x: {
       ticks: {
         callback: function (value) {
-          return `${value}k`; // Converts value to 'k' format
+          return `${value}k`;
         },
       },
     },

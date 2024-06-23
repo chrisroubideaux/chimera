@@ -1,3 +1,4 @@
+// Calendar component
 import React, { useState, useEffect } from 'react';
 import {
   format,
