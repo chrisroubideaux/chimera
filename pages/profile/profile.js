@@ -1,10 +1,27 @@
 // profile page
+import { useState } from 'react';
 import Head from 'next/head';
 import Navbar from '@/components/Nav/Navbar';
 import Cover from '@/components/profile/Cover';
 import Sidebar from '@/components/profile/Sidebar';
+import Notifications from '@/components/profile/Notifications';
+import Messages from '@/components/profile/Messages';
 
-export default function profile() {
+import Bio from '@/components/profile/Bio';
+export default function Profile() {
+  const [activeComponent, setActiveComponent] = useState('PersonalInfo');
+
+  const renderComponent = () => {
+    switch (activeComponent) {
+      case 'Notifications':
+        return <Notifications />;
+
+      case 'Chat':
+        return <Messages />;
+      default:
+        return <Bio />;
+    }
+  };
   return (
     <>
       <Head>
@@ -27,11 +44,9 @@ export default function profile() {
         <div className="container-fluid py-3">
           <div className="row">
             <div className="col-lg-4 col-xxl-3">
-              <Sidebar />
+              <Sidebar setActiveComponent={setActiveComponent} />
             </div>
-            <div className="col-lg-8 col-xxl-9">
-              <h1>Test</h1>
-            </div>
+            <div className="col-lg-8 col-xxl-9">{renderComponent()}</div>
           </div>
         </div>
       </div>
