@@ -2,12 +2,12 @@
 
 export default function Cover() {
   return (
-    <div className="cover mt-2">
+    <div className=" mt-2">
       <div className="container content-space-1 content-space-b-lg-3">
         <div className="row align-items-center">
           <div className="col">
             <div className="d-none d-lg-block">
-              <h1 className="h2 text-white">Personal info</h1>
+              <h1 className="h2">Personal info</h1>
             </div>
 
             <nav aria-label="breadcrumb">
@@ -21,8 +21,18 @@ export default function Cover() {
           </div>
           <div className="col-auto">
             <div className="d-none d-lg-block">
-              <a className="btn btn-soft-light btn-sm" href="#">
-                Log out
+              <a className="btn btn-soft-light btn-sm m-1" href="#">
+                Hours
+              </a>
+
+              <a className="btn btn-soft-light btn-sm m-1" href="#">
+                Schedule
+              </a>
+              <a className="btn btn-soft-light btn-sm m-1" href="#">
+                Meetings
+              </a>
+              <a className="btn btn-soft-light btn-sm m-1" href="#">
+                Messages
               </a>
             </div>
 
@@ -36,10 +46,10 @@ export default function Cover() {
               aria-label="Toggle navigation"
             >
               <span className="navbar-toggler-default">
-                <i className="bi-list"></i>
+                <i className="fs-6 fa-solid fa-list"></i>
               </span>
               <span className="navbar-toggler-toggled">
-                <i className="bi-x"></i>
+                <i className="fs-6 fa-solid fa-x"></i>
               </span>
             </button>
           </div>

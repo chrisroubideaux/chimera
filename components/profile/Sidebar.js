@@ -1,5 +1,4 @@
 // Sidebar component for profile page
-
 export default function Sidebar() {
   return (
     <div className=" d-flex flex-column flex-md-row p-4 gap-4 py-md-3 align-items-center justify-content-center">
@@ -47,7 +46,7 @@ export default function Sidebar() {
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="./account-preferences.html">
-                  <i className="bi-sliders nav-icon"></i> Preferences
+                  <i className="fs-6 fa-solid fa-person-walking"></i> Log out
                 </a>
               </li>
             </ul>
