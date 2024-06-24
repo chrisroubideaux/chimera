@@ -1,8 +1,9 @@
-// Cover component
+import Meetings from './Meetings';
 
-export default function Cover() {
+// Cover component
+export default function Cover({ setActiveComponent }) {
   return (
-    <div className=" mt-2">
+    <div className="mt-2">
       <div className="container content-space-1 content-space-b-lg-3">
         <div className="row align-items-center">
           <div className="col">
@@ -21,17 +22,33 @@ export default function Cover() {
           </div>
           <div className="col-auto">
             <div className="d-none d-lg-block">
-              <a className="btn btn-soft-light btn-sm m-1" href="#">
+              <a
+                className="btn btn-soft-light btn-sm m-1"
+                href="#"
+                onClick={() => setActiveComponent('Hours')}
+              >
                 Hours
               </a>
 
-              <a className="btn btn-soft-light btn-sm m-1" href="#">
+              <a
+                className="btn btn-soft-light btn-sm m-1"
+                href="#"
+                onClick={() => setActiveComponent('Schedule')}
+              >
                 Schedule
               </a>
-              <a className="btn btn-soft-light btn-sm m-1" href="#">
+              <a
+                className="btn btn-soft-light btn-sm m-1"
+                href="#"
+                onClick={() => setActiveComponent('Meetings')}
+              >
                 Meetings
               </a>
-              <a className="btn btn-soft-light btn-sm m-1" href="#">
+              <a
+                className="btn btn-soft-light btn-sm m-1"
+                href="#"
+                onClick={() => setActiveComponent('Messages')}
+              >
                 Messages
               </a>
             </div>

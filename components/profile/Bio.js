@@ -3,7 +3,7 @@
 export default function Bio() {
   return (
     <div className="">
-      <h1>Test</h1>
+      <h1>Bio</h1>
     </div>
   );
 }

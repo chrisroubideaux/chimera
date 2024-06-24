@@ -6,6 +6,9 @@ import Cover from '@/components/profile/Cover';
 import Sidebar from '@/components/profile/Sidebar';
 import Notifications from '@/components/profile/Notifications';
 import Messages from '@/components/profile/Messages';
+import Hours from '@/components/profile/Hours';
+import Meetings from '@/components/profile/Meetings';
+import Schedule from '@/components/profile/Schedule';
 
 import Bio from '@/components/profile/Bio';
 export default function Profile() {
@@ -13,9 +16,16 @@ export default function Profile() {
 
   const renderComponent = () => {
     switch (activeComponent) {
+      case 'Hours':
+        return <Hours />;
+      case 'Schedule':
+        return <Schedule />;
+      case 'Meetings':
+        return <Meetings />;
+      case 'Messages':
+        return <Messages />;
       case 'Notifications':
         return <Notifications />;
-
       case 'Chat':
         return <Messages />;
       default:
@@ -40,7 +50,7 @@ export default function Profile() {
       </Head>
       <div className="layout h-100">
         <Navbar />
-        <Cover />
+        <Cover setActiveComponent={setActiveComponent} />
         <div className="container-fluid py-3">
           <div className="row">
             <div className="col-lg-4 col-xxl-3">
