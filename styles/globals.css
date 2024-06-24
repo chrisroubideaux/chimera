@@ -55,6 +55,21 @@ h5 {
   background-color:  #b1bcff;
 }
 
+/* accordion */
+
+.accordion-body {
+  background: rgb(249,248,252);
+  background: linear-gradient(234deg, rgba(249,248,252,1) 0%, rgba(205,205,225,1) 50%, rgba(253,253,255,1) 100%);
+  box-shadow: 0.1rem 0.1rem 0.8rem #b3b2b2;
+  border-bottom: none;
+}
+
+.accordion-button {
+  background: rgb(249,248,252);
+  background: linear-gradient(234deg, rgba(249,248,252,1) 0%, rgba(205,205,225,1) 50%, rgba(253,253,255,1) 100%);
+  border-radius: 10px;
+}
+ 
 /* icons */
 .social-icons {
   color: #7E8EF1;
