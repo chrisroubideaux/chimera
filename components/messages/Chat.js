@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export default function Chat() {
   return (
-    <div className="chat-container">
+    <div className="chat-container mt-3">
       <div className="card card-chat rounded-start-lg-0 border-start-lg-0">
         <div className="card-body h-100">
           <div className="tab-content py-0 mb-0 h-100" id="chatTabsContent">
@@ -36,9 +36,9 @@ export default function Chat() {
                     className="icon-md me-2 px-2"
                     data-bs-toggle="tooltip"
                     data-bs-placement="top"
-                    title="Audio call"
+                    title="View All Messages"
                   >
-                    <i className="social-icon fa-solid fa-phone"></i>
+                    <i className="social-icon fa-solid fa-comments"></i>
                   </a>
                   <a
                     href="#!"
@@ -55,7 +55,7 @@ export default function Chat() {
                     className="icon-md me-2 px-2"
                     data-bs-toggle="tooltip"
                     data-bs-placement="top"
-                    title="Video call"
+                    title="Start New Chat"
                   >
                     <i className="social-icon fa-solid fa-square-pen"></i>
                   </a>

@@ -11,7 +11,7 @@ export default function CreateEvent() {
 
   const handleDateSelection = (date) => {
     setSelectedDate(date);
-    setShowDatePickerModal(false); // Close the date picker modal after selection
+    setShowDatePickerModal(false);
   };
 
   return (
@@ -126,7 +126,7 @@ export default function CreateEvent() {
 
       {/* Create Event Button */}
       <button
-        className="btn btn-md"
+        className="btn btn-sm"
         data-bs-target="#exampleModalToggle"
         data-bs-toggle="modal"
       >

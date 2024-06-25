@@ -6,7 +6,7 @@ import CreateEvent from './CreateEvent';
 export default function Tab() {
   return (
     <div>
-      <ul className="nav justify-content-end mt-3">
+      <ul className="nav justify-content-end mt-3 ">
         <li className="nav-item">
           <CreateEvent />
         </li>

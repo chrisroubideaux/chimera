@@ -1,7 +1,6 @@
-import Meetings from './Meetings';
+// Breadcrumb componet
 
-// Cover component
-export default function Cover({ setActiveComponent }) {
+export default function Tab({ setActiveComponent }) {
   return (
     <div className="mt-2">
       <div className="container content-space-1 content-space-b-lg-3">
@@ -40,9 +39,9 @@ export default function Cover({ setActiveComponent }) {
               <a
                 className="btn btn-soft-light btn-sm m-1"
                 href="#"
-                onClick={() => setActiveComponent('Meetings')}
+                onClick={() => setActiveComponent('Events')}
               >
-                Meetings
+                Events
               </a>
               <a
                 className="btn btn-soft-light btn-sm m-1"

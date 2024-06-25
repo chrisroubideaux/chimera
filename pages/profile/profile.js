@@ -2,15 +2,16 @@
 import { useState } from 'react';
 import Head from 'next/head';
 import Navbar from '@/components/Nav/Navbar';
-import Cover from '@/components/profile/Cover';
+import Tab from '@/components/profile/Tab';
 import Sidebar from '@/components/profile/Sidebar';
 import Notifications from '@/components/profile/Notifications';
 import Messages from '@/components/profile/Messages';
 import Hours from '@/components/profile/Hours';
-import Meetings from '@/components/profile/Meetings';
+import Events from '@/components/profile/Events';
 import Schedule from '@/components/profile/Schedule';
-
 import Bio from '@/components/profile/Bio';
+import Calendar from '@/components/profile/Calendar';
+
 export default function Profile() {
   const [activeComponent, setActiveComponent] = useState('PersonalInfo');
 
@@ -20,8 +21,8 @@ export default function Profile() {
         return <Hours />;
       case 'Schedule':
         return <Schedule />;
-      case 'Meetings':
-        return <Meetings />;
+      case 'Events':
+        return <Events />;
       case 'Messages':
         return <Messages />;
       case 'Notifications':
@@ -50,7 +51,7 @@ export default function Profile() {
       </Head>
       <div className="layout h-100">
         <Navbar />
-        <Cover setActiveComponent={setActiveComponent} />
+        <Tab setActiveComponent={setActiveComponent} />
         <div className="container-fluid py-3">
           <div className="row">
             <div className="col-lg-4 col-xxl-3">

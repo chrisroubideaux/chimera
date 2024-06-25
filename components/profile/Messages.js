@@ -38,9 +38,9 @@ export default function Messages() {
                       className="icon-md me-2 px-2"
                       data-bs-toggle="tooltip"
                       data-bs-placement="top"
-                      title="Audio call"
+                      title="View All Messages"
                     >
-                      <i className="social-icon fa-solid fa-phone"></i>
+                      <i className="social-icon fa-solid fa-comments"></i>
                     </a>
                     <a
                       href="#!"
@@ -57,7 +57,7 @@ export default function Messages() {
                       className="icon-md me-2 px-2"
                       data-bs-toggle="tooltip"
                       data-bs-placement="top"
-                      title="Video call"
+                      title="Create new message"
                     >
                       <i className="social-icon fa-solid fa-square-pen"></i>
                     </a>
@@ -92,10 +92,10 @@ export default function Messages() {
                         <li>
                           <Link
                             className="dropdown-item"
-                            href="/profile/profile"
+                            href="/messages/messages"
                           >
                             <i className="social-icon fs-6 fa-solid fa-user-check"></i>
-                            Profile
+                            View all
                           </Link>
                         </li>
                         <li>

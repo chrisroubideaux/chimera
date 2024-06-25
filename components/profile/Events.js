@@ -1,6 +1,6 @@
 // Meetings component
 
-export default function Meetings() {
+export default function Events() {
   return (
     <div className="mt-3">
       <div className="accordion" id="accordionExample">

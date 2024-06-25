@@ -90,8 +90,8 @@ export default function Navbar() {
                 <li className="nav-item d-flex align-items-center">
                   <i className="social-icons fs-5 fa-solid fa-people-roof me-2"></i>
 
-                  <Link className="nav-link" href="/messages/messages/">
-                    Meettings
+                  <Link className="nav-link" href="/events/events/">
+                    Events
                   </Link>
                 </li>
 

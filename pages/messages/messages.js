@@ -23,7 +23,8 @@ export default function messages() {
       </Head>
       <div className="layout h-100">
         <Navbar />
-        <div className="container-fluid py-3">
+        <h3 className="d-flex mt-2">Messages</h3>
+        <div className="container-fluid">
           <div className="row">
             <div className="col-lg-4 col-xxl-3">
               <SideBar />
