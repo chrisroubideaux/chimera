@@ -11,7 +11,6 @@ import Events from '@/components/profile/Events';
 import Schedule from '@/components/profile/Schedule';
 import Bio from '@/components/profile/Bio';
 import Calendar from '@/components/profile/Calendar';
-import TestComponent from '@/components/profile/TestComponent';
 import Form from '@/components/profile/Form';
 
 export default function Profile() {
@@ -21,14 +20,13 @@ export default function Profile() {
     switch (activeComponent) {
       case 'Hours':
         return <Hours />;
-      case 'TestComponent':
-        return <TestComponent setActiveComponent={setActiveComponent} />;
+
       case 'Form':
         return <Form />;
       case 'Calendar':
         return <Calendar />;
       case 'Schedule':
-        return <Schedule />;
+        return <Schedule setActiveComponent={setActiveComponent} />;
       case 'Events':
         return <Events />;
       case 'Messages':
