@@ -24,7 +24,7 @@ export default function calendar() {
       </Head>
       <div className="layout h-100">
         <Navbar />
-        <h1 className="mt-3">Calendar</h1>
+
         <Tab />
 
         <div className="container-fluid py-4">

@@ -60,6 +60,30 @@ export default function CreateEvent() {
                 </select>
               </div>
               <div className="mt-2">
+                <select
+                  className="form-select"
+                  aria-label="Default select example"
+                >
+                  <option selected>Invitees</option>
+                  <option value="1">Whole team</option>
+                  <option value="2">Name1</option>
+                  <option value="3">Name1</option>
+                  <option value="3">Name1</option>
+                  <option value="3">Name1</option>
+                  <option value="3">Name1</option>
+                </select>
+              </div>
+              <form className="d-flex mt-2" style={{ width: '29rem' }}>
+                <div className="input-group">
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="dash-daterange"
+                    placeholder="Subject"
+                  />
+                </div>
+              </form>
+              <div className="mt-2">
                 <button
                   type="button"
                   className="btn btn-md w-100 d-flex align-items-center"
