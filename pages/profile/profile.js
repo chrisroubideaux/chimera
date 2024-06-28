@@ -18,15 +18,14 @@ export default function Profile() {
 
   const renderComponent = () => {
     switch (activeComponent) {
-      case 'Hours':
-        return <Hours />;
-
       case 'Form':
         return <Form />;
       case 'Calendar':
         return <Calendar />;
       case 'Schedule':
         return <Schedule setActiveComponent={setActiveComponent} />;
+      case 'Hours':
+        return <Hours setActiveComponent={setActiveComponent} />;
       case 'Events':
         return <Events />;
       case 'Messages':

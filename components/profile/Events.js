@@ -2,7 +2,7 @@
 
 export default function Events() {
   return (
-    <div className="mt-3">
+    <div className="mt-3 card">
       <div className="accordion" id="accordionExample">
         <div className="accordion-item">
           <h5 className="accordion-header">

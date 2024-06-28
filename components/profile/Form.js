@@ -1,9 +1,9 @@
 // Request form component
 
-export default function Form() {
+export default function Form({}) {
   return (
     <div className="mt-4 card py-3">
-      <h6 className="fw-nomral text-center">Request Time OFF</h6>
+      <h6 className="fw-nomral text-center">Time off request</h6>
 
       <form className="form text-center">
         <input
@@ -22,7 +22,6 @@ export default function Form() {
             <option className="" selected>
               Request Type
             </option>
-            <option value="1">Sick</option>
             <option value="2">Vaction</option>
             <option value="3">P.T.O</option>
             <option value="3">Personal</option>
@@ -34,19 +33,17 @@ export default function Form() {
               required
               type="text"
               name="Duration"
-              placeholder="From 00/00 To 00/00"
+              placeholder="From 00/00/00"
             />
           </div>
           <div className="mt-2">
-            <select className="form-select" aria-label="Default select example">
-              <option selected>Invitees</option>
-              <option value="1">Whole team</option>
-              <option value="2">Name1</option>
-              <option value="3">Name1</option>
-              <option value="3">Name1</option>
-              <option value="3">Name1</option>
-              <option value="3">Name1</option>
-            </select>
+            <input
+              className="form-control fw-bold"
+              required
+              type="text"
+              name="Duration"
+              placeholder="To 00/00/00"
+            />
           </div>
         </div>
         <div className="mt-5">
