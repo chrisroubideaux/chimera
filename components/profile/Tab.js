@@ -39,7 +39,7 @@ export default function Tab({ setActiveComponent }) {
               <a
                 className="btn btn-soft-light btn-sm m-1"
                 href="#"
-                onClick={() => setActiveComponent('Events')}
+                onClick={() => setActiveComponent('Notifications')}
               >
                 Events
               </a>

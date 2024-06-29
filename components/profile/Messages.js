@@ -1,8 +1,8 @@
 // Messages component
-// Chat component
+
 import Link from 'next/link';
 
-export default function Messages() {
+export default function Messages({ setActiveComponent }) {
   return (
     <div className="mt-3">
       <div className="chat-container ">
@@ -39,6 +39,7 @@ export default function Messages() {
                       data-bs-toggle="tooltip"
                       data-bs-placement="top"
                       title="View All Messages"
+                      onClick={() => setActiveComponent('Events')}
                     >
                       <i className="social-icon fa-solid fa-comments"></i>
                     </a>
@@ -115,9 +116,7 @@ export default function Messages() {
                     </div>
                   </div>
                 </div>
-
                 <hr />
-
                 <div className="chat-conversation-content custom-scrollbar">
                   <div className="text-center small my-2">
                     Jul 16, 2022, 06:15 am

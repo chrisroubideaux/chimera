@@ -40,16 +40,16 @@ export default function Bio() {
                         className="form-control"
                         name="firstName"
                         id="firstNameLabel"
-                        placeholder="Clarice"
-                        aria-label="Clarice"
+                        placeholder="First Name"
+                        aria-label="First Name"
                       />
                       <input
                         type="text"
                         className="form-control"
                         name="lastName"
                         id="lastNameLabel"
-                        placeholder="Boone"
-                        aria-label="Boone"
+                        placeholder="Last Name"
+                        aria-label="Last Name"
                       />
                     </div>
                   </div>

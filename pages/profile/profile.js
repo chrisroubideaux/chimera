@@ -7,7 +7,7 @@ import Sidebar from '@/components/profile/Sidebar';
 import Notifications from '@/components/profile/Notifications';
 import Messages from '@/components/profile/Messages';
 import Hours from '@/components/profile/Hours';
-import Events from '@/components/profile/Events';
+import Chats from '@/components/profile/Chats';
 import Schedule from '@/components/profile/Schedule';
 import Bio from '@/components/profile/Bio';
 import Calendar from '@/components/profile/Calendar';
@@ -27,13 +27,12 @@ export default function Profile() {
       case 'Hours':
         return <Hours setActiveComponent={setActiveComponent} />;
       case 'Events':
-        return <Events />;
+        return <Chats />;
       case 'Messages':
-        return <Messages />;
+        return <Messages setActiveComponent={setActiveComponent} />;
       case 'Notifications':
-        return <Notifications />;
-      case 'Chat':
-        return <Messages />;
+        return <Notifications setActiveComponent={setActiveComponent} />;
+
       default:
         return <Bio />;
     }
