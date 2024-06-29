@@ -22,7 +22,7 @@ export default function Form({}) {
             <option className="" selected>
               Request Type
             </option>
-            <option value="2">Vaction</option>
+            <option value="2">Vacation</option>
             <option value="3">P.T.O</option>
             <option value="3">Personal</option>
           </select>
