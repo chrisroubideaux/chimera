@@ -102,13 +102,13 @@ export default function Bio() {
                         className="js-quill"
                         style={{ height: '15rem' }}
                         data-hs-quill-options='{
-                      "placeholder": "Type your message...",
-                      "modules": {
-                        "toolbar": [
-                          ["bold", "italic", "underline", "strike", "link", "image", "blockquote", "code", {"list": "bullet"}]
-                        ]
-                      }
-                    }'
+                        "placeholder": "Type your message...",
+                        "modules": {
+                          "toolbar": [
+                            ["bold", "italic", "underline", "strike", "link", "image", "blockquote", "code", {"list": "bullet"}]
+                          ]
+                        }
+                      }'
                       ></div>
                     </div>
                   </div>
@@ -116,7 +116,7 @@ export default function Bio() {
               </form>
               <div className="card-footer pt-0">
                 <div className="d-flex justify-content-end gap-3">
-                  <a className="btn btn-sm" href="#!">
+                  <a className="btn btn-sm mt-1" href="#!">
                     Edit Profile
                   </a>
                 </div>
@@ -127,69 +127,4 @@ export default function Bio() {
       </div>
     </div>
   );
-}
-
-{
-  /*
-export default function Bio() {
-  return (
-    <div className="mt-3">
-      <h4 class="card-header-title">Basic info</h4>
-      <form class="row g-3">
-        <div class="col-md-6">
-          <label for="inputEmail4" className="form-label">
-            First Name
-          </label>
-          <input type="email" className="form-control" id="inputEmail4" />
-          <label for="inputAddress" className="form-label">
-            Email
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="inputAddress"
-            placeholder="Email"
-          />
-        </div>
-        <div className="col-md-6">
-          <label for="inputPassword4" className="form-label">
-            Last Name
-          </label>
-          <input type="password" className="form-control" id="inputPassword4" />
-          <label for="inputAddress" className="form-label">
-            Email
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="inputAddress"
-            placeholder="Email"
-          />
-          <label for="inputAddress" className="form-label">
-            Email
-          </label>
-        </div>
-        <div className="col-12">
-          <label for="inputAddress" className="form-label">
-            Email
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="inputAddress"
-            placeholder="Email"
-          />
-        </div>
-
-        <div className="col-12">
-          <button type="submit" className="btn btn-md">
-            Edit Profile
-          </button>
-        </div>
-      </form>
-    </div>
-  );
-}
-
-*/
 }

@@ -1,12 +1,12 @@
-// Chat component
+// Notifaction component
 
-export default function Chats() {
+export default function Notifications() {
   return (
     <div className="mt-3 card">
       <div className="chat-container ">
         <div className="card card-chat rounded-start-lg-0 border-start-lg-0">
           <div className="card-body h-100">
-            <h5 className=" d-flex ">Messages</h5>
+            <h5 className=" d-flex ">Notifactions</h5>
 
             <div className="accordion" id="accordionExample">
               <div className="accordion-item">
