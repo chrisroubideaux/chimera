@@ -76,6 +76,7 @@ export default function Tab() {
                   Hourly
                 </a>
               </li>
+
               <li>
                 <a className="dropdown-item" href="#">
                   Daily
