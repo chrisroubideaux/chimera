@@ -32,7 +32,7 @@ export default function Tab({ setActiveComponent }) {
               <a
                 className="btn btn-soft-light btn-sm m-1"
                 href="#"
-                onClick={() => setActiveComponent('Notifactions')}
+                onClick={() => setActiveComponent('Notifications')}
               >
                 Notifications
                 <i className=" m-1 fa-solid fa-bell"></i>
@@ -41,13 +41,14 @@ export default function Tab({ setActiveComponent }) {
                 </span>
               </a>
 
-              <Link
+              <a
                 className="btn btn-soft-light btn-sm m-1"
-                href="/messages/messages"
+                href="#"
+                onClick={() => setActiveComponent('Messages')}
               >
                 Messages
                 <i className=" m-1 fa-solid fa-message"></i>
-              </Link>
+              </a>
 
               <Link
                 className="btn btn-soft-light btn-sm m-1"

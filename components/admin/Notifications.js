@@ -1,6 +1,6 @@
 // Notifaction component
 
-export default function Notifications() {
+export default function Notifications({}) {
   return (
     <div className="mt-3 card">
       <div className="chat-container ">

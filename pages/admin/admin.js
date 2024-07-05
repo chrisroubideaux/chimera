@@ -8,6 +8,7 @@ import Chats from '@/components/admin/Chats';
 import Bio from '@/components/admin/Bio';
 import Messages from '@/components/admin/Messages';
 import Notifications from '@/components/admin/Notifications';
+import Schedule from '@/components/admin/Schedule';
 
 export default function Admin() {
   const [activeComponent, setActiveComponent] = useState('PersonalInfo');
@@ -20,6 +21,8 @@ export default function Admin() {
         return <Messages setActiveComponent={setActiveComponent} />;
       case 'Notifications':
         return <Notifications setActiveComponent={setActiveComponent} />;
+      case 'Schedule':
+        return <Schedule setActiveComponent={setActiveComponent} />;
       default:
         return <Bio />;
     }

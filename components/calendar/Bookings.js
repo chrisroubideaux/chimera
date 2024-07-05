@@ -78,7 +78,7 @@ export default function Bookings() {
         </div>
       </div>
 
-      <form className="d-flex" style={{ width: '14rem' }}>
+      <form className="d-flex" style={{ width: '10rem' }}>
         <div className="input-group">
           <input
             type="text"
@@ -89,7 +89,7 @@ export default function Bookings() {
           />
           <button
             type="button"
-            className="input-group-text bg-sm"
+            className="input-group-text bg-sm btn-sm"
             data-bs-target="#exampleModalToggle"
             data-bs-toggle="modal"
           >
