@@ -1,10 +1,7 @@
-// Schedule component
+// Time off request
 import Link from 'next/link';
-import { format } from 'date-fns';
 
-export default function Schedule({ setActiveComponent }) {
-  const today = format(new Date(), ' MM/dd/yyyy');
-  const dayOfWeek = format(new Date(), 'EEEE');
+export default function TimeOff({ setActiveComponent }) {
   return (
     <div>
       <div className="mt-3">
@@ -29,7 +26,7 @@ export default function Schedule({ setActiveComponent }) {
                       </div>
                       <div className="d-block flex-grow-1">
                         <h6 className="mb-0 mt-1 fw-bold d-flex px-1">
-                          {"Today's Schedule"}: {today}
+                          Time Off Request: 06/25/2024
                         </h6>
                       </div>
                     </div>
@@ -37,8 +34,8 @@ export default function Schedule({ setActiveComponent }) {
                       <a
                         href="#!"
                         className="icon-md me-2 px-2"
-                        title="Request time off"
-                        onClick={() => setActiveComponent('TimeOff')}
+                        title="Today's Schedule"
+                        onClick={() => setActiveComponent('Schedule')}
                       >
                         <i className="social-icon fa-solid fa-book"></i>
                       </a>
@@ -108,61 +105,60 @@ export default function Schedule({ setActiveComponent }) {
                   </div>
 
                   <hr />
-
-                  {/*test */}
                   <div className="">
                     <div className="list-group" style={{ width: '50rem' }}>
                       <label className="list-group-item d-flex gap-3">
                         <span className="pt-1 form-checked-content">
-                          <strong className="d-flex me-5 "> {today}</strong>
+                          <strong className="d-flex me-5 ">06/25/2024</strong>
                           <h5 className="d-block  ">
                             <i className="social-icon fa-solid fa-calendar-days me-1 "></i>
-                            {dayOfWeek}1:00–2:00pm
+                            Monday: 1:00–2:00pm
+                          </h5>
+                          <strong className="">Name</strong>
+                        </span>
+                      </label>
+                      <label className="list-group-item d-flex gap-3">
+                        <span className="pt-1 form-checked-content">
+                          <strong className="d-flex me-5">06/25/2024</strong>
+                          <h5 className="d-block  ">
+                            <i className="social-icon fa-solid fa-calendar-days me-1 "></i>
+                            Monday: 1:00–2:00pm
                           </h5>
                         </span>
                       </label>
                       <label className="list-group-item d-flex gap-3">
                         <span className="pt-1 form-checked-content">
-                          <strong className="d-flex me-5"> {today}</strong>
+                          <strong className="d-flex me-5">06/25/2024</strong>
                           <h5 className="d-block  ">
                             <i className="social-icon fa-solid fa-calendar-days me-1 "></i>
-                            {dayOfWeek}: 1:00–2:00pm
-                          </h5>
-                        </span>
-                      </label>
-                      <label className="list-group-item d-flex gap-3">
-                        <span className="pt-1 form-checked-content">
-                          <strong className="d-flex me-5"> {today}</strong>
-                          <h5 className="d-block  ">
-                            <i className="social-icon fa-solid fa-calendar-days me-1 "></i>
-                            {dayOfWeek}: 1:00–2:00pm
+                            Monday: 1:00–2:00pm
                           </h5>
                         </span>
                       </label>
                       <label className="list-group-item d-flex gap-3 bg-body-tertiary">
                         <span className="pt-1 form-checked-content">
-                          <strong className="d-flex me-5"> {today}</strong>
+                          <strong className="d-flex me-5">06/25/2024</strong>
                           <h5 className="d-block  ">
                             <i className="social-icon fa-solid fa-calendar-days me-1 "></i>
-                            {dayOfWeek}: 1:00–2:00pm
+                            Monday: 1:00–2:00pm
                           </h5>
                         </span>
                       </label>
                       <label className="list-group-item d-flex gap-3 bg-body-tertiary">
                         <span className="pt-1 form-checked-content">
-                          <strong className="d-flex me-5"> {today}</strong>
+                          <strong className="d-flex me-5">06/25/2024</strong>
                           <h5 className="d-block  ">
                             <i className="social-icon fa-solid fa-calendar-days me-1 "></i>
-                            {dayOfWeek}: 1:00–2:00pm
+                            Monday: 1:00–2:00pm
                           </h5>
                         </span>
                       </label>
                       <label className="list-group-item d-flex gap-3 bg-body-tertiary">
                         <span className="pt-1 form-checked-content">
-                          <strong className="d-flex me-5"> {today}</strong>
+                          <strong className="d-flex me-5">06/25/2024</strong>
                           <h5 className="d-block  ">
                             <i className="social-icon fa-solid fa-calendar-days me-1 "></i>
-                            {dayOfWeek}: 1:00–2:00pm
+                            Monday: 1:00–2:00pm
                           </h5>
                         </span>
                       </label>
