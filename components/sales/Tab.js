@@ -27,6 +27,12 @@ export default function Tab({ setActiveComponent }) {
           <Bookings />
         </li>
         <li className="nav-item me-2">
+          <Link className="btn btn-sm" href="/dashboard/dashboard">
+            Dashboard
+            <i className="m-1 fa-solid fa-chart-column"></i>
+          </Link>
+        </li>
+        <li className="nav-item me-2">
           <div className="dropdown">
             <button
               className="btn btn-sm dropdown-toggle"
