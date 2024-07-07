@@ -1,7 +1,8 @@
 import Head from 'next/head';
 import Navbar from '@/components/Nav/Navbar';
 import Card from '@/components/charts/Card';
-import Bookings from '@/components/calendar/Bookings';
+//import Bookings from '@/components/calendar/Bookings';
+import Tab from '@/components/charts/Tab';
 import Chart from '@/components/charts/chart';
 import DayChart from '@/components/charts/DayChart';
 import Revenue from '@/components/charts/Revenue';
@@ -29,14 +30,7 @@ export default function dashboard() {
       <div className="layout h-100">
         <Navbar />
         <div className="container-fluid py-3">
-          <div className="row">
-            <div className="col-sm-8">
-              <h1>Greetings!</h1>
-            </div>
-            <div className="col-sm-4">
-              <Bookings />
-            </div>
-          </div>
+          <Tab />
           {/*revenue cards */}
           <div className="row mt-4">
             <div className="col-lg-6 col-6 col-sm-6 mb-3">
