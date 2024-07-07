@@ -19,8 +19,9 @@
 }
 
 td {
+ 
   background: rgb(249,248,252);
-  background: linear-gradient(234deg, rgba(249,248,252,1) 0%, rgba(205,205,225,1) 50%, rgba(253,253,255,1) 100%);  
+  background: linear-gradient(234deg, rgb(146, 145, 145) 0%, rgba(#f1f1f3) 50%, rgba(#f1f1f3) 100%);  
   object-fit: contain;
   border-style: none;
  

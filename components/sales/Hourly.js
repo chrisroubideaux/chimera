@@ -1,4 +1,4 @@
-// Graph component
+// Hourly sales graph component
 
 import { useState, useEffect } from 'react';
 import {
@@ -26,7 +26,7 @@ export const options = {
   indexAxis: 'y',
   elements: {
     bar: {
-      borderWidth: 2,
+      borderWidth: 3,
     },
   },
   responsive: true,
@@ -76,13 +76,13 @@ export const data = {
   datasets: [
     {
       label: 'Actual',
-      data: [10, 10, 10, 10, 12.5, 12.5, 12.5, 15, 15, 15, 15, 15],
+      data: [1.5, 1.2, 1.3, 1, 1.1, 1.3, 1.3, 1.2, 1.2, 1.4, 1.2],
       borderColor: 'rgb(177, 188, 255)',
       backgroundColor: 'rgb(177, 188, 255)',
     },
     {
       label: 'Projected',
-      data: [8, 8, 8, 8, 10, 10, 10, 12, 12, 12, 12, 12],
+      data: [1, 1.1, 1.1, 1, 1.4, 1.3, 1.6, 1.4, 1.3, 1.2, 1.1],
       borderColor: 'rgba(53, 162, 235, 0.5)',
       backgroundColor: 'rgba(53, 162, 235, 0.5)',
     },

@@ -1,4 +1,4 @@
-// Graph component
+// Top selling graph component
 
 export default function TopSelling() {
   return (

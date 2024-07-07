@@ -41,15 +41,6 @@ export default function Tab({ setActiveComponent }) {
                 <a
                   className="dropdown-item"
                   href="#"
-                  onClick={() => setActiveComponent('Chart')}
-                >
-                  Monthly
-                </a>
-              </li>
-              <li>
-                <a
-                  className="dropdown-item"
-                  href="#"
                   onClick={() => setActiveComponent('TopSelling')}
                 >
                   Top Selling
@@ -80,6 +71,15 @@ export default function Tab({ setActiveComponent }) {
                   onClick={() => setActiveComponent('Weekly')}
                 >
                   Weekly
+                </a>
+              </li>
+              <li>
+                <a
+                  className="dropdown-item"
+                  href="#"
+                  onClick={() => setActiveComponent('Monthly')}
+                >
+                  Monthly
                 </a>
               </li>
             </ul>

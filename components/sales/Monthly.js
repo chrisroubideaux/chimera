@@ -1,4 +1,4 @@
-// Daily sales graph component
+// Monthly sales graph component
 import { Bar } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -46,32 +46,34 @@ export const options = {
 };
 
 const labels = [
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thursday',
-  'Friday',
-  'Saturday',
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
 ];
 export const data = {
   labels,
   datasets: [
     {
       label: 'Projected',
-      data: [9, 9, 8, 7, 8, 11],
+      data: [180, 200, 190, 190, 200, 215, 220, 250],
       borderColor: 'rgb(126, 142, 241)',
       backgroundColor: 'rgb(177, 188, 255)',
     },
     {
       label: 'Actual',
-      data: [10, 10, 7, 8, 10, 11],
+      data: [230, 240, 195, 200, 210, 230, 240, 260],
       borderColor: 'rgb(53, 162, 235)',
       backgroundColor: 'rgba(53, 162, 235, 0.5)',
     },
   ],
 };
 
-export default function Daily() {
+export default function Monthly() {
   return (
     <div className="container">
       <div className="card" style={{ maxWidth: '800px' }}>

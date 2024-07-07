@@ -4,12 +4,11 @@ import Head from 'next/head';
 import Navbar from '@/components/Nav/Navbar';
 import Tab from '@/components/sales/Tab';
 import Card from '@/components/charts/Card';
-import Chart from '@/components/charts/Chart';
 import TopSelling from '@/components/sales/TopSelling';
 import Hourly from '@/components/sales/Hourly';
 import Daily from '@/components/sales/Daily';
 import Weekly from '@/components/sales/Weekly';
-
+import Monthly from '@/components/sales/Monthly';
 export default function Sales() {
   const [activeComponent, setActiveComponent] = useState('Sales');
 
@@ -24,7 +23,7 @@ export default function Sales() {
       case 'Weekly':
         return <Weekly setActiveComponent={setActiveComponent} />;
       default:
-        return <Chart />;
+        return <Monthly />;
     }
   };
   return (
