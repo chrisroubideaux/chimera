@@ -1,6 +1,7 @@
 // products page
 import Head from 'next/head';
 import Navbar from '@/components/Nav/Navbar';
+import Tab from '@/components/products/Tab';
 export default function products() {
   return (
     <>
@@ -20,6 +21,7 @@ export default function products() {
       </Head>
       <div className="layout h-100">
         <Navbar />
+        <Tab />
       </div>
     </>
   );
