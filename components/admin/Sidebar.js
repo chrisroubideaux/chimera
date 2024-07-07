@@ -44,7 +44,7 @@ export default function Sidebar({ setActiveComponent }) {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" href="/dashboard/dashboard">
+                <Link className="nav-link" href="/products/products">
                   <i className="fs-6 fa-solid fa-shop"></i> Products
                 </Link>
               </li>

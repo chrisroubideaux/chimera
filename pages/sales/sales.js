@@ -9,6 +9,7 @@ import Hourly from '@/components/sales/Hourly';
 import Daily from '@/components/sales/Daily';
 import Weekly from '@/components/sales/Weekly';
 import Monthly from '@/components/sales/Monthly';
+
 export default function Sales() {
   const [activeComponent, setActiveComponent] = useState('Sales');
 
