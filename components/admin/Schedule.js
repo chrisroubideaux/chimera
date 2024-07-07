@@ -106,10 +106,7 @@ export default function Schedule({ setActiveComponent }) {
                       </div>
                     </div>
                   </div>
-
                   <hr />
-
-                  {/*test */}
                   <div className="">
                     <div className="list-group" style={{ width: '50rem' }}>
                       <label className="list-group-item d-flex gap-3">
@@ -119,6 +116,7 @@ export default function Schedule({ setActiveComponent }) {
                             <i className="social-icon fa-solid fa-calendar-days me-1 "></i>
                             {dayOfWeek}1:00–2:00pm
                           </h5>
+                          <strong className="">Name</strong>
                         </span>
                       </label>
                       <label className="list-group-item d-flex gap-3">
@@ -128,6 +126,7 @@ export default function Schedule({ setActiveComponent }) {
                             <i className="social-icon fa-solid fa-calendar-days me-1 "></i>
                             {dayOfWeek}: 1:00–2:00pm
                           </h5>
+                          <strong className="">Name</strong>
                         </span>
                       </label>
                       <label className="list-group-item d-flex gap-3">
@@ -137,6 +136,7 @@ export default function Schedule({ setActiveComponent }) {
                             <i className="social-icon fa-solid fa-calendar-days me-1 "></i>
                             {dayOfWeek}: 1:00–2:00pm
                           </h5>
+                          <strong className="">Name</strong>
                         </span>
                       </label>
                       <label className="list-group-item d-flex gap-3 bg-body-tertiary">
@@ -146,6 +146,7 @@ export default function Schedule({ setActiveComponent }) {
                             <i className="social-icon fa-solid fa-calendar-days me-1 "></i>
                             {dayOfWeek}: 1:00–2:00pm
                           </h5>
+                          <strong className="">Name</strong>
                         </span>
                       </label>
                       <label className="list-group-item d-flex gap-3 bg-body-tertiary">
@@ -155,6 +156,7 @@ export default function Schedule({ setActiveComponent }) {
                             <i className="social-icon fa-solid fa-calendar-days me-1 "></i>
                             {dayOfWeek}: 1:00–2:00pm
                           </h5>
+                          <strong className="">Name</strong>
                         </span>
                       </label>
                       <label className="list-group-item d-flex gap-3 bg-body-tertiary">
@@ -164,6 +166,7 @@ export default function Schedule({ setActiveComponent }) {
                             <i className="social-icon fa-solid fa-calendar-days me-1 "></i>
                             {dayOfWeek}: 1:00–2:00pm
                           </h5>
+                          <strong className="">Name</strong>
                         </span>
                       </label>
                     </div>

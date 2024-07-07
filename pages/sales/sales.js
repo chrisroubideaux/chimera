@@ -1,11 +1,32 @@
 // sales page
+import { useState } from 'react';
 import Head from 'next/head';
 import Navbar from '@/components/Nav/Navbar';
 import Tab from '@/components/sales/Tab';
 import Card from '@/components/charts/Card';
 import Chart from '@/components/charts/Chart';
+import TopSelling from '@/components/sales/TopSelling';
+import Hourly from '@/components/sales/Hourly';
+import Daily from '@/components/sales/Daily';
+import Weekly from '@/components/sales/Weekly';
 
 export default function Sales() {
+  const [activeComponent, setActiveComponent] = useState('Sales');
+
+  const renderComponent = () => {
+    switch (activeComponent) {
+      case 'TopSelling':
+        return <TopSelling setActiveComponent={setActiveComponent} />;
+      case 'Hourly':
+        return <Hourly setActiveComponent={setActiveComponent} />;
+      case 'Daily':
+        return <Daily setActiveComponent={setActiveComponent} />;
+      case 'Weekly':
+        return <Weekly setActiveComponent={setActiveComponent} />;
+      default:
+        return <Chart />;
+    }
+  };
   return (
     <>
       <Head>
@@ -24,7 +45,7 @@ export default function Sales() {
       </Head>
       <div className="layout h-100">
         <Navbar />
-        <Tab />
+        <Tab setActiveComponent={setActiveComponent} />
         <div className="container-fluid py-3">
           <div className="row mt-4">
             <div className="col-lg-6 col-6 col-sm-6 mb-3">
@@ -34,9 +55,7 @@ export default function Sales() {
             {/*revenue chart */}
             <div className="col-lg-6">
               <div className="">
-                <div className="">
-                  <Chart />
-                </div>
+                <div className="">{renderComponent()}</div>
               </div>
             </div>
           </div>

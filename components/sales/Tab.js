@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import Bookings from '../calendar/Bookings';
 
-export default function Tab() {
+export default function Tab({ setActiveComponent }) {
   return (
     <div className="d-flex justify-content-between align-items-center mt-3 me-4">
       <div className="row align-items-center">
@@ -38,23 +38,48 @@ export default function Tab() {
             </button>
             <ul className="dropdown-menu">
               <li>
-                <a className="dropdown-item" href="#">
+                <a
+                  className="dropdown-item"
+                  href="#"
+                  onClick={() => setActiveComponent('Chart')}
+                >
+                  Monthly
+                </a>
+              </li>
+              <li>
+                <a
+                  className="dropdown-item"
+                  href="#"
+                  onClick={() => setActiveComponent('TopSelling')}
+                >
+                  Top Selling
+                </a>
+              </li>
+              <li>
+                <a
+                  className="dropdown-item"
+                  href="#"
+                  onClick={() => setActiveComponent('Hourly')}
+                >
                   Hourly
                 </a>
               </li>
               <li>
-                <a className="dropdown-item" href="#">
+                <a
+                  className="dropdown-item"
+                  href="#"
+                  onClick={() => setActiveComponent('Daily')}
+                >
                   Daily
                 </a>
               </li>
               <li>
-                <a className="dropdown-item" href="#">
+                <a
+                  className="dropdown-item"
+                  href="#"
+                  onClick={() => setActiveComponent('Weekly')}
+                >
                   Weekly
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  Monthly
                 </a>
               </li>
             </ul>
