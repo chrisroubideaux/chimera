@@ -132,7 +132,7 @@ export default function Tab({ setActiveComponent }) {
         </li>
         */}
         <li className="nav-item me-2">
-          <Link className="btn btn-sm" href="/order/orders">
+          <Link className="btn btn-sm" href="/orders/orders">
             Orders
             <i className="m-1 fa-solid fa-clipboard-list"></i>
           </Link>

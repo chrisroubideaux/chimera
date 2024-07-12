@@ -1,6 +1,6 @@
-// Beverages component
+// card component for orders page
 
-const Bevearges = () => {
+const Monthly = () => {
   return (
     <div>
       <div className="container-fluid p-0 mt-3">
@@ -8,7 +8,7 @@ const Bevearges = () => {
           <div className="card-body">
             <div className="row mb-3">
               <div className="col-md-6 col-xl-4 mb-2 mb-md-0">
-                <h5>Beverages</h5>
+                <h5>{'Orders this month'}</h5>
               </div>
               <div className="col-md-6 col-xl-8">
                 <div className="text-sm-end ">
@@ -36,11 +36,12 @@ const Bevearges = () => {
                         ></label>
                       </div>
                     </th>
-                    <th className="align-middle">Item Name</th>
-                    <th className="align-middle">Price</th>
-                    <th className="align-middle">Stock</th>
-                    <th className="align-middle">Category</th>
-                    <th className="align-middle">Rating</th>
+                    <th className="align-middle">Order ID</th>
+                    <th className="align-middle">Billing Name</th>
+                    <th className="align-middle">Date</th>
+                    <th className="align-middle">Total</th>
+                    <th className="align-middle">Payment Method</th>
+                    <th className="align-middle">Payment Status</th>
                     <th className="align-middle text-end">Actions</th>
                   </tr>
                 </thead>
@@ -125,4 +126,4 @@ const Bevearges = () => {
   );
 };
 
-export default Bevearges;
+export default Monthly;

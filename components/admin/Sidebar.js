@@ -49,17 +49,17 @@ export default function Sidebar({ setActiveComponent }) {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" href="/dashboard/dashboard">
+                <Link className="nav-link" href="/orders/orders">
                   <i className="fs-6 fa-solid fa-clipboard-list"></i> Orders
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" href="/dashboard/dashboard">
+                <Link className="nav-link" href="/inventory/inventory">
                   <i className="fs-6 fa-solid fa-list-check"></i> Inventory
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" href="/dashboard/dashboard">
+                <Link className="nav-link" href="/team/team">
                   <i className="fs-6 fa-solid fa-users"></i> Team
                 </Link>
               </li>
