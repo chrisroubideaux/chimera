@@ -1,8 +1,39 @@
 // products page
+import { useState } from 'react';
 import Head from 'next/head';
 import Navbar from '@/components/Nav/Navbar';
 import Tab from '@/components/products/Tab';
-export default function products() {
+
+import Sidebar from '@/components/admin/Sidebar';
+import Starters from '@/components/products/Starters';
+import Entrees from '@/components/products/Entrees';
+import Desserts from '@/components/products/Desserts';
+import Bevearges from '@/components/products/Beverages';
+import GiftCards from '@/components/products/GiftCards';
+import Form from '@/components/products/Form';
+import NewItems from '@/components/products/NewItems';
+
+export default function Products() {
+  const [activeComponent, setActiveComponent] = useState('Products');
+
+  const renderComponent = () => {
+    switch (activeComponent) {
+      case 'Entrees':
+        return <Entrees setActiveComponent={setActiveComponent} />;
+      case 'Desserts':
+        return <Desserts setActiveComponent={setActiveComponent} />;
+      case 'Beverages':
+        return <Bevearges setActiveComponent={setActiveComponent} />;
+      case 'GiftCards':
+        return <GiftCards setActiveComponent={setActiveComponent} />;
+      case 'Form':
+        return <Form setActiveComponent={setActiveComponent} />;
+      case 'NewItems':
+        return <NewItems setActiveComponent={setActiveComponent} />;
+      default:
+        return <Starters setActiveComponent={setActiveComponent} />;
+    }
+  };
   return (
     <>
       <Head>
@@ -21,7 +52,15 @@ export default function products() {
       </Head>
       <div className="layout h-100">
         <Navbar />
-        <Tab />
+        <Tab setActiveComponent={setActiveComponent} />
+        <div className="container-fluid ">
+          <div className="row">
+            <div className="col-lg-4 col-xxl-3">
+              <Sidebar setActiveComponent={setActiveComponent} />
+            </div>
+            <div className="col-lg-8 col-xxl-9">{renderComponent()}</div>
+          </div>
+        </div>
       </div>
     </>
   );

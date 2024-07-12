@@ -34,57 +34,67 @@ export default function Tab({ setActiveComponent }) {
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              Sale Analytics
+              Products
             </button>
             <ul className="dropdown-menu">
               <li>
                 <a
                   className="dropdown-item"
                   href="#"
-                  onClick={() => setActiveComponent('TopSelling')}
+                  onClick={() => setActiveComponent('Starters')}
                 >
-                  Top Selling
+                  Starters
                 </a>
               </li>
               <li>
                 <a
                   className="dropdown-item"
                   href="#"
-                  onClick={() => setActiveComponent('Hourly')}
+                  onClick={() => setActiveComponent('Entrees')}
                 >
-                  Hourly
+                  {'Entrees'}
                 </a>
               </li>
               <li>
                 <a
                   className="dropdown-item"
                   href="#"
-                  onClick={() => setActiveComponent('Daily')}
+                  onClick={() => setActiveComponent('Desserts')}
                 >
-                  Daily
+                  Desserts
                 </a>
               </li>
               <li>
                 <a
                   className="dropdown-item"
                   href="#"
-                  onClick={() => setActiveComponent('Weekly')}
+                  onClick={() => setActiveComponent('Beverages')}
                 >
-                  Weekly
+                  Beverages
                 </a>
               </li>
               <li>
                 <a
                   className="dropdown-item"
                   href="#"
-                  onClick={() => setActiveComponent('Monthly')}
+                  onClick={() => setActiveComponent('GiftCards')}
                 >
-                  Monthly
+                  Gift Cards
+                </a>
+              </li>
+              <li>
+                <a
+                  className="dropdown-item"
+                  href="#"
+                  onClick={() => setActiveComponent('NewItems')}
+                >
+                  Recently Added
                 </a>
               </li>
             </ul>
           </div>
         </li>
+        {/*
         <li className="nav-item me-2">
           <div className="dropdown">
             <button
@@ -93,7 +103,7 @@ export default function Tab({ setActiveComponent }) {
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              Reports
+              Inventory
             </button>
             <ul className="dropdown-menu">
               <li>
@@ -120,7 +130,13 @@ export default function Tab({ setActiveComponent }) {
             </ul>
           </div>
         </li>
-
+        */}
+        <li className="nav-item me-2">
+          <Link className="btn btn-sm" href="/order/orders">
+            Orders
+            <i className="m-1 fa-solid fa-clipboard-list"></i>
+          </Link>
+        </li>
         <li className="nav-item me-2">
           <Link className="btn btn-sm" href="/admin/admin">
             Admin
