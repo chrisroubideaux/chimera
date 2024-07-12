@@ -1,3 +1,4 @@
+// dashboard page
 import Head from 'next/head';
 import Navbar from '@/components/Nav/Navbar';
 import Card from '@/components/charts/Card';

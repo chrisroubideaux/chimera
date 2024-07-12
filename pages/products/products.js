@@ -3,7 +3,6 @@ import { useState } from 'react';
 import Head from 'next/head';
 import Navbar from '@/components/Nav/Navbar';
 import Tab from '@/components/products/Tab';
-
 import Sidebar from '@/components/admin/Sidebar';
 import Starters from '@/components/products/Starters';
 import Entrees from '@/components/products/Entrees';

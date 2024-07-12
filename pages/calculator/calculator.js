@@ -1,4 +1,4 @@
-// Calculator page
+// calculator page
 import Head from 'next/head';
 import Navbar from '@/components/Nav/Navbar';
 export default function calculator() {

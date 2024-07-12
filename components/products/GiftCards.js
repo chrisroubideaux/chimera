@@ -83,6 +83,42 @@ const GiftCards = () => {
               </table>
             </div>
           </div>
+          <nav
+            className="d-flex justify-content-center align-items-center"
+            aria-label="Page navigation example"
+          >
+            <ul className="pagination">
+              <li className="page-item me-2">
+                <a className="nav-link" href="#" aria-label="Previous">
+                  <span aria-hidden="true">
+                    <i className="fs-6 fa-solid fa-chevron-left"></i>
+                  </span>
+                </a>
+              </li>
+              <li className="page-item me-2">
+                <a className="nav-link" href="#">
+                  1
+                </a>
+              </li>
+              <li className="page-item me-2">
+                <a className="nav-link" href="#">
+                  2
+                </a>
+              </li>
+              <li className="page-item me-2">
+                <a className="nav-link" href="#">
+                  3
+                </a>
+              </li>
+              <li className="page-item me-2">
+                <a className="nav-link" href="#" aria-label="Next">
+                  <span aria-hidden="true">
+                    <i className="fs-6 fa-solid fa-chevron-right"></i>
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </nav>
         </div>
       </div>
     </div>
