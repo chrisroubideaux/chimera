@@ -4,11 +4,17 @@ import Head from 'next/head';
 import Navbar from '@/components/Nav/Navbar';
 import Tab from '@/components/orders/Tab';
 import Sidebar from '@/components/admin/Sidebar';
+// order imports
 import Today from '@/components/orders/Today';
 import Yesterday from '@/components/orders/Yesterday';
 import Weekly from '@/components/orders/Weekly';
 import Monthly from '@/components/orders/Monthly';
 import Refunds from '@/components/orders/Refunds';
+// sale analytics imports
+import DailyChart from '@/components/sales/DailyChart';
+import WeeklyChart from '@/components/sales/WeeklyChart';
+import MonthlyChart from '@/components/sales/MonthlyChart';
+import HourlyChart from '@/components/sales/HourlyChart';
 //import Form from '@/components/orders/Form';
 
 export default function Orders() {
@@ -24,6 +30,14 @@ export default function Orders() {
         return <Monthly setActiveComponent={setActiveComponent} />;
       case 'Refunds':
         return <Refunds setActiveComponent={setActiveComponent} />;
+      case 'WeeklyChart':
+        return <WeeklyChart setActiveComponent={setActiveComponent} />;
+      case 'MonthlyChart':
+        return <MonthlyChart setActiveComponent={setActiveComponent} />;
+      case 'DailyChart':
+        return <DailyChart setActiveComponent={setActiveComponent} />;
+      case 'HourlyChart':
+        return <HourlyChart setActiveComponent={setActiveComponent} />;
       default:
         return <Today setActiveComponent={setActiveComponent} />;
     }
@@ -46,13 +60,15 @@ export default function Orders() {
       </Head>
       <div className="layout h-100">
         <Navbar />
-        <Tab />
+        <Tab setActiveComponent={setActiveComponent} />
         <div className="container-fluid ">
           <div className="row">
             <div className="col-lg-4 col-xxl-3">
               <Sidebar setActiveComponent={setActiveComponent} />
             </div>
-            <div className="col-lg-8 col-xxl-9">{renderComponent()}</div>
+            <div className="col-lg-8 col-xxl-9">
+              <div className="mt-3">{renderComponent()}</div>
+            </div>
           </div>
         </div>
       </div>

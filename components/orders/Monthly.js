@@ -53,29 +53,21 @@ const Monthly = () => {
                         <label className="form-check-label"></label>
                       </div>
                     </td>
-                    <td className="d-flex align-items-center">
-                      <div className="p-2 rounded bg-body-tertiary d-flex justify-content-center align-items-center me-2 w-50px h-50px">
-                        <img
-                          src="img/products/product-9.png"
-                          className="mw-100 mh-100"
-                          alt=""
-                        />
-                      </div>
-                      <p className="mb-0">
-                        <strong>Test Product</strong>
-                        <br />
-                        <span className="text-muted">Test</span>
-                      </p>
-                    </td>
-                    <td>$ Price</td>
-                    <td>Number</td>
-                    <td>Test</td>
                     <td>
-                      <i className="fa-solid fa-star text-warning"></i> 4.6{' '}
-                      <span className="text-muted">out of 55 Reviews</span>
+                      <strong>#SK01</strong>
+                    </td>
+                    <td>Tony Sheley</td>
+                    <td>July 5, 2023</td>
+                    <td>$350 USD</td>
+                    <td>
+                      <i className=" social-icon fs-6 fa-solid fa-credit-card"></i>{' '}
+                      Mastercard
+                    </td>
+                    <td>
+                      <span className="badge badge-subtle-success">Paid</span>
                     </td>
                     <td className="text-end">
-                      <button type="button" className="btn btn-light">
+                      <button type="button" className="btn btn-md">
                         View
                       </button>
                     </td>

@@ -56,7 +56,7 @@ export default function Tab({ setActiveComponent }) {
                 <a
                   className="dropdown-item"
                   href="#"
-                  onClick={() => setActiveComponent('Hourly')}
+                  onClick={() => setActiveComponent('HourlyChart')}
                 >
                   Hourly
                 </a>
@@ -65,7 +65,7 @@ export default function Tab({ setActiveComponent }) {
                 <a
                   className="dropdown-item"
                   href="#"
-                  onClick={() => setActiveComponent('Daily')}
+                  onClick={() => setActiveComponent('DailyChart')}
                 >
                   Daily
                 </a>
@@ -74,7 +74,7 @@ export default function Tab({ setActiveComponent }) {
                 <a
                   className="dropdown-item"
                   href="#"
-                  onClick={() => setActiveComponent('Weekly')}
+                  onClick={() => setActiveComponent('WeeklyChart')}
                 >
                   Weekly
                 </a>
@@ -83,7 +83,7 @@ export default function Tab({ setActiveComponent }) {
                 <a
                   className="dropdown-item"
                   href="#"
-                  onClick={() => setActiveComponent('Monthly')}
+                  onClick={() => setActiveComponent('MonthlyChart')}
                 >
                   Monthly
                 </a>

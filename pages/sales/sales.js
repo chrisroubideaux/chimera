@@ -5,10 +5,10 @@ import Navbar from '@/components/Nav/Navbar';
 import Tab from '@/components/sales/Tab';
 import Card from '@/components/charts/Card';
 import TopSelling from '@/components/sales/TopSelling';
-import Hourly from '@/components/sales/Hourly';
-import Daily from '@/components/sales/Daily';
-import Weekly from '@/components/sales/Weekly';
-import Monthly from '@/components/sales/Monthly';
+import HourlyChart from '@/components/sales/HourlyChart';
+import DailyChart from '@/components/sales/DailyChart';
+import WeeklyChart from '@/components/sales/WeeklyChart';
+import MonthlyChart from '@/components/sales/MonthlyChart';
 
 export default function Sales() {
   const [activeComponent, setActiveComponent] = useState('Sales');
@@ -17,14 +17,14 @@ export default function Sales() {
     switch (activeComponent) {
       case 'TopSelling':
         return <TopSelling setActiveComponent={setActiveComponent} />;
-      case 'Hourly':
-        return <Hourly setActiveComponent={setActiveComponent} />;
-      case 'Daily':
-        return <Daily setActiveComponent={setActiveComponent} />;
+      case 'HourlyChart':
+        return <HourlyChart setActiveComponent={setActiveComponent} />;
+      case 'DailyChart':
+        return <DailyChart setActiveComponent={setActiveComponent} />;
       case 'Weekly':
-        return <Weekly setActiveComponent={setActiveComponent} />;
+        return <WeeklyChart setActiveComponent={setActiveComponent} />;
       default:
-        return <Monthly />;
+        return <MonthlyChart />;
     }
   };
   return (

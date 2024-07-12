@@ -1,6 +1,7 @@
 // Tab component for orders page
 import Link from 'next/link';
 import Bookings from '../calendar/Bookings';
+
 const Tab = ({ setActiveComponent }) => {
   return (
     <>
@@ -81,6 +82,66 @@ const Tab = ({ setActiveComponent }) => {
                     onClick={() => setActiveComponent('Refunds')}
                   >
                     Refunds
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+
+          <li className="nav-item me-2">
+            <div className="dropdown">
+              <button
+                className="btn btn-sm dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Sale Analytics
+              </button>
+              <ul className="dropdown-menu">
+                <li>
+                  <a
+                    className="dropdown-item"
+                    href="#"
+                    onClick={() => setActiveComponent('TopSelling')}
+                  >
+                    Top Selling
+                  </a>
+                </li>
+                <li>
+                  <a
+                    className="dropdown-item"
+                    href="#"
+                    onClick={() => setActiveComponent('HourlyChart')}
+                  >
+                    Hourly
+                  </a>
+                </li>
+                <li>
+                  <a
+                    className="dropdown-item"
+                    href="#"
+                    onClick={() => setActiveComponent('DailyChart')}
+                  >
+                    Daily
+                  </a>
+                </li>
+                <li>
+                  <a
+                    className="dropdown-item"
+                    href="#"
+                    onClick={() => setActiveComponent('WeeklyChart')}
+                  >
+                    Weekly
+                  </a>
+                </li>
+                <li>
+                  <a
+                    className="dropdown-item"
+                    href="#"
+                    onClick={() => setActiveComponent('MonthlyChart')}
+                  >
+                    Monthly
                   </a>
                 </li>
               </ul>
