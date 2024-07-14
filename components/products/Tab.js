@@ -94,43 +94,7 @@ export default function Tab({ setActiveComponent }) {
             </ul>
           </div>
         </li>
-        {/*
-        <li className="nav-item me-2">
-          <div className="dropdown">
-            <button
-              className="btn btn-sm dropdown-toggle"
-              type="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Inventory
-            </button>
-            <ul className="dropdown-menu">
-              <li>
-                <a className="dropdown-item" href="#">
-                  Hourly
-                </a>
-              </li>
 
-              <li>
-                <a className="dropdown-item" href="#">
-                  Daily
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  Weekly
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  Monthly
-                </a>
-              </li>
-            </ul>
-          </div>
-        </li>
-        */}
         <li className="nav-item me-2">
           <Link className="btn btn-sm" href="/orders/orders">
             Orders

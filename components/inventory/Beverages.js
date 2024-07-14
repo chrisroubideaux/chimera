@@ -1,6 +1,6 @@
-// starter component
+// Beverage component for inventory page
 
-const Starters = ({ setActiveComponent }) => {
+const Beverages = () => {
   return (
     <div>
       <div className="container-fluid p-0 mt-3">
@@ -8,22 +8,16 @@ const Starters = ({ setActiveComponent }) => {
           <div className="card-body">
             <div className="row mb-3">
               <div className="col-md-6 col-xl-4 mb-2 mb-md-0">
-                <h5>Starters</h5>
+                <h5>Beverages</h5>
               </div>
               <div className="col-md-6 col-xl-8">
                 <div className="text-sm-end ">
                   <button type="button" className="btn btn-sm me-2">
                     <i className="fa-solid fa-download"></i> Export
                   </button>
-
-                  <a
-                    type="button"
-                    className="btn btn-sm"
-                    href="#"
-                    onClick={() => setActiveComponent('Form')}
-                  >
+                  <button type="button" className="btn btn-sm ">
                     <i className="fa-solid fa-plus"></i> New Product
-                  </a>
+                  </button>
                 </div>
               </div>
               <table id="datatables-products" className="table w-100 mt-1">
@@ -38,15 +32,15 @@ const Starters = ({ setActiveComponent }) => {
                         />
                         <label
                           className="form-check-label"
-                          for="datatables-products-check-all"
+                          htmlFor="datatables-products-check-all"
                         ></label>
                       </div>
                     </th>
                     <th className="align-middle">Item Name</th>
+                    <th className="align-middle">Category</th>
                     <th className="align-middle">Price</th>
                     <th className="align-middle">Stock</th>
-                    <th className="align-middle">Category</th>
-                    <th className="align-middle">Rating</th>
+                    <th className="align-middle">Par</th>
                     <th className="align-middle text-end">Actions</th>
                   </tr>
                 </thead>
@@ -72,13 +66,10 @@ const Starters = ({ setActiveComponent }) => {
                         <span className="text-muted">Test</span>
                       </p>
                     </td>
+                    <td>Test</td>
                     <td>$ Price</td>
                     <td>Number</td>
-                    <td>Test</td>
-                    <td>
-                      <i className="fa-solid fa-star text-warning"></i> 4.6{' '}
-                      <span className="text-muted">out of 55 Reviews</span>
-                    </td>
+                    <td>Number</td>
                     <td className="text-end">
                       <button type="button" className="btn btn-light">
                         View
@@ -131,4 +122,4 @@ const Starters = ({ setActiveComponent }) => {
   );
 };
 
-export default Starters;
+export default Beverages;
