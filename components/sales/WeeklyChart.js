@@ -68,7 +68,7 @@ const lineChartData = {
   ],
 };
 
-export default function Weekly() {
+export default function WeeklyChart() {
   return (
     <div className="container">
       <div className="row">

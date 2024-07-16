@@ -21,7 +21,7 @@ export default function Sales() {
         return <HourlyChart setActiveComponent={setActiveComponent} />;
       case 'DailyChart':
         return <DailyChart setActiveComponent={setActiveComponent} />;
-      case 'Weekly':
+      case 'WeeklyChart':
         return <WeeklyChart setActiveComponent={setActiveComponent} />;
       default:
         return <MonthlyChart />;

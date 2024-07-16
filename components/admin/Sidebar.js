@@ -4,7 +4,7 @@ import Link from 'next/link';
 export default function Sidebar({ setActiveComponent }) {
   return (
     <div className="d-flex flex-column p-4 gap-4 py-md-3">
-      <div className="card  mb-5">
+      <div className="card mb-5">
         <div className="card-body">
           <div className="d-none d-lg-block mb-5">
             <div className="avatar avatar-xxl avatar-circle mb-3">
@@ -59,7 +59,7 @@ export default function Sidebar({ setActiveComponent }) {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" href="/team/team">
+                <Link className="nav-link" href="/team/Team">
                   <i className="fs-6 fa-solid fa-users"></i> Team
                 </Link>
               </li>

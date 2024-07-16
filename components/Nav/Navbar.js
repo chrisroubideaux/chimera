@@ -67,41 +67,41 @@ export default function Navbar() {
             </div>
 
             <div className="offcanvas-body">
-              <ul className="navbar-nav justify-content-end flex-grow-1 pe-3 fw-bold">
+              <ul className="navbar-nav justify-content-end flex-grow-1 pe-3 fw-semi-bold">
                 <li className="nav-item d-flex align-items-center">
-                  <i className="social-icons fs-5 fa-solid fa-house me-2"></i>
+                  <i className="social-icons fs-5 fa-solid fa-house me-3"></i>
                   <Link className="nav-link" href="/">
                     Home
                   </Link>
                 </li>
 
                 <li className="nav-item d-flex align-items-center">
-                  <i className="social-icons fs-5 fa-solid fa-calendar-days me-2"></i>
+                  <i className="social-icons fs-5 fa-solid fa-calendar-days me-3"></i>
                   <Link className="nav-link" href="/calendar/calendar/">
                     Calendar
                   </Link>
                 </li>
                 <li className="nav-item d-flex align-items-center">
-                  <i className="social-icons fs-5 fa-solid fa-message me-2"></i>
+                  <i className="social-icons fs-5 fa-solid fa-message me-3"></i>
                   <Link className="nav-link" href="/messages/messages/">
                     Messages
                   </Link>
                 </li>
                 <li className="nav-item d-flex align-items-center">
-                  <i className="social-icons fs-5 fa-solid fa-calculator me-2"></i>
+                  <i className="social-icons fs-5 fa-solid fa-calculator me-3"></i>
                   <Link className="nav-link" href="/calculator/calculator/">
                     Calculator
                   </Link>
                 </li>
 
                 <li className="nav-item d-flex align-items-center">
-                  <i className="social-icons fs-5 fa-solid fa-user me-2"></i>
+                  <i className="social-icons fs-5 fa-solid fa-user me-3"></i>
                   <Link className="nav-link" href="/login/login/">
                     Login
                   </Link>
                 </li>
                 <li className="nav-item d-flex align-items-center">
-                  <i className="social-icons fs-5 fa-solid fa-envelope me-2"></i>
+                  <i className="social-icons fs-5 fa-solid fa-envelope me-3"></i>
                   <Link className="nav-link" href="/">
                     Email
                   </Link>
