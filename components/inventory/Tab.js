@@ -98,39 +98,10 @@ const Tab = ({ setActiveComponent }) => {
           </li>
 
           <li className="nav-item me-2">
-            <div className="dropdown">
-              <button
-                className="btn btn-sm dropdown-toggle"
-                type="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Reports
-              </button>
-              <ul className="dropdown-menu">
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Hourly
-                  </a>
-                </li>
-
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Daily
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Weekly
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Monthly
-                  </a>
-                </li>
-              </ul>
-            </div>
+            <Link className="btn btn-sm" href="/reports/reports">
+              Reports
+              <i class="m-1 fa-solid fa-folder-open"></i>
+            </Link>
           </li>
 
           <li className="nav-item me-2">

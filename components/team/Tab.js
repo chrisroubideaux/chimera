@@ -132,7 +132,7 @@ const Tab = ({ setActiveComponent }) => {
                     href="#"
                     onClick={() => setActiveComponent('Labor')}
                   >
-                    Labor
+                    Test
                   </a>
                 </li>
                 <li>
@@ -141,7 +141,7 @@ const Tab = ({ setActiveComponent }) => {
                     href="#"
                     onClick={() => setActiveComponent('Payroll')}
                   >
-                    Invoices
+                    Test
                   </a>
                 </li>
                 <li>
