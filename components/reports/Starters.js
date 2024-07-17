@@ -69,7 +69,7 @@ export default function Starters({ setActiveComponent }) {
                 <table className="table table-bordered">
                   <thead className="thead-light">
                     <tr>
-                      <th>Item</th>
+                      <th>Items</th>
                       <th>Category</th>
                       <th>Qaunity</th>
                       <th>Sold</th>
