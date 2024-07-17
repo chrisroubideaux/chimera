@@ -1,11 +1,29 @@
 // calendar page
+import { useState } from 'react';
 import Head from 'next/head';
 import Navbar from '@/components/Nav/Navbar';
-import Calendar from '@/components/calendar/Calendar';
 import Sidebar from '@/components/calendar/Sidebar';
 import Tab from '@/components/calendar/Tab';
+import Calendar from '@/components/calendar/Calendar';
+import Week from '@/components/calendar/Week';
+import Day from '@/components/calendar/Day';
 
-export default function calendar() {
+export default function Calendars() {
+  const [activeComponent, setActiveComponent] = useState('Calendars');
+
+  const renderComponent = () => {
+    switch (activeComponent) {
+      case 'Week':
+        return <Week setActiveComponent={setActiveComponent} />;
+      case 'Day':
+        return <Day setActiveComponent={setActiveComponent} />;
+      case 'Calendar':
+        return <Calendar setActiveComponent={setActiveComponent} />;
+      default:
+        return <Calendar setActiveComponent={setActiveComponent} />;
+    }
+  };
+
   return (
     <>
       <Head>
@@ -24,17 +42,13 @@ export default function calendar() {
       </Head>
       <div className="layout h-100">
         <Navbar />
-        <Tab />
-        <div className="container-fluid py-4">
+        <Tab setActiveComponent={setActiveComponent} />
+        <div className="container-fluid ">
           <div className="row">
             <div className="col-lg-4 col-xxl-3">
-              <Sidebar />
+              <Sidebar setActiveComponent={setActiveComponent} />
             </div>
-            <div className="col-lg-8 col-xxl-9">
-              <div className="container">
-                <Calendar />
-              </div>
-            </div>
+            <div className="col-lg-8 col-xxl-9">{renderComponent()}</div>
           </div>
         </div>
       </div>

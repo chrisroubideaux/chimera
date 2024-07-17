@@ -1,4 +1,5 @@
 // Calendar component
+// Calendar component
 import { useState, useEffect } from 'react';
 import {
   format,
@@ -16,7 +17,7 @@ import {
   parse,
 } from 'date-fns';
 
-const Calendar = () => {
+const Calendar = ({ setActiveComponent }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [events, setEvents] = useState([]);
@@ -162,15 +163,42 @@ const Calendar = () => {
   }
 
   return (
-    <div className="">
-      <div className="calendar">
-        {/* 
+    <div className="calendar">
+      {/* 
         {renderToday()}
          */}
-        {renderHeader()}
-        {renderDays()}
-        {renderCells()}
+      <div className="row">
+        <div className="col-md-6 col-xl-8">
+          <div className="text-sm-end d-flex justify-content-end">
+            <div className="btn-group" role="group" aria-label="Basic example">
+              <button
+                type="button"
+                className="btn btn-sm"
+                onClick={() => setActiveComponent('Month')}
+              >
+                Month
+              </button>
+              <button
+                type="button"
+                className="btn btn-sm"
+                onClick={() => setActiveComponent('Week')}
+              >
+                Week
+              </button>
+              <button
+                type="button"
+                className="btn btn-sm"
+                onClick={() => setActiveComponent('Day')}
+              >
+                Day
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
+      <div className="align-items-center">{renderHeader()}</div>
+      {renderDays()}
+      {renderCells()}
     </div>
   );
 };
