@@ -41,7 +41,7 @@ export default function Tab({ setActiveComponent }) {
                 <a
                   className="dropdown-item"
                   href="#"
-                  onClick={() => setActiveComponent('Starters')}
+                  onClick={() => setActiveComponent('')}
                 >
                   Starters
                 </a>
@@ -88,9 +88,9 @@ export default function Tab({ setActiveComponent }) {
         </li>
 
         <li className="nav-item me-2">
-          <Link className="btn btn-sm" href="/orders/orders">
-            Orders
-            <i className="m-1 fa-solid fa-clipboard-list"></i>
+          <Link className="btn btn-sm" href="/inventory/inventory">
+            Inventory
+            <i className="m-1 fa-solid fa-list-check"></i>
           </Link>
         </li>
         <li className="nav-item me-2">

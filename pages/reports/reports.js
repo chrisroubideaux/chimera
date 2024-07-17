@@ -10,7 +10,6 @@ import Bar from '@/components/reports/Bar';
 
 export default function Reports() {
   const [activeComponent, setActiveComponent] = useState('Reports');
-
   const renderComponent = () => {
     switch (activeComponent) {
       case 'Entrees':
