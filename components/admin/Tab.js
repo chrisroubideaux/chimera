@@ -52,7 +52,7 @@ export default function Tab({ setActiveComponent }) {
 
               <Link
                 className="btn btn-soft-light btn-sm m-1"
-                href="/calendar/calendar/"
+                href="/calendar/calendars/"
               >
                 Calendar
                 <i className=" m-1 fa-solid fa-calendar-plus"></i>

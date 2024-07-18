@@ -163,39 +163,11 @@ const Calendar = ({ setActiveComponent }) => {
   }
 
   return (
-    <div className="calendar">
+    <div className="calendar ">
       {/* 
         {renderToday()}
          */}
-      <div className="row">
-        <div className="col-md-6 col-xl-8">
-          <div className="text-sm-end d-flex justify-content-end">
-            <div className="btn-group" role="group" aria-label="Basic example">
-              <button
-                type="button"
-                className="btn btn-sm"
-                onClick={() => setActiveComponent('Month')}
-              >
-                Month
-              </button>
-              <button
-                type="button"
-                className="btn btn-sm"
-                onClick={() => setActiveComponent('Week')}
-              >
-                Week
-              </button>
-              <button
-                type="button"
-                className="btn btn-sm"
-                onClick={() => setActiveComponent('Day')}
-              >
-                Day
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+
       <div className="align-items-center">{renderHeader()}</div>
       {renderDays()}
       {renderCells()}

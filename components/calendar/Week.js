@@ -91,57 +91,27 @@ const Week = ({ setActiveComponent }) => {
         <div className="card-body">
           <div className="row mb-3">
             <div className="col-md-6 col-xl-4 mb-2 mb-md-0">
-              <h4 className="my-1">Week</h4>
-              <p>
+              <h5 className="fs-4 my-1">Week</h5>
+              <p className="fw-bold">
                 {format(weekStartDate, 'MMM d')} –{' '}
                 {format(weekEndDate, 'MMM d, yyyy')}
               </p>
             </div>
-            <div className="col-md-6 col-xl-8">
-              <div className="text-sm-end d-flex justify-content-end">
-                <div
-                  className="btn-group"
-                  role="group"
-                  aria-label="Basic example"
-                >
-                  <button
-                    type="button"
-                    className="btn btn-sm"
-                    onClick={() => setActiveComponent('Month')}
-                  >
-                    Month
-                  </button>
-                  <button
-                    type="button"
-                    className="btn btn-sm"
-                    onClick={() => setActiveComponent('Week')}
-                  >
-                    Week
-                  </button>
-                  <button
-                    type="button"
-                    className="btn btn-sm"
-                    onClick={() => setActiveComponent('Day')}
-                  >
-                    Day
-                  </button>
-                </div>
-              </div>
-            </div>
+
             <div className="container">
               <div className="table-responsive">
-                <table className="table table-bordered">
-                  <thead className="thead-light">
+                <table className="table table-bordered ">
+                  <thead className="">
                     <tr>
                       <th></th>
                       {daysOfWeek.map((day, index) => (
-                        <th key={index}>
+                        <th className="" key={index}>
                           {day} {format(addDays(currentWeek, index), 'M/d')}
                         </th>
                       ))}
                     </tr>
                   </thead>
-                  <tbody>{renderCells()}</tbody>
+                  <tbody className="">{renderCells()}</tbody>
                 </table>
               </div>
             </div>

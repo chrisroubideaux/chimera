@@ -29,6 +29,32 @@ const Tab = ({ setActiveComponent }) => {
           </li>
 
           <li className="nav-item me-2">
+            <div className="btn-group" role="group" aria-label="Basic example">
+              <button
+                type="button"
+                className="btn btn-sm"
+                onClick={() => setActiveComponent('Month')}
+              >
+                Month
+              </button>
+              <button
+                type="button"
+                className="btn btn-sm"
+                onClick={() => setActiveComponent('Week')}
+              >
+                Week
+              </button>
+              <button
+                type="button"
+                className="btn btn-sm"
+                onClick={() => setActiveComponent('Day')}
+              >
+                Day
+              </button>
+            </div>
+          </li>
+
+          <li className="nav-item me-2">
             <Link className="btn btn-sm" href="/admin/admin">
               Admin
               <i className="m-1 fa-solid fa-person"></i>

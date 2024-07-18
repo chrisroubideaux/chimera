@@ -83,39 +83,9 @@ const Day = ({ setActiveComponent }) => {
       <div className="card-body">
         <div className="row mb-3">
           <div className="col-md-6 col-xl-4 mb-2 mb-md-0">
-            <h5>{renderHeader()}</h5>
+            <h5 className="text-center">{renderHeader()}</h5>
           </div>
-          <div className="col-md-6 col-xl-8">
-            <div className="text-sm-end d-flex justify-content-end">
-              <div
-                className="btn-group"
-                role="group"
-                aria-label="Basic example"
-              >
-                <button
-                  type="button"
-                  className="btn btn-sm"
-                  onClick={() => setActiveComponent('Calendar')}
-                >
-                  Month
-                </button>
-                <button
-                  type="button"
-                  className="btn btn-sm"
-                  onClick={() => setActiveComponent('Week')}
-                >
-                  Week
-                </button>
-                <button
-                  type="button"
-                  className="btn btn-sm"
-                  onClick={() => setActiveComponent('Day')}
-                >
-                  Day
-                </button>
-              </div>
-            </div>
-          </div>
+
           <div className="mt-3">{renderCells()}</div>
         </div>
       </div>

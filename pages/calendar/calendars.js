@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import Head from 'next/head';
 import Navbar from '@/components/Nav/Navbar';
-import Sidebar from '@/components/calendar/Sidebar';
+import Sidebar from '@/components/admin/Sidebar';
 import Tab from '@/components/calendar/Tab';
 import Calendar from '@/components/calendar/Calendar';
 import Week from '@/components/calendar/Week';
@@ -48,7 +48,9 @@ export default function Calendars() {
             <div className="col-lg-4 col-xxl-3">
               <Sidebar setActiveComponent={setActiveComponent} />
             </div>
-            <div className="col-lg-8 col-xxl-9">{renderComponent()}</div>
+            <div className="col-lg-8 col-xxl-9">
+              <div className="mt-3">{renderComponent()}</div>
+            </div>
           </div>
         </div>
       </div>
