@@ -26,6 +26,18 @@ export default function Tab({ setActiveComponent }) {
         <li className="nav-item me-2">
           <Bookings />
         </li>
+        <li className="nav-item me-2">
+          <Link className="btn btn-sm" href="/reports/reports">
+            Reports
+            <i class="m-1 fa-solid fa-folder-open"></i>
+          </Link>
+        </li>
+        <li className="nav-item me-2">
+          <Link className="btn btn-sm" href="/inventory/inventory">
+            Inventory
+            <i className="m-1 fa-solid fa-list-check"></i>
+          </Link>
+        </li>
 
         <li className="nav-item me-2">
           <Link className="btn btn-sm" href="/admin/admin">

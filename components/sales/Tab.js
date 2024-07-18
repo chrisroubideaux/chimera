@@ -26,12 +26,7 @@ export default function Tab({ setActiveComponent }) {
         <li className="nav-item me-2">
           <Bookings />
         </li>
-        <li className="nav-item me-2">
-          <Link className="btn btn-sm" href="/dashboard/dashboard">
-            Dashboard
-            <i className="m-1 fa-solid fa-chart-column"></i>
-          </Link>
-        </li>
+
         <li className="nav-item me-2">
           <div className="dropdown">
             <button
@@ -92,39 +87,16 @@ export default function Tab({ setActiveComponent }) {
           </div>
         </li>
         <li className="nav-item me-2">
-          <div className="dropdown">
-            <button
-              className="btn btn-sm dropdown-toggle"
-              type="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Reports
-            </button>
-            <ul className="dropdown-menu">
-              <li>
-                <a className="dropdown-item" href="#">
-                  Hourly
-                </a>
-              </li>
-
-              <li>
-                <a className="dropdown-item" href="#">
-                  Daily
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  Weekly
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  Monthly
-                </a>
-              </li>
-            </ul>
-          </div>
+          <Link className="btn btn-sm" href="/dashboard/dashboard">
+            Dashboard
+            <i className="m-1 fa-solid fa-chart-column"></i>
+          </Link>
+        </li>
+        <li className="nav-item me-2">
+          <Link className="btn btn-sm" href="/reports/reports">
+            Reports
+            <i class="m-1 fa-solid fa-folder-open"></i>
+          </Link>
         </li>
 
         <li className="nav-item me-2">
