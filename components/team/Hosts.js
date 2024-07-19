@@ -11,11 +11,8 @@ const Employees = () => {
               </div>
               <div className="col-md-6 col-xl-8">
                 <div className="text-sm-end ">
-                  <button type="button" className="btn btn-sm me-2">
-                    <i className="fa-solid fa-download"></i> Export
-                  </button>
                   <button type="button" className="btn btn-sm ">
-                    <i className="fa-solid fa-plus"></i> Add Employee
+                    <i className="fa-solid fa-plus me-1"></i>Employee
                   </button>
                 </div>
               </div>
@@ -36,11 +33,12 @@ const Employees = () => {
                       </div>
                     </th>
                     <th className="align-middle">Employee</th>
-                    <th className="align-middle me-1">Phone</th>
+                    <th className="align-middle">Phone</th>
+                    <th className="align-middle">Role</th>
+                    <th className="align-middle">Hired</th>
+                    <th className="align-middle">Next Shift</th>
+                    <th className="align-middle">Last Active</th>
 
-                    <th className="align-middle me-1">Role</th>
-                    <th className="align-middle me-1">Hire Date</th>
-                    <th className="align-middle me-1">Last Active</th>
                     <th className="align-middle text-end">Profile</th>
                   </tr>
                 </thead>
@@ -67,8 +65,10 @@ const Employees = () => {
 
                     <td>xxx-xxx-xxxx</td>
                     <td>Server</td>
-                    <td>07/12/23</td>
+                    <td>7/12/23</td>
+                    <td>7/31/24</td>
                     <td>34 min ago</td>
+
                     <td className="text-end">
                       <button type="button" className="btn btn-light">
                         View

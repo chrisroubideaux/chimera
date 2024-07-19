@@ -70,9 +70,9 @@ const Tab = ({ setActiveComponent }) => {
                   <a
                     className="dropdown-item"
                     href="#"
-                    onClick={() => setActiveComponent('Bartenders')}
+                    onClick={() => setActiveComponent('Bar')}
                   >
-                    Bartenders
+                    Bar
                   </a>
                 </li>
                 <li>
@@ -98,7 +98,7 @@ const Tab = ({ setActiveComponent }) => {
                   <a
                     className="dropdown-item"
                     href="#"
-                    onClick={() => setActiveComponent('Managment')}
+                    onClick={() => setActiveComponent('Managers')}
                   >
                     Managment
                   </a>
@@ -124,29 +124,6 @@ const Tab = ({ setActiveComponent }) => {
                     onClick={() => setActiveComponent('Payroll')}
                   >
                     Payroll
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="dropdown-item"
-                    href="#"
-                    onClick={() => setActiveComponent('Labor')}
-                  >
-                    Test
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="dropdown-item"
-                    href="#"
-                    onClick={() => setActiveComponent('Payroll')}
-                  >
-                    Test
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Monthly
                   </a>
                 </li>
               </ul>

@@ -30,7 +30,7 @@ export default function Team() {
         return <Dish setActiveComponent={setActiveComponent} />;
       case 'Kitchen':
         return <Kitchen setActiveComponent={setActiveComponent} />;
-      case 'Mangers':
+      case 'Managers':
         return <Managers setActiveComponent={setActiveComponent} />;
       default:
         return <Employees setActiveComponent={setActiveComponent} />;
