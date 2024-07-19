@@ -77,15 +77,6 @@ export default function Tab({ setActiveComponent }) {
                 <a
                   className="dropdown-item"
                   href="#"
-                  onClick={() => setActiveComponent('GiftCards')}
-                >
-                  Gift Cards
-                </a>
-              </li>
-              <li>
-                <a
-                  className="dropdown-item"
-                  href="#"
                   onClick={() => setActiveComponent('NewItems')}
                 >
                   Recently Added
@@ -94,7 +85,6 @@ export default function Tab({ setActiveComponent }) {
             </ul>
           </div>
         </li>
-
         <li className="nav-item me-2">
           <Link className="btn btn-sm" href="/orders/orders">
             Orders

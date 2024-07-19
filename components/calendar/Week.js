@@ -97,7 +97,6 @@ const Week = ({ setActiveComponent }) => {
                 {format(weekEndDate, 'MMM d, yyyy')}
               </p>
             </div>
-
             <div className="container">
               <div className="table-responsive">
                 <table className="table table-bordered ">

@@ -7,6 +7,7 @@ import Tab from '@/components/calendar/Tab';
 import Calendar from '@/components/calendar/Calendar';
 import Week from '@/components/calendar/Week';
 import Day from '@/components/calendar/Day';
+import Badge from '@/components/calendar/Badge';
 
 export default function Calendars() {
   const [activeComponent, setActiveComponent] = useState('Calendars');
@@ -43,6 +44,7 @@ export default function Calendars() {
       <div className="layout h-100">
         <Navbar />
         <Tab setActiveComponent={setActiveComponent} />
+
         <div className="container-fluid ">
           <div className="row">
             <div className="col-lg-4 col-xxl-3">
