@@ -13,7 +13,7 @@ const Employees = ({ setActiveComponent }) => {
               <div className="col-md-6 col-xl-8">
                 <div className="text-sm-end ">
                   <a
-                    className="btn btn-sm"
+                    className="btn btn-sm me-1"
                     href="#"
                     onClick={() => setActiveComponent('Form')}
                   >
