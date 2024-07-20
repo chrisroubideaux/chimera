@@ -12,6 +12,7 @@ import Dish from '@/components/team/Dish';
 import Kitchen from '@/components/team/Kitchen';
 import Managers from '@/components/team/Managers';
 import Payroll from '@/components/team/Payroll';
+import Form from '@/components/team/Form';
 
 export default function Team() {
   const [activeComponent, setActiveComponent] = useState('Team');
@@ -32,6 +33,8 @@ export default function Team() {
         return <Kitchen setActiveComponent={setActiveComponent} />;
       case 'Managers':
         return <Managers setActiveComponent={setActiveComponent} />;
+      case 'Form':
+        return <Form setActiveComponent={setActiveComponent} />;
       default:
         return <Employees setActiveComponent={setActiveComponent} />;
     }

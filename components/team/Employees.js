@@ -1,6 +1,6 @@
 // Employee card component for teams page
 
-const Employees = () => {
+const Employees = ({ setActiveComponent }) => {
   return (
     <div>
       <div className="container-fluid p-0 mt-3">
@@ -12,9 +12,13 @@ const Employees = () => {
               </div>
               <div className="col-md-6 col-xl-8">
                 <div className="text-sm-end ">
-                  <button type="button" className="btn btn-sm ">
+                  <a
+                    className="btn btn-sm"
+                    href="#"
+                    onClick={() => setActiveComponent('Form')}
+                  >
                     <i className="fa-solid fa-plus me-1"></i>Employee
-                  </button>
+                  </a>
                 </div>
               </div>
               <table id="datatables-products" className="table w-100 mt-1">

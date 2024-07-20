@@ -9,8 +9,11 @@
   }
       
   .form-control {
-   
     color: #7E8EF1;
+  }
+     
+  .form-select {
+   border-radius: 10px;
   }
       
   .form-signin .checkbox {
