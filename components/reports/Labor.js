@@ -59,8 +59,8 @@ export default function Labor({ setActiveComponent }) {
                     </li>
                   </ul>
                 </div>
-                <button type="button" className="btn btn-sm ">
-                  <i className="fa-solid fa-plus"></i> New Product
+                <button type="button" className="btn btn-sm me-2">
+                  <i className="fa-solid fa-download"></i> Export
                 </button>
               </div>
             </div>

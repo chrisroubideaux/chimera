@@ -7,7 +7,7 @@ export default function Form({}) {
         <div className="d-grid gap-3 gap-lg-5">
           <div className="card">
             <div className="card-header border-bottom">
-              <h4 className="card-header-title">Basic info</h4>
+              <h4 className="card-header-title">Payroll</h4>
             </div>
             <div className="card-body">
               <form>
@@ -119,7 +119,6 @@ export default function Form({}) {
                       placeholder="City"
                       aria-label="City"
                     />
-
                     <select id="inputState" className="form-select ">
                       <option selected>State</option>
                       <option>...</option>
