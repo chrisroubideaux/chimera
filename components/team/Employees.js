@@ -75,9 +75,13 @@ const Employees = ({ setActiveComponent }) => {
                     <td>34 min ago</td>
 
                     <td className="text-end">
-                      <button type="button" className="btn btn-light">
+                      <a
+                        className="btn btn-sm me-1"
+                        href="#"
+                        onClick={() => setActiveComponent('PayrollForm')}
+                      >
                         View
-                      </button>
+                      </a>
                     </td>
                   </tr>
                 </tbody>

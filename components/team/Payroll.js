@@ -68,9 +68,13 @@ const Payroll = ({ setActiveComponent }) => {
                     <td>$28.00</td>
 
                     <td className="text-end">
-                      <button type="button" className="btn btn-light">
+                      <a
+                        className="btn btn-sm me-1"
+                        href="#"
+                        onClick={() => setActiveComponent('PayrollForm')}
+                      >
                         View
-                      </button>
+                      </a>
                     </td>
                   </tr>
                 </tbody>

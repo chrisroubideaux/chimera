@@ -12,6 +12,7 @@ import Dish from '@/components/team/Dish';
 import Kitchen from '@/components/team/Kitchen';
 import Managers from '@/components/team/Managers';
 import Payroll from '@/components/team/Payroll';
+import PayrollForm from '@/components/team/PayrollForm';
 import Form from '@/components/team/Form';
 
 export default function Team() {
@@ -21,6 +22,8 @@ export default function Team() {
     switch (activeComponent) {
       case 'Payroll':
         return <Payroll setActiveComponent={setActiveComponent} />;
+      case 'PayrollForm':
+        return <PayrollForm setActiveComponent={setActiveComponent} />;
       case 'Hosts':
         return <Hosts setActiveComponent={setActiveComponent} />;
       case 'Servers':
