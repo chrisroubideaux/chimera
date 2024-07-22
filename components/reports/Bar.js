@@ -20,6 +20,7 @@ export default function Bar({ setActiveComponent }) {
                   >
                     View by
                   </button>
+
                   <ul className="dropdown-menu">
                     <li>
                       <a
@@ -48,23 +49,14 @@ export default function Bar({ setActiveComponent }) {
                         Hour
                       </a>
                     </li>
-                    <li>
-                      <a
-                        className="dropdown-item"
-                        href="#"
-                        onClick={() => setActiveComponent('Monthly')}
-                      >
-                        Monthly
-                      </a>
-                    </li>
                   </ul>
                 </div>
-                <button type="button" className="btn btn-sm ">
-                  <i className="fa-solid fa-plus"></i> New Product
+                <button type="button" className="btn btn-sm me-2">
+                  <i className="fa-solid fa-download"></i> Export
                 </button>
               </div>
             </div>
-            <div className="container mt-5">
+            <div className="container">
               <div className="table-responsive">
                 <table className="table table-bordered">
                   <thead className="thead-light">

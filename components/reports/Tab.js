@@ -73,16 +73,6 @@ export default function Tab({ setActiveComponent }) {
                   Beverages
                 </a>
               </li>
-
-              <li>
-                <a
-                  className="dropdown-item"
-                  href="#"
-                  onClick={() => setActiveComponent('NewItems')}
-                >
-                  Recently Added
-                </a>
-              </li>
             </ul>
           </div>
         </li>

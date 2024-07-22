@@ -64,7 +64,7 @@ export default function Starters({ setActiveComponent }) {
                 </button>
               </div>
             </div>
-            <div className="container mt-5">
+            <div className="container ">
               <div className="table-responsive">
                 <table className="table table-bordered">
                   <thead className="thead-light">

@@ -17,7 +17,7 @@ export default function Form({}) {
                     htmlFor="firstNameLabel"
                     className="col-sm-3 col-form-label form-label"
                   >
-                    Full name{' '}
+                    Full name
                     <i
                       className="bi-question-circle text-body ms-1"
                       data-bs-toggle="tooltip"
@@ -46,7 +46,6 @@ export default function Form({}) {
                     </div>
                   </div>
                 </div>
-
                 <div className="row mb-4">
                   <label
                     htmlFor="emailLabel"
@@ -83,7 +82,6 @@ export default function Form({}) {
                     />
                   </div>
                 </div>
-
                 <div className="row mb-4">
                   <label
                     htmlFor="homeLabel"
@@ -127,29 +125,6 @@ export default function Form({}) {
                 </div>
 
                 <div className="row mb-4">
-                  <div className="input-group">
-                    <label
-                      htmlFor="emailLabel"
-                      className="col-sm-3 col-form-label form-label"
-                    >
-                      Id
-                    </label>
-
-                    <select id="inputId" className="form-select">
-                      <option selected>Id Type</option>
-                      <option></option>
-                      <option value="2">Drivers Liscense</option>
-                      <option value="3">State ID</option>
-                      <option value="3">Military ID</option>
-                    </select>
-
-                    <select id="inputState" className="form-select ">
-                      <option selected> State</option>
-                      <option>...</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="row mb-4">
                   <label
                     htmlFor="firstNameLabel"
                     className="col-sm-3 col-form-label form-label"
@@ -185,10 +160,29 @@ export default function Form({}) {
                 </div>
                 <div className="row mb-4">
                   <label
+                    htmlFor="positionLabel"
+                    className="col-sm-3 col-form-label form-label"
+                  >
+                    Position/Title
+                  </label>
+                  <div className="col-sm-9">
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="position"
+                      id="positionLabel"
+                      placeholder="Position/Title"
+                      aria-label="Position"
+                    />
+                  </div>
+                </div>
+
+                <div className="row mb-4">
+                  <label
                     htmlFor="firstNameLabel"
                     className="col-sm-3 col-form-label form-label"
                   >
-                    Start/End Date
+                    Pay Period
                     <i
                       className="bi-question-circle text-body ms-1"
                       data-bs-toggle="tooltip"
@@ -211,7 +205,7 @@ export default function Form({}) {
                         className="form-control"
                         name="Lastday"
                         id="lastDayLabel"
-                        placeholder="07/22/24"
+                        placeholder="08/10/24"
                         aria-label="Last day"
                       />
                     </div>
@@ -222,7 +216,7 @@ export default function Form({}) {
                     htmlFor="firstNameLabel"
                     className="col-sm-3 col-form-label form-label"
                   >
-                    Start/End Wage
+                    Wage
                     <i
                       className="bi-question-circle text-body ms-1"
                       data-bs-toggle="tooltip"
@@ -251,13 +245,12 @@ export default function Form({}) {
                     </div>
                   </div>
                 </div>
-
                 <div className="row mb-4">
                   <label
                     htmlFor="firstNameLabel"
                     className="col-sm-3 col-form-label form-label"
                   >
-                    Emergency 1
+                    Hours/Breaks
                     <i
                       className="bi-question-circle text-body ms-1"
                       data-bs-toggle="tooltip"
@@ -270,89 +263,92 @@ export default function Form({}) {
                       <input
                         type="text"
                         className="form-control"
-                        name="firstName"
-                        id="firstNameLabel"
-                        placeholder="First Name"
-                        aria-label="First Name"
+                        name="wage"
+                        id="wageLabel"
+                        placeholder="$37.5 hrs"
+                        aria-label="Wage"
                       />
                       <input
                         type="text"
                         className="form-control"
-                        name="lastName"
-                        id="lastNameLabel"
-                        placeholder="Last Name"
-                        aria-label="Last Name"
+                        name="Lastday"
+                        id="wageLabel"
+                        placeholder=""
+                        aria-label="Last day"
                       />
                     </div>
                   </div>
                 </div>
                 <div className="row mb-4">
                   <label
-                    htmlFor="emailLabel"
+                    htmlFor="directDepositLabel"
                     className="col-sm-3 col-form-label form-label"
                   >
-                    Phone 1
+                    Direct Deposit Information
+                  </label>
+                  <div className="col-sm-9">
+                    <div className="input-group">
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="bankName"
+                        id="bankNameLabel"
+                        placeholder="Bank Name"
+                        aria-label="Bank Name"
+                      />
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="accountNumber"
+                        id="accountNumberLabel"
+                        placeholder="Account Number"
+                        aria-label="Account Number"
+                      />
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="routingNumber"
+                        id="routingNumberLabel"
+                        placeholder="Routing Number"
+                        aria-label="Routing Number"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="row mb-4">
+                  <label
+                    htmlFor="payDateLabel"
+                    className="col-sm-3 col-form-label form-label"
+                  >
+                    Payment Total
                   </label>
                   <div className="col-sm-9">
                     <input
-                      type="phone"
+                      type="text"
                       className="form-control"
-                      name="phone"
-                      id="emailLabel"
-                      placeholder="xxx-xxx-xxxx"
-                      aria-label="phone"
+                      name="total"
+                      id="payDateLabel"
+                      placeholder="Payment Total"
+                      aria-label="Payment Total"
                     />
                   </div>
                 </div>
+
                 <div className="row mb-4">
                   <label
-                    htmlFor="firstNameLabel"
+                    htmlFor="payDateLabel"
                     className="col-sm-3 col-form-label form-label"
                   >
-                    Emergency 2
-                    <i
-                      className="bi-question-circle text-body ms-1"
-                      data-bs-toggle="tooltip"
-                      data-bs-placement="top"
-                      title=""
-                    ></i>
-                  </label>
-                  <div className="col-sm-9">
-                    <div className="input-group">
-                      <input
-                        type="text"
-                        className="form-control"
-                        name="firstName"
-                        id="firstNameLabel"
-                        placeholder="First Name"
-                        aria-label="First Name"
-                      />
-                      <input
-                        type="text"
-                        className="form-control"
-                        name="lastName"
-                        id="lastNameLabel"
-                        placeholder="Last Name"
-                        aria-label="Last Name"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className="row mb-4">
-                  <label
-                    htmlFor="emailLabel"
-                    className="col-sm-3 col-form-label form-label"
-                  >
-                    Phone 2
+                    Pay Date
                   </label>
                   <div className="col-sm-9">
                     <input
-                      type="phone"
+                      type="text"
                       className="form-control"
-                      name="phone"
-                      id="emailLabel"
-                      placeholder="xxx-xxx-xxxx"
-                      aria-label="phone"
+                      name="payDate"
+                      id="payDateLabel"
+                      placeholder="Pay Date"
+                      aria-label="Pay Date"
                     />
                   </div>
                 </div>
@@ -360,7 +356,7 @@ export default function Form({}) {
               <div className="card-footer pt-0">
                 <div className="d-flex justify-content-end gap-3 mt-2">
                   <a className="btn btn-sm" href="#!">
-                    Add Employee
+                    Process Payment
                   </a>
                 </div>
               </div>
