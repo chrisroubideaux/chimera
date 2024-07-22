@@ -1,5 +1,7 @@
 // Breadcrumb componet
 
+import Link from 'next/link';
+
 export default function Tab({ setActiveComponent }) {
   return (
     <div className="mt-2">
@@ -27,6 +29,7 @@ export default function Tab({ setActiveComponent }) {
                 onClick={() => setActiveComponent('Hours')}
               >
                 Hours
+                <i className=" m-1 fa-solid fa-hourglass-end fs-sm"></i>
               </a>
 
               <a
@@ -35,21 +38,24 @@ export default function Tab({ setActiveComponent }) {
                 onClick={() => setActiveComponent('Schedule')}
               >
                 Schedule
+                <i className="m-1 fa-solid fa-calendar-plus fs-sm"></i>
               </a>
-              <a
-                className="btn btn-soft-light btn-sm m-1"
-                href="#"
-                onClick={() => setActiveComponent('Notifications')}
-              >
-                Events
-              </a>
+
               <a
                 className="btn btn-soft-light btn-sm m-1"
                 href="#"
                 onClick={() => setActiveComponent('Messages')}
               >
                 Messages
+                <i className="m-1 fa-solid fa-message fs-sm"></i>
               </a>
+              <Link
+                className="btn btn-soft-light btn-sm m-1"
+                href="/calendar/calendars/"
+              >
+                Calendar
+                <i className=" m-1 fa-solid fa-calendar-plus"></i>
+              </Link>
             </div>
 
             <button

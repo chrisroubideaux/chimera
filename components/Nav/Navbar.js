@@ -77,7 +77,7 @@ export default function Navbar() {
 
                 <li className="nav-item d-flex align-items-center">
                   <i className="social-icons fs-5 fa-solid fa-calendar-days me-3"></i>
-                  <Link className="nav-link" href="/calendar/calendar/">
+                  <Link className="nav-link" href="/calendar/calendars/">
                     Calendar
                   </Link>
                 </li>

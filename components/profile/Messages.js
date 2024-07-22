@@ -80,35 +80,27 @@ export default function Messages({ setActiveComponent }) {
                       >
                         <li>
                           <a className="dropdown-item" href="#">
-                            <i className="social-icon fs-6 fa-solid fa-check"></i>
+                            <i className="social-icon fs-6 fa-solid fa-check me-2"></i>
                             Mark as read
                           </a>
                         </li>
                         <li>
                           <a className="dropdown-item" href="#">
-                            <i className="social-icon fa-solid fa-microphone-slash fs-6"></i>
+                            <i className="social-icon fs-6 fa-solid fa-microphone-slash me-2"></i>
                             Mute
                           </a>
                         </li>
-                        <li>
-                          <Link
-                            className="dropdown-item"
-                            href="/messages/messages"
-                          >
-                            <i className="social-icon fs-6 fa-solid fa-user-check"></i>
-                            View all
-                          </Link>
-                        </li>
+
                         <li>
                           <Link className="dropdown-item" href="/">
-                            <i className="social-icon fs-6 fa-solid fa-trash"></i>
+                            <i className="social-icon fs-6 fa-solid fa-trash me-2"></i>
                             Delete chat
                           </Link>
                         </li>
                         <li className="dropdown-divider"></li>
                         <li>
                           <Link className="dropdown-item" href="/">
-                            <i className="social-icon fs-6 fa-solid fa-box-archive"></i>
+                            <i className="social-icon fs-6 fa-solid fa-box-archive me-2"></i>
                             Archive chat
                           </Link>
                         </li>
