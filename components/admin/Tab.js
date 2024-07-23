@@ -1,5 +1,6 @@
 // Tab component for admin page
 import Link from 'next/link';
+
 export default function Tab({ setActiveComponent }) {
   return (
     <div className="mt-2">
