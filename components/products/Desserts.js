@@ -1,6 +1,6 @@
 // Desserts component
 
-const Desserts = () => {
+const Desserts = ({ setActiveComponent }) => {
   return (
     <div>
       <div className="container-fluid p-0 mt-3">
@@ -15,9 +15,14 @@ const Desserts = () => {
                   <button type="button" className="btn btn-sm me-2">
                     <i className="fa-solid fa-download"></i> Export
                   </button>
-                  <button type="button" className="btn btn-sm ">
+                  <a
+                    type="button"
+                    className="btn btn-sm"
+                    href="#"
+                    onClick={() => setActiveComponent('Form')}
+                  >
                     <i className="fa-solid fa-plus"></i> New Product
-                  </button>
+                  </a>
                 </div>
               </div>
               <table id="datatables-products" className="table w-100 mt-1">
