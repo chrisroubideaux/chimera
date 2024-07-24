@@ -1,6 +1,6 @@
-// Bar component for teams page
+// Kitchen payroll component for teams page
 
-const Bar = () => {
+const KitchenPayroll = () => {
   return (
     <div>
       <div className="container-fluid p-0 mt-3">
@@ -8,7 +8,7 @@ const Bar = () => {
           <div className="card-body">
             <div className="row mb-3">
               <div className="col-md-6 col-xl-4 mb-2 mb-md-0">
-                <h5>Bar</h5>
+                <h5>Kitchen Payroll</h5>
               </div>
               <div className="col-md-6 col-xl-8">
                 <div className="text-sm-end ">
@@ -33,6 +33,7 @@ const Bar = () => {
                         ></label>
                       </div>
                     </th>
+
                     <th className="align-middle">Employee</th>
                     <th className="align-middle">Emp ID</th>
                     <th className="align-middle">Phone</th>
@@ -123,4 +124,4 @@ const Bar = () => {
   );
 };
 
-export default Bar;
+export default KitchenPayroll;

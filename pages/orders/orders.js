@@ -6,7 +6,7 @@ import Tab from '@/components/orders/Tab';
 import Sidebar from '@/components/admin/Sidebar';
 // order imports
 
-import InStore from '@/components/orders/Instore';
+import InStore from '@/components/orders/InStore';
 import Online from '@/components/orders/Online';
 import GiftCard from '@/components/orders/GiftCard';
 import Refunds from '@/components/orders/Refunds';
@@ -22,7 +22,7 @@ export default function Orders() {
 
   const renderComponent = () => {
     switch (activeComponent) {
-      case 'Instore':
+      case 'InStore':
         return <InStore setActiveComponent={setActiveComponent} />;
       case 'Online':
         return <Online setActiveComponent={setActiveComponent} />;

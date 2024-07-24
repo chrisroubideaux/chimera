@@ -126,6 +126,60 @@ const Tab = ({ setActiveComponent }) => {
                     Payroll
                   </a>
                 </li>
+                <li>
+                  <a
+                    className="dropdown-item"
+                    href="#"
+                    onClick={() => setActiveComponent('HostsPayroll')}
+                  >
+                    Host
+                  </a>
+                </li>
+                <li>
+                  <a
+                    className="dropdown-item"
+                    href="#"
+                    onClick={() => setActiveComponent('ServersPayroll')}
+                  >
+                    Servers
+                  </a>
+                </li>
+                <li>
+                  <a
+                    className="dropdown-item"
+                    href="#"
+                    onClick={() => setActiveComponent('BarPayroll')}
+                  >
+                    Bar
+                  </a>
+                </li>
+                <li>
+                  <a
+                    className="dropdown-item"
+                    href="#"
+                    onClick={() => setActiveComponent('DishPayroll')}
+                  >
+                    Dish
+                  </a>
+                </li>
+                <li>
+                  <a
+                    className="dropdown-item"
+                    href="#"
+                    onClick={() => setActiveComponent('KitchenPayroll')}
+                  >
+                    Kitchen
+                  </a>
+                </li>
+                <li>
+                  <a
+                    className="dropdown-item"
+                    href="#"
+                    onClick={() => setActiveComponent('ManagersPayroll')}
+                  >
+                    Managers
+                  </a>
+                </li>
               </ul>
             </div>
           </li>

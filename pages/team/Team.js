@@ -11,9 +11,16 @@ import Bar from '@/components/team/Bar';
 import Dish from '@/components/team/Dish';
 import Kitchen from '@/components/team/Kitchen';
 import Managers from '@/components/team/Managers';
-import Payroll from '@/components/team/Payroll';
-import PayrollForm from '@/components/team/PayrollForm';
 import Form from '@/components/team/Form';
+// payroll imports
+import Payroll from '@/components/payroll/Payroll';
+import PayrollForm from '@/components/payroll/PayrollForm';
+import HostsPayroll from '@/components/payroll/HostsPayroll';
+import ServersPayroll from '@/components/payroll/ServersPayroll';
+import BarPayroll from '@/components/payroll/BarPayroll';
+import DishPayroll from '@/components/payroll/DishPayroll';
+import KitchenPayroll from '@/components/payroll/KitchenPayroll';
+import ManagersPayroll from '@/components/payroll/Payroll';
 
 export default function Team() {
   const [activeComponent, setActiveComponent] = useState('Team');
@@ -40,6 +47,20 @@ export default function Team() {
         return <Form setActiveComponent={setActiveComponent} />;
       default:
         return <Employees setActiveComponent={setActiveComponent} />;
+
+      // payroll
+      case 'HostsPayroll':
+        return <HostsPayroll setActiveComponent={setActiveComponent} />;
+      case 'ServersPayroll':
+        return <ServersPayroll setActiveComponent={setActiveComponent} />;
+      case 'BarPayroll':
+        return <BarPayroll setActiveComponent={setActiveComponent} />;
+      case 'DishPayroll':
+        return <DishPayroll setActiveComponent={setActiveComponent} />;
+      case 'KitchenPayroll':
+        return <KitchenPayroll setActiveComponent={setActiveComponent} />;
+      case 'ManagersPayroll':
+        return <ManagersPayroll setActiveComponent={setActiveComponent} />;
     }
   };
 

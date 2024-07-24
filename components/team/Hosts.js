@@ -32,7 +32,9 @@ const Employees = () => {
                         ></label>
                       </div>
                     </th>
+
                     <th className="align-middle">Employee</th>
+                    <th className="align-middle">Emp ID</th>
                     <th className="align-middle">Phone</th>
                     <th className="align-middle">Role</th>
                     <th className="align-middle">Hired</th>
@@ -62,7 +64,7 @@ const Employees = () => {
                         <br />
                       </div>
                     </td>
-
+                    <td># xxxx </td>
                     <td>xxx-xxx-xxxx</td>
                     <td>Server</td>
                     <td>7/12/23</td>

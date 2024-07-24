@@ -33,12 +33,14 @@ const InStore = ({ setActiveComponent }) => {
                         ></label>
                       </div>
                     </th>
+                    <th className="align-middle">Category</th>
+                    <th className="align-middle">Item</th>
                     <th className="align-middle">Order ID</th>
                     <th className="align-middle">Billing Name</th>
                     <th className="align-middle">Date</th>
                     <th className="align-middle">Total</th>
                     <th className="align-middle">Payment Method</th>
-                    <th className="align-middle">Payment Status</th>
+
                     <th className="align-middle text-end">Actions</th>
                   </tr>
                 </thead>
@@ -50,19 +52,17 @@ const InStore = ({ setActiveComponent }) => {
                         <label className="form-check-label"></label>
                       </div>
                     </td>
-                    <td>
-                      <strong>#SK01</strong>
-                    </td>
+                    <th className="">Entree</th>
+                    <th className="">Steak</th>
+                    <td># xxxx</td>
                     <td>Tony Sheley</td>
-                    <td>July 5, 2023</td>
-                    <td>$350 USD</td>
+                    <td>07/24/24</td>
+                    <td>$350</td>
                     <td>
                       <i className=" social-icon fs-6 fa-solid fa-credit-card"></i>{' '}
                       Mastercard
                     </td>
-                    <td>
-                      <span className="badge badge-subtle-success">Paid</span>
-                    </td>
+
                     <td className="text-end">
                       <button type="button" className="btn btn-md">
                         View
@@ -116,3 +116,37 @@ const InStore = ({ setActiveComponent }) => {
 };
 
 export default InStore;
+{
+  /*
+<a
+                    className="btn btn-sm me-2"
+                    href="#"
+                    onClick={() => setActiveComponent('HourlyChart')}
+                  >
+                    Hourly
+                  </a>
+
+                  <a
+                    className="btn btn-sm me-2"
+                    href="#"
+                    onClick={() => setActiveComponent('DailyChart')}
+                  >
+                    Daily
+                  </a>
+                  <a
+                    className="btn btn-sm me-2"
+                    href="#"
+                    onClick={() => setActiveComponent('WeeklyChart')}
+                  >
+                    Weekly
+                  </a>
+                  <a
+                    className="btn btn-sm me-2"
+                    href="#"
+                    onClick={() => setActiveComponent('MonthlyChart')}
+                  >
+                    Monthly
+                  </a>
+
+*/
+}

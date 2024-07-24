@@ -1,6 +1,6 @@
-// Bar component for teams page
+// Manager component for teams page
 
-const Bar = () => {
+const ManagersPayroll = () => {
   return (
     <div>
       <div className="container-fluid p-0 mt-3">
@@ -8,7 +8,7 @@ const Bar = () => {
           <div className="card-body">
             <div className="row mb-3">
               <div className="col-md-6 col-xl-4 mb-2 mb-md-0">
-                <h5>Bar</h5>
+                <h5>Managers Payroll</h5>
               </div>
               <div className="col-md-6 col-xl-8">
                 <div className="text-sm-end ">
@@ -123,4 +123,4 @@ const Bar = () => {
   );
 };
 
-export default Bar;
+export default ManagersPayroll;

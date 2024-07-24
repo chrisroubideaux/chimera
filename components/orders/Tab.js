@@ -132,12 +132,6 @@ const Tab = ({ setActiveComponent }) => {
           </li>
 
           <li className="nav-item me-2">
-            <Link className="btn btn-sm" href="/products/products">
-              Products
-              <i className="m-1 fa-solid fa-shop"></i>
-            </Link>
-          </li>
-          <li className="nav-item me-2">
             <Link className="btn btn-sm" href="/admin/admin">
               Admin
               <i className="m-1 fa-solid fa-person"></i>
