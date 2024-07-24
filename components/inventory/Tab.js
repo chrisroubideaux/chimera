@@ -98,10 +98,54 @@ const Tab = ({ setActiveComponent }) => {
           </li>
 
           <li className="nav-item me-2">
-            <Link className="btn btn-sm" href="/reports/reports">
-              Reports
-              <i class="m-1 fa-solid fa-folder-open"></i>
-            </Link>
+            <div className="dropdown me-2">
+              <button
+                className="btn btn-sm dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Sale Analytics
+              </button>
+              <ul className="dropdown-menu">
+                <li>
+                  <a
+                    className="dropdown-item"
+                    href="#"
+                    onClick={() => setActiveComponent('Today')}
+                  >
+                    Today
+                  </a>
+                </li>
+                <li>
+                  <a
+                    className="dropdown-item"
+                    href="#"
+                    onClick={() => setActiveComponent('Weekly')}
+                  >
+                    Weekly
+                  </a>
+                </li>
+                <li>
+                  <a
+                    className="dropdown-item"
+                    href="#"
+                    onClick={() => setActiveComponent('Hourly')}
+                  >
+                    Hour
+                  </a>
+                </li>
+                <li>
+                  <a
+                    className="dropdown-item"
+                    href="#"
+                    onClick={() => setActiveComponent('Monthly')}
+                  >
+                    Monthly
+                  </a>
+                </li>
+              </ul>
+            </div>
           </li>
           {/*
           <li className="nav-item me-2">
