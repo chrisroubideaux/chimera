@@ -16,6 +16,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/index.tsx", "pages/dashboard/dashboard.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/index.tsx", "pages/dashboard/dashboard.js", "components/products/Entrees.js", "pages/products/products.js", "data/entrees.js"],
   "exclude": ["node_modules"]
 }

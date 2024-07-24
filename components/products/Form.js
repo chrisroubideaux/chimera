@@ -1,5 +1,5 @@
 // Form component
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 const Form = () => {
   const [options, setOptions] = useState(['']);
