@@ -7,19 +7,11 @@ export default function Bio() {
         <div className="d-grid gap-3 gap-lg-5">
           <div className="card">
             <div className="card-header border-bottom">
-              <h4 className="card-header-title">Basic info</h4>
+              <h4 className="card-header-title">Profile</h4>
             </div>
             <div className="card-body">
               <form>
-                <div className="row mb-4">
-                  <label className="col-sm-3 col-form-label form-label">
-                    Profile photo
-                  </label>
-                  <div className="col-sm-9">
-                    <div className="d-flex align-items-center"></div>
-                  </div>
-                </div>
-
+                <div className="row mb-4"></div>
                 <div className="row mb-4">
                   <label
                     htmlFor="firstNameLabel"
@@ -93,30 +85,243 @@ export default function Bio() {
                 </div>
 
                 <div className="row mb-4">
-                  <label className="col-sm-3 col-form-label form-label">
-                    BIO
+                  <label
+                    htmlFor="homeLabel"
+                    className="col-sm-3 col-form-label form-label"
+                  >
+                    Address
                   </label>
                   <div className="col-sm-9">
-                    <div className="quill-custom">
-                      <div
-                        className="js-quill"
-                        style={{ height: '15rem' }}
-                        data-hs-quill-options='{
-                        "placeholder": "Type your message...",
-                        "modules": {
-                          "toolbar": [
-                            ["bold", "italic", "underline", "strike", "link", "image", "blockquote", "code", {"list": "bullet"}]
-                          ]
-                        }
-                      }'
-                      ></div>
+                    <input
+                      type="adreess"
+                      className="form-control"
+                      name="address"
+                      id="addressLabel"
+                      placeholder="1234 Main St"
+                      aria-label="addresss"
+                    />
+                  </div>
+                </div>
+                <div className="row mb-4">
+                  <div className="input-group">
+                    <label
+                      htmlFor="cityLabel"
+                      className="col-sm-3 col-form-label form-label"
+                    >
+                      City
+                    </label>
+
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="City"
+                      id="CityLabel"
+                      placeholder="City"
+                      aria-label="City"
+                    />
+
+                    <select id="inputState" className="form-select ">
+                      <option selected>State</option>
+                      <option>...</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="row mb-4">
+                  <label
+                    htmlFor="firstNameLabel"
+                    className="col-sm-3 col-form-label form-label"
+                  >
+                    Employee ID/ssn
+                    <i
+                      className="bi-question-circle text-body ms-1"
+                      data-bs-toggle="tooltip"
+                      data-bs-placement="top"
+                      title=""
+                    ></i>
+                  </label>
+                  <div className="col-sm-9">
+                    <div className="input-group">
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="Employee ID"
+                        id="employeeLabel"
+                        placeholder="Employee ID"
+                        aria-label="Employee ID"
+                      />
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="ssn"
+                        id="ssn"
+                        placeholder="Social security"
+                        aria-label="ssn"
+                      />
                     </div>
+                  </div>
+                </div>
+                <div className="row mb-4">
+                  <label
+                    htmlFor="firstNameLabel"
+                    className="col-sm-3 col-form-label form-label"
+                  >
+                    Hire Date
+                    <i
+                      className="bi-question-circle text-body ms-1"
+                      data-bs-toggle="tooltip"
+                      data-bs-placement="top"
+                      title=""
+                    ></i>
+                  </label>
+                  <div className="col-sm-9">
+                    <div className="input-group">
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="hired"
+                        id="hiredLabel"
+                        placeholder="07/22/24"
+                        aria-label="Hired"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="row mb-4">
+                  <label
+                    htmlFor="firstNameLabel"
+                    className="col-sm-3 col-form-label form-label"
+                  >
+                    Wage
+                    <i
+                      className="bi-question-circle text-body ms-1"
+                      data-bs-toggle="tooltip"
+                      data-bs-placement="top"
+                      title=""
+                    ></i>
+                  </label>
+                  <div className="col-sm-9">
+                    <div className="input-group">
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="wage"
+                        id="wageLabel"
+                        placeholder="$28.00/hr"
+                        aria-label="Hired"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="row mb-4">
+                  <label
+                    htmlFor="firstNameLabel"
+                    className="col-sm-3 col-form-label form-label"
+                  >
+                    Emergency 1
+                    <i
+                      className="bi-question-circle text-body ms-1"
+                      data-bs-toggle="tooltip"
+                      data-bs-placement="top"
+                      title=""
+                    ></i>
+                  </label>
+                  <div className="col-sm-9">
+                    <div className="input-group">
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="firstName"
+                        id="firstNameLabel"
+                        placeholder="First Name"
+                        aria-label="First Name"
+                      />
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="lastName"
+                        id="lastNameLabel"
+                        placeholder="Last Name"
+                        aria-label="Last Name"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="row mb-4">
+                  <label
+                    htmlFor="emailLabel"
+                    className="col-sm-3 col-form-label form-label"
+                  >
+                    Phone 1
+                  </label>
+                  <div className="col-sm-9">
+                    <input
+                      type="phone"
+                      className="form-control"
+                      name="phone"
+                      id="emailLabel"
+                      placeholder="xxx-xxx-xxxx"
+                      aria-label="phone"
+                    />
+                  </div>
+                </div>
+                <div className="row mb-4">
+                  <label
+                    htmlFor="firstNameLabel"
+                    className="col-sm-3 col-form-label form-label"
+                  >
+                    Emergency 2
+                    <i
+                      className="bi-question-circle text-body ms-1"
+                      data-bs-toggle="tooltip"
+                      data-bs-placement="top"
+                      title=""
+                    ></i>
+                  </label>
+                  <div className="col-sm-9">
+                    <div className="input-group">
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="firstName"
+                        id="firstNameLabel"
+                        placeholder="First Name"
+                        aria-label="First Name"
+                      />
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="lastName"
+                        id="lastNameLabel"
+                        placeholder="Last Name"
+                        aria-label="Last Name"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="row mb-4">
+                  <label
+                    htmlFor="emailLabel"
+                    className="col-sm-3 col-form-label form-label"
+                  >
+                    Phone 2
+                  </label>
+                  <div className="col-sm-9">
+                    <input
+                      type="phone"
+                      className="form-control"
+                      name="phone"
+                      id="emailLabel"
+                      placeholder="xxx-xxx-xxxx"
+                      aria-label="phone"
+                    />
                   </div>
                 </div>
               </form>
               <div className="card-footer pt-0">
-                <div className="d-flex justify-content-end gap-3">
-                  <a className="btn btn-sm mt-1" href="#!">
+                <div className="d-flex justify-content-end gap-3 mt-2">
+                  <a className="btn btn-sm" href="#!">
                     Edit Profile
                   </a>
                 </div>

@@ -89,7 +89,7 @@ const entrees = [
   {
     id: '6',
     category: 'Entrees',
-    name: 'Double Cheeseburger',
+    name: 'Dbl Cheeseburger',
     image: '/images/entrees/double_cheeseburger.png',
     description:
       'House made double cheeseburger with house bacon and BBQ sauce served with fries.',

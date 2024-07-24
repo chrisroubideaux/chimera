@@ -7,7 +7,7 @@ export default function Form({}) {
         <div className="d-grid gap-3 gap-lg-5">
           <div className="card">
             <div className="card-header border-bottom">
-              <h4 className="card-header-title">Basic info</h4>
+              <h4 className="card-header-title">Add Employee</h4>
             </div>
             <div className="card-body">
               <form>
@@ -180,6 +180,32 @@ export default function Form({}) {
                         id="ssn"
                         placeholder="Social security"
                         aria-label="ssn"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="row mb-4">
+                  <label
+                    htmlFor="firstNameLabel"
+                    className="col-sm-3 col-form-label form-label"
+                  >
+                    Role
+                    <i
+                      className="bi-question-circle text-body ms-1"
+                      data-bs-toggle="tooltip"
+                      data-bs-placement="top"
+                      title=""
+                    ></i>
+                  </label>
+                  <div className="col-sm-9">
+                    <div className="input-group">
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="Role"
+                        id="roleLabel"
+                        placeholder="Role"
+                        aria-label="Role ID"
                       />
                     </div>
                   </div>
