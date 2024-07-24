@@ -1,6 +1,6 @@
-// card component for orders page
+// in store orders component
 
-const Weekly = () => {
+const InStore = ({ setActiveComponent }) => {
   return (
     <div>
       <div className="container-fluid p-0 mt-3">
@@ -8,15 +8,12 @@ const Weekly = () => {
           <div className="card-body">
             <div className="row mb-3">
               <div className="col-md-6 col-xl-4 mb-2 mb-md-0">
-                <h5>{'This week'}</h5>
+                <h5>In store sale</h5>
               </div>
               <div className="col-md-6 col-xl-8">
                 <div className="text-sm-end ">
                   <button type="button" className="btn btn-sm me-2">
                     <i className="fa-solid fa-download"></i> Export
-                  </button>
-                  <button type="button" className="btn btn-sm ">
-                    <i className="fa-solid fa-plus"></i> New Product
                   </button>
                 </div>
               </div>
@@ -37,7 +34,7 @@ const Weekly = () => {
                       </div>
                     </th>
                     <th className="align-middle">Order ID</th>
-                    <th class="align-middle">Billing Name</th>
+                    <th className="align-middle">Billing Name</th>
                     <th className="align-middle">Date</th>
                     <th className="align-middle">Total</th>
                     <th className="align-middle">Payment Method</th>
@@ -118,4 +115,4 @@ const Weekly = () => {
   );
 };
 
-export default Weekly;
+export default InStore;

@@ -1,6 +1,6 @@
-// card component for orders page
+// Gift card
 
-const Today = () => {
+const GiftCard = () => {
   return (
     <div>
       <div className="container-fluid p-0 mt-3">
@@ -8,15 +8,12 @@ const Today = () => {
           <div className="card-body">
             <div className="row mb-3">
               <div className="col-md-6 col-xl-4 mb-2 mb-md-0">
-                <h5>{'Today'}</h5>
+                <h5>Gift Card Sales</h5>
               </div>
               <div className="col-md-6 col-xl-8">
                 <div className="text-sm-end ">
                   <button type="button" className="btn btn-sm me-2">
                     <i className="fa-solid fa-download"></i> Export
-                  </button>
-                  <button type="button" className="btn btn-sm ">
-                    <i className="fa-solid fa-plus"></i> New Product
                   </button>
                 </div>
               </div>
@@ -118,4 +115,4 @@ const Today = () => {
   );
 };
 
-export default Today;
+export default GiftCard;

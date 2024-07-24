@@ -5,10 +5,10 @@ import Navbar from '@/components/Nav/Navbar';
 import Tab from '@/components/orders/Tab';
 import Sidebar from '@/components/admin/Sidebar';
 // order imports
-import Today from '@/components/orders/Today';
-import Yesterday from '@/components/orders/Yesterday';
-import Weekly from '@/components/orders/Weekly';
-import Monthly from '@/components/orders/Monthly';
+
+import InStore from '@/components/orders/Instore';
+import Online from '@/components/orders/Online';
+import GiftCard from '@/components/orders/GiftCard';
 import Refunds from '@/components/orders/Refunds';
 // sale analytics imports
 import DailyChart from '@/components/sales/DailyChart';
@@ -22,12 +22,12 @@ export default function Orders() {
 
   const renderComponent = () => {
     switch (activeComponent) {
-      case 'Yesterday':
-        return <Yesterday setActiveComponent={setActiveComponent} />;
-      case 'Weekly':
-        return <Weekly setActiveComponent={setActiveComponent} />;
-      case 'Monthly':
-        return <Monthly setActiveComponent={setActiveComponent} />;
+      case 'Instore':
+        return <InStore setActiveComponent={setActiveComponent} />;
+      case 'Online':
+        return <Online setActiveComponent={setActiveComponent} />;
+      case 'GiftCard':
+        return <GiftCard setActiveComponent={setActiveComponent} />;
       case 'Refunds':
         return <Refunds setActiveComponent={setActiveComponent} />;
       case 'WeeklyChart':
@@ -39,7 +39,7 @@ export default function Orders() {
       case 'HourlyChart':
         return <HourlyChart setActiveComponent={setActiveComponent} />;
       default:
-        return <Today setActiveComponent={setActiveComponent} />;
+        return <InStore setActiveComponent={setActiveComponent} />;
     }
   };
   return (

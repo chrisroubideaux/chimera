@@ -42,36 +42,28 @@ const Tab = ({ setActiveComponent }) => {
                   <a
                     className="dropdown-item"
                     href="#"
-                    onClick={() => setActiveComponent('Today')}
+                    onClick={() => setActiveComponent('Instore')}
                   >
-                    {"Today's"}
+                    In Store
+                  </a>
+                </li>
+
+                <li>
+                  <a
+                    className="dropdown-item"
+                    href="#"
+                    onClick={() => setActiveComponent('Online')}
+                  >
+                    Online
                   </a>
                 </li>
                 <li>
                   <a
                     className="dropdown-item"
                     href="#"
-                    onClick={() => setActiveComponent('Yesterday')}
+                    onClick={() => setActiveComponent('GiftCard')}
                   >
-                    Yesterday
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="dropdown-item"
-                    href="#"
-                    onClick={() => setActiveComponent('Weekly')}
-                  >
-                    Weekly
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="dropdown-item"
-                    href="#"
-                    onClick={() => setActiveComponent('Monthly')}
-                  >
-                    Monthly
+                    Gift Card
                   </a>
                 </li>
 
@@ -99,15 +91,6 @@ const Tab = ({ setActiveComponent }) => {
                 Sale Analytics
               </button>
               <ul className="dropdown-menu">
-                <li>
-                  <a
-                    className="dropdown-item"
-                    href="#"
-                    onClick={() => setActiveComponent('TopSelling')}
-                  >
-                    Top Selling
-                  </a>
-                </li>
                 <li>
                   <a
                     className="dropdown-item"

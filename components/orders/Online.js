@@ -1,6 +1,6 @@
-// card component for orders page
+// Online component
 
-const Yesterday = () => {
+const Online = () => {
   return (
     <div>
       <div className="container-fluid p-0 mt-3">
@@ -8,15 +8,12 @@ const Yesterday = () => {
           <div className="card-body">
             <div className="row mb-3">
               <div className="col-md-6 col-xl-4 mb-2 mb-md-0">
-                <h5>{"Yesterday's Orders"}</h5>
+                <h5>Online Sales</h5>
               </div>
               <div className="col-md-6 col-xl-8">
                 <div className="text-sm-end ">
                   <button type="button" className="btn btn-sm me-2">
                     <i className="fa-solid fa-download"></i> Export
-                  </button>
-                  <button type="button" className="btn btn-sm ">
-                    <i className="fa-solid fa-plus"></i> New Product
                   </button>
                 </div>
               </div>
@@ -118,4 +115,4 @@ const Yesterday = () => {
   );
 };
 
-export default Yesterday;
+export default Online;

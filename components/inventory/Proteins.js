@@ -15,9 +15,6 @@ const Proteins = () => {
                   <button type="button" className="btn btn-sm me-2">
                     <i className="fa-solid fa-download"></i> Export
                   </button>
-                  <button type="button" className="btn btn-sm ">
-                    <i className="fa-solid fa-plus"></i> New Product
-                  </button>
                 </div>
               </div>
               <table id="datatables-products" className="table w-100 mt-1">
