@@ -70,7 +70,7 @@ const Entrees = ({ setActiveComponent, entrees }) => {
                       </div>
                     </th>
                     <th className="">Category</th>
-                    <th className="">Item Name</th>
+                    <th className="">Item</th>
                     <th className="">Count</th>
                     <th className="">Par</th>
                     <th className="">Price</th>

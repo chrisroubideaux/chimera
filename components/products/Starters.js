@@ -1,6 +1,34 @@
-// starter component
+// Starter component
+import { useState } from 'react';
 
-const Starters = ({ setActiveComponent }) => {
+const Starters = ({ setActiveComponent, starters }) => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+
+  // Calculate the index of the first and last items to display on the current page
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = starters.slice(indexOfFirstItem, indexOfLastItem);
+
+  // Handle pagination
+  const handleNextPage = () => {
+    if (currentPage < Math.ceil(starters.length / itemsPerPage)) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handlePageClick = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const totalPages = Math.ceil(starters.length / itemsPerPage);
+
   return (
     <div>
       <div className="container-fluid p-0 mt-3">
@@ -15,7 +43,6 @@ const Starters = ({ setActiveComponent }) => {
                   <button type="button" className="btn btn-sm me-2">
                     <i className="fa-solid fa-download"></i> Export
                   </button>
-
                   <a
                     type="button"
                     className="btn btn-sm"
@@ -38,53 +65,59 @@ const Starters = ({ setActiveComponent }) => {
                         />
                         <label
                           className="form-check-label"
-                          for="datatables-products-check-all"
+                          htmlFor="datatables-products-check-all"
                         ></label>
                       </div>
                     </th>
-                    <th className="align-middle">Item Name</th>
-                    <th className="align-middle">Price</th>
-                    <th className="align-middle">Stock</th>
-                    <th className="align-middle">Category</th>
-                    <th className="align-middle">Rating</th>
+                    <th className="">Category</th>
+                    <th className="">Item</th>
+                    <th className="">Count</th>
+                    <th className="">Par</th>
+                    <th className="">Price</th>
+                    <th className="">Rating</th>
                     <th className="align-middle text-end">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>
-                      <div className="form-check fs-4">
-                        <input className="form-check-input" type="checkbox" />
-                        <label className="form-check-label"></label>
-                      </div>
-                    </td>
-                    <td className="d-flex align-items-center">
-                      <div className="p-2 rounded bg-body-tertiary d-flex justify-content-center align-items-center me-2 w-50px h-50px">
-                        <img
-                          src="img/products/product-9.png"
-                          className="mw-100 mh-100"
-                          alt=""
-                        />
-                      </div>
-                      <p className="mb-0">
-                        <strong>Test Product</strong>
-                        <br />
-                        <span className="text-muted">Test</span>
-                      </p>
-                    </td>
-                    <td>$ Price</td>
-                    <td>Number</td>
-                    <td>Test</td>
-                    <td>
-                      <i className="fa-solid fa-star text-warning"></i> 4.6{' '}
-                      <span className="text-muted">out of 55 Reviews</span>
-                    </td>
-                    <td className="text-end">
-                      <button type="button" className="btn btn-light">
-                        View
-                      </button>
-                    </td>
-                  </tr>
+                  {currentItems.map((starter) => (
+                    <tr key={starter.id}>
+                      <td>
+                        <div className="form-check fs-4">
+                          <input className="form-check-input" type="checkbox" />
+                          <label className="form-check-label"></label>
+                        </div>
+                      </td>
+                      <td className="d-flex align-items-center">
+                        <div className="p-2 rounded bg-body-tertiary d-flex justify-content-center align-items-center me-2 w-50px h-50px">
+                          {/*
+                          <img
+                            src={starter.image}
+                            className="mw-100 mh-100"
+                            alt={starter.name}
+                          />
+                          */}
+                        </div>
+                        <p className="mb-0">
+                          <td>{starter.category}</td>
+                          <br />
+                          <span className="text-muted"></span>
+                        </p>
+                      </td>
+                      <td>{starter.name}</td>
+                      <td className="">{starter.count}</td>
+                      <td>{starter.par}</td>
+                      <td>${starter.price}</td>
+                      <td>
+                        <i className="fa-solid fa-star text-warning"></i> 4.6{' '}
+                        <span className="text-muted">out of 55 Reviews</span>
+                      </td>
+                      <td className="text-end">
+                        <button type="button" className="btn btn-light">
+                          View
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
@@ -95,29 +128,40 @@ const Starters = ({ setActiveComponent }) => {
           >
             <ul className="pagination">
               <li className="page-item me-2">
-                <a className="nav-link" href="#" aria-label="Previous">
+                <a
+                  className="nav-link"
+                  href="#"
+                  aria-label="Previous"
+                  onClick={handlePrevPage}
+                >
                   <span aria-hidden="true">
                     <i className="fs-6 fa-solid fa-chevron-left"></i>
                   </span>
                 </a>
               </li>
+              {Array.from({ length: totalPages }, (_, index) => (
+                <li
+                  key={index}
+                  className={`page-item me-2 ${
+                    currentPage === index + 1 ? 'active' : ''
+                  }`}
+                >
+                  <a
+                    className="nav-link"
+                    href="#"
+                    onClick={() => handlePageClick(index + 1)}
+                  >
+                    {index + 1}
+                  </a>
+                </li>
+              ))}
               <li className="page-item me-2">
-                <a className="nav-link" href="#">
-                  1
-                </a>
-              </li>
-              <li className="page-item me-2">
-                <a className="nav-link" href="#">
-                  2
-                </a>
-              </li>
-              <li className="page-item me-2">
-                <a className="nav-link" href="#">
-                  3
-                </a>
-              </li>
-              <li className="page-item me-2">
-                <a className="nav-link" href="#" aria-label="Next">
+                <a
+                  className="nav-link"
+                  href="#"
+                  aria-label="Next"
+                  onClick={handleNextPage}
+                >
                   <span aria-hidden="true">
                     <i className="fs-6 fa-solid fa-chevron-right"></i>
                   </span>

@@ -8,16 +8,17 @@ const NewItems = ({ setActiveComponent }) => {
           <div className="card-body">
             <div className="row mb-3">
               <div className="col-md-6 col-xl-4 mb-2 mb-md-0">
-                <h5>Recently Added</h5>
+                <h5>New Items</h5>
               </div>
               <div className="col-md-6 col-xl-8">
                 <div className="text-sm-end ">
                   <button type="button" className="btn btn-sm me-2">
                     <i className="fa-solid fa-download"></i> Export
                   </button>
+
                   <a
                     type="button"
-                    className="btn btn-sm "
+                    className="btn btn-sm"
                     href="#"
                     onClick={() => setActiveComponent('Form')}
                   >
@@ -41,10 +42,11 @@ const NewItems = ({ setActiveComponent }) => {
                         ></label>
                       </div>
                     </th>
-                    <th className="align-middle">Item Name</th>
-                    <th className="align-middle">Price</th>
-                    <th className="align-middle">Stock</th>
                     <th className="align-middle">Category</th>
+                    <th className="align-middle">Item</th>
+                    <th className="align-middle">Count</th>
+                    <th className="align-middle">Par</th>
+                    <th className="align-middle">Price</th>
                     <th className="align-middle">Rating</th>
                     <th className="align-middle text-end">Actions</th>
                   </tr>
@@ -66,14 +68,16 @@ const NewItems = ({ setActiveComponent }) => {
                         />
                       </div>
                       <p className="mb-0">
-                        <strong>Test Product</strong>
+                        <td>Test Product</td>
                         <br />
-                        <span className="text-muted">Test</span>
+                        <span className="text-muted"></span>
                       </p>
                     </td>
+                    <td>Name</td>
+                    <td>count</td>
+                    <td>Par</td>
                     <td>$ Price</td>
-                    <td>Number</td>
-                    <td>Test</td>
+
                     <td>
                       <i className="fa-solid fa-star text-warning"></i> 4.6{' '}
                       <span className="text-muted">out of 55 Reviews</span>

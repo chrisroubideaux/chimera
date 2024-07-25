@@ -1,6 +1,6 @@
-// Gift card component
+// Gift Card Component
 
-const GiftCards = () => {
+const GiftCards = ({ setActiveComponent }) => {
   return (
     <div>
       <div className="container-fluid p-0 mt-3">
@@ -8,16 +8,22 @@ const GiftCards = () => {
           <div className="card-body">
             <div className="row mb-3">
               <div className="col-md-6 col-xl-4 mb-2 mb-md-0">
-                <h5>Gift Cards</h5>
+                <h5>Gift Card</h5>
               </div>
               <div className="col-md-6 col-xl-8">
                 <div className="text-sm-end ">
                   <button type="button" className="btn btn-sm me-2">
                     <i className="fa-solid fa-download"></i> Export
                   </button>
-                  <button type="button" className="btn btn-sm ">
+
+                  <a
+                    type="button"
+                    className="btn btn-sm"
+                    href="#"
+                    onClick={() => setActiveComponent('Form')}
+                  >
                     <i className="fa-solid fa-plus"></i> New Product
-                  </button>
+                  </a>
                 </div>
               </div>
               <table id="datatables-products" className="table w-100 mt-1">
@@ -36,10 +42,11 @@ const GiftCards = () => {
                         ></label>
                       </div>
                     </th>
-                    <th className="align-middle">Item Name</th>
-                    <th className="align-middle">Price</th>
-                    <th className="align-middle">Stock</th>
                     <th className="align-middle">Category</th>
+                    <th className="align-middle">Item</th>
+                    <th className="align-middle">Count</th>
+                    <th className="align-middle">Par</th>
+                    <th className="align-middle">Price</th>
                     <th className="align-middle">Rating</th>
                     <th className="align-middle text-end">Actions</th>
                   </tr>
@@ -61,14 +68,16 @@ const GiftCards = () => {
                         />
                       </div>
                       <p className="mb-0">
-                        <strong>Test Product</strong>
+                        <td>Test Product</td>
                         <br />
-                        <span className="text-muted">Test</span>
+                        <span className="text-muted"></span>
                       </p>
                     </td>
+                    <td>Name</td>
+                    <td>count</td>
+                    <td>Par</td>
                     <td>$ Price</td>
-                    <td>Number</td>
-                    <td>Test</td>
+
                     <td>
                       <i className="fa-solid fa-star text-warning"></i> 4.6{' '}
                       <span className="text-muted">out of 55 Reviews</span>
