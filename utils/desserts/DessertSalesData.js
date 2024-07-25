@@ -7,7 +7,7 @@ const HOURLY_SALES = DAILY_SALES / 10;
 const WEEKLY_SALES = DAILY_SALES * 7;
 const MONTHLY_SALES = DAILY_SALES * 30;
 
-const DessertSalesData = (startDate, endDate) => {
+const generateDessertsSalesData = (startDate, endDate) => {
   return generateSalesData(
     desserts,
     startDate,
@@ -19,4 +19,4 @@ const DessertSalesData = (startDate, endDate) => {
   );
 };
 
-export default DessertSalesData;
+export default generateDessertsSalesData;
