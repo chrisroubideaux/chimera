@@ -1,4 +1,4 @@
-// beverages const beverages = [
+// beverages const beverages
 const beverages = [
   {
     id: '1',
