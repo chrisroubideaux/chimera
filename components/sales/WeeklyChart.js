@@ -68,7 +68,7 @@ const lineChartData = {
   ],
 };
 
-export default function WeeklyChart() {
+export default function WeeklyChart({ setActiveComponent }) {
   return (
     <div className="container-fluid">
       <div className="card">
@@ -82,54 +82,6 @@ export default function WeeklyChart() {
                 <button type="button" className="btn btn-sm me-2">
                   <i className="fa-solid fa-download"></i> Export
                 </button>
-                <div className="dropdown">
-                  <button
-                    className="btn btn-sm dropdown-toggle"
-                    type="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    Category
-                  </button>
-                  <ul className="dropdown-menu">
-                    <li>
-                      <a
-                        className="dropdown-item"
-                        href="#"
-                        onClick={() => setActiveComponent('Starters')}
-                      >
-                        Starters
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        className="dropdown-item"
-                        href="#"
-                        onClick={() => setActiveComponent('Entrees')}
-                      >
-                        Entrees
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        className="dropdown-item"
-                        href="#"
-                        onClick={() => setActiveComponent('Desserts')}
-                      >
-                        Desserts
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        className="dropdown-item"
-                        href="#"
-                        onClick={() => setActiveComponent('Bar')}
-                      >
-                        Bar
-                      </a>
-                    </li>
-                  </ul>
-                </div>
               </div>
             </div>
           </div>

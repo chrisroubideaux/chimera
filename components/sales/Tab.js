@@ -77,6 +77,56 @@ export default function Tab({ setActiveComponent }) {
             </ul>
           </div>
         </li>
+        <li className="nav-item me-2">
+          <div className="dropdown">
+            <button
+              className="btn btn-sm dropdown-toggle"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Category
+            </button>
+            <ul className="dropdown-menu">
+              <li>
+                <a
+                  className="dropdown-item"
+                  href="#"
+                  onClick={() => setActiveComponent('StarterDailyChart')}
+                >
+                  Starters
+                </a>
+              </li>
+              <li>
+                <a
+                  className="dropdown-item"
+                  href="#"
+                  onClick={() => setActiveComponent('')}
+                >
+                  Entrees
+                </a>
+              </li>
+              <li>
+                <a
+                  className="dropdown-item"
+                  href="#"
+                  onClick={() => setActiveComponent('Desserts')}
+                >
+                  Desserts
+                </a>
+              </li>
+              <li>
+                <a
+                  className="dropdown-item"
+                  href="#"
+                  onClick={() => setActiveComponent('Bar')}
+                >
+                  Bar
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
 
         <li className="nav-item me-2">
           <Link className="btn btn-sm" href="/dashboard/dashboard">

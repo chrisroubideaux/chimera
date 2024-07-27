@@ -12,7 +12,9 @@ import WeeklyChart from '@/components/sales/WeeklyChart';
 import MonthlyChart from '@/components/sales/MonthlyChart';
 // daily charts by category
 import StarterDailyChart from '@/components/sales/starters/StarterDailyChart';
-import HourlyDailyChart from '@/components/sales/starters/HourlyDailyChart';
+import StarterHourlyChart from '@/components/sales/starters/StarterHourlyChart';
+import StarterWeeklyChart from '@/components/sales/starters/StarterWeeklyChart';
+import StarterMonthlyChart from '@/components/sales/starters/StarterMonthlyChart';
 
 export default function Sales() {
   const [activeComponent, setActiveComponent] = useState('Sales');
@@ -31,8 +33,12 @@ export default function Sales() {
       // daily charts by category
       case 'StarterDailyChart':
         return <StarterDailyChart setActiveComponent={setActiveComponent} />;
-      case 'HourlyDailyChart':
-        return <HourlyDailyChart setActiveComponent={setActiveComponent} />;
+      case 'StarterHourlyChart':
+        return <StarterHourlyChart setActiveComponent={setActiveComponent} />;
+      case 'StarterWeeklyChart':
+        return <StarterWeeklyChart setActiveComponent={setActiveComponent} />;
+      case 'StarterMonthlyChart':
+        return <StarterMonthlyChart setActiveComponent={setActiveComponent} />;
 
       // default
       default:

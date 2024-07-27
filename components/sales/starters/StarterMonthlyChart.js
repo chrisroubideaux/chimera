@@ -1,4 +1,4 @@
-// Daily sales graph component
+// Starter monthly chart
 import { useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
 import {
@@ -48,38 +48,39 @@ export const options = {
 };
 
 const labels = [
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thursday',
-  'Friday',
-  'Saturday',
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
 ];
-
 export const data = {
   labels,
   datasets: [
     {
       label: 'Projected',
-      data: [9, 9, 8, 7, 8, 11],
+      data: [180, 200, 190, 190, 200, 215, 220, 250],
       borderColor: 'rgb(126, 142, 241)',
       backgroundColor: 'rgb(177, 188, 255)',
     },
     {
       label: 'Actual',
-      data: [10, 10, 7, 8, 10, 11],
+      data: [230, 240, 195, 200, 210, 230, 240, 260],
       borderColor: 'rgb(53, 162, 235)',
       backgroundColor: 'rgba(53, 162, 235, 0.5)',
     },
   ],
 };
 
-export default function StarterDailyChart({ setActiveComponent }) {
+export default function StarterMonthlyChart({ setActiveComponent }) {
   const [currentDate, setCurrentDate] = useState('');
 
   useEffect(() => {
     const now = new Date();
-    const formattedDate = format(now, 'EEEE, MMMM dd, yyyy');
+    const formattedDate = format(now, 'MMMM dd, yyyy');
     setCurrentDate(formattedDate);
   }, []);
 
@@ -89,10 +90,9 @@ export default function StarterDailyChart({ setActiveComponent }) {
         <div className="card-body">
           <div className="row mb-3">
             <div className="col-md-6 col-xl-4 mb-2 mb-md-0">
-              <div className="d-flex align-items-center">
-                <h5 className="mb-0 me-2">Daily Sales / Starters:</h5>
-                <p className="mb-0">{currentDate}</p>
-              </div>
+              <h5>
+                Monthly Sales / Starters <small>({currentDate})</small>
+              </h5>
             </div>
             <div className="col-md-6 col-xl-8">
               <div className="d-flex justify-content-end">
@@ -208,39 +208,41 @@ export const options = {
 };
 
 const labels = [
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thursday',
-  'Friday',
-  'Saturday',
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
 ];
 export const data = {
   labels,
   datasets: [
     {
       label: 'Projected',
-      data: [9, 9, 8, 7, 8, 11],
+      data: [180, 200, 190, 190, 200, 215, 220, 250],
       borderColor: 'rgb(126, 142, 241)',
       backgroundColor: 'rgb(177, 188, 255)',
     },
     {
       label: 'Actual',
-      data: [10, 10, 7, 8, 10, 11],
+      data: [230, 240, 195, 200, 210, 230, 240, 260],
       borderColor: 'rgb(53, 162, 235)',
       backgroundColor: 'rgba(53, 162, 235, 0.5)',
     },
   ],
 };
 
-export default function StarterDailyChart({ setActiveComponent }) {
+export default function StarterMonthlyChart() {
   return (
     <div className="container-fluid">
       <div className="card">
         <div className="card-body">
           <div className="row mb-3">
             <div className="col-md-6 col-xl-4 mb-2 mb-md-0">
-              <h5>Daily Sales/ Starters</h5>
+              <h5>Monthly Sales /Starters</h5>
             </div>
             <div className="col-md-6 col-xl-8">
               <div className="d-flex justify-content-end">
@@ -306,5 +308,6 @@ export default function StarterDailyChart({ setActiveComponent }) {
     </div>
   );
 }
+
 */
 }
