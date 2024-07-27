@@ -42,15 +42,6 @@ export default function Tab({ setActiveComponent }) {
                 <a
                   className="dropdown-item"
                   href="#"
-                  onClick={() => setActiveComponent('TopSelling')}
-                >
-                  Top Selling
-                </a>
-              </li>
-              <li>
-                <a
-                  className="dropdown-item"
-                  href="#"
                   onClick={() => setActiveComponent('HourlyChart')}
                 >
                   Hourly
@@ -92,13 +83,6 @@ export default function Tab({ setActiveComponent }) {
             <i className="m-1 fa-solid fa-chart-column"></i>
           </Link>
         </li>
-        <li className="nav-item me-2">
-          <Link className="btn btn-sm" href="/inventory/inventory">
-            Inventory
-            <i className="m-1 fa-solid fa-list-check"></i>
-          </Link>
-        </li>
-
         <li className="nav-item me-2">
           <Link className="btn btn-sm" href="/admin/admin">
             Admin

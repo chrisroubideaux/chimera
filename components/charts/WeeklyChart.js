@@ -70,10 +70,13 @@ const lineChartData = {
 
 export default function WeeklyChart() {
   return (
-    <div className="container">
-      <div className="row">
-        <div className="col-12">
-          <div className="card" style={{ maxWidth: '800px' }}>
+    <div className="container-fluid">
+      <div className="card">
+        <div className="card-body">
+          <div className="row mb-3">
+            <div className="col-md-6 col-xl-4 mb-2 mb-md-0">
+              <h5>Weekly Sales</h5>
+            </div>
             <Line options={lineChartOptions} data={lineChartData} />
           </div>
         </div>

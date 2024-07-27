@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Head from 'next/head';
 import Navbar from '@/components/Nav/Navbar';
 import Tab from '@/components/sales/Tab';
-import Card from '@/components/charts/Card';
+import Sidebar from '@/components/admin/Sidebar';
 import TopSelling from '@/components/sales/TopSelling';
 import HourlyChart from '@/components/sales/HourlyChart';
 import DailyChart from '@/components/sales/DailyChart';
@@ -48,15 +48,12 @@ export default function Sales() {
         <Tab setActiveComponent={setActiveComponent} />
         <div className="container-fluid py-3">
           <div className="row mt-4">
-            <div className="col-lg-6 col-6 col-sm-6 mb-3">
-              <Card />
+            <div className="col-lg-4 col-xxl-3">
+              <Sidebar setActiveComponent={setActiveComponent} />
             </div>
 
-            {/*revenue chart */}
-            <div className="col-lg-6">
-              <div className="">
-                <div className="">{renderComponent()}</div>
-              </div>
+            <div className="col-lg-8 col-xxl-9">
+              <div className="mt-3">{renderComponent()}</div>
             </div>
           </div>
         </div>

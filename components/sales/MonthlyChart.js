@@ -75,9 +75,71 @@ export const data = {
 
 export default function Monthly() {
   return (
-    <div className="container">
-      <div className="card" style={{ maxWidth: '800px' }}>
-        <Bar options={options} data={data} />
+    <div className="container-fluid">
+      <div className="card">
+        <div className="card-body">
+          <div className="row mb-3">
+            <div className="col-md-6 col-xl-4 mb-2 mb-md-0">
+              <h5>Monthly Sales</h5>
+            </div>
+            <div className="col-md-6 col-xl-8">
+              <div className="d-flex justify-content-end">
+                <button type="button" className="btn btn-sm me-2">
+                  <i className="fa-solid fa-download"></i> Export
+                </button>
+                <div className="dropdown">
+                  <button
+                    className="btn btn-sm dropdown-toggle"
+                    type="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    Category
+                  </button>
+                  <ul className="dropdown-menu">
+                    <li>
+                      <a
+                        className="dropdown-item"
+                        href="#"
+                        onClick={() => setActiveComponent('Starters')}
+                      >
+                        Starters
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className="dropdown-item"
+                        href="#"
+                        onClick={() => setActiveComponent('Entrees')}
+                      >
+                        Entrees
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className="dropdown-item"
+                        href="#"
+                        onClick={() => setActiveComponent('Desserts')}
+                      >
+                        Desserts
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className="dropdown-item"
+                        href="#"
+                        onClick={() => setActiveComponent('Bar')}
+                      >
+                        Bar
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <Bar className="" options={options} data={data} />
+        </div>
       </div>
     </div>
   );
