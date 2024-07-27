@@ -4,17 +4,22 @@ import Head from 'next/head';
 import Navbar from '@/components/Nav/Navbar';
 import Tab from '@/components/sales/Tab';
 import Sidebar from '@/components/admin/Sidebar';
+// overall revenue imports
 import TopSelling from '@/components/sales/TopSelling';
 import HourlyChart from '@/components/sales/HourlyChart';
 import DailyChart from '@/components/sales/DailyChart';
 import WeeklyChart from '@/components/sales/WeeklyChart';
 import MonthlyChart from '@/components/sales/MonthlyChart';
+// daily charts by category
+import StarterDailyChart from '@/components/sales/starters/StarterDailyChart';
+import HourlyDailyChart from '@/components/sales/starters/HourlyDailyChart';
 
 export default function Sales() {
   const [activeComponent, setActiveComponent] = useState('Sales');
 
   const renderComponent = () => {
     switch (activeComponent) {
+      // overall revenue
       case 'TopSelling':
         return <TopSelling setActiveComponent={setActiveComponent} />;
       case 'HourlyChart':
@@ -23,6 +28,13 @@ export default function Sales() {
         return <DailyChart setActiveComponent={setActiveComponent} />;
       case 'WeeklyChart':
         return <WeeklyChart setActiveComponent={setActiveComponent} />;
+      // daily charts by category
+      case 'StarterDailyChart':
+        return <StarterDailyChart setActiveComponent={setActiveComponent} />;
+      case 'HourlyDailyChart':
+        return <HourlyDailyChart setActiveComponent={setActiveComponent} />;
+
+      // default
       default:
         return <MonthlyChart />;
     }

@@ -1,5 +1,5 @@
-// Hourly sales graph component
-import { useState, useEffect } from 'react';
+// Daily sales graph component
+import { Bar } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -9,8 +9,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-import { Bar } from 'react-chartjs-2';
-import { format } from 'date-fns';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 ChartJS.register(
   CategoryScale,
@@ -18,35 +17,25 @@ ChartJS.register(
   BarElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  ChartDataLabels
 );
 
 export const options = {
-  indexAxis: 'y',
-  elements: {
-    bar: {
-      borderWidth: 3,
-      barThickness: 30,
-    },
-  },
   responsive: true,
   plugins: {
     legend: {
-      position: 'right',
+      position: 'top',
     },
-    title: {
+    datalabels: {
       display: true,
-    },
-    tooltip: {
-      callbacks: {
-        label: function (context) {
-          return `$${context.raw}k`;
-        },
-      },
+      align: 'end',
+      anchor: 'end',
+      formatter: (value) => `${value}k`,
     },
   },
   scales: {
-    x: {
+    y: {
       ticks: {
         callback: function (value) {
           return `${value}k`;
@@ -57,61 +46,39 @@ export const options = {
 };
 
 const labels = [
-  '11am',
-  '12pm',
-  '1pm',
-  '2pm',
-  '3pm',
-  '4pm',
-  '5pm',
-  '6pm',
-  '7pm',
-  '8pm',
-  '9pm',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
 ];
-
 export const data = {
   labels,
   datasets: [
     {
-      label: 'Actual',
-      data: [1.5, 1.2, 1.3, 1, 1.1, 1.3, 1.3, 1.2, 1.2, 1.4, 1.2],
-      borderColor: 'rgb(177, 188, 255)',
+      label: 'Projected',
+      data: [9, 9, 8, 7, 8, 11],
+      borderColor: 'rgb(126, 142, 241)',
       backgroundColor: 'rgb(177, 188, 255)',
     },
     {
-      label: 'Projected',
-      data: [1, 1.1, 1.1, 1, 1.4, 1.3, 1.6, 1.4, 1.3, 1.2, 1.1],
-      borderColor: 'rgba(53, 162, 235, 0.5)',
+      label: 'Actual',
+      data: [10, 10, 7, 8, 10, 11],
+      borderColor: 'rgb(53, 162, 235)',
       backgroundColor: 'rgba(53, 162, 235, 0.5)',
     },
   ],
 };
 
-export default function Hourly({ setActiveComponent }) {
-  const [currentTime, setCurrentTime] = useState('');
-
-  useEffect(() => {
-    const updateTime = () => {
-      const now = new Date();
-      const formattedTime = format(now, 'hh:mm:ss a');
-      setCurrentTime(formattedTime);
-    };
-
-    updateTime();
-
-    const intervalId = setInterval(updateTime, 1000);
-
-    return () => clearInterval(intervalId);
-  }, []);
-
+export default function StarterDailyChart({ setActiveComponent }) {
   return (
     <div className="container-fluid">
       <div className="card">
         <div className="card-body">
           <div className="row mb-3">
             <div className="col-md-6 col-xl-4 mb-2 mb-md-0">
-              <h5>Hourly Sales</h5>
+              <h5>Hourly Sales/ Starters</h5>
             </div>
             <div className="col-md-6 col-xl-8">
               <div className="d-flex justify-content-end">
@@ -170,7 +137,6 @@ export default function Hourly({ setActiveComponent }) {
             </div>
           </div>
           <Bar className="" options={options} data={data} />
-          <div className="card-footer ">2 days ago</div>
         </div>
       </div>
     </div>

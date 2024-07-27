@@ -99,7 +99,7 @@ export default function Daily({ setActiveComponent }) {
                       <a
                         className="dropdown-item"
                         href="#"
-                        onClick={() => setActiveComponent('Starters')}
+                        onClick={() => setActiveComponent('StarterDailyChart')}
                       >
                         Starters
                       </a>

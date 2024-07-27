@@ -77,6 +77,7 @@ export default function Tab({ setActiveComponent }) {
             </ul>
           </div>
         </li>
+
         <li className="nav-item me-2">
           <Link className="btn btn-sm" href="/dashboard/dashboard">
             Dashboard

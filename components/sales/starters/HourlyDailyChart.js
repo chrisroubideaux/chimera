@@ -88,7 +88,7 @@ export const data = {
   ],
 };
 
-export default function Hourly({ setActiveComponent }) {
+export default function HourlyDailyChart({ setActiveComponent }) {
   const [currentTime, setCurrentTime] = useState('');
 
   useEffect(() => {
@@ -111,13 +111,14 @@ export default function Hourly({ setActiveComponent }) {
         <div className="card-body">
           <div className="row mb-3">
             <div className="col-md-6 col-xl-4 mb-2 mb-md-0">
-              <h5>Hourly Sales</h5>
+              <h5>Hourly Sales / Starters</h5>
             </div>
             <div className="col-md-6 col-xl-8">
               <div className="d-flex justify-content-end">
                 <button type="button" className="btn btn-sm me-2">
                   <i className="fa-solid fa-download"></i> Export
                 </button>
+
                 <div className="dropdown">
                   <button
                     className="btn btn-sm dropdown-toggle"

@@ -101,7 +101,7 @@ export default function Monthly() {
                       <a
                         className="dropdown-item"
                         href="#"
-                        onClick={() => setActiveComponent('Starters')}
+                        onClick={() => setActiveComponent('StarterDailyChart')}
                       >
                         Starters
                       </a>
@@ -110,7 +110,7 @@ export default function Monthly() {
                       <a
                         className="dropdown-item"
                         href="#"
-                        onClick={() => setActiveComponent('Entrees')}
+                        onClick={() => setActiveComponent('')}
                       >
                         Entrees
                       </a>

@@ -27,10 +27,54 @@ export default function Tab({ setActiveComponent }) {
           <Bookings />
         </li>
         <li className="nav-item me-2">
-          <Link className="btn btn-sm" href="/reports/reports">
-            Reports
-            <i class="m-1 fa-solid fa-folder-open"></i>
-          </Link>
+          <div className="dropdown">
+            <button
+              className="btn btn-sm dropdown-toggle"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Category
+            </button>
+            <ul className="dropdown-menu">
+              <li>
+                <a
+                  className="dropdown-item"
+                  href="#"
+                  onClick={() => setActiveComponent('Starters')}
+                >
+                  Starters
+                </a>
+              </li>
+              <li>
+                <a
+                  className="dropdown-item"
+                  href="#"
+                  onClick={() => setActiveComponent('Entrees')}
+                >
+                  Entrees
+                </a>
+              </li>
+              <li>
+                <a
+                  className="dropdown-item"
+                  href="#"
+                  onClick={() => setActiveComponent('Desserts')}
+                >
+                  Desserts
+                </a>
+              </li>
+              <li>
+                <a
+                  className="dropdown-item"
+                  href="#"
+                  onClick={() => setActiveComponent('Bar')}
+                >
+                  Bar
+                </a>
+              </li>
+            </ul>
+          </div>
         </li>
         <li className="nav-item me-2">
           <Link className="btn btn-sm" href="/inventory/inventory">
