@@ -1,5 +1,7 @@
 // Hourly sales graph component
 import { useState, useEffect } from 'react';
+import { Bar } from 'react-chartjs-2';
+import { format } from 'date-fns';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -9,8 +11,6 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-import { Bar } from 'react-chartjs-2';
-import { format } from 'date-fns';
 
 ChartJS.register(
   CategoryScale,
@@ -88,21 +88,14 @@ export const data = {
   ],
 };
 
-export default function Hourly({ setActiveComponent }) {
-  const [currentTime, setCurrentTime] = useState('');
+export default function HourlyChart({ setActiveComponent }) {
+  const [currentDateTime, setCurrentDateTime] = useState('');
 
   useEffect(() => {
-    const updateTime = () => {
-      const now = new Date();
-      const formattedTime = format(now, 'hh:mm:ss a');
-      setCurrentTime(formattedTime);
-    };
-
-    updateTime();
-
-    const intervalId = setInterval(updateTime, 1000);
-
-    return () => clearInterval(intervalId);
+    const now = new Date();
+    const formattedDate = format(now, 'MMMM dd, yyyy');
+    const formattedTime = format(now, 'h:mm a');
+    setCurrentDateTime(`${formattedDate}, ${formattedTime}`);
   }, []);
 
   return (
@@ -111,7 +104,10 @@ export default function Hourly({ setActiveComponent }) {
         <div className="card-body">
           <div className="row mb-3">
             <div className="col-md-6 col-xl-4 mb-2 mb-md-0">
-              <h5>Hourly Sales</h5>
+              <div className="d-flex align-items-center">
+                <h5 className="mb-0 me-2">Hourly:</h5>
+                <p className="mb-0">{currentDateTime}</p>
+              </div>
             </div>
             <div className="col-md-6 col-xl-8">
               <div className="d-flex justify-content-end">
@@ -122,7 +118,6 @@ export default function Hourly({ setActiveComponent }) {
             </div>
           </div>
           <Bar className="" options={options} data={data} />
-          <div className="card-footer ">2 days ago</div>
         </div>
       </div>
     </div>

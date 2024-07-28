@@ -1,4 +1,4 @@
-// Daily sales graph component
+// Entrees sales graph component
 import { useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
 import {
@@ -74,7 +74,7 @@ export const data = {
   ],
 };
 
-export default function StarterDailyChart({ setActiveComponent }) {
+export default function EntreeDailyChart({ setActiveComponent }) {
   const [currentDate, setCurrentDate] = useState('');
 
   useEffect(() => {

@@ -10,11 +10,16 @@ import HourlyChart from '@/components/sales/HourlyChart';
 import DailyChart from '@/components/sales/DailyChart';
 import WeeklyChart from '@/components/sales/WeeklyChart';
 import MonthlyChart from '@/components/sales/MonthlyChart';
-// daily charts by category
+// starter charts by category
 import StarterDailyChart from '@/components/sales/starters/StarterDailyChart';
 import StarterHourlyChart from '@/components/sales/starters/StarterHourlyChart';
 import StarterWeeklyChart from '@/components/sales/starters/StarterWeeklyChart';
 import StarterMonthlyChart from '@/components/sales/starters/StarterMonthlyChart';
+// entree charts by category
+import EntreeDailyChart from '@/components/sales/entrees/EntreeDailyChart';
+import EntreeHourlyChart from '@/components/sales/entrees/EntreeHourlyChart';
+import EntreeWeeklyChart from '@/components/sales/entrees/EntreeWeeklyChart';
+import EntreeMonthlyChart from '@/components/sales/entrees/EntreeMonthlyChart';
 
 export default function Sales() {
   const [activeComponent, setActiveComponent] = useState('Sales');
@@ -30,7 +35,7 @@ export default function Sales() {
         return <DailyChart setActiveComponent={setActiveComponent} />;
       case 'WeeklyChart':
         return <WeeklyChart setActiveComponent={setActiveComponent} />;
-      // daily charts by category
+      // starter charts by category
       case 'StarterDailyChart':
         return <StarterDailyChart setActiveComponent={setActiveComponent} />;
       case 'StarterHourlyChart':
@@ -39,10 +44,19 @@ export default function Sales() {
         return <StarterWeeklyChart setActiveComponent={setActiveComponent} />;
       case 'StarterMonthlyChart':
         return <StarterMonthlyChart setActiveComponent={setActiveComponent} />;
+      // Entree charts by category
+      case 'EntreeDailyChart':
+        return <EntreeDailyChart setActiveComponent={setActiveComponent} />;
+      case 'EntreeHourlyChart':
+        return <EntreeHourlyChart setActiveComponent={setActiveComponent} />;
+      case 'EntreeWeeklyChart':
+        return <EntreeWeeklyChart setActiveComponent={setActiveComponent} />;
+      case 'EntreeMonthlyChart':
+        return <EntreeMonthlyChart setActiveComponent={setActiveComponent} />;
 
       // default
       default:
-        return <MonthlyChart />;
+        return <MonthlyChart setActiveComponent={setActiveComponent} />;
     }
   };
   return (

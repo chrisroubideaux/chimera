@@ -1,86 +1,84 @@
-// Daily sales graph component
+// Starters weekly chart
 import { useState, useEffect } from 'react';
-import { Bar } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
-  BarElement,
+  PointElement,
+  LineElement,
   Title,
   Tooltip,
   Legend,
 } from 'chart.js';
-import ChartDataLabels from 'chartjs-plugin-datalabels';
-import { format } from 'date-fns';
+import { startOfWeek, endOfWeek, format } from 'date-fns';
 
 ChartJS.register(
   CategoryScale,
   LinearScale,
-  BarElement,
+  PointElement,
+  LineElement,
   Title,
   Tooltip,
-  Legend,
-  ChartDataLabels
+  Legend
 );
 
-export const options = {
+const lineChartOptions = {
   responsive: true,
   plugins: {
     legend: {
       position: 'top',
     },
-    datalabels: {
+    title: {
       display: true,
-      align: 'end',
-      anchor: 'end',
-      formatter: (value) => `${value}k`,
+    },
+    tooltip: {
+      callbacks: {
+        label: function (context) {
+          return `$${context.raw.toLocaleString()}k`;
+        },
+      },
     },
   },
   scales: {
     y: {
       ticks: {
         callback: function (value) {
-          return `${value}k`;
+          return `${value / 1}k`;
         },
       },
     },
   },
 };
 
-const labels = [
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thursday',
-  'Friday',
-  'Saturday',
-];
-
-export const data = {
-  labels,
+const lineChartData = {
+  labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
   datasets: [
     {
-      label: 'Projected',
-      data: [9, 9, 8, 7, 8, 11],
-      borderColor: 'rgb(126, 142, 241)',
+      label: 'Current Week $75k',
+      data: [77, 78, 77, 80, 81, 79, 83],
+      borderColor: 'rgb(177, 188, 255)',
       backgroundColor: 'rgb(177, 188, 255)',
     },
     {
-      label: 'Actual',
-      data: [10, 10, 7, 8, 10, 11],
-      borderColor: 'rgb(53, 162, 235)',
+      label: 'Previous Week $72k',
+      data: [72, 70, 65, 71, 77, 72, 70],
+      borderColor: 'rgba(53, 162, 235, 0.5)',
       backgroundColor: 'rgba(53, 162, 235, 0.5)',
     },
   ],
 };
 
-export default function StarterDailyChart({ setActiveComponent }) {
-  const [currentDate, setCurrentDate] = useState('');
+export default function EntreeWeeklyChart({ setActiveComponent }) {
+  const [currentWeek, setCurrentWeek] = useState('');
 
   useEffect(() => {
     const now = new Date();
-    const formattedDate = format(now, 'EEEE, MMMM dd, yyyy');
-    setCurrentDate(formattedDate);
+    const start = startOfWeek(now, { weekStartsOn: 1 });
+    const end = endOfWeek(now, { weekStartsOn: 1 });
+    const formattedStart = format(start, 'MMMM dd');
+    const formattedEnd = format(end, 'MMMM dd, yyyy');
+    setCurrentWeek(`${formattedStart} - ${formattedEnd}`);
   }, []);
 
   return (
@@ -89,10 +87,10 @@ export default function StarterDailyChart({ setActiveComponent }) {
         <div className="card-body">
           <div className="row mb-3">
             <div className="col-md-6 col-xl-4 mb-2 mb-md-0">
-              <span className="d-flex">
-                <h5 className="mb-0 me-2">Starters:</h5>
-                <p className="text-center">{currentDate}</p>
-              </span>
+              <div className="d-flex ">
+                <h5 className="mb-0 me-1">Starters:</h5>
+                <p className="mb-0">{currentWeek}</p>
+              </div>
             </div>
             <div className="col-md-6 col-xl-8">
               <div className="d-flex justify-content-end">
@@ -152,7 +150,11 @@ export default function StarterDailyChart({ setActiveComponent }) {
               </div>
             </div>
           </div>
-          <Bar className="" options={options} data={data} />
+          <Line
+            className="my-2"
+            options={lineChartOptions}
+            data={lineChartData}
+          />
         </div>
       </div>
     </div>

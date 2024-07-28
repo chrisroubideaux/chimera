@@ -1,6 +1,6 @@
 // Weekly sales graph component
+import { useState, useEffect } from 'react';
 import { Line } from 'react-chartjs-2';
-
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -11,6 +11,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
+import { startOfWeek, endOfWeek, format } from 'date-fns';
 
 ChartJS.register(
   CategoryScale,
@@ -69,19 +70,43 @@ const lineChartData = {
 };
 
 export default function WeeklyChart({ setActiveComponent }) {
+  const [currentWeek, setCurrentWeek] = useState('');
+
+  useEffect(() => {
+    const now = new Date();
+    const start = startOfWeek(now, { weekStartsOn: 1 });
+    const end = endOfWeek(now, { weekStartsOn: 1 });
+    const formattedStart = format(start, 'MMMM dd');
+    const formattedEnd = format(end, 'MMMM dd, yyyy');
+    setCurrentWeek(`${formattedStart} - ${formattedEnd}`);
+  }, []);
+
   return (
     <div className="container-fluid">
       <div className="card">
         <div className="card-body">
           <div className="row mb-3">
             <div className="col-md-6 col-xl-4 mb-2 mb-md-0">
-              <h5>Weekly Sales</h5>
+              <div className="d-flex ">
+                <h5 className="mb-0 me-1">Weekly :</h5>
+                <p className="mb-0">{currentWeek}</p>
+              </div>
             </div>
             <div className="col-md-6 col-xl-8">
               <div className="d-flex justify-content-end">
                 <button type="button" className="btn btn-sm me-2">
                   <i className="fa-solid fa-download"></i> Export
                 </button>
+                <div className="dropdown">
+                  <button
+                    className="btn btn-sm dropdown-toggle"
+                    type="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    Sales
+                  </button>
+                </div>
               </div>
             </div>
           </div>

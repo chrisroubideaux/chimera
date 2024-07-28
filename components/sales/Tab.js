@@ -101,7 +101,7 @@ export default function Tab({ setActiveComponent }) {
                 <a
                   className="dropdown-item"
                   href="#"
-                  onClick={() => setActiveComponent('')}
+                  onClick={() => setActiveComponent('EntreeDailyChart')}
                 >
                   Entrees
                 </a>

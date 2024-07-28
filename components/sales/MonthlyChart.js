@@ -1,4 +1,5 @@
 // Monthly sales graph component
+import { useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -10,6 +11,7 @@ import {
   Legend,
 } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
+import { format } from 'date-fns';
 
 ChartJS.register(
   CategoryScale,
@@ -73,14 +75,25 @@ export const data = {
   ],
 };
 
-export default function Monthly() {
+export default function MonthlyChart({ setActiveComponent }) {
+  const [currentDate, setCurrentDate] = useState('');
+
+  useEffect(() => {
+    const now = new Date();
+    const formattedDate = format(now, 'MMMM dd, yyyy');
+    setCurrentDate(formattedDate);
+  }, []);
+
   return (
     <div className="container-fluid">
       <div className="card">
         <div className="card-body">
           <div className="row mb-3">
             <div className="col-md-6 col-xl-4 mb-2 mb-md-0">
-              <h5>Monthly Sales</h5>
+              <span className="d-flex">
+                <h5 className="mb-0 me-1">Monthly Sales:</h5>
+                <p>{currentDate}</p>
+              </span>
             </div>
             <div className="col-md-6 col-xl-8">
               <div className="d-flex justify-content-end">
