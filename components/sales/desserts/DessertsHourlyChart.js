@@ -89,7 +89,7 @@ export const data = {
   ],
 };
 
-export default function EntreeHourlyChart({ setActiveComponent }) {
+export default function DessertsHourlyChart({ setActiveComponent }) {
   const [currentDateTime, setCurrentDateTime] = useState('');
 
   useEffect(() => {
@@ -106,7 +106,7 @@ export default function EntreeHourlyChart({ setActiveComponent }) {
           <div className="row mb-3">
             <div className="col-md-6 col-xl-4 mb-2 mb-md-0">
               <div className="d-flex align-items-center">
-                <h5 className="mb-0 me-2">Entrees:</h5>
+                <h5 className="mb-0 me-2">Desserts:</h5>
                 <p className="mb-0">{currentDateTime}</p>
               </div>
             </div>

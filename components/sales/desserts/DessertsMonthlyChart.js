@@ -1,4 +1,4 @@
-// Daily sales graph component
+// Desserts monthly chart
 
 import { useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
@@ -50,38 +50,39 @@ export const options = {
 };
 
 const labels = [
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thursday',
-  'Friday',
-  'Saturday',
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
 ];
-
 export const data = {
   labels,
   datasets: [
     {
       label: 'Projected',
-      data: [9, 9, 8, 7, 8, 11],
+      data: [180, 200, 190, 190, 200, 215, 220, 250],
       borderColor: 'rgb(126, 142, 241)',
       backgroundColor: 'rgb(177, 188, 255)',
     },
     {
       label: 'Actual',
-      data: [10, 10, 7, 8, 10, 11],
+      data: [230, 240, 195, 200, 210, 230, 240, 260],
       borderColor: 'rgb(53, 162, 235)',
       backgroundColor: 'rgba(53, 162, 235, 0.5)',
     },
   ],
 };
 
-export default function StarterDailyChart({ setActiveComponent }) {
+export default function DessertsMonthlyChart({ setActiveComponent }) {
   const [currentDate, setCurrentDate] = useState('');
 
   useEffect(() => {
     const now = new Date();
-    const formattedDate = format(now, 'EEEE, MMMM dd, yyyy');
+    const formattedDate = format(now, 'MMMM dd, yyyy');
     setCurrentDate(formattedDate);
   }, []);
 
@@ -92,8 +93,8 @@ export default function StarterDailyChart({ setActiveComponent }) {
           <div className="row mb-3">
             <div className="col-md-6 col-xl-4 mb-2 mb-md-0">
               <span className="d-flex">
-                <h5 className="mb-0 me-2">Starters:</h5>
-                <p className="text-center">{currentDate}</p>
+                <h5 className="mb-0 me-1">Desserts:</h5>
+                <p>{currentDate}</p>
               </span>
             </div>
             <div className="col-md-6 col-xl-8">
@@ -102,8 +103,8 @@ export default function StarterDailyChart({ setActiveComponent }) {
               </div>
             </div>
           </div>
+          <Bar className="" options={options} data={data} />
         </div>
-        <Bar className="" options={options} data={data} />
       </div>
     </div>
   );

@@ -1,39 +1,35 @@
-// Hourly sales graph component
+// Desserts weekly chart
+
 import { useState, useEffect } from 'react';
-import { Bar } from 'react-chartjs-2';
-import { format } from 'date-fns';
-import Nav from './Nav';
+import { Line } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
-  BarElement,
+  PointElement,
+  LineElement,
   Title,
   Tooltip,
   Legend,
 } from 'chart.js';
+import { startOfWeek, endOfWeek, format } from 'date-fns';
+import Nav from './Nav';
 
 ChartJS.register(
   CategoryScale,
   LinearScale,
-  BarElement,
+  PointElement,
+  LineElement,
   Title,
   Tooltip,
   Legend
 );
 
-export const options = {
-  indexAxis: 'y',
-  elements: {
-    bar: {
-      borderWidth: 3,
-      barThickness: 30,
-    },
-  },
+const lineChartOptions = {
   responsive: true,
   plugins: {
     legend: {
-      position: 'right',
+      position: 'top',
     },
     title: {
       display: true,
@@ -41,62 +37,50 @@ export const options = {
     tooltip: {
       callbacks: {
         label: function (context) {
-          return `$${context.raw}k`;
+          return `$${context.raw.toLocaleString()}k`;
         },
       },
     },
   },
   scales: {
-    x: {
+    y: {
       ticks: {
         callback: function (value) {
-          return `${value}k`;
+          return `${value / 1}k`;
         },
       },
     },
   },
 };
 
-const labels = [
-  '11am',
-  '12pm',
-  '1pm',
-  '2pm',
-  '3pm',
-  '4pm',
-  '5pm',
-  '6pm',
-  '7pm',
-  '8pm',
-  '9pm',
-];
-
-export const data = {
-  labels,
+const lineChartData = {
+  labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
   datasets: [
     {
-      label: 'Actual',
-      data: [1.5, 1.2, 1.3, 1, 1.1, 1.3, 1.3, 1.2, 1.2, 1.4, 1.2],
+      label: 'Current Week $75k',
+      data: [77, 78, 77, 80, 81, 79, 83],
       borderColor: 'rgb(177, 188, 255)',
       backgroundColor: 'rgb(177, 188, 255)',
     },
     {
-      label: 'Projected',
-      data: [1, 1.1, 1.1, 1, 1.4, 1.3, 1.6, 1.4, 1.3, 1.2, 1.1],
+      label: 'Previous Week $72k',
+      data: [72, 70, 65, 71, 77, 72, 70],
       borderColor: 'rgba(53, 162, 235, 0.5)',
       backgroundColor: 'rgba(53, 162, 235, 0.5)',
     },
   ],
 };
 
-export default function EntreeHourlyChart({ setActiveComponent }) {
-  const [currentDateTime, setCurrentDateTime] = useState('');
+export default function DessertsWeeklyChart({ setActiveComponent }) {
+  const [currentWeek, setCurrentWeek] = useState('');
 
   useEffect(() => {
     const now = new Date();
-    const formattedDate = format(now, 'MMMM dd, yyyy');
-    const formattedTime = format(now, 'h:mm a');
-    setCurrentDateTime(`${formattedDate}, ${formattedTime}`);
+    const start = startOfWeek(now, { weekStartsOn: 1 });
+    const end = endOfWeek(now, { weekStartsOn: 1 });
+    const formattedStart = format(start, 'MMMM dd');
+    const formattedEnd = format(end, 'MMMM dd, yyyy');
+    setCurrentWeek(`${formattedStart} - ${formattedEnd}`);
   }, []);
 
   return (
@@ -105,9 +89,9 @@ export default function EntreeHourlyChart({ setActiveComponent }) {
         <div className="card-body">
           <div className="row mb-3">
             <div className="col-md-6 col-xl-4 mb-2 mb-md-0">
-              <div className="d-flex align-items-center">
-                <h5 className="mb-0 me-2">Entrees:</h5>
-                <p className="mb-0">{currentDateTime}</p>
+              <div className="d-flex ">
+                <h5 className="mb-0 me-1">Desserts:</h5>
+                <p className="mb-0">{currentWeek}</p>
               </div>
             </div>
             <div className="col-md-6 col-xl-8">
@@ -116,7 +100,11 @@ export default function EntreeHourlyChart({ setActiveComponent }) {
               </div>
             </div>
           </div>
-          <Bar className="" options={options} data={data} />
+          <Line
+            className="my-2"
+            options={lineChartOptions}
+            data={lineChartData}
+          />
         </div>
       </div>
     </div>

@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
 import { format } from 'date-fns';
+import Nav from './Nav';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -111,59 +112,7 @@ export default function StarterHourlyChart({ setActiveComponent }) {
             </div>
             <div className="col-md-6 col-xl-8">
               <div className="d-flex justify-content-end">
-                <button type="button" className="btn btn-sm me-2">
-                  <i className="fa-solid fa-download"></i> Export
-                </button>
-                <div className="dropdown">
-                  <button
-                    className="btn btn-sm dropdown-toggle"
-                    type="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    Sales
-                  </button>
-                  <ul className="dropdown-menu">
-                    <li>
-                      <a
-                        className="dropdown-item"
-                        href="#"
-                        onClick={() => setActiveComponent('StarterHourlyChart')}
-                      >
-                        Hourly
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        className="dropdown-item"
-                        href="#"
-                        onClick={() => setActiveComponent('StarterDailyChart')}
-                      >
-                        Daily
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        className="dropdown-item"
-                        href="#"
-                        onClick={() => setActiveComponent('StarterWeeklyChart')}
-                      >
-                        Weekly
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        className="dropdown-item"
-                        href="#"
-                        onClick={() =>
-                          setActiveComponent('StarterMonthlyChart')
-                        }
-                      >
-                        Monthly
-                      </a>
-                    </li>
-                  </ul>
-                </div>
+                <Nav setActiveComponent={setActiveComponent} />
               </div>
             </div>
           </div>

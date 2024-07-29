@@ -11,6 +11,7 @@ import DailyChart from '@/components/sales/DailyChart';
 import WeeklyChart from '@/components/sales/WeeklyChart';
 import MonthlyChart from '@/components/sales/MonthlyChart';
 // starter charts by category
+
 import StarterDailyChart from '@/components/sales/starters/StarterDailyChart';
 import StarterHourlyChart from '@/components/sales/starters/StarterHourlyChart';
 import StarterWeeklyChart from '@/components/sales/starters/StarterWeeklyChart';
@@ -20,6 +21,16 @@ import EntreeDailyChart from '@/components/sales/entrees/EntreeDailyChart';
 import EntreeHourlyChart from '@/components/sales/entrees/EntreeHourlyChart';
 import EntreeWeeklyChart from '@/components/sales/entrees/EntreeWeeklyChart';
 import EntreeMonthlyChart from '@/components/sales/entrees/EntreeMonthlyChart';
+// desserts charts by category
+import DessertsDailyChart from '@/components/sales/desserts/DessertsDailyChart';
+import DessertsHourlyChart from '@/components/sales/desserts/DessertsHourlyChart';
+import DessertsWeeklyChart from '@/components/sales/desserts/DessertsWeeklyChart';
+import DessertsMonthlyChart from '@/components/sales/desserts/DessertsMonthlyChart';
+// beverages charts by category
+import BeverageDailyChart from '@/components/sales/beverages/BeverageDailyChart';
+import BeverageHourlyChart from '@/components/sales/beverages/BeverageHourlyChart';
+import BeverageWeeklyChart from '@/components/sales/beverages/BeverageWeeklyChart';
+import BeverageMonthlyChart from '@/components/sales/beverages/BeverageMonthlyChart';
 
 export default function Sales() {
   const [activeComponent, setActiveComponent] = useState('Sales');
@@ -35,6 +46,7 @@ export default function Sales() {
         return <DailyChart setActiveComponent={setActiveComponent} />;
       case 'WeeklyChart':
         return <WeeklyChart setActiveComponent={setActiveComponent} />;
+
       // starter charts by category
       case 'StarterDailyChart':
         return <StarterDailyChart setActiveComponent={setActiveComponent} />;
@@ -44,6 +56,7 @@ export default function Sales() {
         return <StarterWeeklyChart setActiveComponent={setActiveComponent} />;
       case 'StarterMonthlyChart':
         return <StarterMonthlyChart setActiveComponent={setActiveComponent} />;
+
       // Entree charts by category
       case 'EntreeDailyChart':
         return <EntreeDailyChart setActiveComponent={setActiveComponent} />;
@@ -54,6 +67,24 @@ export default function Sales() {
       case 'EntreeMonthlyChart':
         return <EntreeMonthlyChart setActiveComponent={setActiveComponent} />;
 
+      // Dessert charts by category
+      case 'DessertsDailyChart':
+        return <DessertsDailyChart setActiveComponent={setActiveComponent} />;
+      case 'DessertsHourlyChart':
+        return <DessertsHourlyChart setActiveComponent={setActiveComponent} />;
+      case 'DessertsWeeklyChart':
+        return <DessertsWeeklyChart setActiveComponent={setActiveComponent} />;
+      case 'DessrtsMonthlyChart':
+        return <DessertsMonthlyChart setActiveComponent={setActiveComponent} />;
+      // Beverage charts by category
+      case 'BeverageDailyChart':
+        return <BeverageDailyChart setActiveComponent={setActiveComponent} />;
+      case 'BeverageHourlyChart':
+        return <BeverageHourlyChart setActiveComponent={setActiveComponent} />;
+      case 'BeverageWeeklyChart':
+        return <BeverageWeeklyChart setActiveComponent={setActiveComponent} />;
+      case 'BeverageMonthlyChart':
+        return <BeverageMonthlyChart setActiveComponent={setActiveComponent} />;
       // default
       default:
         return <MonthlyChart setActiveComponent={setActiveComponent} />;

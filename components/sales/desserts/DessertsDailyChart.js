@@ -1,5 +1,4 @@
-// Daily sales graph component
-
+// Desserts daily chart
 import { useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
 import {
@@ -76,7 +75,7 @@ export const data = {
   ],
 };
 
-export default function StarterDailyChart({ setActiveComponent }) {
+export default function DessertsDailyChart({ setActiveComponent }) {
   const [currentDate, setCurrentDate] = useState('');
 
   useEffect(() => {
@@ -92,7 +91,7 @@ export default function StarterDailyChart({ setActiveComponent }) {
           <div className="row mb-3">
             <div className="col-md-6 col-xl-4 mb-2 mb-md-0">
               <span className="d-flex">
-                <h5 className="mb-0 me-2">Starters:</h5>
+                <h5 className="mb-0 me-2">Desserts:</h5>
                 <p className="text-center">{currentDate}</p>
               </span>
             </div>
@@ -102,8 +101,8 @@ export default function StarterDailyChart({ setActiveComponent }) {
               </div>
             </div>
           </div>
+          <Bar className="" options={options} data={data} />
         </div>
-        <Bar className="" options={options} data={data} />
       </div>
     </div>
   );
