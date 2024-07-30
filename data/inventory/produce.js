@@ -255,3 +255,5 @@ const produce = [
     MonthlySales: {},
   },
 ];
+
+export default produce;

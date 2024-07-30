@@ -11,21 +11,47 @@ import Beverages from '@/components/inventory/Beverages';
 import Dry from '@/components/inventory/Dry';
 import Paper from '@/components/inventory/Paper';
 
+// data imports
+import produce from '@/data/inventory/produce';
+import dairy from '@/data/inventory/dairy';
+import dryGoods from '@/data/inventory/dryGoods';
+import proteins from '@/data/inventory/proteins';
+import beverages from '@/data/inventory/beverages';
+import paperProducts from '@/data/inventory/PaperProducts';
+
 export default function Inventory() {
   const [activeComponent, setActiveComponent] = useState('Inventory');
 
   const renderComponent = () => {
     switch (activeComponent) {
       case 'Dairy':
-        return <Dairy setActiveComponent={setActiveComponent} />;
+        return <Dairy setActiveComponent={setActiveComponent} dairy={dairy} />;
+
       case 'Proteins':
-        return <Proteins setActiveComponent={setActiveComponent} />;
+        return (
+          <Proteins
+            setActiveComponent={setActiveComponent}
+            proteins={proteins}
+          />
+        );
       case 'Beverages':
-        return <Beverages setActiveComponent={setActiveComponent} />;
+        return (
+          <Beverages
+            setActiveComponent={setActiveComponent}
+            beverages={beverages}
+          />
+        );
       case 'Dry':
-        return <Dry setActiveComponent={setActiveComponent} />;
+        return (
+          <Dry setActiveComponent={setActiveComponent} dryGoods={dryGoods} />
+        );
       case 'Paper':
-        return <Paper setActiveComponent={setActiveComponent} />;
+        return (
+          <Paper
+            setActiveComponent={setActiveComponent}
+            paperProducts={paperProducts}
+          />
+        );
         // chart analytics
         {
           /*
@@ -43,7 +69,9 @@ export default function Inventory() {
     */
         }
       default:
-        return <Produce setActiveComponent={setActiveComponent} />;
+        return (
+          <Produce setActiveComponent={setActiveComponent} produce={produce} />
+        );
     }
   };
   return (
