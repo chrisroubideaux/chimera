@@ -1,11 +1,6 @@
 // linens
 
 const linens = [
-  [
-    {
-      monthlyBudget: '2,308.46',
-    },
-  ],
   {
     id: '1',
     category: 'Napkins',

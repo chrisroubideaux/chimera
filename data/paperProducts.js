@@ -6,8 +6,16 @@ const paperProducts = [
     name: 'Standard Napkins',
     description:
       'High-quality paper napkins for everyday use. Absorbent and durable, ideal for casual dining.',
-    pricePerCase: 37.5, // average price per case of 500 napkins
-    pricePerUnit: 0.075, // average price per napkin
+    price: '37',
+    unit: 'case',
+    count: '1',
+    par: '2',
+    projected: '2',
+    actual: '0',
+    date: '00/00/00',
+    time: '1:00pm',
+    WeeklySales: {},
+    MonthlySales: {},
   },
   {
     id: '2',
@@ -15,8 +23,16 @@ const paperProducts = [
     name: 'Standard Togo Box',
     description:
       'Durable to-go box for packing food. Suitable for a variety of menu items. Available in multiple sizes.',
-    pricePerCase: 35.0, // average price per case of 100 boxes
-    pricePerUnit: 0.35, // average price per box
+    price: '30',
+    unit: 'case',
+    count: '1',
+    par: '2',
+    projected: '2',
+    actual: '0',
+    date: '00/00/00',
+    time: '1:00pm',
+    WeeklySales: {},
+    MonthlySales: {},
   },
   {
     id: '3',
@@ -24,8 +40,16 @@ const paperProducts = [
     name: 'Plastic Silverware Set',
     description:
       'Disposable plastic silverware set including fork, knife, and spoon. Perfect for takeout and to-go orders.',
-    pricePerCase: 150.0, // average price per case of 1,000 sets
-    pricePerUnit: 0.15, // average price per set
+    price: '30',
+    unit: 'case',
+    count: '1',
+    par: '2',
+    projected: '2',
+    actual: '0',
+    date: '00/00/00',
+    time: '1:00pm',
+    WeeklySales: {},
+    MonthlySales: {},
   },
   {
     id: '4',
@@ -33,8 +57,16 @@ const paperProducts = [
     name: '4 oz Plastic Soup Cup',
     description:
       'Small plastic soup cup for hot or cold soups. Comes with a secure lid to prevent spills.',
-    pricePerCase: 65.0, // average price per case of 1,000 cups
-    pricePerUnit: 0.065, // average price per cup
+    price: '30',
+    unit: 'case',
+    count: '1',
+    par: '2',
+    projected: '2',
+    actual: '0',
+    date: '00/00/00',
+    time: '1:00pm',
+    WeeklySales: {},
+    MonthlySales: {},
   },
   {
     id: '5',
@@ -42,8 +74,16 @@ const paperProducts = [
     name: '6 oz Plastic Soup Cup',
     description:
       'Medium-sized plastic soup cup for hot or cold soups. Includes a tight-fitting lid.',
-    pricePerCase: 75.0, // average price per case of 1,000 cups
-    pricePerUnit: 0.075, // average price per cup
+    price: '30',
+    unit: 'case',
+    count: '1',
+    par: '2',
+    projected: '2',
+    actual: '0',
+    date: '00/00/00',
+    time: '1:00pm',
+    WeeklySales: {},
+    MonthlySales: {},
   },
   {
     id: '6',
@@ -51,8 +91,16 @@ const paperProducts = [
     name: '8 oz Plastic Soup Cup',
     description:
       'Large plastic soup cup for generous servings of hot or cold soups. Equipped with a secure lid.',
-    pricePerCase: 85.0, // average price per case of 1,000 cups
-    pricePerUnit: 0.085, // average price per cup
+    price: '30',
+    unit: 'case',
+    count: '1',
+    par: '2',
+    projected: '2',
+    actual: '0',
+    date: '00/00/00',
+    time: '1:00pm',
+    WeeklySales: {},
+    MonthlySales: {},
   },
   {
     id: '7',
@@ -60,8 +108,16 @@ const paperProducts = [
     name: '4 oz Plastic Ramekin with Lid',
     description:
       'Small plastic ramekin with lid, ideal for sauces, dressings, or small sides. Leak-proof and convenient.',
-    pricePerCase: 125.0, // average price per case of 1,000 ramekins
-    pricePerUnit: 0.125, // average price per ramekin
+    price: '30',
+    unit: 'case',
+    count: '1',
+    par: '2',
+    projected: '2',
+    actual: '0',
+    date: '00/00/00',
+    time: '1:00pm',
+    WeeklySales: {},
+    MonthlySales: {},
   },
   {
     id: '8',
@@ -69,8 +125,16 @@ const paperProducts = [
     name: 'Paper Towels',
     description:
       'Highly absorbent paper towels for cleaning and drying. Essential for maintaining a clean kitchen environment.',
-    pricePerCase: 45.0,
-    pricePerUnit: 1.5,
+    price: '30',
+    unit: 'case',
+    count: '1',
+    par: '2',
+    projected: '2',
+    actual: '0',
+    date: '00/00/00',
+    time: '1:00pm',
+    WeeklySales: {},
+    MonthlySales: {},
   },
   {
     id: '9',
