@@ -8,8 +8,17 @@ const starters = [
     description:
       ' Four Grilled crostinis served with with shaved fillet & fresh arugula tossed in house made lemon ailoi topped with shaved parmesan.',
     price: '17',
-    count: '120,orders',
-    par: '120',
+    count: '80',
+    par: '80',
+    projected: '30',
+    actual: '30',
+    sold: '30',
+    date: '00/00/00',
+    time: '1:00pm',
+    HourlySales: {},
+    DailySales: {},
+    WeeklySales: {},
+    MonthlySales: {},
     options: [
       {
         sauce: 'Lemon Aioli',
@@ -37,9 +46,17 @@ const starters = [
     description:
       'Chicken wings tossed in your choice of one of our house made sauce served with your choice of ranch or blue cheese.',
     price: '15',
-    price: '14',
-    count: '3 lexons',
-    par: '3',
+    count: '200',
+    par: '200',
+    projected: '200',
+    actual: '150',
+    sold: '150',
+    date: '00/00/00',
+    time: '1:00pm',
+    HourlySales: {},
+    DailySales: {},
+    WeeklySales: {},
+    MonthlySales: {},
     options: [
       {
         sauce: 'Buffalo, BBQ, Korean BBG',
@@ -68,8 +85,17 @@ const starters = [
     description:
       'Steamed house made boa buns filled with top noch pork belly, with pickled cucumber, & house made korean bbq sauce.',
     price: '17',
-    count: '20 orders',
+    count: '35',
     par: '20',
+    projected: '20',
+    actual: '20',
+    sold: '20',
+    date: '00/00/00',
+    time: '1:00pm',
+    HourlySales: {},
+    DailySales: {},
+    WeeklySales: {},
+    MonthlySales: {},
     options: [
       {
         quantity: '3 sliders',
@@ -90,6 +116,15 @@ const starters = [
     price: '15',
     count: '48',
     par: '56',
+    projected: '50',
+    actual: '50',
+    sold: '50',
+    date: '00/00/00',
+    time: '1:00pm',
+    HourlySales: {},
+    DailySales: {},
+    WeeklySales: {},
+    MonthlySales: {},
     options: [
       {
         quantity: '6 potstickers',

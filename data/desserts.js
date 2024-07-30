@@ -8,8 +8,17 @@ const desserts = [
     description:
       'Decadent house-made brownie, rich and fudgy, served warm with a scoop of our creamy house-made ice cream. A perfect end to any meal.',
     price: 8,
-    count: '12pc',
-    par: '12pc',
+    count: '48',
+    par: '48',
+    projected: '12',
+    actual: '12',
+    sold: '12',
+    date: '00/00/00',
+    time: '1:00pm',
+    HourlySales: {},
+    DailySales: {},
+    WeeklySales: {},
+    MonthlySales: {},
     options: [
       {
         iceCream: ['Vanilla', 'Chocolate', 'Strawberry'],
@@ -26,6 +35,15 @@ const desserts = [
     price: 9,
     count: '10',
     par: '8',
+    projected: '9',
+    actual: '8',
+    sold: '8',
+    date: '00/00/00',
+    time: '1:00pm',
+    HourlySales: {},
+    DailySales: {},
+    WeeklySales: {},
+    MonthlySales: {},
     options: [
       {
         garnish: ['Fresh Berries', 'Mint Leaves'],
@@ -42,6 +60,16 @@ const desserts = [
     price: 10,
     count: '12',
     par: '12',
+    projected: '12',
+    actual: '12',
+    sold: '12',
+    date: '00/00/00',
+    time: '1:00pm',
+    HourlySales: {},
+    DailySales: {},
+    WeeklySales: {},
+    MonthlySales: {},
+
     options: [
       {
         garnish: ['Mint Leaves'],
@@ -58,6 +86,15 @@ const desserts = [
     price: 12,
     count: '12',
     par: '12',
+    projected: '12',
+    actual: '12',
+    sold: '12',
+    date: '00/00/00',
+    time: '1:00pm',
+    HourlySales: {},
+    DailySales: {},
+    WeeklySales: {},
+    MonthlySales: {},
     options: [
       {
         toppings: ['Whipped Cream', 'Cinnamon'],

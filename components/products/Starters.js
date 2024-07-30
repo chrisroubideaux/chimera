@@ -69,12 +69,14 @@ const Starters = ({ setActiveComponent, starters }) => {
                         ></label>
                       </div>
                     </th>
-                    <th className="">Category</th>
                     <th className="">Item</th>
+                    <th className="">Category</th>
+                    <th className="">Price</th>
                     <th className="">Count</th>
                     <th className="">Par</th>
-                    <th className="">Price</th>
-                    <th className="">Rating</th>
+                    <th className="">Sold</th>
+                    <th className="">Date</th>
+
                     <th className="align-middle text-end">Actions</th>
                   </tr>
                 </thead>
@@ -88,31 +90,23 @@ const Starters = ({ setActiveComponent, starters }) => {
                         </div>
                       </td>
                       <td className="d-flex align-items-center">
-                        <div className="p-2 rounded bg-body-tertiary d-flex justify-content-center align-items-center me-2 w-50px h-50px">
-                          {/*
-                          <img
-                            src={starter.image}
-                            className="mw-100 mh-100"
-                            alt={starter.name}
-                          />
-                          */}
-                        </div>
+                        <div className=" rounded bg-body-tertiary d-flex justify-content-center align-items-center  w-50px h-50px"></div>
                         <p className="mb-0">
-                          <td>{starter.category}</td>
+                          <td>{starter.name}</td>
                           <br />
                           <span className="text-muted"></span>
                         </p>
                       </td>
-                      <td>{starter.name}</td>
-                      <td className="">{starter.count}</td>
-                      <td>{starter.par}</td>
+
+                      <td>{starter.category}</td>
                       <td>${starter.price}</td>
-                      <td>
-                        <i className="fa-solid fa-star text-warning"></i> 4.6{' '}
-                        <span className="text-muted">out of 55 Reviews</span>
-                      </td>
+                      <td>{starter.count}</td>
+                      <td>{starter.par}</td>
+                      <td>{starter.sold}</td>
+                      <td>{starter.date}</td>
+
                       <td className="text-end">
-                        <button type="button" className="btn btn-light">
+                        <button type="button" className="btn btn-sm">
                           View
                         </button>
                       </td>

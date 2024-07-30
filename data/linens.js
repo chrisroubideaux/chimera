@@ -1,6 +1,11 @@
 // linens
 
 const linens = [
+  [
+    {
+      monthlyBudget: '2,308.46',
+    },
+  ],
   {
     id: '1',
     category: 'Napkins',
@@ -16,8 +21,15 @@ const linens = [
     name: 'Linen Tablecloth',
     description:
       'Elegant linen tablecloths that add a touch of sophistication to any table setting. Durable and easy to clean.',
-    pricePerCase: 90.0,
-    pricePerUnit: 7.5,
+    price: '600',
+    count: '5 Bundles',
+    par: '5',
+    projected: '7',
+    actual: '3',
+    date: '00/00/00',
+    time: '1:00pm',
+    WeeklySales: {},
+    MonthlySales: {},
   },
   {
     id: '3',
@@ -25,8 +37,15 @@ const linens = [
     name: 'Server Apron',
     description:
       'Durable aprons designed for servers. Made from high-quality fabric to withstand daily use and spills.',
-    pricePerCase: 150.0,
-    pricePerUnit: 15.0,
+    price: '500',
+    count: '5 Bundles',
+    par: '5',
+    projected: '3',
+    actual: '3',
+    date: '00/00/00',
+    time: '1:00pm',
+    WeeklySales: {},
+    MonthlySales: {},
   },
   {
     id: '4',
@@ -34,8 +53,15 @@ const linens = [
     name: 'Cook Apron',
     description:
       'Heavy-duty aprons for kitchen use. Provides excellent coverage and protection for cooks. Made from durable fabric.',
-    pricePerCase: 175.0,
-    pricePerUnit: 17.5,
+    price: '2 Bundle',
+    count: '5 bundles',
+    par: '5',
+    projected: '3',
+    actual: '3',
+    date: '00/00/00',
+    time: '1:00pm',
+    WeeklySales: {},
+    MonthlySales: {},
   },
   {
     id: '5',
@@ -43,8 +69,15 @@ const linens = [
     name: 'Linen Mop Head',
     description:
       'High-quality mop heads for cleaning. Made from durable linen for effective cleaning and long-lasting use.',
-    pricePerCase: 115.0,
-    pricePerUnit: 9.58,
+    price: '200',
+    count: '3 Bundles',
+    par: '4',
+    projected: '4',
+    actual: '3',
+    date: '00/00/00',
+    time: '1:00pm',
+    WeeklySales: {},
+    MonthlySales: {},
   },
 ];
 

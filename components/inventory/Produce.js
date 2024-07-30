@@ -35,7 +35,7 @@ export default function Produce() {
                   </thead>
                   <tbody>
                     <tr>
-                      <td>Eggs</td>
+                      <td>Bruschetta</td>
                       <td>Dairy</td>
                       <td># xxxx</td>
                       <td>6 cases</td>

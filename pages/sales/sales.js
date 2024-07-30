@@ -11,7 +11,6 @@ import DailyChart from '@/components/sales/DailyChart';
 import WeeklyChart from '@/components/sales/WeeklyChart';
 import MonthlyChart from '@/components/sales/MonthlyChart';
 // starter charts by category
-
 import StarterDailyChart from '@/components/sales/starters/StarterDailyChart';
 import StarterHourlyChart from '@/components/sales/starters/StarterHourlyChart';
 import StarterWeeklyChart from '@/components/sales/starters/StarterWeeklyChart';

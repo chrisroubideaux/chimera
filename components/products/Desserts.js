@@ -68,12 +68,13 @@ const Desserts = ({ setActiveComponent, desserts }) => {
                         ></label>
                       </div>
                     </th>
-                    <th className="align-middle">Category</th>
-                    <th className="align-middle">Item</th>
-                    <th className="align-middle">Count</th>
-                    <th className="align-middle">Par</th>
-                    <th className="align-middle">Price</th>
-                    <th className="align-middle">Rating</th>
+                    <th className="">Item</th>
+                    <th className="">Category</th>
+                    <th className="">Price</th>
+                    <th className="">Count</th>
+                    <th className="">Par</th>
+                    <th className="">Sold</th>
+                    <th className="">Date</th>
                     <th className="align-middle text-end">Actions</th>
                   </tr>
                 </thead>
@@ -87,29 +88,21 @@ const Desserts = ({ setActiveComponent, desserts }) => {
                         </div>
                       </td>
                       <td className="d-flex align-items-center">
-                        <div className="p-2 rounded bg-body-tertiary d-flex justify-content-center align-items-center me-2 w-50px h-50px">
-                          {/*
-                          <img
-                            src={beverage.image}
-                            className="mw-100 mh-100"
-                            alt={beverage.name}
-                          />
-                          */}
-                        </div>
+                        <div className="rounded bg-body-tertiary d-flex  w-50px h-50px"></div>
                         <p className="mb-0">
                           <td>{dessert.category}</td>
                           <br />
                           <span className="text-muted"></span>
                         </p>
                       </td>
-                      <td>{dessert.name}</td>
-                      <td className="">{dessert.count}</td>
-                      <td>{dessert.par}</td>
+
+                      <td>{dessert.category}</td>
                       <td>${dessert.price}</td>
-                      <td>
-                        <i className="fa-solid fa-star text-warning"></i> 4.6{' '}
-                        <span className="text-muted">out of 55 Reviews</span>
-                      </td>
+                      <td>{dessert.count}</td>
+                      <td>{dessert.par}</td>
+                      <td>{dessert.sold}</td>
+                      <td>{dessert.date}</td>
+
                       <td className="text-end">
                         <button type="button" className="btn btn-light">
                           View

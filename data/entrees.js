@@ -10,6 +10,15 @@ const entrees = [
     price: '38',
     count: '5',
     par: '3',
+    projected: '5',
+    actual: '5',
+    sold: '5',
+    date: '00/00/00',
+    time: '1:00pm',
+    HourlySales: {},
+    DailySales: {},
+    WeeklySales: {},
+    MonthlySales: {},
     options: [
       {
         sides: ['Broccolini', 'Baked Potato', 'Loaded Mashed Potato'],
@@ -26,6 +35,15 @@ const entrees = [
     price: '45',
     count: '5',
     par: '6',
+    projected: '6',
+    actual: '6',
+    sold: '6',
+    date: '00/00/00',
+    time: '1:00pm',
+    HourlySales: {},
+    DailySales: {},
+    WeeklySales: {},
+    MonthlySales: {},
     options: [
       {
         sides: [
@@ -49,6 +67,15 @@ const entrees = [
     price: '28',
     count: '5',
     par: '5',
+    projected: '4',
+    actual: '3',
+    sold: '5',
+    date: '00/00/00',
+    time: '1:00pm',
+    HourlySales: {},
+    DailySales: {},
+    WeeklySales: {},
+    MonthlySales: {},
     options: [
       {
         sides: ['Asparagus'],
@@ -65,6 +92,15 @@ const entrees = [
     price: '42',
     count: '5',
     par: '8',
+    projected: '4',
+    actual: '4',
+    sold: '4',
+    date: '00/00/00',
+    time: '1:00pm',
+    HourlySales: {},
+    DailySales: {},
+    WeeklySales: {},
+    MonthlySales: {},
     options: [
       {
         sides: ['Risotto'],
@@ -80,6 +116,15 @@ const entrees = [
     price: '25',
     count: '5',
     par: '7',
+    projected: '5',
+    actual: '4',
+    sold: '4',
+    date: '00/00/00',
+    time: '1:00pm',
+    HourlySales: {},
+    DailySales: {},
+    WeeklySales: {},
+    MonthlySales: {},
     options: [
       {
         sides: ['Polenta'],
@@ -96,6 +141,15 @@ const entrees = [
     price: '15',
     count: '5',
     par: '6',
+    projected: '7',
+    actual: '8',
+    sold: '8',
+    date: '00/00/00',
+    time: '1:00pm',
+    HourlySales: {},
+    DailySales: {},
+    WeeklySales: {},
+    MonthlySales: {},
     options: [
       {
         sides: ['Fries'],
