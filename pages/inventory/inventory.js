@@ -1,4 +1,5 @@
 // inventory page
+
 import { useState } from 'react';
 import Head from 'next/head';
 import Navbar from '@/components/Nav/Navbar';
@@ -11,8 +12,11 @@ import Beverages from '@/components/inventory/Beverages';
 import Dry from '@/components/inventory/Dry';
 import Paper from '@/components/inventory/Paper';
 
+// util imports
+import ProduceInventory from '@/utils/inventory/ProduceInventory';
+import DairyInventory from '../../utils/inventory/DairyInventory';
 // data imports
-import produce from '@/data/inventory/produce';
+//import produce from '@/data/inventory/produce';
 import dairy from '@/data/inventory/dairy';
 import dryGoods from '@/data/inventory/dryGoods';
 import proteins from '@/data/inventory/proteins';
@@ -25,7 +29,12 @@ export default function Inventory() {
   const renderComponent = () => {
     switch (activeComponent) {
       case 'Dairy':
-        return <Dairy setActiveComponent={setActiveComponent} dairy={dairy} />;
+        return (
+          <Dairy
+            setActiveComponent={setActiveComponent}
+            dairy={DairyInventory}
+          />
+        );
 
       case 'Proteins':
         return (
@@ -52,25 +61,14 @@ export default function Inventory() {
             paperProducts={paperProducts}
           />
         );
-        // chart analytics
-        {
-          /*
-      case 'HourlyChart':
-        return <HourlyChart setActiveComponent={setActiveComponent} />;
-      case 'DayilyChart':
-        return <DailyChart setActiveComponent={setActiveComponent} />;
-      case 'WeeklytChart':
-        return <WeeklyChart setActiveComponent={setActiveComponent} />;
-      case 'MonthlyChart':
-        return <MonthlyChart setActiveComponent={setActiveComponent} />;
-      default:
-        return <Starters setActiveComponent={setActiveComponent} />;
+      // chart analytics
 
-    */
-        }
       default:
         return (
-          <Produce setActiveComponent={setActiveComponent} produce={produce} />
+          <Produce
+            setActiveComponent={setActiveComponent}
+            produce={ProduceInventory}
+          />
         );
     }
   };
@@ -98,7 +96,9 @@ export default function Inventory() {
             <div className="col-lg-4 col-xxl-3">
               <Sidebar setActiveComponent={setActiveComponent} />
             </div>
-            <div className="col-lg-8 col-xxl-9">{renderComponent()}</div>
+            <div className="col-lg-8 col-xxl-9">
+              <div className="mt-4">{renderComponent()}</div>
+            </div>
           </div>
         </div>
       </div>

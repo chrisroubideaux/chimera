@@ -92,7 +92,7 @@ const Beverages = ({ setActiveComponent, beverages }) => {
                       <td className="d-flex align-items-center">
                         <div className=" rounded bg-body-tertiary d-flex w-50px h-50px"></div>
                         <p className="mb-0">
-                          <td>{beverage.category}</td>
+                          <td>{beverage.name}</td>
                           <br />
                           <span className="text-muted"></span>
                         </p>

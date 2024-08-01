@@ -1,5 +1,5 @@
 // Entree component
-// Entree component
+
 import { useState } from 'react';
 
 const Entrees = ({ setActiveComponent, entrees }) => {
@@ -92,7 +92,7 @@ const Entrees = ({ setActiveComponent, entrees }) => {
                       <td className="d-flex align-items-center">
                         <div className=" rounded bg-body-tertiary d-flex w-50px h-50px"></div>
                         <p className="mb-0">
-                          <td>{entree.category}</td>
+                          <td>{entree.name}</td>
                           <br />
                           <span className="text-muted"></span>
                         </p>

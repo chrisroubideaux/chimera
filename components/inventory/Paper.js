@@ -53,6 +53,7 @@ export default function Paper({ paperProducts }) {
                       <th>Price</th>
                       <th>Unit</th>
                       <th>Count</th>
+                      <th>Sold</th>
                       <th>Par</th>
                       <th>Projected</th>
                       <th>Actual</th>
@@ -68,9 +69,10 @@ export default function Paper({ paperProducts }) {
                         <td>${item.price}</td>
                         <td>{item.unit}</td>
                         <td>{item.count}</td>
+                        <td>{item.sold}</td>
                         <td>{item.par}</td>
                         <td>{item.projected}</td>
-                        <td>{item.actual}</td>
+                        <td>{item.sold}</td>
                         <td>{item.date}</td>
                         <td className="text-end">
                           <button type="button" className="btn btn-sm">

@@ -90,7 +90,7 @@ const Desserts = ({ setActiveComponent, desserts }) => {
                       <td className="d-flex align-items-center">
                         <div className="rounded bg-body-tertiary d-flex  w-50px h-50px"></div>
                         <p className="mb-0">
-                          <td>{dessert.category}</td>
+                          <td>{dessert.name}</td>
                           <br />
                           <span className="text-muted"></span>
                         </p>
