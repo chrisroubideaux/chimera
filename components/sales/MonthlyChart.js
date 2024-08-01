@@ -1,4 +1,5 @@
 // Monthly Sales chart
+
 import { useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
 import {
@@ -47,6 +48,7 @@ export const options = {
   },
 };
 
+// Original labels and data
 const labels = [
   'January',
   'February',
@@ -57,7 +59,8 @@ const labels = [
   'July',
   'August',
 ];
-export const data = {
+
+const originalData = {
   labels,
   datasets: [
     {
@@ -75,6 +78,21 @@ export const data = {
   ],
 };
 
+// Monthly averages data
+const averageData = {
+  labels,
+  datasets: [
+    {
+      label: 'Monthly Average',
+      data: [200, 210, 205, 205, 215, 225, 230, 255], // Example average data
+      borderColor: 'rgb(255, 159, 64)',
+      backgroundColor: 'rgba(255, 159, 64, 0.5)',
+      type: 'line', // Adding this dataset as a line type
+      tension: 0.1, // Optional: Smooth the line
+    },
+  ],
+};
+
 export default function MonthlyChart({ setActiveComponent }) {
   const [currentDate, setCurrentDate] = useState('');
 
@@ -83,6 +101,12 @@ export default function MonthlyChart({ setActiveComponent }) {
     const formattedDate = format(now, 'MMMM dd, yyyy');
     setCurrentDate(formattedDate);
   }, []);
+
+  // Combine original data with average data
+  const combinedData = {
+    labels,
+    datasets: [...originalData.datasets, ...averageData.datasets],
+  };
 
   return (
     <div className="container-fluid">
@@ -103,7 +127,7 @@ export default function MonthlyChart({ setActiveComponent }) {
               </div>
             </div>
           </div>
-          <Bar className="" options={options} data={data} />
+          <Bar className="" options={options} data={combinedData} />
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-// desserts const desserts = [
+// desserts
 const desserts = [
   {
     id: '1',

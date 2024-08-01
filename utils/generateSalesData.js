@@ -1,112 +1,94 @@
-// utils/generateSalesData.js
-import { subMonths, formatISO, startOfDay } from 'date-fns';
+import { faker } from '@faker-js/faker';
+import {
+  format,
+  subDays,
+  eachDayOfInterval,
+  startOfMonth,
+  endOfMonth,
+} from 'date-fns';
 
-const generateSalesData = (
-  products,
-  startDate,
-  endDate,
-  hourlySales,
-  dailySales,
-  weeklySales,
-  monthlySales
-) => {
-  const salesData = [];
-  const hoursOfOperation = 10; // 11 AM to 9 PM
-  const operationalDays = [1, 2, 3, 4, 5, 6]; // Monday to Saturday
+const generateSalesData = (categoryData) => {
+  return categoryData.map((item) => {
+    const hourlySales = {};
+    const dailySales = {};
+    const weeklySales = {};
+    const monthlySales = {};
 
-  const totalDays = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
+    // Define sales figures
+    const dailySalesAverage = 11400; // Daily average sales figure
+    const weeklySalesAverage = 74000; // Weekly average sales figure
+    const monthlySalesAverage = 299293; // Monthly average sales figure
 
-  for (let i = 0; i < totalDays; i++) {
-    const currentDay = new Date(startDate.getTime() + i * 1000 * 60 * 60 * 24);
-    const dayOfWeek = currentDay.getDay();
+    // Generate sales data for each day in the last 30 days
+    const last30Days = eachDayOfInterval({
+      start: subDays(new Date(), 30),
+      end: new Date(),
+    });
 
-    if (operationalDays.includes(dayOfWeek)) {
-      const numEntriesPerHour = Math.floor(hourlySales / hoursOfOperation);
-      const numEntriesPerDay = Math.floor(dailySales / products.length);
-      const numEntriesPerWeek = Math.floor(weeklySales / (products.length * 7));
-      const numEntriesPerMonth = Math.floor(
-        monthlySales / (products.length * 30)
-      );
+    last30Days.forEach((date) => {
+      const formattedDate = format(date, 'yyyy-MM-dd');
+      dailySales[formattedDate] = faker.datatype.number({
+        min: 0,
+        max: dailySalesAverage,
+      });
+    });
 
-      // Generate hourly data
-      for (let hour = 0; hour < hoursOfOperation; hour++) {
-        const currentHour = new Date(
-          currentDay.getTime() + hour * 1000 * 60 * 60
-        );
-        for (let j = 0; j < numEntriesPerHour; j++) {
-          const product = products[Math.floor(Math.random() * products.length)];
-          const cost = parseFloat(product.price);
-          const quantity = Math.floor(Math.random() * 5) + 1; // Random quantity between 1 and 5
-          const sale = {
-            itemName: product.name,
-            cost: cost,
-            quantity: quantity,
-            date: formatISO(currentHour),
-            category: product.category,
-            interval: 'Hourly',
-          };
-          salesData.push(sale);
-        }
-      }
-
-      // Generate daily data
-      for (let j = 0; j < numEntriesPerDay; j++) {
-        const product = products[Math.floor(Math.random() * products.length)];
-        const cost = parseFloat(product.price);
-        const quantity = Math.floor(Math.random() * 5) + 1; // Random quantity between 1 and 5
-        const sale = {
-          itemName: product.name,
-          cost: cost,
-          quantity: quantity,
-          date: formatISO(currentDay),
-          category: product.category,
-          interval: 'Daily',
-        };
-        salesData.push(sale);
-      }
-
-      // Generate weekly data (based on the same day each week)
-      const startOfWeek = new Date(currentDay);
-      startOfWeek.setDate(currentDay.getDate() - currentDay.getDay() + 1); // Adjust to Monday
-      if (currentDay >= startOfWeek) {
-        for (let j = 0; j < numEntriesPerWeek; j++) {
-          const product = products[Math.floor(Math.random() * products.length)];
-          const cost = parseFloat(product.price);
-          const quantity = Math.floor(Math.random() * 5) + 1; // Random quantity between 1 and 5
-          const sale = {
-            itemName: product.name,
-            cost: cost,
-            quantity: quantity,
-            date: formatISO(startOfWeek),
-            category: product.category,
-            interval: 'Weekly',
-          };
-          salesData.push(sale);
-        }
-      }
-
-      // Generate monthly data
-      if (i % 30 === 0) {
-        // Approximate monthly interval
-        for (let j = 0; j < numEntriesPerMonth; j++) {
-          const product = products[Math.floor(Math.random() * products.length)];
-          const cost = parseFloat(product.price);
-          const quantity = Math.floor(Math.random() * 5) + 1; // Random quantity between 1 and 5
-          const sale = {
-            itemName: product.name,
-            cost: cost,
-            quantity: quantity,
-            date: formatISO(currentDay),
-            category: product.category,
-            interval: 'Monthly',
-          };
-          salesData.push(sale);
-        }
-      }
+    // Generate random sales for each hour in the last 24 hours
+    for (let hour = 0; hour < 24; hour++) {
+      const formattedTime = `${hour}:00`;
+      hourlySales[formattedTime] = faker.datatype.number({
+        min: 0,
+        max: dailySalesAverage / 24,
+      });
     }
-  }
 
-  return salesData;
+    // Generate random sales for the current week
+    const startOfWeek = subDays(startOfMonth(new Date()), new Date().getDay());
+    const endOfWeek = new Date(startOfWeek);
+    endOfWeek.setDate(endOfWeek.getDate() + 6);
+
+    eachDayOfInterval({ start: startOfWeek, end: endOfWeek }).forEach(
+      (date) => {
+        const formattedDate = format(date, 'yyyy-MM-dd');
+        weeklySales[formattedDate] = faker.datatype.number({
+          min: 0,
+          max: weeklySalesAverage,
+        });
+      }
+    );
+
+    // Generate random sales for the current month
+    const startOfCurrentMonth = startOfMonth(new Date());
+    const endOfCurrentMonth = endOfMonth(new Date());
+
+    eachDayOfInterval({
+      start: startOfCurrentMonth,
+      end: endOfCurrentMonth,
+    }).forEach((date) => {
+      const formattedDate = format(date, 'yyyy-MM-dd');
+      dailySales[formattedDate] = faker.datatype.number({
+        min: 0,
+        max: dailySalesAverage,
+      });
+    });
+
+    // Generate random sales for the last 12 months
+    for (let month = 0; month < 12; month++) {
+      const formattedDate = format(subDays(new Date(), month * 30), 'yyyy-MM');
+      monthlySales[formattedDate] = faker.datatype.number({
+        min: 0,
+        max: monthlySalesAverage,
+      });
+    }
+
+    return {
+      ...item,
+      HourlySales: hourlySales,
+      DailySales: dailySales,
+      WeeklySales: weeklySales,
+      MonthlySales: monthlySales,
+    };
+  });
 };
 
 export default generateSalesData;

@@ -1,5 +1,5 @@
 // sales page
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Navbar from '@/components/Nav/Navbar';
 import Tab from '@/components/sales/Tab';
@@ -31,8 +31,19 @@ import BeverageHourlyChart from '@/components/sales/beverages/BeverageHourlyChar
 import BeverageWeeklyChart from '@/components/sales/beverages/BeverageWeeklyChart';
 import BeverageMonthlyChart from '@/components/sales/beverages/BeverageMonthlyChart';
 
+// Import the Revenue function
+// import Revenue from '@/utils/Revenue';
+import { generateRawRevenueData } from '@/utils/Revenue';
+
 export default function Sales() {
   const [activeComponent, setActiveComponent] = useState('Sales');
+  const [revenueData, setRevenueData] = useState({});
+
+  useEffect(() => {
+    // Fetch and set the revenue data on component mount
+    const revenue = generateRawRevenueData(11400, 74000, 299293); // Example parameters, adjust as needed
+    setRevenueData(revenue);
+  }, []);
 
   const renderComponent = () => {
     switch (activeComponent) {
@@ -42,7 +53,13 @@ export default function Sales() {
       case 'HourlyChart':
         return <HourlyChart setActiveComponent={setActiveComponent} />;
       case 'DailyChart':
-        return <DailyChart setActiveComponent={setActiveComponent} />;
+        return (
+          <DailyChart
+            setActiveComponent={setActiveComponent}
+            data={revenueData.daily}
+          />
+        );
+
       case 'WeeklyChart':
         return <WeeklyChart setActiveComponent={setActiveComponent} />;
 
@@ -77,7 +94,12 @@ export default function Sales() {
         return <DessertsMonthlyChart setActiveComponent={setActiveComponent} />;
       // Beverage charts by category
       case 'BeverageDailyChart':
-        return <BeverageDailyChart setActiveComponent={setActiveComponent} />;
+        return (
+          <BeverageDailyChart
+            setActiveComponent={setActiveComponent}
+            data={revenueData.beverages?.daily} // Ensure data exists
+          />
+        );
       case 'BeverageHourlyChart':
         return <BeverageHourlyChart setActiveComponent={setActiveComponent} />;
       case 'BeverageWeeklyChart':
@@ -86,7 +108,12 @@ export default function Sales() {
         return <BeverageMonthlyChart setActiveComponent={setActiveComponent} />;
       // default
       default:
-        return <MonthlyChart setActiveComponent={setActiveComponent} />;
+        return (
+          <MonthlyChart
+            setActiveComponent={setActiveComponent}
+            data={revenueData.monthly}
+          />
+        );
     }
   };
   return (
