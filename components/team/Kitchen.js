@@ -1,4 +1,4 @@
-// Kitchen component for teams page
+// Kitchen component
 
 const Kitchen = () => {
   return (

@@ -1,4 +1,4 @@
-// in store orders component
+// In store component
 
 const InStore = ({ setActiveComponent }) => {
   return (

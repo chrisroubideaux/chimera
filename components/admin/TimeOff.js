@@ -1,4 +1,4 @@
-// Time off request
+// Time off request component
 import Link from 'next/link';
 
 export default function TimeOff({ setActiveComponent }) {

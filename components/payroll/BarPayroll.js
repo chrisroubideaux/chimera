@@ -1,4 +1,4 @@
-// Bar component for teams page
+// Bar payroll component
 
 const BarPayroll = () => {
   return (

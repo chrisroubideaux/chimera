@@ -1,4 +1,4 @@
-// Calendar component for profile page
+// Calendar component
 import { useState, useEffect } from 'react';
 import {
   format,

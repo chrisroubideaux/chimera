@@ -1,4 +1,4 @@
-// Request form component
+// Form component
 
 export default function Form({}) {
   return (

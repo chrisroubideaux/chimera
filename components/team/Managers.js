@@ -1,4 +1,4 @@
-// Manager component for teams page
+// Manager component
 
 const Managers = () => {
   return (

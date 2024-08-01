@@ -52,8 +52,8 @@ const generateDairySalesData = (
         newItem.sold = weeklyCases;
 
         // Adjust par and projected based on sales
-        newItem.par = weeklyCases * 2; // Example logic: par is twice the weekly sales
-        newItem.projected = weeklyCases * 1.5; // Example logic: projected is 1.5 times the weekly sales
+        newItem.par = weeklyCases * 2;
+        newItem.projected = weeklyCases * 1.5;
       }
     }
 

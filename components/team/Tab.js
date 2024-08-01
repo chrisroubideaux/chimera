@@ -1,4 +1,4 @@
-// Tab component for teams page
+// Tab component
 
 import Link from 'next/link';
 import Bookings from '../calendar/Bookings';

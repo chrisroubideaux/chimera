@@ -93,6 +93,15 @@ const Tab = ({ setActiveComponent }) => {
                     Paper
                   </a>
                 </li>
+                <li>
+                  <a
+                    className="dropdown-item"
+                    href="#"
+                    onClick={() => setActiveComponent('Linens')}
+                  >
+                    Linens
+                  </a>
+                </li>
               </ul>
             </div>
           </li>

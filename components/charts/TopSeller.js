@@ -1,4 +1,4 @@
-// Card component
+// Top seller component
 
 export default function TopSeller() {
   return (

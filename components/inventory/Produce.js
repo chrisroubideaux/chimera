@@ -1,20 +1,26 @@
-// Produce component for inventory page
-import { useState } from 'react';
+// Produce component inventory
+import React, { useState, useEffect } from 'react';
+import produce from '@/data/inventory/produce';
 import ProduceInventory from '@/utils/inventory/ProduceInventory';
 
-const Produce = () => {
+export default function Produce() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
+  const [salesData, setSalesData] = useState([]);
 
+  useEffect(() => {
+    const updatedProduce = ProduceInventory(produce, 300, 1500, 6000);
+    setSalesData(updatedProduce);
+  }, []);
+
+  // Calculate the index of the first and last items to display on the current page
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = ProduceInventory.slice(
-    indexOfFirstItem,
-    indexOfLastItem
-  );
+  const currentItems = salesData.slice(indexOfFirstItem, indexOfLastItem);
 
+  // Handle pagination
   const handleNextPage = () => {
-    if (currentPage < Math.ceil(ProduceInventory.length / itemsPerPage)) {
+    if (currentPage < Math.ceil(salesData.length / itemsPerPage)) {
       setCurrentPage(currentPage + 1);
     }
   };
@@ -29,7 +35,7 @@ const Produce = () => {
     setCurrentPage(pageNumber);
   };
 
-  const totalPages = Math.ceil(ProduceInventory.length / itemsPerPage);
+  const totalPages = Math.ceil(salesData.length / itemsPerPage);
 
   return (
     <div>
@@ -37,7 +43,7 @@ const Produce = () => {
         <div className="card-body">
           <div className="row mb-3">
             <div className="col-md-6 col-xl-4 mb-2 mb-md-0">
-              <h4 className="my-1">Produce</h4>
+              <h5 className="my-1">Produce</h5>
             </div>
             <div className="col-md-6 col-xl-8">
               <div className="text-sm-end d-flex justify-content-end">
@@ -46,7 +52,7 @@ const Produce = () => {
                 </button>
               </div>
             </div>
-            <div className="container">
+            <div className="container mt-1">
               <div className="table-responsive">
                 <table className="table table-bordered">
                   <thead className="thead-light">
@@ -140,24 +146,26 @@ const Produce = () => {
       </div>
     </div>
   );
-};
-
-export default Produce;
+}
 
 {
   /*
 import { useState } from 'react';
+import ProduceInventory from '@/utils/inventory/ProduceInventory';
 
-const Produce = ({ produce }) => {
+const Produce = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = produce.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = ProduceInventory.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
 
   const handleNextPage = () => {
-    if (currentPage < Math.ceil(produce.length / itemsPerPage)) {
+    if (currentPage < Math.ceil(ProduceInventory.length / itemsPerPage)) {
       setCurrentPage(currentPage + 1);
     }
   };
@@ -172,7 +180,7 @@ const Produce = ({ produce }) => {
     setCurrentPage(pageNumber);
   };
 
-  const totalPages = Math.ceil(produce.length / itemsPerPage);
+  const totalPages = Math.ceil(ProduceInventory.length / itemsPerPage);
 
   return (
     <div>
@@ -199,6 +207,7 @@ const Produce = ({ produce }) => {
                       <th>Price</th>
                       <th>Unit</th>
                       <th>Count</th>
+                      <th>Sold</th>
                       <th>Par</th>
                       <th>Projected</th>
                       <th>Actual</th>
@@ -214,6 +223,7 @@ const Produce = ({ produce }) => {
                         <td>${item.price}</td>
                         <td>{item.unit}</td>
                         <td>{item.count}</td>
+                        <td>{item.sold}</td>
                         <td>{item.par}</td>
                         <td>{item.projected}</td>
                         <td>{item.actual}</td>

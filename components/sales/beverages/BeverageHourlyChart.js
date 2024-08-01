@@ -1,4 +1,4 @@
-// Hourly sales graph component
+// Hourly sales component
 
 import { useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';

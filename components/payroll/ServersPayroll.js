@@ -1,4 +1,4 @@
-// Sever payroll component for teams page
+// Sever payroll component
 
 const ServersPayroll = () => {
   return (

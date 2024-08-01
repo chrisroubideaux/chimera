@@ -1,4 +1,4 @@
-// Tab component for dashboard page
+// Tab component
 import Link from 'next/link';
 import Bookings from '../calendar/Bookings';
 

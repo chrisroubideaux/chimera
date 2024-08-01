@@ -1,4 +1,4 @@
-// utils/entrees/functions/generateSalesData.js
+// Entree sales
 import entrees from '@/data/entrees';
 import generateSalesData from '@/utils/generateSalesData';
 

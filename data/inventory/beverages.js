@@ -2,7 +2,7 @@
 const beverages = [
   {
     id: '1',
-    category: 'alcohol',
+    category: 'Alcohol',
     name: 'Beer',
     image: '',
     description:
@@ -21,7 +21,7 @@ const beverages = [
   },
   {
     id: '2',
-    category: 'alcohol',
+    category: 'Alcohol',
     name: 'Wine',
     image: '',
     description: 'High-quality wine sold by the case, 12 bottles per case.',
@@ -39,7 +39,7 @@ const beverages = [
   },
   {
     id: '3',
-    category: 'alcohol',
+    category: 'Alcohol',
     name: 'Liquor',
     image: '',
     description: 'High-quality liquor sold by the case, 12 bottles per case.',
@@ -57,7 +57,7 @@ const beverages = [
   },
   {
     id: '4',
-    category: 'alcohol',
+    category: 'Soda',
     name: 'Cola Syrup',
     image: '',
     description:
@@ -76,8 +76,8 @@ const beverages = [
   },
   {
     id: '5',
-    category: 'alcohol',
-    name: 'Sprite Syrup',
+    category: 'Soda',
+    name: 'Sprite',
     image: '',
     description:
       'Homemade sprite syrup sold by the case, used for fountain soda.',
@@ -95,7 +95,7 @@ const beverages = [
   },
   {
     id: '6',
-    category: 'alcohol',
+    category: 'Soda',
     name: 'Rootbeer Syrup',
     image: '',
     description:

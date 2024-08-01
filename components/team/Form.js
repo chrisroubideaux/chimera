@@ -1,4 +1,4 @@
-// Form component for team page
+// Form component
 
 export default function Form({}) {
   return (

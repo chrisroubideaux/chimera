@@ -1,4 +1,4 @@
-// Employee card component for teams page
+// Employee component
 
 const Employees = ({ setActiveComponent }) => {
   return (

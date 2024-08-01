@@ -1,4 +1,4 @@
-// Component for currnent day
+// Current day component
 
 import { format } from 'date-fns';
 
@@ -21,15 +21,4 @@ export default function Dates() {
       </div>
     </form>
   );
-}
-
-{
-  /*<form className="d-flex" style={{ width: '15rem' }}>
-      <div className="input-group">
-        <input type="text" className="form-control" id="dash-daterange" />
-        <span className="input-group-text bg-sm">
-          <i className="social-icon fa-solid fa-calendar-days"></i>
-        </span>
-      </div>
-    </form> */
 }

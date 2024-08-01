@@ -1,8 +1,9 @@
-// Linens inventory
+// Beverage inventory
+
 import { faker } from '@faker-js/faker';
 import { subDays, subWeeks, subMonths, format } from 'date-fns';
 
-const LinensInventory = (items, dailySales, weeklySales, monthlySales) => {
+const BeveragesInventory = (items, dailySales, weeklySales, monthlySales) => {
   if (!Array.isArray(items)) {
     console.error('The items parameter should be an array.');
     return [];
@@ -17,7 +18,7 @@ const LinensInventory = (items, dailySales, weeklySales, monthlySales) => {
     newItem.WeeklySales = {};
     newItem.MonthlySales = {};
 
-    // Generate monthly sales for the last six months
+    // Generate monthly sales data for the last six months
     for (let month = 0; month < 6; month++) {
       const monthDate = subMonths(currentDate, month);
       const monthKey = format(monthDate, 'MM-yyyy');
@@ -67,4 +68,4 @@ const LinensInventory = (items, dailySales, weeklySales, monthlySales) => {
   return salesData;
 };
 
-export default LinensInventory;
+export default BeveragesInventory;

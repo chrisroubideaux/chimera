@@ -1,4 +1,4 @@
-// New items
+// New items component
 
 const NewItems = ({ setActiveComponent }) => {
   return (

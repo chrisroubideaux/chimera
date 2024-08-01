@@ -1,4 +1,4 @@
-// Component for current day of the week
+// Current day of the week component
 import { useState, useEffect } from 'react';
 import {
   Chart as ChartJS,

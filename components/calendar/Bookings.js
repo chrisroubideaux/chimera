@@ -1,4 +1,4 @@
-// Bookings.js
+// Booking component
 
 import { format } from 'date-fns';
 import Calendar from './Calendar';

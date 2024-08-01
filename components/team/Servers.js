@@ -1,4 +1,4 @@
-// Sever component for teams page
+// Sever component
 
 const Servers = () => {
   return (

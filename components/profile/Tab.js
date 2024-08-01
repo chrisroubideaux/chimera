@@ -1,4 +1,4 @@
-// Breadcrumb componet
+// Breadcrumb component
 
 import Link from 'next/link';
 

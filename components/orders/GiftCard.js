@@ -1,4 +1,4 @@
-// Gift card
+// Gift card component
 
 const GiftCard = () => {
   return (

@@ -11,12 +11,13 @@ import Proteins from '@/components/inventory/Proteins';
 import Beverages from '@/components/inventory/Beverages';
 import Dry from '@/components/inventory/Dry';
 import Paper from '@/components/inventory/Paper';
+import Linens from '@/components/inventory/Linens';
 
 // util imports
-import ProduceInventory from '@/utils/inventory/ProduceInventory';
-import DairyInventory from '../../utils/inventory/DairyInventory';
+//import ProduceInventory from '@/utils/inventory/ProduceInventory';
+
 // data imports
-//import produce from '@/data/inventory/produce';
+import produce from '@/data/inventory/produce';
 import dairy from '@/data/inventory/dairy';
 import dryGoods from '@/data/inventory/dryGoods';
 import proteins from '@/data/inventory/proteins';
@@ -29,12 +30,7 @@ export default function Inventory() {
   const renderComponent = () => {
     switch (activeComponent) {
       case 'Dairy':
-        return (
-          <Dairy
-            setActiveComponent={setActiveComponent}
-            dairy={DairyInventory}
-          />
-        );
+        return <Dairy setActiveComponent={setActiveComponent} dairy={dairy} />;
 
       case 'Proteins':
         return (
@@ -61,14 +57,15 @@ export default function Inventory() {
             paperProducts={paperProducts}
           />
         );
+      case 'Linens':
+        return (
+          <Linens setActiveComponent={setActiveComponent} linens={Linens} />
+        );
       // chart analytics
 
       default:
         return (
-          <Produce
-            setActiveComponent={setActiveComponent}
-            produce={ProduceInventory}
-          />
+          <Produce setActiveComponent={setActiveComponent} produce={produce} />
         );
     }
   };

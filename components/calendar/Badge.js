@@ -1,4 +1,4 @@
-// badge component for calendar page
+// badge component
 
 export default function Badge() {
   return (

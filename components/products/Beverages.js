@@ -5,12 +5,11 @@ const Beverages = ({ setActiveComponent, beverages }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
 
-  // Calculate the index of the first and last items to display on the current page
+  // Calculates the index of the first and last items to display on the current page
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = beverages.slice(indexOfFirstItem, indexOfLastItem);
 
-  // Handle pagination
   const handleNextPage = () => {
     if (currentPage < Math.ceil(beverages.length / itemsPerPage)) {
       setCurrentPage(currentPage + 1);

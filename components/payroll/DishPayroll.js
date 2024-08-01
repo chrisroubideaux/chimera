@@ -1,4 +1,4 @@
-// Dish component for teams page
+// Dish payroll component
 
 const DishPayroll = () => {
   return (

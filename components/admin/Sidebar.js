@@ -1,4 +1,4 @@
-// Sidebar component for profile page
+// Sidebar component
 import Link from 'next/link';
 
 export default function Sidebar({ setActiveComponent }) {

@@ -1,4 +1,4 @@
-// Dairy component for inventory page
+// Dairy inventory
 import { useState, useEffect } from 'react';
 import DairyInventory from '@/utils/inventory/DairyInventory';
 
@@ -42,7 +42,7 @@ export default function Dairy() {
         <div className="card-body">
           <div className="row mb-3">
             <div className="col-md-6 col-xl-4 mb-2 mb-md-0">
-              <h4 className="my-1">Dairy</h4>
+              <h5 className="my-1">Dairy</h5>
             </div>
             <div className="col-md-6 col-xl-8">
               <div className="text-sm-end d-flex justify-content-end">
@@ -51,7 +51,7 @@ export default function Dairy() {
                 </button>
               </div>
             </div>
-            <div className="container">
+            <div className="container mt-1">
               <div className="table-responsive">
                 <table className="table table-bordered">
                   <thead className="thead-light">

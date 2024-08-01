@@ -1,4 +1,4 @@
-// Bar component for teams page
+// Bar component
 
 const Bar = () => {
   return (

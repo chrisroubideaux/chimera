@@ -1,4 +1,4 @@
-// Dish component for teams page
+// Dish component
 
 const Dish = () => {
   return (

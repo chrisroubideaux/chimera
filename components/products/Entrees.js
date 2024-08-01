@@ -6,12 +6,11 @@ const Entrees = ({ setActiveComponent, entrees }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
 
-  // Calculate the index of the first and last items to display on the current page
+  // Calculates the index of the first and last items to display on the current page
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = entrees.slice(indexOfFirstItem, indexOfLastItem);
 
-  // Handle pagination
   const handleNextPage = () => {
     if (currentPage < Math.ceil(entrees.length / itemsPerPage)) {
       setCurrentPage(currentPage + 1);

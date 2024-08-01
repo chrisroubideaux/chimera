@@ -1,4 +1,4 @@
-// utils/beverages/functions/generateSalesData.js
+// Beverage sales
 import beverages from '@/data/beverages';
 import generateSalesData from '@/utils/generateSalesData';
 

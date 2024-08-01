@@ -1,4 +1,4 @@
-// Payroll form
+// Payroll form component
 
 export default function Form({}) {
   return (

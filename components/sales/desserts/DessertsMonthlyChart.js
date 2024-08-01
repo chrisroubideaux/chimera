@@ -1,4 +1,4 @@
-// Desserts monthly chart
+// Monthly sales chart
 
 import { useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';

@@ -1,4 +1,4 @@
-// utils/starters/functions/generateSalesData.js
+// Starters sales
 import starters from '@/data/starters';
 import generateSalesData from '@/utils/generateSalesData';
 

@@ -1,4 +1,4 @@
-// Kitchen payroll component for teams page
+// Kitchen payroll component
 
 const KitchenPayroll = () => {
   return (

@@ -1,3 +1,4 @@
+// Nav component
 export default function Nav({ setActiveComponent }) {
   return (
     <div>

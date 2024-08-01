@@ -1,4 +1,4 @@
-// Starter monthly chart
+// Monthly sales component
 import { useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
 import {

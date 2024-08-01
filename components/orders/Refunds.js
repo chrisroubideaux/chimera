@@ -1,4 +1,4 @@
-// card component for orders page
+// Refund component
 
 const Refunds = () => {
   return (
