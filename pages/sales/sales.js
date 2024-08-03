@@ -32,17 +32,29 @@ import BeverageWeeklyChart from '@/components/sales/beverages/BeverageWeeklyChar
 import BeverageMonthlyChart from '@/components/sales/beverages/BeverageMonthlyChart';
 
 // Import the Revenue function
-// import Revenue from '@/utils/Revenue';
+
 import { generateRawRevenueData } from '@/utils/Revenue';
+import StartersRevenue from '@/utils/starters/StartersRevenue';
 
 export default function Sales() {
   const [activeComponent, setActiveComponent] = useState('Sales');
   const [revenueData, setRevenueData] = useState({});
+  const [startersRevenue, setStartersRevenue] = useState({});
 
   useEffect(() => {
     // Fetch and set the revenue data on component mount
-    const revenue = generateRawRevenueData(11400, 74000, 299293); // Example parameters, adjust as needed
+    const revenue = generateRawRevenueData(11400, 74000, 299293);
     setRevenueData(revenue);
+    // Fetch and set the starters revenue data
+    const startersRevenueData = StartersRevenue(
+      1000,
+      2000,
+      5000,
+      10000,
+      20000,
+      40000
+    );
+    setStartersRevenue(startersRevenueData);
   }, []);
 
   const renderComponent = () => {
@@ -65,7 +77,12 @@ export default function Sales() {
 
       // starter charts by category
       case 'StarterDailyChart':
-        return <StarterDailyChart setActiveComponent={setActiveComponent} />;
+        return (
+          <StarterDailyChart
+            setActiveComponent={setActiveComponent}
+            data={startersRevenue}
+          />
+        );
       case 'StarterHourlyChart':
         return <StarterHourlyChart setActiveComponent={setActiveComponent} />;
       case 'StarterWeeklyChart':
@@ -94,12 +111,7 @@ export default function Sales() {
         return <DessertsMonthlyChart setActiveComponent={setActiveComponent} />;
       // Beverage charts by category
       case 'BeverageDailyChart':
-        return (
-          <BeverageDailyChart
-            setActiveComponent={setActiveComponent}
-            data={revenueData.beverages?.daily} // Ensure data exists
-          />
-        );
+        return <BeverageDailyChart setActiveComponent={setActiveComponent} />;
       case 'BeverageHourlyChart':
         return <BeverageHourlyChart setActiveComponent={setActiveComponent} />;
       case 'BeverageWeeklyChart':

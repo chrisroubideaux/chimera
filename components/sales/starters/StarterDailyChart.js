@@ -1,5 +1,3 @@
-// Daily sales chart
-
 import { useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
 import {
@@ -58,25 +56,7 @@ const labels = [
   'Saturday',
 ];
 
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: 'Projected',
-      data: [9, 9, 8, 7, 8, 11],
-      borderColor: 'rgb(126, 142, 241)',
-      backgroundColor: 'rgb(177, 188, 255)',
-    },
-    {
-      label: 'Actual',
-      data: [10, 10, 7, 8, 10, 11],
-      borderColor: 'rgb(53, 162, 235)',
-      backgroundColor: 'rgba(53, 162, 235, 0.5)',
-    },
-  ],
-};
-
-export default function StarterDailyChart({ setActiveComponent }) {
+export default function StarterDailyChart({ setActiveComponent, data }) {
   const [currentDate, setCurrentDate] = useState('');
 
   useEffect(() => {
@@ -85,6 +65,33 @@ export default function StarterDailyChart({ setActiveComponent }) {
     setCurrentDate(formattedDate);
   }, []);
 
+  // Extract projected and actual daily revenue data from the provided data
+  const dailyData = data.daily;
+  const projectedData = Object.keys(dailyData)
+    .filter((key) => key.includes('-projected'))
+    .map((key) => dailyData[key]);
+  const actualData = Object.keys(dailyData)
+    .filter((key) => key.includes('-actual'))
+    .map((key) => dailyData[key]);
+
+  const chartData = {
+    labels,
+    datasets: [
+      {
+        label: 'Projected',
+        data: projectedData,
+        borderColor: 'rgb(126, 142, 241)',
+        backgroundColor: 'rgb(177, 188, 255)',
+      },
+      {
+        label: 'Actual',
+        data: actualData,
+        borderColor: 'rgb(53, 162, 235)',
+        backgroundColor: 'rgba(53, 162, 235, 0.5)',
+      },
+    ],
+  };
+
   return (
     <div className="container-fluid">
       <div className="card">
@@ -92,7 +99,7 @@ export default function StarterDailyChart({ setActiveComponent }) {
           <div className="row mb-3">
             <div className="col-md-6 col-xl-4 mb-2 mb-md-0">
               <span className="d-flex">
-                <h5 className="mb-0 me-2">Starters:</h5>
+                <h5 className="mb-0 ">Starter Daily Sales:</h5>
                 <p className="text-center">{currentDate}</p>
               </span>
             </div>
@@ -103,7 +110,7 @@ export default function StarterDailyChart({ setActiveComponent }) {
             </div>
           </div>
         </div>
-        <Bar className="" options={options} data={data} />
+        <Bar className="" options={options} data={chartData} />
       </div>
     </div>
   );

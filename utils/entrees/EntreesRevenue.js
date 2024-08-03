@@ -1,8 +1,8 @@
-// utils/Revenue.js
+// Entree sales
 import { faker } from '@faker-js/faker';
 import { subDays, subWeeks, subMonths, format } from 'date-fns';
 
-export function generateRawRevenueData(
+export function generateEntreesRevenueData(
   dailyRevenue,
   weeklyRevenue,
   monthlyRevenue
@@ -77,4 +77,5 @@ export function generateRawRevenueData(
   return revenueData;
 }
 
-export default generateRawRevenueData;
+// Export default if you want to use the function as the default export
+export default generateEntreesRevenueData;
