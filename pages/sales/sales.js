@@ -63,7 +63,12 @@ export default function Sales() {
       case 'TopSelling':
         return <TopSelling setActiveComponent={setActiveComponent} />;
       case 'HourlyChart':
-        return <HourlyChart setActiveComponent={setActiveComponent} />;
+        return (
+          <HourlyChart
+            setActiveComponent={setActiveComponent}
+            data={revenueData.hourly}
+          />
+        );
       case 'DailyChart':
         return (
           <DailyChart
@@ -84,9 +89,19 @@ export default function Sales() {
           />
         );
       case 'StarterHourlyChart':
-        return <StarterHourlyChart setActiveComponent={setActiveComponent} />;
+        return (
+          <StarterHourlyChart
+            setActiveComponent={setActiveComponent}
+            startersRevenue={startersRevenue}
+          />
+        );
       case 'StarterWeeklyChart':
-        return <StarterWeeklyChart setActiveComponent={setActiveComponent} />;
+        return (
+          <StarterWeeklyChart
+            setActiveComponent={setActiveComponent}
+            startersRevenue={startersRevenue}
+          />
+        );
       case 'StarterMonthlyChart':
         return <StarterMonthlyChart setActiveComponent={setActiveComponent} />;
 
