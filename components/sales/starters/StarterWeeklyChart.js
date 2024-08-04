@@ -36,7 +36,7 @@ const lineChartOptions = {
     tooltip: {
       callbacks: {
         label: function (context) {
-          return `$${context.raw.toLocaleString()}k`;
+          return `$${context.raw.toLocaleString()}`;
         },
       },
     },
@@ -45,55 +45,36 @@ const lineChartOptions = {
     y: {
       ticks: {
         callback: function (value) {
-          return `${value / 1}k`;
+          return `$${value}`;
         },
       },
     },
   },
 };
 
-// Function to generate average sales data
-const generateAverageSalesData = (salesData) => {
-  const total = salesData.reduce((sum, value) => sum + value, 0);
-  return Array(salesData.length).fill(total / salesData.length);
-};
-
-const currentWeekSales = [77, 78, 77, 80, 81, 79, 83];
-const previousWeekSales = [72, 70, 65, 71, 77, 72, 70];
-
-// Generate average sales
-const averageSales = generateAverageSalesData(currentWeekSales);
-
 const lineChartData = {
-  labels: [
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-    'Sunday',
-  ],
+  labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
   datasets: [
     {
-      label: 'Current Week $75k',
-      data: currentWeekSales,
+      label: 'Current Week $8,760',
+      data: [8640, 8700, 8800, 8650, 8750, 8600], // Example data points within range
       borderColor: 'rgb(177, 188, 255)',
-      backgroundColor: 'rgb(177, 188, 255)',
+      backgroundColor: 'rgba(177, 188, 255, 0.5)',
+      fill: false,
     },
     {
-      label: 'Previous Week $72k',
-      data: previousWeekSales,
+      label: 'Previous Week $8,760',
+      data: [8600, 8680, 8800, 8700, 8600, 8550], // Example data points within range
       borderColor: 'rgba(53, 162, 235, 0.5)',
       backgroundColor: 'rgba(53, 162, 235, 0.5)',
+      fill: false,
     },
     {
-      label: 'Average Sales',
-      data: averageSales,
-      borderColor: 'rgba(255, 165, 0, 0.7)',
-      backgroundColor: 'rgba(255, 165, 0, 0.2)',
-      borderWidth: 2,
-      type: 'line',
+      label: 'Average $8,760', // Label for the new yellow line
+      data: [8760, 8760, 8760, 8760, 8760, 8760], // Constant average value
+      borderColor: 'rgb(255, 205, 86)', // Yellow color for the line
+      backgroundColor: 'rgba(255, 205, 86, 0.5)', // Light yellow background
+      fill: false,
     },
   ],
 };
@@ -197,16 +178,25 @@ const lineChartData = {
   labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
   datasets: [
     {
-      label: 'Current Week $75k',
+      label: 'Current Week $8,640',
       data: [77, 78, 77, 80, 81, 79, 83],
       borderColor: 'rgb(177, 188, 255)',
-      backgroundColor: 'rgb(177, 188, 255)',
+      backgroundColor: 'rgba(177, 188, 255, 0.5)',
+      fill: false,
     },
     {
-      label: 'Previous Week $72k',
+      label: 'Previous Week $8,800',
       data: [72, 70, 65, 71, 77, 72, 70],
       borderColor: 'rgba(53, 162, 235, 0.5)',
       backgroundColor: 'rgba(53, 162, 235, 0.5)',
+      fill: false,
+    },
+    {
+      label: 'Average $8,750', // Label for the new yellow line
+      data: [73, 73, 73, 73, 73, 73, 73], // Example average data
+      borderColor: 'rgb(255, 205, 86)', // Yellow color for the line
+      backgroundColor: 'rgba(255, 205, 86, 0.5)', // Light yellow background
+      fill: false,
     },
   ],
 };

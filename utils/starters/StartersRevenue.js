@@ -1,3 +1,4 @@
+// utils/starters/StartersRevenue.js
 import { faker } from '@faker-js/faker';
 import { subDays, subWeeks, subMonths, format } from 'date-fns';
 
@@ -78,8 +79,38 @@ export default function StartersRevenue(
     );
   }
 
-  return revenueData;
+  // Calculate daily sales averages for chart
+  const labels = [];
+  const projectedSalesData = [];
+  const actualSalesData = [];
+  const dailySales = Object.keys(revenueData.daily).filter((key) =>
+    key.includes('-projected')
+  );
+
+  dailySales.forEach((key) => {
+    const date = key.split('-')[0];
+    if (!labels.includes(date)) {
+      labels.push(date);
+      projectedSalesData.push(revenueData.daily[`${date}-projected`]);
+      actualSalesData.push(revenueData.daily[`${date}-actual`]);
+    }
+  });
+
+  // Calculate average daily sales
+  const totalProjected = projectedSalesData.reduce(
+    (sum, value) => sum + value,
+    0
+  );
+  const averageDailySales = totalProjected / projectedSalesData.length;
+
+  return {
+    labels,
+    projectedSalesData,
+    actualSalesData,
+    averageDailySales,
+  };
 }
+
 {
   /*
 import { faker } from '@faker-js/faker';
