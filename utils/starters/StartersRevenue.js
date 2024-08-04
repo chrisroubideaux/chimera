@@ -80,7 +80,6 @@ export default function StartersRevenue(
 
   return revenueData;
 }
-
 {
   /*
 import { faker } from '@faker-js/faker';
@@ -103,6 +102,7 @@ export default function StartersRevenue(
 
   const currentDate = new Date();
 
+  // Generate data for the past 8 months
   for (let month = 0; month < 8; month++) {
     const monthDate = subMonths(currentDate, month);
     const monthKey = format(monthDate, 'MM-yyyy');
@@ -129,27 +129,28 @@ export default function StartersRevenue(
         const dayDate = subDays(weekDate, day);
         const dayKey = format(dayDate, 'yyyy-MM-dd');
 
-        const projectedDailyRevenueAmount = faker.datatype.number({
-          min: dailyRevenueMin * 0.8,
-          max: dailyRevenueMin * 1.2,
-        });
-        const actualDailyRevenueAmount = faker.datatype.number({
-          min: dailyRevenueMin * 0.7,
-          max: dailyRevenueMin * 1.3,
+        const dailyRevenueAmount = faker.datatype.number({
+          min: dailyRevenueMin,
+          max: dailyRevenueMax,
         });
 
-        revenueData.daily[`${dayKey}-projected`] = projectedDailyRevenueAmount;
-        revenueData.daily[`${dayKey}-actual`] = actualDailyRevenueAmount;
-
+        // Distribute daily revenue across hours
         for (let hour = 0; hour < 24; hour++) {
           const hourKey = `${dayKey}T${hour < 10 ? '0' : ''}${hour}:00:00`;
 
           const hourlyRevenueAmount = faker.datatype.number({
-            min: (projectedDailyRevenueAmount / 24) * 0.9,
-            max: (projectedDailyRevenueAmount / 24) * 1.1,
+            min: (dailyRevenueAmount / 24) * 0.8,
+            max: (dailyRevenueAmount / 24) * 1.2,
           });
-          revenueData.hourly[hourKey] = Math.round(hourlyRevenueAmount);
+
+          revenueData.hourly[`${hourKey}-projected`] =
+            Math.round(hourlyRevenueAmount);
+          revenueData.hourly[`${hourKey}-actual`] =
+            Math.round(hourlyRevenueAmount);
         }
+
+        revenueData.daily[`${dayKey}-projected`] = dailyRevenueAmount;
+        revenueData.daily[`${dayKey}-actual`] = dailyRevenueAmount;
       }
     }
 

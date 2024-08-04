@@ -48,6 +48,7 @@ export const options = {
   },
 };
 
+// Labels and data
 const labels = [
   'January',
   'February',
@@ -59,41 +60,30 @@ const labels = [
   'August',
 ];
 
-// Function to generate average sales data
-const generateAverageSalesData = (projectedData, actualData) => {
-  const combinedData = projectedData.map(
-    (value, index) => (value + actualData[index]) / 2
-  );
-  return combinedData;
-};
-
-const projectedSales = [180, 200, 190, 190, 200, 215, 220, 250];
-const actualSales = [230, 240, 195, 200, 210, 230, 240, 260];
-
-// Generate average sales
-const averageSales = generateAverageSalesData(projectedSales, actualSales);
-
-export const data = {
+// Original data
+const data = {
   labels,
   datasets: [
     {
       label: 'Projected',
-      data: projectedSales,
+      data: [180, 200, 190, 190, 200, 215, 220, 250],
       borderColor: 'rgb(126, 142, 241)',
       backgroundColor: 'rgb(177, 188, 255)',
     },
     {
       label: 'Actual',
-      data: actualSales,
+      data: [230, 240, 195, 200, 210, 230, 240, 260],
       borderColor: 'rgb(53, 162, 235)',
       backgroundColor: 'rgba(53, 162, 235, 0.5)',
     },
+    // Monthly averages data as bars
     {
-      label: 'Average Sales',
-      data: averageSales,
-      borderColor: 'rgba(255, 165, 0, 0.7)',
-      backgroundColor: 'rgba(255, 165, 0, 0.2)',
-      borderWidth: 2,
+      label: 'Monthly Average',
+      data: [200, 210, 205, 205, 215, 225, 230, 255], // Example average data
+      borderColor: 'rgb(255, 159, 64)',
+      backgroundColor: 'rgba(255, 159, 64, 0.5)',
+      // Ensure this dataset is rendered as a bar
+      type: 'bar',
     },
   ],
 };

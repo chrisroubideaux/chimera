@@ -60,8 +60,10 @@ export default function Sales() {
   const renderComponent = () => {
     switch (activeComponent) {
       // overall revenue
+
       case 'TopSelling':
         return <TopSelling setActiveComponent={setActiveComponent} />;
+
       case 'HourlyChart':
         return (
           <HourlyChart
@@ -69,6 +71,7 @@ export default function Sales() {
             data={revenueData.hourly}
           />
         );
+
       case 'DailyChart':
         return (
           <DailyChart
@@ -103,7 +106,12 @@ export default function Sales() {
           />
         );
       case 'StarterMonthlyChart':
-        return <StarterMonthlyChart setActiveComponent={setActiveComponent} />;
+        return (
+          <StarterMonthlyChart
+            setActiveComponent={setActiveComponent}
+            startersRevenue={startersRevenue}
+          />
+        );
 
       // Entree charts by category
       case 'EntreeDailyChart':
