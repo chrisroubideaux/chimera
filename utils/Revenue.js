@@ -1,8 +1,81 @@
-// utils/Revenue.js
+import { faker } from '@faker-js/faker';
+import { subDays, format } from 'date-fns';
+
+function generateHourlySalesData(dailyAverage) {
+  const hourlySales = [];
+  for (let i = 0; i < 11; i++) {
+    // 11am to 9pm
+    const sales =
+      dailyAverage / 11 + faker.datatype.number({ min: -100, max: 100 });
+    hourlySales.push(parseFloat(sales.toFixed(2)));
+  }
+  return hourlySales;
+}
+
+function generateDailySalesData(dailyAverage) {
+  const dailySales = [];
+  for (let i = 0; i < 30; i++) {
+    // Assume 30 days
+    const dailySalesValue =
+      dailyAverage + faker.datatype.number({ min: -2000, max: 2000 });
+    dailySales.push(parseFloat(dailySalesValue.toFixed(2)));
+  }
+  return dailySales;
+}
+
+// Function to generate weekly sales data based on daily sales data
+function generateWeeklySalesData(dailySalesData) {
+  const weeklySales = [];
+  for (let i = 0; i < 4; i++) {
+    // Assume 4 weeks
+    const weekSales = dailySalesData
+      .slice(i * 7, (i + 1) * 7)
+      .reduce((a, b) => a + b, 0);
+    weeklySales.push(parseFloat(weekSales.toFixed(2)));
+  }
+  return weeklySales;
+}
+
+// Main function to generate sales data for hourly, daily, and weekly periods
+export function Revenue(dailyAverage) {
+  // Generate daily sales data
+  const dailySalesData = generateDailySalesData(dailyAverage);
+
+  // Generate weekly sales data from daily sales data
+  const weeklySales = generateWeeklySalesData(dailySalesData);
+
+  // Generate hourly sales data from daily average
+  const hourlySales = generateHourlySalesData(dailyAverage);
+
+  // Generate data for the last 7 days
+  const lastSevenDays = [];
+  const today = new Date();
+  for (let i = 6; i >= 0; i--) {
+    const date = subDays(today, i);
+    lastSevenDays.push(format(date, 'yyyy-MM-dd'));
+  }
+
+  const dailyData = lastSevenDays.reduce((acc, date, index) => {
+    acc[`${date}-projected`] = dailySalesData[index] || 0;
+    acc[`${date}-actual`] = dailySalesData[index] || 0;
+    return acc;
+  }, {});
+
+  return {
+    daily: dailyData,
+    weekly: weeklySales,
+    hourly: hourlySales,
+  };
+}
+
+export default Revenue;
+
+{
+  /*
 import { faker } from '@faker-js/faker';
 import { subDays, subWeeks, subMonths, format } from 'date-fns';
 
-export function generateRawRevenueData(
+export function Revenue(
   dailyRevenue,
   weeklyRevenue,
   monthlyRevenue
@@ -77,4 +150,6 @@ export function generateRawRevenueData(
   return revenueData;
 }
 
-export default generateRawRevenueData;
+export default Revenue;
+*/
+}

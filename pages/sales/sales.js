@@ -32,12 +32,13 @@ import BeverageWeeklyChart from '@/components/sales/beverages/BeverageWeeklyChar
 import BeverageMonthlyChart from '@/components/sales/beverages/BeverageMonthlyChart';
 
 // Import the Revenue function and StartersRevenue
-import { generateRawRevenueData } from '@/utils/Revenue';
+//import { generateRawRevenueData } from '@/utils/Revenue';
 import StartersRevenue from '@/utils/starters/StartersRevenue';
+import monthlySales from '@/data/sales/monthlySales';
 
 export default function Sales() {
   const [activeComponent, setActiveComponent] = useState('Sales');
-  const [revenueData, setRevenueData] = useState({});
+
   const [startersRevenue, setStartersRevenue] = useState({});
 
   // Set the revenue ranges
@@ -49,10 +50,6 @@ export default function Sales() {
   const monthlyRevenueMax = 150000;
 
   useEffect(() => {
-    // Fetch and set the revenue data on component mount
-    const revenue = generateRawRevenueData(11400, 74000, 299293);
-    setRevenueData(revenue);
-
     // Fetch and set the starters revenue data
     const startersRevenue = StartersRevenue(
       dailyRevenueMin,
@@ -72,20 +69,10 @@ export default function Sales() {
         return <TopSelling setActiveComponent={setActiveComponent} />;
 
       case 'HourlyChart':
-        return (
-          <HourlyChart
-            setActiveComponent={setActiveComponent}
-            data={revenueData.hourly}
-          />
-        );
+        return <HourlyChart setActiveComponent={setActiveComponent} />;
 
       case 'DailyChart':
-        return (
-          <DailyChart
-            setActiveComponent={setActiveComponent}
-            data={revenueData.daily}
-          />
-        );
+        return <DailyChart setActiveComponent={setActiveComponent} />;
 
       case 'WeeklyChart':
         return <WeeklyChart setActiveComponent={setActiveComponent} />;
@@ -158,7 +145,7 @@ export default function Sales() {
         return (
           <MonthlyChart
             setActiveComponent={setActiveComponent}
-            data={revenueData.monthly}
+            monthlySales={monthlySales}
           />
         );
     }
@@ -236,7 +223,7 @@ import BeverageMonthlyChart from '@/components/sales/beverages/BeverageMonthlyCh
 
 import { generateRawRevenueData } from '@/utils/Revenue';
 //import StartersRevenue from '@/utils/starters/StartersRevenue';
-
+import monthlySales from '@/data/sales/monthlySales';
 export default function Sales() {
   const [activeComponent, setActiveComponent] = useState('Sales');
   const [revenueData, setRevenueData] = useState({});
@@ -318,7 +305,7 @@ export default function Sales() {
         return (
           <MonthlyChart
             setActiveComponent={setActiveComponent}
-            data={revenueData.monthly}
+            monthlySales={monthlySales}
           />
         );
     }

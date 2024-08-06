@@ -1,4 +1,4 @@
-// components/sales/starters/StarterDailyChart
+// Daily chart component
 import { useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
 import {
@@ -34,16 +34,23 @@ export const options = {
       display: true,
       align: 'end',
       anchor: 'end',
-      formatter: (value) => `${(value / 1000).toFixed(0)}k`, // Format value in 'k'
+      formatter: (value) => `${(value / 1000).toFixed(1)}k`,
     },
   },
   scales: {
     y: {
+      beginAtZero: true,
+      max: 3000,
       ticks: {
+        stepSize: 500,
         callback: function (value) {
-          return `${(value / 1000).toFixed(0)}k`; // Format y-axis values in 'k'
+          return `${(value / 1000).toFixed(1)}k`;
         },
       },
+    },
+    x: {
+      categoryPercentage: 0.8,
+      barPercentage: 0.9,
     },
   },
 };
@@ -125,6 +132,7 @@ export default function StarterDailyChart({ setActiveComponent }) {
 
 {
   /*
+import { useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -159,61 +167,70 @@ export const options = {
       display: true,
       align: 'end',
       anchor: 'end',
-      formatter: (value) => `${(value / 1000).toFixed(0)}k`, // Format value in 'k'
+      formatter: (value) => `${(value / 1000).toFixed(1)}k`,
     },
   },
   scales: {
     y: {
       ticks: {
         callback: function (value) {
-          return `${(value / 1000).toFixed(0)}k`; // Format y-axis values in 'k'
+          return `${(value / 1000).toFixed(1)}k`;
         },
       },
     },
   },
 };
 
-// Define daily sales data based on calculated averages
-const labels = [
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thursday',
-  'Friday',
-  'Saturday',
-];
-
-const projectedSalesData = [2000, 2200, 2100, 2300, 2400, 2200]; // Example projected data
-const actualSalesData = [2100, 2250, 2200, 2350, 2450, 2300]; // Example actual data
-const averageDailySales = 2200; // Average daily sales
-
 export default function StarterDailyChart({ setActiveComponent }) {
-  // Get current date in MM/dd/yyyy format
+  const [chartData, setChartData] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    // Static data as example
+    const labels = [
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+    ];
+
+    const projectedSalesData = [2000, 2200, 2100, 2300, 2400, 2200];
+    const actualSalesData = [2100, 2250, 2200, 2350, 2450, 2300];
+    const averageDailySales = 2200;
+
+    setChartData({
+      labels,
+      datasets: [
+        {
+          label: 'Projected Sales',
+          data: projectedSalesData,
+          borderColor: 'rgb(126, 142, 241)',
+          backgroundColor: 'rgb(177, 188, 255)',
+        },
+        {
+          label: 'Actual Sales',
+          data: actualSalesData,
+          borderColor: 'rgb(53, 162, 235)',
+          backgroundColor: 'rgba(53, 162, 235, 0.5)',
+        },
+        {
+          label: 'Average Sales',
+          data: new Array(labels.length).fill(averageDailySales),
+          borderColor: 'rgb(255, 205, 86)',
+          backgroundColor: 'rgba(255, 205, 86, 0.5)',
+        },
+      ],
+    });
+    setLoading(false);
+  }, []);
+
   const currentDate = format(new Date(), 'MM/dd/yyyy');
 
-  const chartData = {
-    labels,
-    datasets: [
-      {
-        label: 'Projected Sales',
-        data: projectedSalesData,
-        borderColor: 'rgb(126, 142, 241)',
-        backgroundColor: 'rgb(177, 188, 255)',
-      },
-      {
-        label: 'Actual Sales',
-        data: actualSalesData,
-        borderColor: 'rgb(53, 162, 235)',
-        backgroundColor: 'rgba(53, 162, 235, 0.5)',
-      },
-      {
-        label: 'Average Sales',
-        data: new Array(labels.length).fill(averageDailySales),
-        borderColor: 'rgb(255, 205, 86)',
-        backgroundColor: 'rgba(255, 205, 86, 0.5)',
-      },
-    ],
-  };
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
 
   return (
     <div className="container-fluid">
@@ -222,8 +239,8 @@ export default function StarterDailyChart({ setActiveComponent }) {
           <div className="row mb-3">
             <div className="col-md-6 col-xl-4 mb-2 mb-md-0">
               <span className="d-flex">
-                <h5 className="mb-0 ">Starters:</h5>
-                <h6 className="text-center">{currentDate}</h6>
+                <h5 className="mb-0">Starters:</h5>
+                <h6 className="text-center mt-1">{currentDate}</h6>
               </span>
             </div>
             <div className="col-md-6 col-xl-8">

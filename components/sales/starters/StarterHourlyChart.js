@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
 import { format } from 'date-fns';
-import Nav from './Nav'; // Corrected file path
+import Nav from './Nav';
 import {
   Chart as ChartJS,
   CategoryScale,
