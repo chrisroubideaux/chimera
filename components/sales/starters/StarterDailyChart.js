@@ -1,4 +1,5 @@
 // Daily chart component
+import { faker } from '@faker-js/faker';
 import { useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
 import {
@@ -11,7 +12,7 @@ import {
   Legend,
 } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-import { format } from 'date-fns';
+import { format, subDays } from 'date-fns';
 import Nav from './Nav';
 
 ChartJS.register(
@@ -34,7 +35,12 @@ export const options = {
       display: true,
       align: 'end',
       anchor: 'end',
-      formatter: (value) => `${(value / 1000).toFixed(1)}k`,
+      formatter: (value) => {
+        if (value >= 1000) {
+          return `${(value / 1000).toFixed(1)}k`;
+        }
+        return value.toLocaleString();
+      },
     },
   },
   scales: {
@@ -44,7 +50,10 @@ export const options = {
       ticks: {
         stepSize: 500,
         callback: function (value) {
-          return `${(value / 1000).toFixed(1)}k`;
+          if (value >= 1000) {
+            return `${(value / 1000).toFixed(1)}k`;
+          }
+          return value.toLocaleString();
         },
       },
     },
@@ -55,50 +64,107 @@ export const options = {
   },
 };
 
+// Generate labels for the last 7 days
+const getLastSevenDays = () => {
+  const days = [];
+  const today = new Date();
+  for (let i = 6; i >= 0; i--) {
+    const date = subDays(today, i);
+    days.push(format(date, 'EEEE'));
+  }
+  return days;
+};
+
+// Function to generate daily sales data with some variance
+const generateDailySales = (dailyAverage, variation) => {
+  const dailySales = {};
+  const today = new Date();
+  for (let i = 0; i < 7; i++) {
+    const date = subDays(today, i);
+    const keyProjected = format(date, 'yyyy-MM-dd') + '-projected';
+    const keyActual = format(date, 'yyyy-MM-dd') + '-actual';
+
+    // Generate random variance using faker
+    const projected = Math.round(
+      dailyAverage +
+        faker.datatype.float({ min: -variation / 2, max: variation / 2 })
+    );
+    const actual = Math.round(
+      dailyAverage +
+        faker.datatype.float({ min: -variation / 2, max: variation / 2 })
+    );
+
+    dailySales[keyProjected] = projected;
+    dailySales[keyActual] = actual;
+  }
+  return dailySales;
+};
+
 export default function StarterDailyChart({ setActiveComponent }) {
   const [chartData, setChartData] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Static data as example
-    const labels = [
-      'Monday',
-      'Tuesday',
-      'Wednesday',
-      'Thursday',
-      'Friday',
-      'Saturday',
-    ];
+    const refreshChartData = () => {
+      // Generate revenue data
+      const revenueData = generateDailySales(2200, 500);
 
-    const projectedSalesData = [2000, 2200, 2100, 2300, 2400, 2200];
-    const actualSalesData = [2100, 2250, 2200, 2350, 2450, 2300];
-    const averageDailySales = 2200;
+      // Get the last 7 days
+      const lastSevenDays = getLastSevenDays();
+      const today = new Date();
 
-    setChartData({
-      labels,
-      datasets: [
-        {
-          label: 'Projected Sales',
-          data: projectedSalesData,
-          borderColor: 'rgb(126, 142, 241)',
-          backgroundColor: 'rgb(177, 188, 255)',
-        },
-        {
-          label: 'Actual Sales',
-          data: actualSalesData,
-          borderColor: 'rgb(53, 162, 235)',
-          backgroundColor: 'rgba(53, 162, 235, 0.5)',
-        },
-        {
-          label: 'Average Sales',
-          data: new Array(labels.length).fill(averageDailySales),
-          borderColor: 'rgb(255, 205, 86)',
-          backgroundColor: 'rgba(255, 205, 86, 0.5)',
-        },
-      ],
-    });
-    setLoading(false);
+      // Extract daily revenue for the last 7 days
+      const projectedData = lastSevenDays.map((day, index) => {
+        const date = subDays(today, 6 - index);
+        const key = format(date, 'yyyy-MM-dd') + '-projected';
+        return revenueData[key] || 0;
+      });
+
+      const actualData = lastSevenDays.map((day, index) => {
+        const date = subDays(today, 6 - index);
+        const key = format(date, 'yyyy-MM-dd') + '-actual';
+        return revenueData[key] || 0;
+      });
+
+      // Assuming the daily average revenue is 2200
+      const averageData = new Array(7).fill(2200);
+
+      setChartData({
+        labels: lastSevenDays,
+        datasets: [
+          {
+            label: 'Projected Sales',
+            data: projectedData,
+            borderColor: 'rgb(126, 142, 241)',
+            backgroundColor: 'rgb(177, 188, 255)',
+          },
+          {
+            label: 'Actual Sales',
+            data: actualData,
+            borderColor: 'rgb(53, 162, 235)',
+            backgroundColor: 'rgba(53, 162, 235, 0.5)',
+          },
+          {
+            label: 'Average Sales',
+            data: averageData,
+            borderColor: 'rgb(255, 205, 86)',
+            backgroundColor: 'rgba(255, 205, 86, 0.5)',
+            type: 'line',
+            tension: 0.1,
+          },
+        ],
+      });
+      setLoading(false);
+    };
+
+    refreshChartData();
+
+    const intervalId = setInterval(() => {
+      refreshChartData();
+    }, 3600000); // Refresh every hour
+
+    return () => clearInterval(intervalId);
   }, []);
 
   const currentDate = format(new Date(), 'MM/dd/yyyy');
@@ -132,6 +198,7 @@ export default function StarterDailyChart({ setActiveComponent }) {
 
 {
   /*
+import { faker } from '@faker-js/faker';
 import { useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
 import {
@@ -144,7 +211,7 @@ import {
   Legend,
 } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-import { format } from 'date-fns';
+import { format, subDays } from 'date-fns';
 import Nav from './Nav';
 
 ChartJS.register(
@@ -167,18 +234,69 @@ export const options = {
       display: true,
       align: 'end',
       anchor: 'end',
-      formatter: (value) => `${(value / 1000).toFixed(1)}k`,
+      formatter: (value) => {
+        if (value >= 1000) {
+          return `${(value / 1000).toFixed(1)}k`;
+        }
+        return value.toLocaleString();
+      },
     },
   },
   scales: {
     y: {
+      beginAtZero: true,
+      max: 3000,
       ticks: {
+        stepSize: 500,
         callback: function (value) {
-          return `${(value / 1000).toFixed(1)}k`;
+          if (value >= 1000) {
+            return `${(value / 1000).toFixed(1)}k`;
+          }
+          return value.toLocaleString();
         },
       },
     },
+    x: {
+      categoryPercentage: 0.8,
+      barPercentage: 0.9,
+    },
   },
+};
+
+// Generate labels for the last 7 days
+const getLastSevenDays = () => {
+  const days = [];
+  const today = new Date();
+  for (let i = 6; i >= 0; i--) {
+    const date = subDays(today, i);
+    days.push(format(date, 'EEEE'));
+  }
+  return days;
+};
+
+// Function to generate daily sales data with some variance
+const generateDailySales = (dailyAverage, variation) => {
+  const dailySales = {};
+  const today = new Date();
+  for (let i = 0; i < 7; i++) {
+    const date = subDays(today, i);
+    const keyProjected = format(date, 'yyyy-MM-dd') + '-projected';
+    const keyActual = format(date, 'yyyy-MM-dd') + '-actual';
+
+    // Generate random variance using faker
+    const projected = Math.round(
+      dailyAverage +
+        faker.datatype.float({ min: -variation / 2, max: variation / 2 })
+    );
+    const actual = Math.round(
+      dailyAverage +
+        faker.datatype.float({ min: -variation / 2, max: variation / 2 })
+    );
+
+    dailySales[keyProjected] = projected;
+    dailySales[keyActual] = actual;
+  }
+  return dailySales;
 };
 
 export default function StarterDailyChart({ setActiveComponent }) {
@@ -187,44 +305,65 @@ export default function StarterDailyChart({ setActiveComponent }) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Static data as example
-    const labels = [
-      'Monday',
-      'Tuesday',
-      'Wednesday',
-      'Thursday',
-      'Friday',
-      'Saturday',
-    ];
+    const refreshChartData = () => {
+      // Generate revenue data
+      const revenueData = generateDailySales(2200, 500);
 
-    const projectedSalesData = [2000, 2200, 2100, 2300, 2400, 2200];
-    const actualSalesData = [2100, 2250, 2200, 2350, 2450, 2300];
-    const averageDailySales = 2200;
+      // Get the last 7 days
+      const lastSevenDays = getLastSevenDays();
+      const today = new Date();
 
-    setChartData({
-      labels,
-      datasets: [
-        {
-          label: 'Projected Sales',
-          data: projectedSalesData,
-          borderColor: 'rgb(126, 142, 241)',
-          backgroundColor: 'rgb(177, 188, 255)',
-        },
-        {
-          label: 'Actual Sales',
-          data: actualSalesData,
-          borderColor: 'rgb(53, 162, 235)',
-          backgroundColor: 'rgba(53, 162, 235, 0.5)',
-        },
-        {
-          label: 'Average Sales',
-          data: new Array(labels.length).fill(averageDailySales),
-          borderColor: 'rgb(255, 205, 86)',
-          backgroundColor: 'rgba(255, 205, 86, 0.5)',
-        },
-      ],
-    });
-    setLoading(false);
+      // Extract daily revenue for the last 7 days
+      const projectedData = lastSevenDays.map((day, index) => {
+        const date = subDays(today, 6 - index);
+        const key = format(date, 'yyyy-MM-dd') + '-projected';
+        return revenueData[key] || 0;
+      });
+
+      const actualData = lastSevenDays.map((day, index) => {
+        const date = subDays(today, 6 - index);
+        const key = format(date, 'yyyy-MM-dd') + '-actual';
+        return revenueData[key] || 0;
+      });
+
+      // Assuming the daily average revenue is 2200
+      const averageData = new Array(7).fill(2200);
+
+      setChartData({
+        labels: lastSevenDays,
+        datasets: [
+          {
+            label: 'Projected Sales',
+            data: projectedData,
+            borderColor: 'rgb(126, 142, 241)',
+            backgroundColor: 'rgb(177, 188, 255)',
+          },
+          {
+            label: 'Actual Sales',
+            data: actualData,
+            borderColor: 'rgb(53, 162, 235)',
+            backgroundColor: 'rgba(53, 162, 235, 0.5)',
+          },
+          {
+            label: 'Average Sales',
+            data: averageData,
+            borderColor: 'rgb(255, 205, 86)',
+            backgroundColor: 'rgba(255, 205, 86, 0.5)',
+            type: 'line',
+            tension: 0.1,
+          },
+        ],
+      });
+      setLoading(false);
+    };
+
+    refreshChartData();
+
+    const intervalId = setInterval(() => {
+      refreshChartData();
+    }, 3600000); // Refresh every hour
+
+    return () => clearInterval(intervalId);
   }, []);
 
   const currentDate = format(new Date(), 'MM/dd/yyyy');
@@ -255,6 +394,7 @@ export default function StarterDailyChart({ setActiveComponent }) {
     </div>
   );
 }
+
 
 */
 }
