@@ -11,6 +11,7 @@ import {
 } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { format } from 'date-fns';
+import { faker } from '@faker-js/faker';
 
 ChartJS.register(
   CategoryScale,
@@ -46,7 +47,65 @@ export const options = {
   },
 };
 
-export default function MonthlyChart({ setActiveComponent, monthlySales }) {
+const generateMonthlySales = () => {
+  const currentMonth = new Date().getMonth(); // 0-11 (January is 0)
+  const monthlyData = {
+    labels: [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
+    ],
+    datasets: [
+      {
+        label: 'Projected',
+        data: Array.from({ length: 12 }, (_, i) => {
+          // Projected data for months up to the current month
+          return i <= currentMonth
+            ? faker.datatype.number({ min: 150, max: 300 })
+            : 0;
+        }),
+        borderColor: 'rgb(126, 142, 241)',
+        backgroundColor: 'rgb(177, 188, 255)',
+      },
+      {
+        label: 'Actual',
+        data: Array.from({ length: 12 }, (_, i) => {
+          // Actual data only for past months, with lower values for early August
+          return i < currentMonth
+            ? faker.datatype.number({ min: 150, max: 300 })
+            : i === currentMonth
+            ? faker.datatype.number({ min: 50, max: 100 })
+            : 0;
+        }),
+        borderColor: 'rgb(53, 162, 235)',
+        backgroundColor: 'rgba(53, 162, 235, 0.5)',
+      },
+      {
+        label: 'Monthly Average',
+        data: Array.from({ length: 12 }, () =>
+          faker.datatype.number({ min: 150, max: 300 })
+        ),
+        borderColor: 'rgb(255, 159, 64)',
+        backgroundColor: 'rgba(255, 159, 64, 0.5)',
+        type: 'line',
+        tension: 0.1,
+      },
+    ],
+  };
+
+  return monthlyData;
+};
+
+export default function MonthlyChart({ setActiveComponent }) {
   const [currentDate, setCurrentDate] = useState('');
   const [filteredData, setFilteredData] = useState({
     labels: [],
@@ -58,16 +117,17 @@ export default function MonthlyChart({ setActiveComponent, monthlySales }) {
     const formattedDate = format(now, 'MMMM dd, yyyy');
     setCurrentDate(formattedDate);
 
-    const currentMonth = now.getMonth(); // 0-11 (January is 0)
-    const labels = monthlySales[0].data.slice(0, currentMonth + 1);
+    const { labels, datasets } = generateMonthlySales();
+    const currentMonth = now.getMonth();
 
-    const datasets = monthlySales[1].data.map((dataset) => ({
+    const filteredLabels = labels.slice(0, currentMonth + 1);
+    const filteredDatasets = datasets.map((dataset) => ({
       ...dataset,
       data: dataset.data.slice(0, currentMonth + 1),
     }));
 
-    setFilteredData({ labels, datasets });
-  }, [monthlySales]);
+    setFilteredData({ labels: filteredLabels, datasets: filteredDatasets });
+  }, []);
 
   return (
     <div className="container-fluid">

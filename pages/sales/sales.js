@@ -32,14 +32,14 @@ import BeverageWeeklyChart from '@/components/sales/beverages/BeverageWeeklyChar
 import BeverageMonthlyChart from '@/components/sales/beverages/BeverageMonthlyChart';
 
 // Import the Revenue function and StartersRevenue
-//import { generateRawRevenueData } from '@/utils/Revenue';
-import StartersRevenue from '@/utils/starters/StartersRevenue';
-import monthlySales from '@/data/sales/monthlySales';
+
+//import StartersRevenue from '@/utils/starters/StartersRevenue';
+//import monthlySales from '@/data/sales/monthlySales';
 
 export default function Sales() {
   const [activeComponent, setActiveComponent] = useState('Sales');
 
-  const [startersRevenue, setStartersRevenue] = useState({});
+  // const [startersRevenue, setStartersRevenue] = useState({});
 
   // Set the revenue ranges
   const dailyRevenueMin = 1000;
@@ -49,18 +49,7 @@ export default function Sales() {
   const monthlyRevenueMin = 30000;
   const monthlyRevenueMax = 150000;
 
-  useEffect(() => {
-    // Fetch and set the starters revenue data
-    const startersRevenue = StartersRevenue(
-      dailyRevenueMin,
-      dailyRevenueMax,
-      weeklyRevenueMin,
-      weeklyRevenueMax,
-      monthlyRevenueMin,
-      monthlyRevenueMax
-    );
-    setStartersRevenue(startersRevenue);
-  }, []);
+  useEffect(() => {}, []);
 
   const renderComponent = () => {
     switch (activeComponent) {
@@ -79,36 +68,16 @@ export default function Sales() {
 
       // Starter charts by category
       case 'StarterDailyChart':
-        return (
-          <StarterDailyChart
-            setActiveComponent={setActiveComponent}
-            dailyData={startersRevenue.daily}
-          />
-        );
+        return <StarterDailyChart setActiveComponent={setActiveComponent} />;
 
       case 'StarterHourlyChart':
-        return (
-          <StarterHourlyChart
-            setActiveComponent={setActiveComponent}
-            hourlyData={startersRevenue.hourly}
-          />
-        );
+        return <StarterHourlyChart setActiveComponent={setActiveComponent} />;
 
       case 'StarterWeeklyChart':
-        return (
-          <StarterWeeklyChart
-            setActiveComponent={setActiveComponent}
-            weeklyData={startersRevenue.weekly}
-          />
-        );
+        return <StarterWeeklyChart setActiveComponent={setActiveComponent} />;
 
       case 'StarterMonthlyChart':
-        return (
-          <StarterMonthlyChart
-            setActiveComponent={setActiveComponent}
-            monthlyData={startersRevenue.monthly}
-          />
-        );
+        return <StarterMonthlyChart setActiveComponent={setActiveComponent} />;
 
       // Entree charts by category
       case 'EntreeDailyChart':
@@ -145,7 +114,7 @@ export default function Sales() {
         return (
           <MonthlyChart
             setActiveComponent={setActiveComponent}
-            monthlySales={monthlySales}
+            // monthlySales={monthlySales}
           />
         );
     }

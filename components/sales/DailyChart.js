@@ -11,7 +11,8 @@ import {
   Legend,
 } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-import { format, subDays } from 'date-fns';
+import { format, subDays, getDay } from 'date-fns';
+import { faker } from '@faker-js/faker';
 
 ChartJS.register(
   CategoryScale,
@@ -23,7 +24,6 @@ ChartJS.register(
   ChartDataLabels
 );
 
-// Define the chart options
 const options = {
   plugins: {
     datalabels: {
@@ -38,7 +38,7 @@ const options = {
         return value.toLocaleString();
       },
       font: {
-        weight: 'normal', // Adjust font weight here
+        weight: 'normal',
       },
     },
     legend: {
@@ -71,39 +71,53 @@ const options = {
           }
           return value.toLocaleString();
         },
-        stepSize: 2000, // Adjust step size to fit your data
+        stepSize: 2000,
       },
-      min: 0, // Start from 0
-      max: 13000, // Set maximum to 13k
+      min: 0,
+      max: 13000,
     },
   },
 };
 
-// Generate labels for the last 7 days
-const getLastSevenDays = () => {
+const getLastSixDays = () => {
   const days = [];
   const today = new Date();
-  for (let i = 6; i >= 0; i--) {
-    const date = subDays(today, i);
-    days.push(format(date, 'EEEE'));
+  let date = subDays(today, getDay(today) === 0 ? 1 : 0); // Start from Saturday if today is Sunday
+  for (let i = 0; days.length < 6; i++) {
+    if (getDay(date) !== 0) {
+      // Skip Sunday
+      days.push(format(date, 'EEEE'));
+    }
+    date = subDays(date, 1);
   }
-  return days;
+  return days.reverse();
 };
 
-// Function to generate daily sales data
 const generateDailySales = (dailyAverage, variation) => {
   const dailySales = {};
   const today = new Date();
-  for (let i = 0; i < 7; i++) {
+  let daysCounter = 0;
+  for (let i = 0; daysCounter < 6; i++) {
     const date = subDays(today, i);
-    const keyProjected = format(date, 'yyyy-MM-dd') + '-projected';
-    const keyActual = format(date, 'yyyy-MM-dd') + '-actual';
-    const projected =
-      dailyAverage + Math.round(Math.random() * variation - variation / 2);
-    const actual =
-      dailyAverage + Math.round(Math.random() * variation - variation / 2);
-    dailySales[keyProjected] = projected;
-    dailySales[keyActual] = actual;
+    if (getDay(date) !== 0) {
+      // Skip Sunday
+      const keyProjected = format(date, 'yyyy-MM-dd') + '-projected';
+      const keyActual = format(date, 'yyyy-MM-dd') + '-actual';
+      const projected = faker.datatype.number({
+        min: dailyAverage - variation,
+        max: dailyAverage + variation,
+      });
+      const actual =
+        getDay(date) < getDay(today)
+          ? faker.datatype.number({
+              min: dailyAverage - variation,
+              max: dailyAverage + variation,
+            })
+          : 0; // No actual sales for today and future days
+      dailySales[keyProjected] = projected;
+      dailySales[keyActual] = actual;
+      daysCounter++;
+    }
   }
   return dailySales;
 };
@@ -111,7 +125,7 @@ const generateDailySales = (dailyAverage, variation) => {
 export default function DailyChart() {
   const [currentDate, setCurrentDate] = useState('');
   const [chartData, setChartData] = useState({
-    labels: getLastSevenDays(),
+    labels: getLastSixDays(),
     datasets: [
       {
         label: 'Projected',
@@ -138,33 +152,34 @@ export default function DailyChart() {
     const formattedDate = format(now, 'EEEE, MMMM dd, yyyy');
     setCurrentDate(formattedDate);
 
-    // Generate revenue data
-    const revenueData = generateDailySales(11000, 2000); // Adjust variation as needed
+    const revenueData = generateDailySales(11000, 2000);
 
-    // Get the last 7 days
-    const lastSevenDays = getLastSevenDays();
+    const lastSixDays = getLastSixDays();
     const today = new Date();
 
-    // Extract daily revenue for the last 7 days
-    const projectedData = lastSevenDays.map((day, index) => {
-      const date = subDays(today, 6 - index);
+    const projectedData = lastSixDays.map((day, index) => {
+      let date = subDays(today, 6 - index);
+      if (getDay(date) === 0) {
+        date = subDays(date, 1);
+      }
       const key = format(date, 'yyyy-MM-dd') + '-projected';
-      return revenueData[key] || 0;
+      return revenueData[key] || 11000; // Use the daily average for future days
     });
 
-    const actualData = lastSevenDays.map((day, index) => {
-      const date = subDays(today, 6 - index);
+    const actualData = lastSixDays.map((day, index) => {
+      let date = subDays(today, 6 - index);
+      if (getDay(date) === 0) {
+        date = subDays(date, 1);
+      }
       const key = format(date, 'yyyy-MM-dd') + '-actual';
-      return revenueData[key] || 0;
+      return getDay(date) < getDay(today) ? revenueData[key] : 0; // No actual data for today and future days
     });
 
-    // Assuming the restaurant is open Mon-Sat (6 days a week)
-    const dailyAverage = 11000; // Daily average revenue
-
-    const averageData = new Array(7).fill(dailyAverage);
+    const dailyAverage = 11000;
+    const averageData = new Array(6).fill(dailyAverage);
 
     setChartData({
-      labels: lastSevenDays,
+      labels: lastSixDays,
       datasets: [
         {
           label: 'Projected',
@@ -234,6 +249,17 @@ export default function DailyChart() {
 {
   /*
 
+import { useState, useEffect } from 'react';
+import { Bar } from 'react-chartjs-2';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { format, subDays } from 'date-fns';
 
@@ -257,12 +283,12 @@ const options = {
       align: 'top',
       formatter: (value) => {
         if (value >= 1000) {
-          return `${(value / 1000).toFixed(1)}k`;
+          return `${(value / 1000).toFixed(1).replace(/\.0$/, '')}k`;
         }
         return value.toLocaleString();
       },
       font: {
-        weight: 'normal', // Adjust font weight here
+        weight: 'normal', 
       },
     },
     legend: {
@@ -291,11 +317,14 @@ const options = {
       ticks: {
         callback: (value) => {
           if (value >= 1000) {
-            return `${(value / 1000).toFixed(1)}k`;
+            return `${(value / 1000).toFixed(1).replace(/\.0$/, '')}k`;
           }
           return value.toLocaleString();
         },
+        stepSize: 2000, 
       },
+      min: 0, // Start from 0
+      max: 13000, // Set maximum to 13k
     },
   },
 };
