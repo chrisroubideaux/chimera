@@ -1,4 +1,3 @@
-// Weekly Sales chart
 import { useState, useEffect } from 'react';
 import { Line } from 'react-chartjs-2';
 import {
@@ -111,8 +110,8 @@ export default function WeeklyChart({}) {
     const now = new Date();
     const start = startOfWeek(now, { weekStartsOn: 1 });
     const end = endOfWeek(now, { weekStartsOn: 1 });
-    const formattedStart = format(start, 'MMMM dd');
-    const formattedEnd = format(end, 'MMMM dd, yyyy');
+    const formattedStart = format(start, 'MM/dd/yyyy');
+    const formattedEnd = format(end, 'MM/dd/yyyy');
     setCurrentWeek(`${formattedStart} - ${formattedEnd}`);
   }, []);
 
@@ -124,7 +123,6 @@ export default function WeeklyChart({}) {
             <div className="col-md-6 col-xl-4 mb-2 mb-md-0">
               <div className="d-flex ">
                 <h5 className="me-1 mt-1">Weekly:</h5>
-
                 <h6 className="mt-1">{currentWeek}</h6>
               </div>
             </div>

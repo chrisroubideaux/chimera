@@ -43,6 +43,9 @@ export const options = {
           return `${value}k`;
         },
       },
+      // Set the maximum value for the y-axis
+      min: 0,
+      max: 350, // 350k
     },
   },
 };
