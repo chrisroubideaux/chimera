@@ -12,7 +12,7 @@ import {
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { format, eachMonthOfInterval, getDaysInMonth, getDate } from 'date-fns';
 import Nav from './Nav';
-import { faker } from '@faker-js/faker'; // Import faker
+import { faker } from '@faker-js/faker';
 
 ChartJS.register(
   CategoryScale,
@@ -44,6 +44,8 @@ export const options = {
           return `$${(value / 1000).toFixed(0)}k`;
         },
       },
+      min: 0,
+      max: 45000, // Set the maximum value to 45k
     },
   },
 };

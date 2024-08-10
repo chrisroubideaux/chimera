@@ -35,15 +35,20 @@ const formatNumber = (number) => {
   return number.toString();
 };
 
-// Function to generate weekly sales data with adjustments
-const generateWeeklySalesData = (weeklyTotal, days = 7) => {
+// Function to generate weekly sales data with adjustments for the current week
+const generateWeeklySalesData = (weeklyTotal, currentDay) => {
+  const days = 6; // Number of days in the week
   const dailyAverage = weeklyTotal / days;
-  return Array.from({ length: days }, () => {
+
+  // Create data with adjusted values for days that have not yet occurred
+  return Array.from({ length: days }, (_, index) => {
+    const dayOfWeek = (index + 1) % 7; // Mapping index to day of week (Monday is 1, Sunday is 0)
+    const isFutureDay = dayOfWeek > currentDay;
     const variance = faker.datatype.float({
       min: -dailyAverage * 0.2,
       max: dailyAverage * 0.2,
     }); // Random variance +/- 20% of daily average
-    return dailyAverage + variance;
+    return isFutureDay ? dailyAverage * 0.5 : dailyAverage + variance;
   });
 };
 
@@ -65,11 +70,16 @@ export default function StarterWeeklyChart({ setActiveComponent }) {
     setCurrentWeek(`${formattedStart} - ${formattedEnd}`);
   }, []);
 
-  // Generate weekly sales data
-  const allDaysSales = generateWeeklySalesData(currentWeekSalesTotal);
-  const currentWeekSales = allDaysSales.slice(0, currentDay + 1); // Slice data to include up to current day
-  const previousWeekSales = generateWeeklySalesData(previousWeekSalesTotal);
-  const averageData = generateWeeklySalesData(weeklyAverageSales);
+  // Generate weekly sales data based on current day
+  const currentWeekSales = generateWeeklySalesData(
+    currentWeekSalesTotal,
+    currentDay
+  );
+  const previousWeekSales = generateWeeklySalesData(
+    previousWeekSalesTotal,
+    currentDay
+  );
+  const averageData = generateWeeklySalesData(weeklyAverageSales, currentDay);
 
   const lineChartOptions = {
     responsive: true,
@@ -123,10 +133,7 @@ export default function StarterWeeklyChart({ setActiveComponent }) {
     datasets: [
       {
         label: `Current Week $${formatNumber(currentWeekSalesTotal)}`,
-        data: [
-          ...currentWeekSales,
-          ...Array(6 - currentWeekSales.length).fill(null),
-        ], // Fill the rest with null to avoid display issues
+        data: currentWeekSales,
         borderColor: 'rgb(177, 188, 255)',
         backgroundColor: 'rgba(177, 188, 255, 0.5)',
         fill: false,
@@ -175,9 +182,9 @@ export default function StarterWeeklyChart({ setActiveComponent }) {
     </div>
   );
 }
-
 {
   /*
+// Weekly Sales chart
 import { useState, useEffect } from 'react';
 import { faker } from '@faker-js/faker';
 import { Line } from 'react-chartjs-2';

@@ -89,9 +89,8 @@ export const options = {
           return formatNumber(value);
         },
       },
-      // Set the minimum and maximum values for the x-axis
       min: 0,
-      max: 1600, // Set the maximum value to 1.6k
+      max: 1600,
     },
   },
 };
@@ -105,19 +104,24 @@ const generateHourlySalesData = (
 ) => {
   const hours = labels.length;
   const salesData = [];
-  let accumulatedSales = 0;
-
   for (let i = 0; i < hours; i++) {
     if (i < openHour || i > closeHour || i > currentHour) {
       salesData.push(0);
     } else {
       const variance = faker.datatype.float({ min: -100, max: 100 });
       const hourlySales = averageHourlySales + variance;
-      accumulatedSales += parseFloat(hourlySales.toFixed(2));
-      salesData.push(accumulatedSales);
+      salesData.push(parseFloat(hourlySales.toFixed(2)));
     }
   }
   return salesData;
+};
+
+// Function to generate random projected sales data
+const generateRandomProjectedData = (averageHourlySales) => {
+  return labels.map(() => {
+    const variance = faker.datatype.float({ min: -100, max: 100 });
+    return parseFloat((averageHourlySales + variance).toFixed(2));
+  });
 };
 
 export default function StartersHourlyChart({ setActiveComponent }) {
@@ -133,29 +137,24 @@ export default function StartersHourlyChart({ setActiveComponent }) {
     const formattedTime = format(now, 'h:mm a');
     setCurrentDateTime(`${formattedDate}, ${formattedTime}`);
 
-    const currentHour = now.getHours() - 11; // Convert to 0-10 scale for 11am to 9pm
-    const openHour = 0; // 11am is the 0th index in labels
-    const closeHour = 9; // 9pm is the 9th index in labels
+    const currentHour = now.getHours() - 11;
+    const openHour = 0;
+    const closeHour = 9;
 
-    const hourlyAverageSales = 1400; // $1,400 average per hour
+    const hourlyAverageSales = 1400;
+
     const actualData = generateHourlySalesData(
       hourlyAverageSales,
       openHour,
       closeHour,
       currentHour
     );
-    const projectedData = Array(labels.length)
-      .fill(hourlyAverageSales)
-      .map((val, index) =>
-        index <= currentHour ? val * (currentHour + 1) : 0
-      );
 
-    // Calculate the average value for the actual and projected data
-    const averageProjected =
-      projectedData.reduce((sum, value) => sum + value, 0) /
-      projectedData.length;
-    const averageActual =
-      actualData.reduce((sum, value) => sum + value, 0) / actualData.length;
+    const projectedData = generateRandomProjectedData(hourlyAverageSales);
+
+    const averageData = labels.map(
+      (_, index) => (actualData[index] + projectedData[index]) / 2
+    );
 
     setData({
       labels,
@@ -174,9 +173,7 @@ export default function StartersHourlyChart({ setActiveComponent }) {
         },
         {
           label: 'Average',
-          data: Array(labels.length).fill(
-            (averageProjected + averageActual) / 2
-          ),
+          data: averageData,
           borderColor: 'rgba(255, 165, 0, 0.7)',
           backgroundColor: 'rgba(255, 165, 0, 0.2)',
           borderWidth: 2,
