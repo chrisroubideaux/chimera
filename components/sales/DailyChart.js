@@ -11,7 +11,7 @@ import {
   Legend,
 } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-import { format, subDays, getDay } from 'date-fns';
+import { format } from 'date-fns';
 import { faker } from '@faker-js/faker';
 
 ChartJS.register(
@@ -24,201 +24,143 @@ ChartJS.register(
   ChartDataLabels
 );
 
-const options = {
+export const options = {
+  responsive: true,
   plugins: {
-    datalabels: {
-      color: 'black',
-      display: true,
-      anchor: 'end',
-      align: 'top',
-      formatter: (value) => {
-        if (value >= 1000) {
-          return `${(value / 1000).toFixed(1).replace(/\.0$/, '')}k`;
-        }
-        return value.toLocaleString();
-      },
-      font: {
-        weight: 'normal',
-      },
-    },
     legend: {
       position: 'top',
     },
-    tooltip: {
-      callbacks: {
-        label: (context) => {
-          return `${context.dataset.label}: ${context.raw.toLocaleString()}`;
-        },
-      },
+    datalabels: {
+      display: true,
+      align: 'end',
+      anchor: 'end',
+      formatter: (value) => `${(value / 1000).toFixed(1)}k`,
     },
   },
   scales: {
-    x: {
-      title: {
-        display: true,
-        text: 'Day of the Week',
-      },
-    },
     y: {
-      title: {
-        display: true,
-        text: 'Revenue',
-      },
       ticks: {
-        callback: (value) => {
-          if (value >= 1000) {
-            return `${(value / 1000).toFixed(1).replace(/\.0$/, '')}k`;
-          }
-          return value.toLocaleString();
+        callback: function (value) {
+          return `${(value / 1000).toFixed(1)}k`;
         },
         stepSize: 2000,
       },
-      min: 0,
-      max: 13000,
+      max: 14000, // Set the max value to 14,000
     },
   },
 };
 
-const getLastSixDays = () => {
-  const days = [];
-  const today = new Date();
-  let date = subDays(today, getDay(today) === 0 ? 1 : 0); // Start from Saturday if today is Sunday
-  for (let i = 0; days.length < 6; i++) {
-    if (getDay(date) !== 0) {
-      // Skip Sunday
-      days.push(format(date, 'EEEE'));
-    }
-    date = subDays(date, 1);
-  }
-  return days.reverse();
+const labels = [
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+];
+
+const dailySalesRange = {
+  min: 11000, // Minimum daily sales
+  max: 12000, // Maximum daily sales
 };
 
-const generateDailySales = (dailyAverage, variation) => {
-  const dailySales = {};
-  const today = new Date();
-  let daysCounter = 0;
-  for (let i = 0; daysCounter < 6; i++) {
-    const date = subDays(today, i);
-    if (getDay(date) !== 0) {
-      // Skip Sunday
-      const keyProjected = format(date, 'yyyy-MM-dd') + '-projected';
-      const keyActual = format(date, 'yyyy-MM-dd') + '-actual';
-      const projected = faker.datatype.number({
-        min: dailyAverage - variation,
-        max: dailyAverage + variation,
+// Function to generate daily sales data
+const generateDailySalesData = () => {
+  const projectedSales = [];
+  const actualSales = [];
+  const averageSales = [];
+
+  labels.forEach((day) => {
+    const projected = faker.datatype.number({
+      min: dailySalesRange.min,
+      max: dailySalesRange.max,
+    });
+
+    let actual;
+    if (day === 'Saturday') {
+      actual = faker.datatype.number({
+        min: dailySalesRange.min * 0.7,
+        max: dailySalesRange.max * 0.7,
       });
-      const actual =
-        getDay(date) < getDay(today)
-          ? faker.datatype.number({
-              min: dailyAverage - variation,
-              max: dailyAverage + variation,
-            })
-          : 0; // No actual sales for today and future days
-      dailySales[keyProjected] = projected;
-      dailySales[keyActual] = actual;
-      daysCounter++;
+    } else {
+      actual = faker.datatype.number({
+        min: dailySalesRange.min * 0.9,
+        max: dailySalesRange.max * 1.1,
+      });
     }
-  }
-  return dailySales;
+
+    const average = (projected + actual) / 2;
+
+    projectedSales.push(projected);
+    actualSales.push(actual);
+    averageSales.push(average);
+  });
+
+  return { projectedSales, actualSales, averageSales };
 };
 
-export default function DailyChart() {
+export default function DailyChart({ setActiveComponent }) {
   const [currentDate, setCurrentDate] = useState('');
   const [chartData, setChartData] = useState({
-    labels: getLastSixDays(),
+    projectedSales: [],
+    actualSales: [],
+    averageSales: [],
+  });
+
+  useEffect(() => {
+    const now = new Date();
+    const formattedDate = format(now, 'EEEE, MM/dd/yyyy');
+    setCurrentDate(formattedDate);
+
+    const updateSalesData = () => {
+      const { projectedSales, actualSales, averageSales } =
+        generateDailySalesData();
+      setChartData({ projectedSales, actualSales, averageSales });
+    };
+
+    updateSalesData();
+
+    // Set interval to update sales data at midnight
+    const nowTime = now.getTime();
+    const midnight = new Date().setHours(24, 0, 0, 0);
+    const timeToMidnight = midnight - nowTime;
+
+    const firstInterval = setTimeout(() => {
+      updateSalesData();
+
+      const interval = setInterval(() => {
+        updateSalesData();
+      }, 24 * 60 * 60 * 1000); // 24 hours
+
+      return () => clearInterval(interval);
+    }, timeToMidnight);
+
+    return () => clearTimeout(firstInterval);
+  }, []);
+
+  const data = {
+    labels,
     datasets: [
       {
         label: 'Projected',
+        data: chartData.projectedSales,
         borderColor: 'rgb(126, 142, 241)',
         backgroundColor: 'rgb(177, 188, 255)',
       },
       {
         label: 'Actual',
+        data: chartData.actualSales,
         borderColor: 'rgb(53, 162, 235)',
         backgroundColor: 'rgba(53, 162, 235, 0.5)',
       },
       {
-        label: 'Daily Average',
+        label: 'Average',
+        data: chartData.averageSales,
         borderColor: 'rgb(255, 159, 64)',
         backgroundColor: 'rgba(255, 159, 64, 0.5)',
-        type: 'line',
-        tension: 0.1,
       },
     ],
-  });
-
-  const refreshChartData = () => {
-    const now = new Date();
-    const formattedDate = format(now, 'EEEE, MMMM dd, yyyy');
-    setCurrentDate(formattedDate);
-
-    const revenueData = generateDailySales(11000, 2000);
-
-    const lastSixDays = getLastSixDays();
-    const today = new Date();
-
-    const projectedData = lastSixDays.map((day, index) => {
-      let date = subDays(today, 6 - index);
-      if (getDay(date) === 0) {
-        date = subDays(date, 1);
-      }
-      const key = format(date, 'yyyy-MM-dd') + '-projected';
-      return revenueData[key] || 11000; // Use the daily average for future days
-    });
-
-    const actualData = lastSixDays.map((day, index) => {
-      let date = subDays(today, 6 - index);
-      if (getDay(date) === 0) {
-        date = subDays(date, 1);
-      }
-      const key = format(date, 'yyyy-MM-dd') + '-actual';
-      return getDay(date) < getDay(today) ? revenueData[key] : 0; // No actual data for today and future days
-    });
-
-    const dailyAverage = 11000;
-    const averageData = new Array(6).fill(dailyAverage);
-
-    setChartData({
-      labels: lastSixDays,
-      datasets: [
-        {
-          label: 'Projected',
-          data: projectedData,
-          borderColor: 'rgb(126, 142, 241)',
-          backgroundColor: 'rgb(177, 188, 255)',
-        },
-        {
-          label: 'Actual',
-          data: actualData,
-          borderColor: 'rgb(53, 162, 235)',
-          backgroundColor: 'rgba(53, 162, 235, 0.5)',
-        },
-        {
-          label: 'Daily Average',
-          data: averageData,
-          borderColor: 'rgb(255, 159, 64)',
-          backgroundColor: 'rgba(255, 159, 64, 0.5)',
-          type: 'line',
-          tension: 0.1,
-        },
-      ],
-    });
   };
-
-  useEffect(() => {
-    refreshChartData();
-
-    const intervalId = setInterval(() => {
-      const now = new Date();
-      const midnight = new Date();
-      midnight.setHours(0, 0, 0, 0);
-      if (now > midnight) {
-        refreshChartData();
-      }
-    }, 3600000);
-
-    return () => clearInterval(intervalId);
-  }, []);
 
   return (
     <div className="container-fluid">
@@ -239,7 +181,7 @@ export default function DailyChart() {
               </div>
             </div>
           </div>
-          <Bar className="" options={options} data={chartData} />
+          <Bar className="" options={options} data={data} />
         </div>
       </div>
     </div>
@@ -249,6 +191,7 @@ export default function DailyChart() {
 {
   /*
 
+// Daily Sales chart
 import { useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
 import {
@@ -261,7 +204,8 @@ import {
   Legend,
 } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-import { format, subDays } from 'date-fns';
+import { format } from 'date-fns';
+import { faker } from '@faker-js/faker';
 
 ChartJS.register(
   CategoryScale,
@@ -273,187 +217,139 @@ ChartJS.register(
   ChartDataLabels
 );
 
-// Define the chart options
-const options = {
+export const options = {
+  responsive: true,
   plugins: {
-    datalabels: {
-      color: 'black',
-      display: true,
-      anchor: 'end',
-      align: 'top',
-      formatter: (value) => {
-        if (value >= 1000) {
-          return `${(value / 1000).toFixed(1).replace(/\.0$/, '')}k`;
-        }
-        return value.toLocaleString();
-      },
-      font: {
-        weight: 'normal', 
-      },
-    },
     legend: {
       position: 'top',
     },
-    tooltip: {
-      callbacks: {
-        label: (context) => {
-          return `${context.dataset.label}: ${context.raw.toLocaleString()}`;
-        },
-      },
+    datalabels: {
+      display: true,
+      align: 'end',
+      anchor: 'end',
+      formatter: (value) => `${(value / 1000).toFixed(1)}k`,
     },
   },
   scales: {
-    x: {
-      title: {
-        display: true,
-        text: 'Day of the Week',
-      },
-    },
     y: {
-      title: {
-        display: true,
-        text: 'Revenue',
-      },
       ticks: {
-        callback: (value) => {
-          if (value >= 1000) {
-            return `${(value / 1000).toFixed(1).replace(/\.0$/, '')}k`;
-          }
-          return value.toLocaleString();
+        callback: function (value) {
+          return `${(value / 1000).toFixed(1)}k`;
         },
-        stepSize: 2000, 
+        stepSize: 2000,
       },
-      min: 0, // Start from 0
-      max: 13000, // Set maximum to 13k
+      max: 14000,
     },
   },
 };
 
-// Generate labels for the last 7 days
-const getLastSevenDays = () => {
-  const days = [];
-  const today = new Date();
-  for (let i = 6; i >= 0; i--) {
-    const date = subDays(today, i);
-    days.push(format(date, 'EEEE'));
-  }
-  return days;
+const labels = [
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+];
+
+const dailySalesRange = {
+  min: 11000, // Minimum daily sales
+  max: 12000, // Maximum daily sales
 };
 
 // Function to generate daily sales data
-const generateDailySales = (dailyAverage, variation) => {
-  const dailySales = {};
-  const today = new Date();
-  for (let i = 0; i < 7; i++) {
-    const date = subDays(today, i);
-    const keyProjected = format(date, 'yyyy-MM-dd') + '-projected';
-    const keyActual = format(date, 'yyyy-MM-dd') + '-actual';
-    const projected =
-      dailyAverage + Math.round(Math.random() * variation - variation / 2);
-    const actual =
-      dailyAverage + Math.round(Math.random() * variation - variation / 2);
-    dailySales[keyProjected] = projected;
-    dailySales[keyActual] = actual;
-  }
-  return dailySales;
+const generateDailySalesData = () => {
+  const projectedSales = [];
+  const actualSales = [];
+  const averageSales = [];
+
+  labels.forEach((day) => {
+    const projected = faker.datatype.number({
+      min: dailySalesRange.min,
+      max: dailySalesRange.max,
+    });
+    let actual;
+    // Simulate lower sales on weekends
+    if (day === 'Saturday') {
+      actual = faker.datatype.number({
+        min: dailySalesRange.min * 0.7,
+        max: dailySalesRange.max * 0.7,
+      });
+    } else {
+      actual = projected;
+    }
+    const average = (projected + actual) / 2;
+
+    projectedSales.push(projected);
+    actualSales.push(actual);
+    averageSales.push(average);
+  });
+
+  return { projectedSales, actualSales, averageSales };
 };
 
-export default function DailyChart() {
+export default function DailyChart({ setActiveComponent }) {
   const [currentDate, setCurrentDate] = useState('');
   const [chartData, setChartData] = useState({
-    labels: getLastSevenDays(),
+    projectedSales: [],
+    actualSales: [],
+    averageSales: [],
+  });
+
+  useEffect(() => {
+    const now = new Date();
+    const formattedDate = format(now, 'EEEE, MM/dd/yyyy');
+    setCurrentDate(formattedDate);
+
+    const updateSalesData = () => {
+      const { projectedSales, actualSales, averageSales } =
+        generateDailySalesData();
+      setChartData({ projectedSales, actualSales, averageSales });
+    };
+
+    updateSalesData();
+
+    // Set interval to update sales data at midnight
+    const nowTime = now.getTime();
+    const midnight = new Date().setHours(24, 0, 0, 0);
+    const timeToMidnight = midnight - nowTime;
+
+    const firstInterval = setTimeout(() => {
+      updateSalesData();
+
+      const interval = setInterval(() => {
+        updateSalesData();
+      }, 24 * 60 * 60 * 1000); // 24 hours
+
+      return () => clearInterval(interval);
+    }, timeToMidnight);
+
+    return () => clearTimeout(firstInterval);
+  }, []);
+
+  const data = {
+    labels,
     datasets: [
       {
         label: 'Projected',
+        data: chartData.projectedSales,
         borderColor: 'rgb(126, 142, 241)',
         backgroundColor: 'rgb(177, 188, 255)',
       },
       {
         label: 'Actual',
+        data: chartData.actualSales,
         borderColor: 'rgb(53, 162, 235)',
         backgroundColor: 'rgba(53, 162, 235, 0.5)',
       },
       {
-        label: 'Daily Average',
+        label: 'Average',
+        data: chartData.averageSales,
         borderColor: 'rgb(255, 159, 64)',
         backgroundColor: 'rgba(255, 159, 64, 0.5)',
-        type: 'line',
-        tension: 0.1,
       },
     ],
-  });
-
-  const refreshChartData = () => {
-    const now = new Date();
-    const formattedDate = format(now, 'EEEE, MMMM dd, yyyy');
-    setCurrentDate(formattedDate);
-
-    // Generate revenue data
-    const revenueData = generateDailySales(11000, 2000); // Adjust variation as needed
-
-    // Get the last 7 days
-    const lastSevenDays = getLastSevenDays();
-    const today = new Date();
-
-    // Extract daily revenue for the last 7 days
-    const projectedData = lastSevenDays.map((day, index) => {
-      const date = subDays(today, 6 - index);
-      const key = format(date, 'yyyy-MM-dd') + '-projected';
-      return revenueData[key] || 0;
-    });
-
-    const actualData = lastSevenDays.map((day, index) => {
-      const date = subDays(today, 6 - index);
-      const key = format(date, 'yyyy-MM-dd') + '-actual';
-      return revenueData[key] || 0;
-    });
-
-    // Assuming the restaurant is open Mon-Sat (6 days a week)
-    const dailyAverage = 11000; // Daily average revenue
-
-    const averageData = new Array(7).fill(dailyAverage);
-
-    setChartData({
-      labels: lastSevenDays,
-      datasets: [
-        {
-          label: 'Projected',
-          data: projectedData,
-          borderColor: 'rgb(126, 142, 241)',
-          backgroundColor: 'rgb(177, 188, 255)',
-        },
-        {
-          label: 'Actual',
-          data: actualData,
-          borderColor: 'rgb(53, 162, 235)',
-          backgroundColor: 'rgba(53, 162, 235, 0.5)',
-        },
-        {
-          label: 'Daily Average',
-          data: averageData,
-          borderColor: 'rgb(255, 159, 64)',
-          backgroundColor: 'rgba(255, 159, 64, 0.5)',
-          type: 'line',
-          tension: 0.1,
-        },
-      ],
-    });
   };
-
-  useEffect(() => {
-    refreshChartData();
-
-    const intervalId = setInterval(() => {
-      const now = new Date();
-      const midnight = new Date();
-      midnight.setHours(0, 0, 0, 0);
-      if (now > midnight) {
-        refreshChartData();
-      }
-    }, 3600000);
-
-    return () => clearInterval(intervalId);
-  }, []);
 
   return (
     <div className="container-fluid">
@@ -474,7 +370,7 @@ export default function DailyChart() {
               </div>
             </div>
           </div>
-          <Bar className="" options={options} data={chartData} />
+          <Bar className="" options={options} data={data} />
         </div>
       </div>
     </div>

@@ -67,7 +67,6 @@ export default function DessertsWeeklyChart({ setActiveComponent }) {
 
   // Generate weekly sales data
   const allDaysSales = generateWeeklySalesData(currentWeekSalesTotal);
-  const currentWeekSales = allDaysSales.slice(0, currentDay + 1); // Slice data to include up to current day
   const previousWeekSales = generateWeeklySalesData(previousWeekSalesTotal);
   const averageData = generateWeeklySalesData(weeklyAverageSales);
 
@@ -107,7 +106,7 @@ export default function DessertsWeeklyChart({ setActiveComponent }) {
             return `$${formatNumber(value)}`;
           },
         },
-        max: 1600, // Adjust y-axis maximum to 1.6k
+        max: 1600, // Set y-axis maximum to 1.6k
       },
     },
   };
@@ -124,10 +123,7 @@ export default function DessertsWeeklyChart({ setActiveComponent }) {
     datasets: [
       {
         label: `Current Week $${formatNumber(currentWeekSalesTotal)}`,
-        data: [
-          ...currentWeekSales,
-          ...Array(7 - currentWeekSales.length).fill(null), // Fill the rest with null to avoid display issues
-        ], // Ensure the array length matches the number of days in the week
+        data: allDaysSales,
         borderColor: 'rgb(177, 188, 255)',
         backgroundColor: 'rgba(177, 188, 255, 0.5)',
         fill: false,
@@ -179,6 +175,7 @@ export default function DessertsWeeklyChart({ setActiveComponent }) {
 
 {
   /*
+// Weekly sales chart
 import { useState, useEffect } from 'react';
 import { faker } from '@faker-js/faker';
 import { Line } from 'react-chartjs-2';
@@ -247,7 +244,6 @@ export default function DessertsWeeklyChart({ setActiveComponent }) {
 
   // Generate weekly sales data
   const allDaysSales = generateWeeklySalesData(currentWeekSalesTotal);
-  const currentWeekSales = allDaysSales.slice(0, currentDay + 1); // Slice data to include up to current day
   const previousWeekSales = generateWeeklySalesData(previousWeekSalesTotal);
   const averageData = generateWeeklySalesData(weeklyAverageSales);
 
@@ -287,7 +283,14 @@ export default function DessertsWeeklyChart({ setActiveComponent }) {
             return `$${formatNumber(value)}`;
           },
         },
-        max: 1600, // Adjust y-axis maximum to 1.6k
+        max:
+          (Math.max(
+            currentWeekSalesTotal,
+            previousWeekSalesTotal,
+            weeklyAverageSales
+          ) *
+            1.1) /
+          7, // Adjust y-axis maximum
       },
     },
   };
@@ -300,14 +303,12 @@ export default function DessertsWeeklyChart({ setActiveComponent }) {
       'Thursday',
       'Friday',
       'Saturday',
+      'Sunday',
     ],
     datasets: [
       {
         label: `Current Week $${formatNumber(currentWeekSalesTotal)}`,
-        data: [
-          ...currentWeekSales,
-          ...Array(7 - currentWeekSales.length).fill(null), // Fill the rest with null to avoid display issues
-        ], // Ensure the array length matches the number of days in the week
+        data: allDaysSales,
         borderColor: 'rgb(177, 188, 255)',
         backgroundColor: 'rgba(177, 188, 255, 0.5)',
         fill: false,
@@ -356,6 +357,5 @@ export default function DessertsWeeklyChart({ setActiveComponent }) {
     </div>
   );
 }
-
 */
 }
