@@ -96,7 +96,24 @@ const generateHourlySalesData = (hourlyAverageSales) => {
   return data;
 };
 
-const hourlyAverageSales = 1.2; // Average sales per hour in thousands
+const generateRandomAverageData = (hourlyAverageSales) => {
+  const data = [];
+  for (let i = 0; i < labels.length; i++) {
+    data.push(
+      parseFloat(
+        faker.datatype
+          .float({
+            min: hourlyAverageSales - 0.3,
+            max: hourlyAverageSales + 0.3,
+          })
+          .toFixed(1)
+      )
+    );
+  }
+  return data;
+};
+
+const hourlyAverageSales = 1.4; // Average sales per hour in thousands
 
 export default function EntreeHourlyChart({ setActiveComponent }) {
   const [currentDateTime, setCurrentDateTime] = useState('');
@@ -117,7 +134,7 @@ export default function EntreeHourlyChart({ setActiveComponent }) {
       },
       {
         label: 'Average',
-        data: Array(labels.length).fill(hourlyAverageSales),
+        data: generateRandomAverageData(hourlyAverageSales),
         borderColor: 'rgb(255, 159, 64)',
         backgroundColor: 'rgba(255, 159, 64, 0.5)',
         borderWidth: 2,
@@ -150,7 +167,7 @@ export default function EntreeHourlyChart({ setActiveComponent }) {
           },
           {
             label: 'Average',
-            data: Array(labels.length).fill(hourlyAverageSales),
+            data: generateRandomAverageData(hourlyAverageSales),
             borderColor: 'rgb(255, 159, 64)',
             backgroundColor: 'rgba(255, 159, 64, 0.5)',
             borderWidth: 2,
