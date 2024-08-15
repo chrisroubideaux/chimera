@@ -71,7 +71,42 @@ const dailySalesRange = {
   min: 2000,
   max: 4000,
 };
+const generateDailySalesData = (currentDay) => {
+  const projectedSales = [];
+  const actualSales = [];
+  const averageSales = [];
 
+  labels.forEach((day, index) => {
+    const projected = faker.datatype.float({
+      min: dailySalesRange.min,
+      max: dailySalesRange.max,
+      precision: 0.01,
+    });
+
+    // Generate actual sales for the current day and the previous two days
+    const actual =
+      index === currentDay ||
+      index === (currentDay + 6) % 7 || // Previous day
+      index === (currentDay + 5) % 7 // Two days ago
+        ? faker.datatype.float({
+            min: dailySalesRange.min,
+            max: dailySalesRange.max,
+            precision: 0.01,
+          })
+        : 0;
+
+    const average = (projected + actual) / 2;
+
+    projectedSales.push(projected);
+    actualSales.push(actual);
+    averageSales.push(average);
+  });
+
+  return { projectedSales, actualSales, averageSales };
+};
+
+{
+  /*
 const generateDailySalesData = (currentDay) => {
   const projectedSales = [];
   const actualSales = [];
@@ -103,7 +138,8 @@ const generateDailySalesData = (currentDay) => {
 
   return { projectedSales, actualSales, averageSales };
 };
-
+*/
+}
 export default function DessertsDailyChart({ setActiveComponent }) {
   const [currentDate, setCurrentDate] = useState('');
   const [chartData, setChartData] = useState({
@@ -117,7 +153,7 @@ export default function DessertsDailyChart({ setActiveComponent }) {
     const formattedDate = format(now, 'EEEE, MM/dd/yyyy');
     setCurrentDate(formattedDate);
 
-    const currentDay = now.getDay() - 1; // getDay() returns 0 for Sunday, so subtract 1 to align with our labels
+    const currentDay = now.getDay() - 1;
 
     const updateSalesData = () => {
       const { projectedSales, actualSales, averageSales } =
@@ -126,8 +162,6 @@ export default function DessertsDailyChart({ setActiveComponent }) {
     };
 
     updateSalesData();
-
-    // Remove the interval code since we don't need to update daily in this case
   }, []);
 
   const data = {
@@ -161,8 +195,8 @@ export default function DessertsDailyChart({ setActiveComponent }) {
           <div className="row mb-3">
             <div className="col-md-6 col-xl-4 mb-2 mb-md-0">
               <span className="d-flex">
-                <h5 className="mb-0 me-2">Desserts:</h5>
-                <p className="text-center">{currentDate}</p>
+                <h5 className="">Desserts:</h5>
+                <p className="">{currentDate}</p>
               </span>
             </div>
             <div className="col-md-6 col-xl-8">

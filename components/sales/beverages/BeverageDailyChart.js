@@ -44,9 +44,9 @@ export const options = {
         callback: function (value) {
           return `${(value / 1000).toFixed(1)}k`;
         },
-        stepSize: 500, // Step size to ensure desired labels
+        stepSize: 500,
       },
-      max: 10000, // Set the max value to 6000
+      max: 10000,
     },
   },
 };
@@ -61,11 +61,10 @@ const labels = [
 ];
 
 const dailySalesRange = {
-  min: 3000, // Minimum daily sales
-  max: 6000, // Maximum daily sales
+  min: 3000,
+  max: 6000,
 };
 
-// Function to generate daily sales data with random values
 const generateDailySalesData = (currentDay) => {
   const projectedSales = [];
   const actualSales = [];
@@ -86,7 +85,7 @@ const generateDailySalesData = (currentDay) => {
             max: dailySalesRange.max,
             precision: 0.01,
           }))
-        : 0; // Actual sales are 0 for days that haven't occurred yet
+        : 0;
 
     const average = (projected + actual) / 2;
 
@@ -108,7 +107,7 @@ export default function BeverageDailyChart({ setActiveComponent }) {
 
   useEffect(() => {
     const now = new Date();
-    const formattedDate = format(now, 'EEEE, MMMM dd, yyyy');
+    const formattedDate = format(now, 'EEEE, MM/dd/yyyy');
     setCurrentDate(formattedDate);
 
     const currentDay = now.getDay() === 0 ? 6 : now.getDay() - 1;
@@ -121,7 +120,6 @@ export default function BeverageDailyChart({ setActiveComponent }) {
 
     updateSalesData();
 
-    // Set interval to update sales data at midnight
     const nowTime = now.getTime();
     const midnight = new Date().setHours(24, 0, 0, 0);
     const timeToMidnight = midnight - nowTime;
@@ -131,7 +129,7 @@ export default function BeverageDailyChart({ setActiveComponent }) {
 
       const interval = setInterval(() => {
         updateSalesData();
-      }, 24 * 60 * 60 * 1000); // 24 hours
+      }, 24 * 60 * 60 * 1000);
 
       return () => clearInterval(interval);
     }, timeToMidnight);
@@ -170,8 +168,8 @@ export default function BeverageDailyChart({ setActiveComponent }) {
           <div className="row mb-3">
             <div className="col-md-6 col-xl-4 mb-2 mb-md-0">
               <span className="d-flex">
-                <h5 className="mb-0 me-2">Drinks:</h5>
-                <p className="text-center">{currentDate}</p>
+                <h5 className="">Drinks:</h5>
+                <p className="">{currentDate}</p>
               </span>
             </div>
             <div className="col-md-6 col-xl-8">
@@ -234,9 +232,9 @@ export const options = {
         callback: function (value) {
           return `${(value / 1000).toFixed(1)}k`;
         },
-        stepSize: 2000, // Reverted to original step size
+        stepSize: 500,
       },
-      max: 10000, // Reverted to original max value
+      max: 10000,
     },
   },
 };
@@ -251,11 +249,10 @@ const labels = [
 ];
 
 const dailySalesRange = {
-  min: 3000, // Minimum daily sales
-  max: 6000, // Maximum daily sales
+  min: 3000,
+  max: 6000,
 };
 
-// Function to generate daily sales data with random values
 const generateDailySalesData = (currentDay) => {
   const projectedSales = [];
   const actualSales = [];
@@ -276,7 +273,7 @@ const generateDailySalesData = (currentDay) => {
             max: dailySalesRange.max,
             precision: 0.01,
           }))
-        : 0; // Actual sales are 0 for days that haven't occurred yet
+        : 0;
 
     const average = (projected + actual) / 2;
 
@@ -298,10 +295,10 @@ export default function BeverageDailyChart({ setActiveComponent }) {
 
   useEffect(() => {
     const now = new Date();
-    const formattedDate = format(now, 'EEEE, MMMM dd, yyyy');
+    const formattedDate = format(now, 'MM/dd/yyyy');
     setCurrentDate(formattedDate);
 
-    const currentDay = now.getDay() === 0 ? 6 : now.getDay() - 1; // Adjust to align with labels, Sunday is 0
+    const currentDay = now.getDay() === 0 ? 6 : now.getDay() - 1;
 
     const updateSalesData = () => {
       const { projectedSales, actualSales, averageSales } =
@@ -311,7 +308,6 @@ export default function BeverageDailyChart({ setActiveComponent }) {
 
     updateSalesData();
 
-    // Set interval to update sales data at midnight
     const nowTime = now.getTime();
     const midnight = new Date().setHours(24, 0, 0, 0);
     const timeToMidnight = midnight - nowTime;
@@ -321,7 +317,7 @@ export default function BeverageDailyChart({ setActiveComponent }) {
 
       const interval = setInterval(() => {
         updateSalesData();
-      }, 24 * 60 * 60 * 1000); // 24 hours
+      }, 24 * 60 * 60 * 1000);
 
       return () => clearInterval(interval);
     }, timeToMidnight);
@@ -360,8 +356,8 @@ export default function BeverageDailyChart({ setActiveComponent }) {
           <div className="row mb-3">
             <div className="col-md-6 col-xl-4 mb-2 mb-md-0">
               <span className="d-flex">
-                <h5 className="mb-0 me-2">Drinks:</h5>
-                <p className="text-center">{currentDate}</p>
+                <h5 className="">Drinks:</h5>
+                <p className="">{currentDate}</p>
               </span>
             </div>
             <div className="col-md-6 col-xl-8">

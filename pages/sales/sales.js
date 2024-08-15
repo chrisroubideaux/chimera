@@ -56,26 +56,20 @@ export default function Sales() {
       // Overall revenue
       case 'TopSelling':
         return <TopSelling setActiveComponent={setActiveComponent} />;
-
       case 'HourlyChart':
         return <HourlyChart setActiveComponent={setActiveComponent} />;
-
       case 'DailyChart':
         return <DailyChart setActiveComponent={setActiveComponent} />;
-
       case 'WeeklyChart':
         return <WeeklyChart setActiveComponent={setActiveComponent} />;
 
       // Starter charts by category
       case 'StarterDailyChart':
         return <StarterDailyChart setActiveComponent={setActiveComponent} />;
-
       case 'StarterHourlyChart':
         return <StarterHourlyChart setActiveComponent={setActiveComponent} />;
-
       case 'StarterWeeklyChart':
         return <StarterWeeklyChart setActiveComponent={setActiveComponent} />;
-
       case 'StarterMonthlyChart':
         return <StarterMonthlyChart setActiveComponent={setActiveComponent} />;
 
