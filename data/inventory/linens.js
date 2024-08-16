@@ -3,13 +3,13 @@
 const linens = [
   {
     id: '1',
-    category: 'Linens',
+    category: 'linens',
     name: 'Napkins',
     description:
       'High-quality linen napkins for formal dining. Soft, absorbent, and reusable. Ideal for enhancing the dining experience.',
     price: '600',
     unit: 'bundle',
-    count: '5 Bundles',
+    count: '5',
     sold: '0',
     par: '5',
     projected: '7',
@@ -21,13 +21,13 @@ const linens = [
   },
   {
     id: '2',
-    category: 'Linens',
+    category: 'linens',
     name: 'Tablecloth',
     description:
       'Elegant linen tablecloths that add a touch of sophistication to any table setting. Durable and easy to clean.',
     price: '600',
     unit: 'bundle',
-    count: '5 Bundles',
+    count: '5',
     sold: '0',
     par: '5',
     projected: '7',
@@ -39,13 +39,13 @@ const linens = [
   },
   {
     id: '3',
-    category: 'Linens',
+    category: 'linens',
     name: 'Server Apron',
     description:
       'Durable aprons designed for servers. Made from high-quality fabric to withstand daily use and spills.',
     price: '500',
     unit: 'bundle',
-    count: '5 Bundles',
+    count: '4',
     sold: '0',
     par: '5',
     projected: '3',
@@ -57,13 +57,13 @@ const linens = [
   },
   {
     id: '4',
-    category: 'Linens',
+    category: 'linens',
     name: 'Cook Apron',
     description:
       'Heavy-duty aprons for kitchen use. Provides excellent coverage and protection for cooks. Made from durable fabric.',
     price: '300',
     unit: 'bundle',
-    count: '5 bundles',
+    count: '5',
     sold: '0',
     par: '5',
     projected: '3',
@@ -75,13 +75,13 @@ const linens = [
   },
   {
     id: '5',
-    category: 'Linens',
+    category: 'linens',
     name: 'Mop Head',
     description:
       'High-quality mop heads for cleaning. Made from durable linen for effective cleaning and long-lasting use.',
     price: '200',
     unit: 'bundle',
-    count: '3 Bundles',
+    count: '3',
     sold: '0',
     par: '4',
     projected: '4',

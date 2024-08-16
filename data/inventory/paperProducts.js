@@ -3,7 +3,7 @@ const paperProducts = [
   {
     id: '1',
     category: 'Napkins',
-    name: 'Standard Napkins',
+    name: 'Napkins',
     description:
       'High-quality paper napkins for everyday use. Absorbent and durable, ideal for casual dining.',
     price: '37',
@@ -21,7 +21,7 @@ const paperProducts = [
   {
     id: '2',
     category: 'Togo Boxes',
-    name: 'Standard Togo Box',
+    name: 'Lg, Togo Box',
     description:
       'Durable to-go box for packing food. Suitable for a variety of menu items. Available in multiple sizes.',
     price: '30',
@@ -38,8 +38,8 @@ const paperProducts = [
   },
   {
     id: '3',
-    category: 'Togo Silverware',
-    name: 'Plastic Silverware Set',
+    category: 'togo Silverware',
+    name: 'Silverware',
     description:
       'Disposable plastic silverware set including fork, knife, and spoon. Perfect for takeout and to-go orders.',
     price: '30',
@@ -57,9 +57,9 @@ const paperProducts = [
   {
     id: '4',
     category: 'Togo Soup Cups',
-    name: '4 oz Plastic Soup Cup',
+    name: '4oz Soup Cup',
     description:
-      'Small plastic soup cup for hot or cold soups. Comes with a secure lid to prevent spills.',
+      '4oz Small plastic soup cup for hot or cold soups. Comes with a secure lid to prevent spills.',
     price: '30',
     unit: 'case',
     count: '1',
@@ -75,9 +75,9 @@ const paperProducts = [
   {
     id: '5',
     category: 'Togo Soup Cups',
-    name: '6 oz Plastic Soup Cup',
+    name: '6oz Soup Cup',
     description:
-      'Medium-sized plastic soup cup for hot or cold soups. Includes a tight-fitting lid.',
+      '6oz Medium-sized plastic soup cup for hot or cold soups. Includes a tight-fitting lid.',
     price: '30',
     unit: 'case',
     count: '1',
@@ -93,9 +93,9 @@ const paperProducts = [
   {
     id: '6',
     category: 'Togo Soup Cups',
-    name: '8 oz Plastic Soup Cup',
+    name: '8oz Soup Cup',
     description:
-      'Large plastic soup cup for generous servings of hot or cold soups. Equipped with a secure lid.',
+      ' Large plastic soup cup for generous servings of hot or cold soups. Equipped with a secure lid.',
     price: '30',
     unit: 'case',
     count: '1',
@@ -111,7 +111,7 @@ const paperProducts = [
   {
     id: '7',
     category: 'Ramekins',
-    name: '4 oz Plastic Ramekin with Lid',
+    name: '4oz Ramekin',
     description:
       'Small plastic ramekin with lid, ideal for sauces, dressings, or small sides. Leak-proof and convenient.',
     price: '30',
@@ -128,7 +128,7 @@ const paperProducts = [
   },
   {
     id: '8',
-    category: 'Paper Products',
+    category: 'Paper',
     name: 'Paper Towels',
     description:
       'Highly absorbent paper towels for cleaning and drying. Essential for maintaining a clean kitchen environment.',
@@ -146,7 +146,7 @@ const paperProducts = [
   },
   {
     id: '9',
-    category: 'Paper Products',
+    category: 'Paper',
     name: 'Toilet Paper',
     description:
       'Soft and durable toilet paper for restrooms. Provides comfort and efficiency.',
@@ -164,7 +164,7 @@ const paperProducts = [
   },
   {
     id: '10',
-    category: 'Paper Products',
+    category: 'Paper',
     name: 'Printer Paper',
     description:
       'Standard white printer paper suitable for all office printing needs. Comes in reams of 500 sheets.',
@@ -182,7 +182,7 @@ const paperProducts = [
   },
   {
     id: '11',
-    category: 'Paper Products',
+    category: 'Paper',
     name: 'Paper Bags',
     description:
       'Eco-friendly paper bags for takeout and carryout. Available in various sizes for different needs.',
@@ -200,7 +200,7 @@ const paperProducts = [
   },
   {
     id: '12',
-    category: 'Paper Products',
+    category: 'Paper',
     name: 'Menu Paper',
     description:
       'High-quality paper used for printing restaurant menus. Durable and resistant to wear and tear.',
@@ -218,8 +218,8 @@ const paperProducts = [
   },
   {
     id: '13',
-    category: 'Paper Products',
-    name: 'Grease-Resistant Paper',
+    category: 'Paper',
+    name: 'Grease-Resistant',
     description:
       'Specialized paper for wrapping fried or greasy foods. Helps to maintain food quality and prevent leaks.',
     price: '30',
@@ -236,7 +236,7 @@ const paperProducts = [
   },
   {
     id: '14',
-    category: 'Paper Products',
+    category: 'Paper',
     name: 'Food Wrapping Paper',
     description:
       'Paper used for wrapping sandwiches, burgers, and other menu items. Provides a clean and professional presentation.',

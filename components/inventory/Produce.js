@@ -13,19 +13,18 @@ export default function Produce({ produce }) {
     return data.map((item) => {
       const count = parseInt(item.count, 10);
 
-      // Ensure that some items have sales data
-      // Introduce a minimum value to avoid zero sales for all items
-      const minSales = Math.ceil(count * 0.1); // Minimum 10% of count
+      // A minimum value to avoid zero sales for all items
+      const minSales = Math.ceil(count * 0.1); // Min 10% of count
       const maxSales = count;
       const sold = faker.datatype.number({ min: minSales, max: maxSales });
-      const actual = sold; // Set actual to be the same as sold
+      const actual = sold;
 
       return {
         ...item,
         sold,
         projected: count,
         actual,
-        date: format(new Date(), 'MM/dd/yyyy'), // Add current date in MM/dd/yyyy format
+        date: format(new Date(), 'MM/dd/yyyy'),
       };
     });
   };

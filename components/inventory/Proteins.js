@@ -51,7 +51,7 @@ export default function Proteins() {
   const [salesData, setSalesData] = useState([]);
 
   useEffect(() => {
-    const updatedProteins = generateSalesData(proteins, 1, 10); // Adjusted min and max sales to single digits
+    const updatedProteins = generateSalesData(proteins, 1, 10);
     setSalesData(updatedProteins);
   }, []);
 
