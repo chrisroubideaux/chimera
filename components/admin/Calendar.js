@@ -121,9 +121,7 @@ const Calendar = () => {
   const onDateClick = (day) => {
     setSelectedDate(day);
     const eventTitle = prompt('Enter event title');
-    const eventType = prompt(
-      'Enter event type (meeting, video-chat, reminder)'
-    );
+    const eventType = prompt('Enter event type (meeting, video-chat, remindr)');
     if (eventTitle && eventType) {
       setEvents([
         ...events,
