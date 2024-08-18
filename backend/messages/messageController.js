@@ -1,6 +1,6 @@
 // messages controller
-const Message = require('./messageModel');
-const User = require('./userModel'); // Assuming you have a User model
+const Message = require('./messages');
+const User = require('./userModal');
 const Filter = require('bad-words');
 const filter = new Filter();
 
