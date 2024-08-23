@@ -12,6 +12,7 @@
     "axios": "^1.7.4",
     "bad-words-next": "^2.3.1",
     "config": "^3.3.12",
+    "connect-mongo": "^5.1.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",

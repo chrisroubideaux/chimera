@@ -1,4 +1,5 @@
 // messages schema
+
 const mongoose = require('mongoose');
 
 const messageSchema = new mongoose.Schema({
@@ -30,9 +31,5 @@ const createMessage = async (senderId, receiverId, content) => {
   console.log('Message sent!');
 };
 
-// Example usage
-createMessage(
-  'senderUserId',
-  'receiverUserId',
-  'Hello, this is a test message with some bad words.'
-);
+// Export the Message model and createMessage function
+module.exports = { Message, createMessage };
