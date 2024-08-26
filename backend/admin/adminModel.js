@@ -15,9 +15,11 @@ const timeOffRequestSchema = new mongoose.Schema({
 });
 
 const adminSchema = new mongoose.Schema({
+  googleId: String,
   name: String,
   image: String,
   email: String,
+  role: String,
   phone: String,
   address: String,
   city: String,
@@ -25,6 +27,7 @@ const adminSchema = new mongoose.Schema({
   empId: String,
   socialSec: String,
   hireDate: Date,
+  endDate: Date,
   wage: Number,
   emergencyContacts: [
     {

@@ -5,17 +5,18 @@ const { json, urlencoded } = require('body-parser');
 const mongoose = require('mongoose');
 //const jwt = require('jsonwebtoken');
 const MongoStore = require('connect-mongo');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const cors = require('cors');
 const passport = require('passport');
 
 // auth routes
 const employeeRoutes = require('./employees/employeeRoutes');
-const adminRoutes = require('./admin/adminRoutes');
+const adminRoutes = require('./admin/admins');
 const messageRoutes = require('./messages/messageRoutes');
 const userRoutes = require('./users/userRoutes');
 const authRoutes = require('./routes/auth');
 
-require('dotenv').config(); // env config
+require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -48,19 +49,19 @@ mongoose
 // CORS setup
 app.use(
   cors({
-    origin: process.env.CLIENT_ORIGIN, // Allow requests only from this origin
-    credentials: true, // Allow cookies and authentication headers to be sent
+    origin: process.env.CLIENT_ORIGIN,
+    credentials: true,
   })
 );
 // Session setup with connect-mongo
 app.use(
   session({
-    secret: process.env.SESSION_SECRET, // Secret for session encryption
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    store: MongoStore.create({ mongoUrl: mongoURI }), // Use connect-mongo for session store
+    store: MongoStore.create({ mongoUrl: mongoURI }),
     cookie: {
-      maxAge: 1000 * 60 * 60 * 24, // Session expiry time (1 day)
+      maxAge: 1000 * 60 * 60 * 24,
     },
   })
 );
@@ -79,10 +80,32 @@ app.get('/', (req, res) => {
 });
 // api routes
 app.use('/employees', employeeRoutes);
-app.use('/admin', adminRoutes);
+app.use('/admins', adminRoutes);
 app.use('/message', messageRoutes);
 app.use('/users', userRoutes);
 app.use('/auth', authRoutes);
+
+// Oauth
+app.get(
+  '/auth/google/register',
+  passport.authenticate('google', { scope: ['openid', 'profile', 'email'] })
+);
+
+// Google OAuth login route
+app.get(
+  '/auth/google/login',
+  passport.authenticate('google', {
+    scope: ['openid', 'profile', 'email'],
+  })
+);
+
+app.get(
+  '/auth/google/callback',
+  passport.authenticate('google', { failureRedirect: '/login' }),
+  (req, res) => {
+    res.redirect(`http://localhost:3001/admins/${adminId}`);
+  }
+);
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);

@@ -1,5 +1,6 @@
 //  admin
 const Admin = require('./adminModel');
+const mongoose = require('mongoose');
 
 // Define allowed fields for update
 const allowedUpdateFields = [
@@ -33,7 +34,7 @@ const createAdmin = async (req, res) => {
 
 const getAllAdmins = async (req, res) => {
   try {
-    const admins = await admins.find();
+    const admins = await Admin.find(); // Ensure `Admin` is being used
     res.status(200).json(admins);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -42,49 +43,96 @@ const getAllAdmins = async (req, res) => {
 
 const getAdminById = async (req, res) => {
   try {
-    const adminId = req.params.id;
-    const admin = await Admin.findById(adminId);
-    if (!admin) {
-      return res.status(404).json({ error: 'Admin not found' });
+    const { id } = req.params;
+
+    // Check if `id` is a valid ObjectId
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: 'Invalid admin ID' });
     }
+
+    // Convert the string `id` to a MongoDB ObjectId
+    const objectId = new mongoose.Types.ObjectId(id); // Add `new` here
+
+    const admin = await Admin.findById(objectId);
+
+    if (!admin) {
+      return res.status(404).json({ message: 'Admin not found' });
+    }
+
     res.status(200).json(admin);
-  } catch (err) {
-    res.status(500).json({ error: 'Internal server error' });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: 'Failed to fetch admin', error: error.message });
   }
 };
+
+{
+  /*
+const getAdminById = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Check if `id` is a valid ObjectId
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: 'Invalid admin ID' });
+    }
+
+    // Convert the string `id` to a MongoDB ObjectId
+    const objectId = mongoose.Types.ObjectId(id);
+
+    const admin = await Admin.findById(objectId);
+
+    if (!admin) {
+      res.status(404).json({ message: 'Admin not found' });
+      return;
+    }
+
+    res.status(200).json(admin);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: 'Failed to fetch admin', error: error.message });
+  }
+};
+
+*/
+}
 
 const updateAdminById = async (req, res) => {
   try {
-    const updateFields = req.body;
+    const { id } = req.params;
+    const updatedAdmin = await Admin.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
 
-    // Validate fields
-    if (!validateUpdateFields(updateFields)) {
-      return res.status(400).json({ error: 'Invalid fields for update' });
-    }
-
-    const updatedAdmin = await Admin.findByIdAndUpdate(
-      req.params.id,
-      updateFields,
-      { new: true, runValidators: true }
-    );
     if (!updatedAdmin) {
-      return res.status(404).json({ error: 'Admin not found' });
+      res.status(404).json({ message: 'Admin not found' });
+      return;
     }
+
     res.status(200).json(updatedAdmin);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: 'Failed to update admin', error: error.message });
   }
 };
-
 const deleteAdminById = async (req, res) => {
   try {
-    const deletedAdmin = await Admin.findByIdAndRemove(req.params.id);
+    const { id } = req.params;
+    const deletedAdmin = await Admin.findByIdAndDelete(id);
+
     if (!deletedAdmin) {
-      return res.status(404).json({ error: 'Admin not found' });
+      res.status(404).json({ message: 'Admin not found' });
+      return;
     }
+
     res.status(200).json({ message: 'Admin deleted successfully' });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: 'Failed to delete admin', error: error.message });
   }
 };
 
@@ -113,7 +161,7 @@ const getPendingRequests = async (req, res) => {
 // Update time-off request status
 const updateRequestStatus = async (req, res) => {
   const { adminId, requestId } = req.params;
-  const { status } = req.body; // Expected to be either 'approved' or 'denied'
+  const { status } = req.body;
 
   if (!['approved', 'denied'].includes(status)) {
     return res.status(400).json({ error: 'Invalid status' });

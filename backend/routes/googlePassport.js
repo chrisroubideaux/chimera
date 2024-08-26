@@ -1,7 +1,7 @@
 // google passprot
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const User = require('../users/userModel');
+const Admin = require('../admin/adminModel');
 const dotenv = require('dotenv');
 
 dotenv.config();
@@ -11,14 +11,14 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: '/auth/google/callback',
+      callbackURL: 'http://localhost:3001/auth/google/callback',
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
         // Check if the user already exists
-        let user = await User.findOne({ googleId: profile.id });
+        let admin = await Admin.findOne({ googleId: profile.id });
 
-        if (!user) {
+        if (!admin) {
           // Determine the role (main admin or employee)
           const role =
             profile.emails[0].value === process.env.MAIN_ADMIN_EMAIL
@@ -26,7 +26,7 @@ passport.use(
               : 'employee';
 
           // Create a new user if they don't exist
-          user = new User({
+          admin = new Admin({
             googleId: profile.id,
             name: profile.displayName,
             email: profile.emails[0].value,
@@ -34,25 +34,24 @@ passport.use(
             role,
           });
 
-          await user.save();
+          await admin.save();
         }
 
-        done(null, user);
+        done(null, admin);
       } catch (err) {
         done(err, null);
       }
     }
   )
 );
-
-passport.serializeUser((user, done) => {
-  done(null, user.id);
+passport.serializeUser((admin, done) => {
+  done(null, admin._id); // Use _id here
 });
 
-passport.deserializeUser(async (id, done) => {
+passport.deserializeUser(async (_id, done) => {
   try {
-    const user = await User.findById(id);
-    done(null, user);
+    const admin = await Admin.findById(_id); // Use _id here
+    done(null, admin);
   } catch (err) {
     done(err, null);
   }

@@ -1,7 +1,6 @@
 // auth routes
 const express = require('express');
 const passport = require('./googlePassport');
-
 const authRoutes = express.Router();
 
 authRoutes.get(
@@ -13,8 +12,13 @@ authRoutes.get(
   '/google/callback',
   passport.authenticate('google', { failureRedirect: '/' }),
   (req, res) => {
-    // Successful authentication, redirect to dashboard or home page.
-    res.redirect('/dashboard');
+    console.log('req.user:', req.user);
+    if (req.user) {
+      const adminId = req.user._id;
+      res.redirect(`http://localhost:3001/admins/${adminId}`);
+    } else {
+      res.redirect('/');
+    }
   }
 );
 
