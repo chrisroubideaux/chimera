@@ -34,7 +34,7 @@ const createAdmin = async (req, res) => {
 
 const getAllAdmins = async (req, res) => {
   try {
-    const admins = await Admin.find(); // Ensure `Admin` is being used
+    const admins = await Admin.find();
     res.status(200).json(admins);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -51,7 +51,7 @@ const getAdminById = async (req, res) => {
     }
 
     // Convert the string `id` to a MongoDB ObjectId
-    const objectId = new mongoose.Types.ObjectId(id); // Add `new` here
+    const objectId = new mongoose.Types.ObjectId(id);
 
     const admin = await Admin.findById(objectId);
 
@@ -98,10 +98,10 @@ const getAdminById = async (req, res) => {
 
 */
 }
-
 const updateAdminById = async (req, res) => {
   try {
     const { id } = req.params;
+    console.log('Update Request Body:', req.body);
     const updatedAdmin = await Admin.findByIdAndUpdate(id, req.body, {
       new: true,
     });
@@ -111,13 +111,16 @@ const updateAdminById = async (req, res) => {
       return;
     }
 
+    console.log('Updated Admin:', updatedAdmin);
     res.status(200).json(updatedAdmin);
   } catch (error) {
+    console.error('Update Error:', error);
     res
       .status(500)
       .json({ message: 'Failed to update admin', error: error.message });
   }
 };
+
 const deleteAdminById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -185,6 +188,7 @@ const updateRequestStatus = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
 module.exports = {
   createAdmin,
   getAllAdmins,

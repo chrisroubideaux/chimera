@@ -31,7 +31,7 @@ passport.use(
             name: profile.displayName,
             email: profile.emails[0].value,
             photo: profile.photos[0].value,
-            role,
+            role: profile.displayRole,
           });
 
           await admin.save();

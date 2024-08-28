@@ -4,7 +4,7 @@ const passport = require('./googlePassport');
 const authRoutes = express.Router();
 
 authRoutes.get(
-  '/google',
+  '/google/login',
   passport.authenticate('google', { scope: ['profile', 'email'] })
 );
 
@@ -14,8 +14,8 @@ authRoutes.get(
   (req, res) => {
     console.log('req.user:', req.user);
     if (req.user) {
-      const adminId = req.user._id;
-      res.redirect(`http://localhost:3001/admins/${adminId}`);
+      const id = req.user.id;
+      res.redirect(`http://localhost:3000/admins/${id}`);
     } else {
       res.redirect('/');
     }
@@ -30,5 +30,11 @@ authRoutes.get('/logout', (req, res) => {
     res.redirect('/');
   });
 });
+
+// Google OAuth login route
+authRoutes.get(
+  '/google/login',
+  passport.authenticate('google', { scope: ['email', 'openid', 'profile'] })
+);
 
 module.exports = authRoutes;

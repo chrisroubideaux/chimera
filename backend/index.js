@@ -85,6 +85,21 @@ app.use('/message', messageRoutes);
 app.use('/users', userRoutes);
 app.use('/auth', authRoutes);
 
+app.get('/admins/:id', (req, res) => {
+  const { id } = req.params;
+  Admin.findById(id)
+    .then((admin) => {
+      if (admin) {
+        res.json(admin);
+      } else {
+        res.status(404).send('Admin not found');
+      }
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
+});
+
 // Oauth
 app.get(
   '/auth/google/register',
@@ -103,7 +118,7 @@ app.get(
   '/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
   (req, res) => {
-    res.redirect(`http://localhost:3001/admins/${adminId}`);
+    res.redirect(`http://localhost:3000/admins/${userId}`);
   }
 );
 
