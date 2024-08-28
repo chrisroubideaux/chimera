@@ -1,5 +1,7 @@
 // admin page
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import axios from 'axios';
 import Head from 'next/head';
 import Navbar from '@/components/Nav/Navbar';
 import Tab from '@/components/admin/Tab';
@@ -11,10 +13,33 @@ import Notifications from '@/components/admin/Notifications';
 import Schedule from '@/components/admin/Schedule';
 import TimeOff from '@/components/admin/TimeOff';
 
-export default function Admin() {
+export default function Admin({}) {
+  const router = useRouter();
+  const { id } = router.query;
   const [activeComponent, setActiveComponent] = useState('PersonalInfo');
+  const [admin, setAdmin] = useState([]);
+
+  useEffect(() => {
+    if (id) {
+      // Ensure userId is defined
+      const fetchAdminData = async () => {
+        try {
+          const response = await axios.get(
+            `http://localhost:3001/admins/${id}`
+          );
+          console.log('Admin data:', response.data);
+          setAdmin(response.data);
+        } catch (error) {
+          console.error('Error fetching admin data:', error);
+        }
+      };
+
+      fetchAdminData();
+    }
+  }, [id]);
 
   const renderComponent = () => {
+    console.log('Admin data for Bio:', admin);
     switch (activeComponent) {
       case 'Events':
         return <Chats />;
@@ -27,7 +52,7 @@ export default function Admin() {
       case 'TimeOff':
         return <TimeOff setActiveComponent={setActiveComponent} />;
       default:
-        return <Bio />;
+        return <Bio admins={admin} />;
     }
   };
   return (
@@ -52,7 +77,7 @@ export default function Admin() {
         <div className="container-fluid py-3">
           <div className="row">
             <div className="col-lg-4 col-xxl-3">
-              <Sidebar setActiveComponent={setActiveComponent} />
+              <Sidebar admins={admin} setActiveComponent={setActiveComponent} />
             </div>
             <div className="col-lg-8 col-xxl-9">{renderComponent()}</div>
           </div>

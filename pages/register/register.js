@@ -1,73 +1,25 @@
 // resgiter page
 import Head from 'next/head';
-//import { useState } from 'react';
-//import axios from 'axios';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 // metadata
 
-const register = () => {
-  {
-    /*
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-  });
-
-  const [error, setError] = useState(null);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      // POST request to the login endpoint using Axios
-      const response = await axios.post(
-        'https://midwest-realtors-95d2cdb37007.herokuapp.com/auth/login',
-        formData
-      );
-
-      if (response.status === 200) {
-       
-        window.location.href = '/user';
-      } else {
-        const data = response.data;
-        setError(data.message);
-      }
-    } catch (err) {
-      console.error(err);
-      setError('Internal server error');
-    }
-  };
-
-  // Google login function
-  const handleGoogleLogin = () => {
-    // Redirect the user to Google OAuth login
-    window.location.href =
-      'https://midwest-realtors-95d2cdb37007.herokuapp.com/auth/google/login';
-  };
-
-  // Facebook registration function
-  const handleFacebookLogin = () => {
-    const facebookOAuthURL =
-      'https://midwest-realtors-95d2cdb37007.herokuapp.com/auth/facebook/register';
+const Register = () => {
+  // Google registration function
+  const handleGoogleRegister = () => {
+    const googleOAuthURL = 'http://localhost:3001/auth/google';
 
     window.open(
-      facebookOAuthURL,
-      'Facebook OAuth',
+      googleOAuthURL,
+      'Google OAuth',
       'align-item-center',
       'width=300,height=300'
     );
   };
-*/
-  }
+
+  // facebook registration function
+
   return (
     <>
       <Head>
@@ -100,15 +52,17 @@ const register = () => {
                 </button>
               </li>
               <li className="ms-3">
-                <button className="text-muted bg-transparent border-0">
+                <button
+                  className="text-muted bg-transparent border-0"
+                  type="button"
+                  onClick={handleGoogleRegister}
+                >
                   <i className="social-icons fs-1 fa-brands fa-google mt-1"></i>
                 </button>
               </li>
             </ul>
           </div>
-          {/*
-          {error && <p style={{ color: 'red' }}>{error}</p>}
-           */}
+
           <div className="my-5">
             <p className="pt-1 fw-bold">{'Already have an account?'}</p>
             <Link className="btn btn lg w-75" href="/login/login/">
@@ -122,4 +76,4 @@ const register = () => {
   );
 };
 
-export default register;
+export default Register;

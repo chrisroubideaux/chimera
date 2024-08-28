@@ -1,7 +1,18 @@
 // Sidebar component
 import Link from 'next/link';
 
-export default function Sidebar({ setActiveComponent }) {
+export default function Sidebar({ setActiveComponent, admins }) {
+  const handleLogout = async () => {
+    try {
+      await fetch('http://localhost:3001/auth/logout', {
+        method: 'GET',
+        credentials: 'include', // To ensure cookies are sent with the request
+      });
+      window.location.href = '/'; // Redirect to the homepage after logout
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
+  };
   return (
     <div className="d-flex flex-column p-4 gap-4 py-md-3">
       <div className="card mb-5">
@@ -22,8 +33,8 @@ export default function Sidebar({ setActiveComponent }) {
                 title="Verified user"
               />
             </div>
-            <h4 className="card-title mb-0">Name Here</h4>
-            <p className="card-text small">example@example.com</p>
+            <h5 className="card-title mb-0">{admins.firstName}</h5>
+            <p className="card-text small">{admins.email}</p>
             <span className="text-cap">
               <h4>Account</h4>
             </span>
@@ -64,9 +75,9 @@ export default function Sidebar({ setActiveComponent }) {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" href="/">
+                <a className="nav-link" href="#" onClick={handleLogout}>
                   <i className="fs-6 fa-solid fa-person-walking"></i> Log out
-                </Link>
+                </a>
               </li>
             </ul>
           </div>

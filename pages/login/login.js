@@ -1,59 +1,21 @@
 // login page
 import Head from 'next/head';
-//import { useState } from 'react';
+import { useState } from 'react';
 //import axios from 'axios';
 import Link from 'next/link';
 
 // metadata
 
 const Login = () => {
+  //const [error, setError] = useState(null);
+
+  const handleGoogleLogin = () => {
+    console.log('Redirecting to Google login...');
+    window.location.href = 'http://localhost:3001/auth/google/login';
+  };
+
   {
     /*
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-  });
-
-  const [error, setError] = useState(null);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      // POST request to the login endpoint using Axios
-      const response = await axios.post(
-        'https://midwest-realtors-95d2cdb37007.herokuapp.com/auth/login',
-        formData
-      );
-
-      if (response.status === 200) {
-       
-        window.location.href = '/user';
-      } else {
-        const data = response.data;
-        setError(data.message);
-      }
-    } catch (err) {
-      console.error(err);
-      setError('Internal server error');
-    }
-  };
-
-  // Google login function
-  const handleGoogleLogin = () => {
-    // Redirect the user to Google OAuth login
-    window.location.href =
-      'https://midwest-realtors-95d2cdb37007.herokuapp.com/auth/google/login';
-  };
-
   // Facebook registration function
   const handleFacebookLogin = () => {
     const facebookOAuthURL =
@@ -68,6 +30,7 @@ const Login = () => {
   };
 */
   }
+
   return (
     <>
       <Head>
@@ -100,9 +63,12 @@ const Login = () => {
                 </button>
               </li>
               <li className="ms-3">
-                <button className="text-muted bg-transparent border-0">
+                <a
+                  className="text-muted bg-transparent border-0"
+                  onClick={handleGoogleLogin}
+                >
                   <i className="social-icons fs-1 fa-brands fa-google mt-1"></i>
-                </button>
+                </a>
               </li>
             </ul>
           </div>
@@ -111,7 +77,7 @@ const Login = () => {
            */}
           <div className="my-5">
             <p className="pt-1 fw-bold">{"Don't have an account?"}</p>
-            <Link className="btn btn lg w-75" href="/register/register/">
+            <Link className="btn btn lg w-75" href="/register/Register/">
               Register
             </Link>
 
