@@ -1,5 +1,6 @@
 // products page
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import Head from 'next/head';
 import Navbar from '@/components/Nav/Navbar';
 import Tab from '@/components/products/Tab';
@@ -25,6 +26,18 @@ import WeeklyChart from '@/components/charts/WeeklyChart';
 
 export default function Products() {
   const [activeComponent, setActiveComponent] = useState('Products');
+  const [admins, setAdmins] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/admins')
+      .then((response) => {
+        setAdmins(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching admins:', error);
+      });
+  }, []);
 
   const renderComponent = () => {
     switch (activeComponent) {
@@ -89,11 +102,23 @@ export default function Products() {
       </Head>
       <div className="layout h-100">
         <Navbar />
-        <Tab setActiveComponent={setActiveComponent} />
+        {admins.map((admins) => (
+          <Tab
+            setActiveComponent={setActiveComponent}
+            key={admins.id}
+            admins={admins}
+          />
+        ))}
         <div className="container-fluid">
           <div className="row">
             <div className="col-lg-4 col-xxl-3">
-              <Sidebar setActiveComponent={setActiveComponent} />
+              {admins.map((admins) => (
+                <Sidebar
+                  setActiveComponent={setActiveComponent}
+                  key={admins.id}
+                  admins={admins}
+                />
+              ))}
             </div>
             <div className="col-lg-8 col-xxl-9">{renderComponent()}</div>
           </div>

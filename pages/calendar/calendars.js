@@ -1,5 +1,6 @@
 // calendar page
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import Head from 'next/head';
 import Navbar from '@/components/Nav/Navbar';
 import Sidebar from '@/components/admin/Sidebar';
@@ -11,6 +12,18 @@ import Badge from '@/components/calendar/Badge';
 
 export default function Calendars() {
   const [activeComponent, setActiveComponent] = useState('Calendars');
+  const [admins, setAdmins] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/admins')
+      .then((response) => {
+        setAdmins(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching admins:', error);
+      });
+  }, []);
 
   const renderComponent = () => {
     switch (activeComponent) {
@@ -43,12 +56,24 @@ export default function Calendars() {
       </Head>
       <div className="layout h-100">
         <Navbar />
-        <Tab setActiveComponent={setActiveComponent} />
+        {admins.map((admins) => (
+          <Tab
+            setActiveComponent={setActiveComponent}
+            key={admins.id}
+            admins={admins}
+          />
+        ))}
 
         <div className="container-fluid ">
           <div className="row">
             <div className="col-lg-4 col-xxl-3">
-              <Sidebar setActiveComponent={setActiveComponent} />
+              {admins.map((admins) => (
+                <Sidebar
+                  setActiveComponent={setActiveComponent}
+                  key={admins.id}
+                  admins={admins}
+                />
+              ))}
             </div>
             <div className="col-lg-8 col-xxl-9">
               <div className="mt-3">{renderComponent()}</div>

@@ -6,13 +6,14 @@ export default function Sidebar({ setActiveComponent, admins }) {
     try {
       await fetch('http://localhost:3001/auth/logout', {
         method: 'GET',
-        credentials: 'include', // To ensure cookies are sent with the request
+        credentials: 'include',
       });
-      window.location.href = '/'; // Redirect to the homepage after logout
+      window.location.href = '/';
     } catch (error) {
       console.error('Logout failed:', error);
     }
   };
+
   return (
     <div className="d-flex flex-column p-4 gap-4 py-md-3">
       <div className="card mb-5">
@@ -33,8 +34,10 @@ export default function Sidebar({ setActiveComponent, admins }) {
                 title="Verified user"
               />
             </div>
+
             <h5 className="card-title mb-0">{admins.firstName}</h5>
             <p className="card-text small">{admins.email}</p>
+
             <span className="text-cap">
               <h4>Account</h4>
             </span>

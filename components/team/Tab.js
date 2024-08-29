@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Bookings from '../calendar/Bookings';
 
-const Tab = ({ setActiveComponent }) => {
+const Tab = ({ setActiveComponent, admins }) => {
   return (
     <>
       <div className="d-flex justify-content-between align-items-center mt-3 me-4">
@@ -184,7 +184,7 @@ const Tab = ({ setActiveComponent }) => {
             </div>
           </li>
           <li className="nav-item me-2">
-            <Link className="btn btn-sm" href="/admin/admin">
+            <Link className="btn btn-sm" href={`/admins/${admins._id}`}>
               Admin
               <i className="m-1 fa-solid fa-person"></i>
             </Link>

@@ -1,5 +1,7 @@
 // sales page
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import axios from 'axios';
 import Head from 'next/head';
 import Navbar from '@/components/Nav/Navbar';
 import Tab from '@/components/sales/Tab';
@@ -38,6 +40,18 @@ import BeverageMonthlyChart from '@/components/sales/beverages/BeverageMonthlyCh
 
 export default function Sales() {
   const [activeComponent, setActiveComponent] = useState('Sales');
+  const [admins, setAdmins] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/admins')
+      .then((response) => {
+        setAdmins(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching admins:', error);
+      });
+  }, []);
 
   // const [startersRevenue, setStartersRevenue] = useState({});
 
@@ -48,8 +62,6 @@ export default function Sales() {
   const weeklyRevenueMax = 35000;
   const monthlyRevenueMin = 30000;
   const monthlyRevenueMax = 150000;
-
-  useEffect(() => {}, []);
 
   const renderComponent = () => {
     switch (activeComponent) {
@@ -132,11 +144,23 @@ export default function Sales() {
       </Head>
       <div className="layout h-100">
         <Navbar />
-        <Tab setActiveComponent={setActiveComponent} />
+        {admins.map((admins) => (
+          <Tab
+            setActiveComponent={setActiveComponent}
+            key={admins.id}
+            admins={admins}
+          />
+        ))}
         <div className="container-fluid py-3">
           <div className="row mt-4">
             <div className="col-lg-4 col-xxl-3">
-              <Sidebar setActiveComponent={setActiveComponent} />
+              {admins.map((admins) => (
+                <Sidebar
+                  setActiveComponent={setActiveComponent}
+                  key={admins.id}
+                  admins={admins}
+                />
+              ))}
             </div>
             <div className="col-lg-8 col-xxl-9">
               <div className="mt-3">{renderComponent()}</div>
