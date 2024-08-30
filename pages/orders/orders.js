@@ -73,7 +73,13 @@ export default function Orders() {
       </Head>
       <div className="layout h-100">
         <Navbar />
-        <Tab setActiveComponent={setActiveComponent} />
+        {admins.map((admins) => (
+          <Tab
+            setActiveComponent={setActiveComponent}
+            key={admins.id}
+            admins={admins}
+          />
+        ))}
         <div className="container-fluid ">
           <div className="row">
             <div className="col-lg-4 col-xxl-3">

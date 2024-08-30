@@ -1,8 +1,10 @@
 // Starter component
 import { useState, useEffect } from 'react';
 import { format } from 'date-fns';
+import { faker } from '@faker-js/faker';
 
 const Starters = ({ setActiveComponent, starters }) => {
+  const [dailySales, setDailySales] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
   const [currentDateTime, setCurrentDateTime] = useState({
@@ -15,6 +17,36 @@ const Starters = ({ setActiveComponent, starters }) => {
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = starters.slice(indexOfFirstItem, indexOfLastItem);
 
+  // Function to generate daily sales data only between 11 AM and 9 PM
+  const generateDailySalesData = () => {
+    const now = new Date();
+    const currentHour = now.getHours();
+
+    if (currentHour >= 11 && currentHour <= 21) {
+      return starters.map((starter) => ({
+        ...starter,
+        count: starter.count || '',
+        par: starter.par || '',
+        projected: starter.projected || '',
+        actual: starter.actual || '',
+        sales: faker.datatype.float({
+          min: 100,
+          max: 500,
+          precision: 0.01,
+        }),
+      }));
+    }
+
+    return starters; // Return starters without sales data outside the specified hours
+  };
+
+  // Call generateDailySalesData and update dailySales state
+  useEffect(() => {
+    const salesData = generateDailySalesData();
+    setDailySales(salesData);
+  }, [starters]); // Re-run when starters array changes
+
+  // update date/time
   useEffect(() => {
     const updateDateTime = () => {
       const now = new Date();
@@ -95,11 +127,12 @@ const Starters = ({ setActiveComponent, starters }) => {
                   <th className="">Par</th>
                   <th className="">Date</th>
                   <th className="">Time</th>
+                  <th className="">Sold</th>
                   <th className="align-middle text-end">Actions</th>
                 </tr>
               </thead>
               <tbody>
-                {currentItems.map((starter) => (
+                {currentItems.map((starter, index) => (
                   <tr key={starter.id}>
                     <td>
                       <div className="form-check fs-4">
@@ -121,6 +154,7 @@ const Starters = ({ setActiveComponent, starters }) => {
                     <td>{starter.par}</td>
                     <td>{currentDateTime.date}</td>
                     <td>{currentDateTime.time}</td>
+                    <td>${dailySales[index]?.sales?.toFixed(2)}</td>
                     <td className="text-end">
                       <button type="button" className="btn btn-sm">
                         View

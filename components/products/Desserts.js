@@ -1,14 +1,35 @@
 // Dessert component
 import { useState, useEffect } from 'react';
 import { format } from 'date-fns';
+import { faker } from '@faker-js/faker';
 
 const Desserts = ({ setActiveComponent, desserts }) => {
+  const [dailySales, setDailySales] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
   const [currentDateTime, setCurrentDateTime] = useState({
     date: '',
     time: '',
   });
+
+  // Function to generate daily sales data
+  const generateDailySalesData = () => {
+    const averageDailySales = 500; // You can adjust this value based on your requirements
+    return desserts.map((dessert) => ({
+      ...dessert,
+      sales: faker.datatype.float({
+        min: averageDailySales / 2,
+        max: averageDailySales * 1.5,
+        precision: 0.01,
+      }),
+    }));
+  };
+
+  // Call generateDailySalesData and update dailySales state
+  useEffect(() => {
+    const salesData = generateDailySalesData();
+    setDailySales(salesData);
+  }, [desserts]);
 
   useEffect(() => {
     const updateDateTime = () => {
@@ -100,11 +121,12 @@ const Desserts = ({ setActiveComponent, desserts }) => {
                     <th className="">Par</th>
                     <th className="">Date</th>
                     <th className="">Time</th>
+                    <th className="">Sold</th>
                     <th className="align-middle text-end">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {currentItems.map((dessert) => (
+                  {currentItems.map((dessert, index) => (
                     <tr key={dessert.id}>
                       <td>
                         <div className="form-check fs-4">
@@ -127,6 +149,7 @@ const Desserts = ({ setActiveComponent, desserts }) => {
                       <td>{dessert.par}</td>
                       <td>{currentDateTime.date}</td>
                       <td>{currentDateTime.time}</td>
+                      <td>${dailySales[index]?.sales?.toFixed(2)}</td>
                       <td className="text-end">
                         <button type="button" className="btn btn-light">
                           View

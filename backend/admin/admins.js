@@ -1,5 +1,4 @@
 // admin routes
-
 const express = require('express');
 const Admin = require('./adminModel');
 const adminRoutes = express.Router();

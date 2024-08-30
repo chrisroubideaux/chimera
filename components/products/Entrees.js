@@ -1,14 +1,34 @@
 // Entree component
 import { useState, useEffect } from 'react';
 import { format } from 'date-fns';
-
+import { faker } from '@faker-js/faker';
 const Entrees = ({ setActiveComponent, entrees }) => {
+  const [dailySales, setDailySales] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
   const [currentDateTime, setCurrentDateTime] = useState({
     date: '',
     time: '',
   });
+
+  // Function to generate daily sales data
+  const generateDailySalesData = () => {
+    const averageDailySales = 1000;
+    return entrees.map((entree) => ({
+      ...entree,
+      sales: faker.datatype.float({
+        min: averageDailySales / 2,
+        max: averageDailySales * 1.5,
+        precision: 0.01,
+      }),
+    }));
+  };
+
+  // Call generateDailySalesData and update dailySales state
+  useEffect(() => {
+    const salesData = generateDailySalesData();
+    setDailySales(salesData);
+  }, [entrees]);
 
   useEffect(() => {
     const updateDateTime = () => {
@@ -99,11 +119,12 @@ const Entrees = ({ setActiveComponent, entrees }) => {
                     <th className="">Par</th>
                     <th className="">Date</th>
                     <th className="">Time</th>
+                    <th className="">Sold</th>
                     <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {currentItems.map((entree) => (
+                  {currentItems.map((entree, index) => (
                     <tr key={entree.id}>
                       <td>
                         <div className="form-check fs-4">
@@ -125,6 +146,7 @@ const Entrees = ({ setActiveComponent, entrees }) => {
                       <td>{entree.par}</td>
                       <td>{currentDateTime.date}</td>
                       <td>{currentDateTime.time}</td>
+                      <td>${dailySales[index]?.sales?.toFixed(2)}</td>
                       <td className="text-end">
                         <button type="button" className="btn btn-light">
                           View

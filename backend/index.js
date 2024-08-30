@@ -10,11 +10,12 @@ const cors = require('cors');
 const passport = require('passport');
 
 // auth routes
-const employeeRoutes = require('./employees/employeeRoutes');
+//const employeeRoutes = require('./employees/employeeRoutes');
 const adminRoutes = require('./admin/admins');
 const messageRoutes = require('./messages/messageRoutes');
 const userRoutes = require('./users/userRoutes');
 const authRoutes = require('./routes/auth');
+const starterRoutes = require('./starters/starters');
 
 require('dotenv').config();
 
@@ -78,9 +79,15 @@ app.use(passport.session());
 app.get('/', (req, res) => {
   res.send('Hello world!');
 });
+
+// routes
+app.use('/products', (req, res) => {
+  res.send('Hello world!');
+});
 // api routes
-app.use('/employees', employeeRoutes);
+//app.use('/employees', employeeRoutes);
 app.use('/admins', adminRoutes);
+app.use('/starters', starterRoutes);
 app.use('/message', messageRoutes);
 app.use('/users', userRoutes);
 app.use('/auth', authRoutes);

@@ -1,14 +1,33 @@
 // Beverages component
 import { useState, useEffect } from 'react';
 import { format } from 'date-fns';
+import { faker } from '@faker-js/faker';
 
 const Beverages = ({ setActiveComponent, beverages }) => {
+  const [dailySales, setDailySales] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
   const [currentDateTime, setCurrentDateTime] = useState({
     date: '',
     time: '',
   });
+  // Function to generate daily sales data
+  const generateDailySalesData = () => {
+    const averageDailySales = 1000;
+    return beverages.map((beverage) => ({
+      ...beverage,
+      sales: faker.datatype.float({
+        min: averageDailySales / 2,
+        max: averageDailySales * 1.5,
+        precision: 0.01,
+      }),
+    }));
+  };
+  // Call generateDailySalesData and update dailySales state
+  useEffect(() => {
+    const salesData = generateDailySalesData();
+    setDailySales(salesData);
+  }, [beverages]);
 
   // Calculates the index of the first and last items to display on the current page
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -19,7 +38,7 @@ const Beverages = ({ setActiveComponent, beverages }) => {
     const updateDateTime = () => {
       const now = new Date();
       const formattedDate = format(now, 'MM/dd/yy');
-      const formattedTime = format(now, 'hh:mm:ss a'); // Update here for 12-hour format with AM/PM
+      const formattedTime = format(now, 'hh:mm:ss a');
       setCurrentDateTime({ date: formattedDate, time: formattedTime });
     };
 
@@ -95,11 +114,12 @@ const Beverages = ({ setActiveComponent, beverages }) => {
                   <th className="">Par</th>
                   <th className="">Date</th>
                   <th className="">Time</th>
+                  <th className="">Sold</th>
                   <th className="align-middle text-end">Actions</th>
                 </tr>
               </thead>
               <tbody>
-                {currentItems.map((beverage) => (
+                {currentItems.map((beverage, index) => (
                   <tr key={beverage.id}>
                     <td>
                       <div className="form-check fs-4">
@@ -121,6 +141,7 @@ const Beverages = ({ setActiveComponent, beverages }) => {
                     <td>{beverage.par}</td>
                     <td>{currentDateTime.date}</td>
                     <td>{currentDateTime.time}</td>
+                    <td>${dailySales[index]?.sales?.toFixed(2)}</td>
                     <td className="text-end">
                       <button type="button" className="btn btn-light">
                         View
