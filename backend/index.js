@@ -16,6 +16,8 @@ const messageRoutes = require('./messages/messageRoutes');
 const userRoutes = require('./users/userRoutes');
 const authRoutes = require('./routes/auth');
 const starterRoutes = require('./starters/starters');
+const entreeRoutes = require('./entrees/entrees');
+const dessertRoutes = require('./desserts/desserts');
 
 require('dotenv').config();
 
@@ -88,6 +90,8 @@ app.use('/products', (req, res) => {
 //app.use('/employees', employeeRoutes);
 app.use('/admins', adminRoutes);
 app.use('/starters', starterRoutes);
+app.use('/entrees', entreeRoutes);
+app.use('/desserts', dessertRoutes);
 app.use('/message', messageRoutes);
 app.use('/users', userRoutes);
 app.use('/auth', authRoutes);

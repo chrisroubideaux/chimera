@@ -13,8 +13,8 @@ import GiftCards from '@/components/products/GiftCards';
 import Form from '@/components/products/Form';
 import NewItems from '@/components/products/NewItems';
 // Import data
-import starters from '@/data/starters';
-import entrees from '@/data/entrees';
+//import starters from '@/data/starters';
+//import entrees from '@/data/entrees';
 import beverages from '@/data/beverages';
 import desserts from '@/data/desserts';
 
@@ -27,7 +27,9 @@ import WeeklyChart from '@/components/charts/WeeklyChart';
 export default function Products() {
   const [activeComponent, setActiveComponent] = useState('Products');
   const [admins, setAdmins] = useState([]);
-
+  const [starters, setStarters] = useState([]);
+  const [entrees, setEntrees] = useState([]);
+  // admins
   useEffect(() => {
     axios
       .get('http://localhost:3001/admins')
@@ -36,6 +38,29 @@ export default function Products() {
       })
       .catch((error) => {
         console.error('Error fetching admins:', error);
+      });
+  }, []);
+  // starters
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/starters')
+      .then((response) => {
+        setStarters(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching starters:', error);
+      });
+  }, []);
+
+  // entrees
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/entrees')
+      .then((response) => {
+        setEntrees(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching entrees:', error);
       });
   }, []);
 

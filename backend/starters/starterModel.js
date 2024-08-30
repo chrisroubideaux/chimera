@@ -1,6 +1,6 @@
 // starter/schema
 const mongoose = require('mongoose');
-
+const { faker } = require('@faker-js/faker');
 // Define the options schema
 const optionSchema = new mongoose.Schema(
   {
@@ -44,6 +44,25 @@ const starterSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+// Middleware to generate sales data before saving
+starterSchema.pre('save', function (next) {
+  const now = new Date();
+  const currentHour = now.getHours();
+
+  if (currentHour >= 11 && currentHour <= 21) {
+    this.sold = faker.datatype
+      .float({
+        min: 100,
+        max: 500,
+        precision: 0.01,
+      })
+      .toFixed(2);
+  } else {
+    this.sold = '0.00';
+  }
+
+  next();
+});
 
 const Starter = mongoose.model('Starter', starterSchema);
 
