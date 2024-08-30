@@ -6,37 +6,39 @@ const optionSchema = new mongoose.Schema(
   {
     quantity: {
       type: String,
-      required: false, // Optional field
+      required: false,
     },
     sauce: {
       type: String,
-      required: false, // Optional field
+      required: false,
     },
     choices: {
-      type: [String], // Array of strings
-      required: false, // Optional field
+      type: [String],
+      required: false,
     },
     method: {
       type: String,
-      required: false, // Optional field
+      required: false,
     },
   },
   { _id: false }
-); // Disable _id for subdocuments
+);
 
 const starterSchema = new mongoose.Schema(
   {
-    item: String,
     category: String,
+    name: String,
+    image: String,
+    description: String,
     price: String,
     count: String,
     par: String,
     projected: String,
     actual: String,
-    sold: String,
     date: String,
     time: String,
-    options: [optionSchema], // Add options array to the schema
+    sold: String,
+    options: [optionSchema],
   },
   {
     timestamps: true,
