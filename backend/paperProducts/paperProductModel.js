@@ -1,8 +1,8 @@
-// dry goods schema
+// paper product schema
 const mongoose = require('mongoose');
 const { faker } = require('@faker-js/faker');
 
-const dryGoodSchema = new mongoose.Schema(
+const paperProductSchema = new mongoose.Schema(
   {
     category: String,
     name: String,
@@ -22,7 +22,7 @@ const dryGoodSchema = new mongoose.Schema(
   }
 );
 // Middleware to generate sales data before saving
-dryGoodSchema.pre('save', function (next) {
+paperProductSchema.pre('save', function (next) {
   const now = new Date();
   const currentHour = now.getHours();
 
@@ -41,6 +41,6 @@ dryGoodSchema.pre('save', function (next) {
   next();
 });
 
-const DryGood = mongoose.model('DryGood', dryGoodSchema);
+const PaperProduct = mongoose.model('PaperProduct', paperProductSchema);
 
-module.exports = DryGood;
+module.exports = PaperProduct;

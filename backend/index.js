@@ -25,7 +25,9 @@ const dairyRoutes = require('./dairy/dairy');
 const proteinRoutes = require('./proteins/proteins');
 const drinkRoutes = require('./drinks/drinks');
 const linenRoutes = require('./linens/linens');
-const dryRoutes = require('./dryGoods/dryGoods');
+const dryGoodRoutes = require('./dryGoods/dryGoods');
+const paperProductRoutes = require('./paperProducts/paperProducts');
+
 require('dotenv').config();
 
 const app = express();
@@ -105,7 +107,8 @@ app.use('/dairy', dairyRoutes);
 app.use('/proteins', proteinRoutes);
 app.use('/linens', linenRoutes);
 app.use('/drinks', drinkRoutes);
-app.use('/dryGoods', dryRoutes);
+app.use('/dryGoods', dryGoodRoutes);
+app.use('/paperProducts', paperProductRoutes);
 app.use('/message', messageRoutes);
 app.use('/users', userRoutes);
 app.use('/auth', authRoutes);
