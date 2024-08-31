@@ -1,0 +1,1 @@
+// dry goods schema
