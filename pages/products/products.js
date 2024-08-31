@@ -15,8 +15,8 @@ import NewItems from '@/components/products/NewItems';
 // Import data
 //import starters from '@/data/starters';
 //import entrees from '@/data/entrees';
-import beverages from '@/data/beverages';
-import desserts from '@/data/desserts';
+//import beverages from '@/data/beverages';
+//import desserts from '@/data/desserts';
 
 // chart imports
 import MonthlyChart from '@/components/charts/MonthlyChart';
@@ -29,6 +29,8 @@ export default function Products() {
   const [admins, setAdmins] = useState([]);
   const [starters, setStarters] = useState([]);
   const [entrees, setEntrees] = useState([]);
+  const [desserts, setDesserts] = useState([]);
+  const [beverages, setBeverages] = useState([]);
   // admins
   useEffect(() => {
     axios
@@ -40,6 +42,7 @@ export default function Products() {
         console.error('Error fetching admins:', error);
       });
   }, []);
+
   // starters
   useEffect(() => {
     axios
@@ -64,6 +67,28 @@ export default function Products() {
       });
   }, []);
 
+  // desserts
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/desserts')
+      .then((response) => {
+        setDesserts(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching desserts:', error);
+      });
+  }, []);
+  // beverages
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/beverages')
+      .then((response) => {
+        setBeverages(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching beverage:', error);
+      });
+  }, []);
   const renderComponent = () => {
     switch (activeComponent) {
       case 'Entrees':

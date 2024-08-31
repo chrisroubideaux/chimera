@@ -18,6 +18,13 @@ const authRoutes = require('./routes/auth');
 const starterRoutes = require('./starters/starters');
 const entreeRoutes = require('./entrees/entrees');
 const dessertRoutes = require('./desserts/desserts');
+const beverageRoutes = require('./beverages/beverages');
+// inventory routes
+const produceRoutes = require('./produce/produce');
+const dairyRoutes = require('./dairy/dairy');
+const proteinRoutes = require('./proteins/proteins');
+const drinkRoutes = require('./drinks/drinks');
+const linenRoutes = require('./linens/linens');
 
 require('dotenv').config();
 
@@ -92,6 +99,12 @@ app.use('/admins', adminRoutes);
 app.use('/starters', starterRoutes);
 app.use('/entrees', entreeRoutes);
 app.use('/desserts', dessertRoutes);
+app.use('/beverages', beverageRoutes);
+app.use('/produce', produceRoutes);
+app.use('/dairy', dairyRoutes);
+app.use('/proteins', proteinRoutes);
+app.use('/linens', linenRoutes);
+app.use('/drinks', drinkRoutes);
 app.use('/message', messageRoutes);
 app.use('/users', userRoutes);
 app.use('/auth', authRoutes);

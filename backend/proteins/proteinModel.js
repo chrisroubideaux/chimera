@@ -1,55 +1,29 @@
-// dessert/schema
+// protein schema
 const mongoose = require('mongoose');
 const { faker } = require('@faker-js/faker');
-{
-  /*
-// Define the options schema
-const optionSchema = new mongoose.Schema(
-  {
-    quantity: {
-      type: String,
-      required: false,
-    },
-    sauce: {
-      type: String,
-      required: false,
-    },
-    choices: {
-      type: [String],
-      required: false,
-    },
-    method: {
-      type: String,
-      required: false,
-    },
-  },
-  { _id: false }
-);
-*/
-}
-const dessertSchema = new mongoose.Schema(
+
+const proteinSchema = new mongoose.Schema(
   {
     category: String,
     name: String,
     image: String,
     description: String,
     price: String,
+    unit: String,
     count: String,
+    sold: String,
     par: String,
     projected: String,
     actual: String,
     date: String,
     time: String,
-    sold: String,
-    // options: [optionSchema],
   },
   {
     timestamps: true,
   }
 );
-
 // Middleware to generate sales data before saving
-dessertSchema.pre('save', function (next) {
+proteinSchema.pre('save', function (next) {
   const now = new Date();
   const currentHour = now.getHours();
 
@@ -68,6 +42,6 @@ dessertSchema.pre('save', function (next) {
   next();
 });
 
-const Dessert = mongoose.model('Dessert', dessertSchema);
+const Protein = mongoose.model('Protein', proteinSchema);
 
-module.exports = Dessert;
+module.exports = Protein;

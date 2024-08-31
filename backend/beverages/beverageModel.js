@@ -1,8 +1,6 @@
-// dessert/schema
+// bev model
 const mongoose = require('mongoose');
 const { faker } = require('@faker-js/faker');
-{
-  /*
 // Define the options schema
 const optionSchema = new mongoose.Schema(
   {
@@ -25,9 +23,8 @@ const optionSchema = new mongoose.Schema(
   },
   { _id: false }
 );
-*/
-}
-const dessertSchema = new mongoose.Schema(
+
+const beverageSchema = new mongoose.Schema(
   {
     category: String,
     name: String,
@@ -41,15 +38,14 @@ const dessertSchema = new mongoose.Schema(
     date: String,
     time: String,
     sold: String,
-    // options: [optionSchema],
+    options: [optionSchema],
   },
   {
     timestamps: true,
   }
 );
-
 // Middleware to generate sales data before saving
-dessertSchema.pre('save', function (next) {
+beverageSchema.pre('save', function (next) {
   const now = new Date();
   const currentHour = now.getHours();
 
@@ -68,6 +64,6 @@ dessertSchema.pre('save', function (next) {
   next();
 });
 
-const Dessert = mongoose.model('Dessert', dessertSchema);
+const Beverage = mongoose.model('Beverage', beverageSchema);
 
-module.exports = Dessert;
+module.exports = Beverage;

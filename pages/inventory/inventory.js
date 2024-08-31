@@ -12,22 +12,24 @@ import Beverages from '@/components/inventory/Beverages';
 import Dry from '@/components/inventory/Dry';
 import Paper from '@/components/inventory/Paper';
 import Linens from '@/components/inventory/Linens';
-
-// util imports
-//import ProduceInventory from '@/utils/inventory/ProduceInventory';
-
 // data imports
-import produce from '@/data/inventory/produce';
-import dairy from '@/data/inventory/dairy';
+//import produce from '@/data/inventory/produce';
+//import dairy from '@/data/inventory/dairy';
 import dryGoods from '@/data/inventory/dryGoods';
-import proteins from '@/data/inventory/proteins';
-import beverages from '@/data/inventory/beverages';
+//import proteins from '@/data/inventory/proteins';
+//import beverages from '@/data/inventory/beverages';
 import paperProducts from '@/data/inventory/PaperProducts';
+//import linens from '@/data/inventory/linens';
 
 export default function Inventory() {
   const [activeComponent, setActiveComponent] = useState('Inventory');
   const [admins, setAdmins] = useState([]);
-
+  const [produce, setProduce] = useState([]);
+  const [dairy, setDairy] = useState([]);
+  const [proteins, setProteins] = useState([]);
+  const [linens, setLinens] = useState([]);
+  const [drinks, setDrinks] = useState([]);
+  // admins
   useEffect(() => {
     axios
       .get('http://localhost:3001/admins')
@@ -39,11 +41,68 @@ export default function Inventory() {
       });
   }, []);
 
+  // produce
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/produce')
+      .then((response) => {
+        setProduce(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching produce items:', error);
+      });
+  }, []);
+
+  // dairy
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/dairy')
+      .then((response) => {
+        setDairy(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching dairy items:', error);
+      });
+  }, []);
+
+  // proteins
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/proteins')
+      .then((response) => {
+        setProteins(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching protein items:', error);
+      });
+  }, []);
+  // linens
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/linens')
+      .then((response) => {
+        setLinens(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching linens items:', error);
+      });
+  }, []);
+  // linens
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/drinks')
+      .then((response) => {
+        setDrinks(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching linens items:', error);
+      });
+  }, []);
+
   const renderComponent = () => {
     switch (activeComponent) {
       case 'Dairy':
         return <Dairy setActiveComponent={setActiveComponent} dairy={dairy} />;
-
       case 'Proteins':
         return (
           <Proteins
@@ -53,10 +112,7 @@ export default function Inventory() {
         );
       case 'Beverages':
         return (
-          <Beverages
-            setActiveComponent={setActiveComponent}
-            beverages={beverages}
-          />
+          <Beverages setActiveComponent={setActiveComponent} drinks={drinks} />
         );
       case 'Dry':
         return (
@@ -71,7 +127,7 @@ export default function Inventory() {
         );
       case 'Linens':
         return (
-          <Linens setActiveComponent={setActiveComponent} linens={Linens} />
+          <Linens setActiveComponent={setActiveComponent} linens={linens} />
         );
       // chart analytics
 

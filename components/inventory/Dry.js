@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { faker } from '@faker-js/faker';
 import { format } from 'date-fns';
-import dryGoods from '@/data/inventory/dryGoods';
+//import dryGoods from '@/data/inventory/dryGoods';
 
 const generateSalesData = (data, minSales, maxSales) => {
   return data.map((item) => {
@@ -43,7 +43,7 @@ const generateSalesData = (data, minSales, maxSales) => {
   });
 };
 
-export default function Dry() {
+export default function Dry({ dryGoods }) {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
   const [salesData, setSalesData] = useState([]);
@@ -186,152 +186,4 @@ export default function Dry() {
       </div>
     </div>
   );
-}
-
-{
-  /*
-import { useState } from 'react';
-import dryGoods from '@/data/inventory/dryGoods';
-
-export default function Dry() {
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
-
-  // Generate sales data for beverages
-  const dry = DryInventory(dryGoods, 100, 500, 2000);
-
-  // Calculate the index of the first and last items to display on the current page
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = dry.slice(indexOfFirstItem, indexOfLastItem);
-
-  // Handle pagination
-  const handleNextPage = () => {
-    if (currentPage < Math.ceil(dry.length / itemsPerPage)) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
-
-  const handlePrevPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
-
-  const handlePageClick = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
-
-  const totalPages = Math.ceil(dry.length / itemsPerPage);
-
-  return (
-    <div>
-      <div className="card">
-        <div className="card-body">
-          <div className="row mb-3">
-            <div className="col-md-6 col-xl-4 mb-2 mb-md-0">
-              <h5 className="my-1">Dry goods</h5>
-            </div>
-            <div className="col-md-6 col-xl-8">
-              <div className="text-sm-end d-flex justify-content-end">
-                <button type="button" className="btn btn-sm me-2">
-                  <i className="fa-solid fa-download"></i> Export
-                </button>
-              </div>
-            </div>
-          </div>
-          <div className="table-responsive">
-            <table className="table table-bordered">
-              <thead className="thead-light">
-                <tr>
-                  <th>Item</th>
-                  <th>Category</th>
-                  <th>Price</th>
-                  <th>Unit</th>
-                  <th>Count</th>
-                  <th>Sold</th>
-                  <th>Par</th>
-                  <th>Projected</th>
-                  <th>Actual</th>
-                  <th>Date</th>
-                  <th>View</th>
-                </tr>
-              </thead>
-              <tbody>
-                {currentItems.map((item) => (
-                  <tr key={item.id}>
-                    <td>{item.name}</td>
-                    <td>{item.category}</td>
-                    <td>${item.price}</td>
-                    <td>{item.unit}</td>
-                    <td>{item.count}</td>
-                    <td>{item.sold}</td>
-                    <td>{item.par}</td>
-                    <td>{item.projected}</td>
-                    <td>{item.sold}</td>
-                    <td>{item.date}</td>
-                    <td className="text-end">
-                      <button type="button" className="btn btn-sm">
-                        View
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <nav
-            className="d-flex justify-content-center align-items-center"
-            aria-label="Page navigation example"
-          >
-            <ul className="pagination">
-              <li className="page-item me-2">
-                <a
-                  className="nav-link"
-                  href="#"
-                  aria-label="Previous"
-                  onClick={handlePrevPage}
-                >
-                  <span aria-hidden="true">
-                    <i className="fs-6 fa-solid fa-chevron-left"></i>
-                  </span>
-                </a>
-              </li>
-              {Array.from({ length: totalPages }, (_, index) => (
-                <li
-                  key={index}
-                  className={`page-item me-2 ${
-                    currentPage === index + 1 ? 'active' : ''
-                  }`}
-                >
-                  <a
-                    className="nav-link"
-                    href="#"
-                    onClick={() => handlePageClick(index + 1)}
-                  >
-                    {index + 1}
-                  </a>
-                </li>
-              ))}
-              <li className="page-item me-2">
-                <a
-                  className="nav-link"
-                  href="#"
-                  aria-label="Next"
-                  onClick={handleNextPage}
-                >
-                  <span aria-hidden="true">
-                    <i className="fs-6 fa-solid fa-chevron-right"></i>
-                  </span>
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-*/
 }

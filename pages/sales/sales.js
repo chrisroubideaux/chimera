@@ -55,14 +55,6 @@ export default function Sales() {
 
   // const [startersRevenue, setStartersRevenue] = useState({});
 
-  // Set the revenue ranges
-  const dailyRevenueMin = 1000;
-  const dailyRevenueMax = 5000;
-  const weeklyRevenueMin = 7000;
-  const weeklyRevenueMax = 35000;
-  const monthlyRevenueMin = 30000;
-  const monthlyRevenueMax = 150000;
-
   const renderComponent = () => {
     switch (activeComponent) {
       // Overall revenue
