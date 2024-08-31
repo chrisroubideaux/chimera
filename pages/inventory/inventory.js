@@ -13,13 +13,6 @@ import Dry from '@/components/inventory/Dry';
 import Paper from '@/components/inventory/Paper';
 import Linens from '@/components/inventory/Linens';
 // data imports
-//import produce from '@/data/inventory/produce';
-//import dairy from '@/data/inventory/dairy';
-import dryGoods from '@/data/inventory/dryGoods';
-//import proteins from '@/data/inventory/proteins';
-//import beverages from '@/data/inventory/beverages';
-import paperProducts from '@/data/inventory/PaperProducts';
-//import linens from '@/data/inventory/linens';
 
 export default function Inventory() {
   const [activeComponent, setActiveComponent] = useState('Inventory');
@@ -29,6 +22,8 @@ export default function Inventory() {
   const [proteins, setProteins] = useState([]);
   const [linens, setLinens] = useState([]);
   const [drinks, setDrinks] = useState([]);
+  const [dryGoods, setDryGoods] = useState([]);
+  const [paperProducts, setPaperProducts] = useState([]);
   // admins
   useEffect(() => {
     axios
@@ -41,7 +36,7 @@ export default function Inventory() {
       });
   }, []);
 
-  // produce
+  // produce inventory
   useEffect(() => {
     axios
       .get('http://localhost:3001/produce')
@@ -53,7 +48,7 @@ export default function Inventory() {
       });
   }, []);
 
-  // dairy
+  // dairy inventory
   useEffect(() => {
     axios
       .get('http://localhost:3001/dairy')
@@ -65,7 +60,7 @@ export default function Inventory() {
       });
   }, []);
 
-  // proteins
+  // protein inventory
   useEffect(() => {
     axios
       .get('http://localhost:3001/proteins')
@@ -76,7 +71,7 @@ export default function Inventory() {
         console.error('Error fetching protein items:', error);
       });
   }, []);
-  // linens
+  // linen inventory
   useEffect(() => {
     axios
       .get('http://localhost:3001/linens')
@@ -87,7 +82,7 @@ export default function Inventory() {
         console.error('Error fetching linens items:', error);
       });
   }, []);
-  // linens
+  // beverage inventory
   useEffect(() => {
     axios
       .get('http://localhost:3001/drinks')
@@ -95,7 +90,29 @@ export default function Inventory() {
         setDrinks(response.data);
       })
       .catch((error) => {
-        console.error('Error fetching linens items:', error);
+        console.error('Error fetching beverage items:', error);
+      });
+  }, []);
+  // dry goods inventory
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/dryGoods')
+      .then((response) => {
+        setDryGoods(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching dry good items:', error);
+      });
+  }, []);
+  // paper products inventory
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/paperProducts')
+      .then((response) => {
+        setPaperProducts(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching paper products items:', error);
       });
   }, []);
 

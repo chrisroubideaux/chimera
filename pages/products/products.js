@@ -12,11 +12,6 @@ import Beverages from '@/components/products/Beverages';
 import GiftCards from '@/components/products/GiftCards';
 import Form from '@/components/products/Form';
 import NewItems from '@/components/products/NewItems';
-// Import data
-//import starters from '@/data/starters';
-//import entrees from '@/data/entrees';
-//import beverages from '@/data/beverages';
-//import desserts from '@/data/desserts';
 
 // chart imports
 import MonthlyChart from '@/components/charts/MonthlyChart';
@@ -31,6 +26,7 @@ export default function Products() {
   const [entrees, setEntrees] = useState([]);
   const [desserts, setDesserts] = useState([]);
   const [beverages, setBeverages] = useState([]);
+
   // admins
   useEffect(() => {
     axios
@@ -42,7 +38,6 @@ export default function Products() {
         console.error('Error fetching admins:', error);
       });
   }, []);
-
   // starters
   useEffect(() => {
     axios
@@ -54,7 +49,6 @@ export default function Products() {
         console.error('Error fetching starters:', error);
       });
   }, []);
-
   // entrees
   useEffect(() => {
     axios
@@ -66,7 +60,6 @@ export default function Products() {
         console.error('Error fetching entrees:', error);
       });
   }, []);
-
   // desserts
   useEffect(() => {
     axios
@@ -89,6 +82,7 @@ export default function Products() {
         console.error('Error fetching beverage:', error);
       });
   }, []);
+
   const renderComponent = () => {
     switch (activeComponent) {
       case 'Entrees':
