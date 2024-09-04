@@ -8,11 +8,10 @@ const MongoStore = require('connect-mongo');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const cors = require('cors');
 const passport = require('passport');
-
 // auth routes
-//const employeeRoutes = require('./employees/employeeRoutes');
+const employeeRoutes = require('./employees/employees');
 const adminRoutes = require('./admin/admins');
-const messageRoutes = require('./messages/messageRoutes');
+const messageRoutes = require('./messages/messages');
 const userRoutes = require('./users/userRoutes');
 const authRoutes = require('./routes/auth');
 const starterRoutes = require('./starters/starters');
@@ -35,7 +34,6 @@ const port = process.env.PORT || 3001;
 const mongoURI = process.env.MONGO_URI;
 
 // mongoose
-
 mongoose
   .connect(mongoURI)
   .then(() => {
@@ -96,7 +94,7 @@ app.use('/products', (req, res) => {
   res.send('Hello world!');
 });
 // api routes
-//app.use('/employees', employeeRoutes);
+app.use('/employees', employeeRoutes);
 app.use('/admins', adminRoutes);
 app.use('/starters', starterRoutes);
 app.use('/entrees', entreeRoutes);
@@ -109,7 +107,7 @@ app.use('/linens', linenRoutes);
 app.use('/drinks', drinkRoutes);
 app.use('/dryGoods', dryGoodRoutes);
 app.use('/paperProducts', paperProductRoutes);
-app.use('/message', messageRoutes);
+app.use('/messages', messageRoutes);
 app.use('/users', userRoutes);
 app.use('/auth', authRoutes);
 

@@ -33,10 +33,13 @@ const createUser = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
-
 const getAllUsers = async (req, res) => {
   try {
-    const users = await User.find();
+    const { role } = req.query;
+
+    const filter = role ? { role } : {};
+    const users = await User.find(filter);
+
     res.status(200).json(users);
   } catch (err) {
     res.status(500).json({ error: err.message });

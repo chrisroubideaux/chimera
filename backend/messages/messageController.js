@@ -1,50 +1,84 @@
 // messages controller
-const Message = require('./messages');
-const User = require('../users/userModel');
-const Filter = require('bad-words-next');
-const filter = new Filter();
+const mongoose = require('mongoose');
+const Message = require('./messageModel');
+const Admin = require('../admin/adminModel');
+const Employee = require('../employees/employeeModel');
 
 // Function to create a new message
 const createMessage = async (req, res) => {
   try {
-    const { senderId, receiverId, content } = req.body;
+    const {
+      sender,
+      recipient,
+      senderModel,
+      recipientModel,
+      messageContent,
+      parentMessage,
+    } = req.body;
 
-    // Fetch sender and receiver from the database
-    const sender = await User.findById(senderId);
-    const receiver = await User.findById(receiverId);
+    const SenderModel = senderModel === 'Admin' ? Admin : Employee;
+    const RecipientModel = recipientModel === 'Admin' ? Admin : Employee;
 
-    if (!sender || !receiver) {
-      return res.status(404).json({ error: 'Sender or receiver not found' });
+    const senderDoc = await SenderModel.findById(sender);
+    const recipientDoc = await RecipientModel.findById(recipient);
+
+    if (!senderDoc || !recipientDoc) {
+      return res.status(404).json({ error: 'Sender or recipient not found' });
     }
 
-    // Check if the content contains profanity
-    const isProfane = filter.isProfane(content);
-
-    // Create a new message with filtered content and flag if profane
     const newMessage = new Message({
-      sender: senderId,
-      receiver: receiverId,
-      content: filter.clean(content),
-      flagged: isProfane,
+      sender,
+      recipient,
+      senderModel,
+      recipientModel,
+      messageContent,
+      timestamp: Date.now(),
+      flagged: false,
+      parentMessage, // Link to the original message if this is a reply
     });
 
-    // Save the message to the database
     const savedMessage = await newMessage.save();
     res.status(201).json(savedMessage);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
+// Get all messages
+const getAllMessages = async (req, res) => {
+  try {
+    // Fetch all messages
+    const messages = await Message.find({})
+      .populate('sender', 'name')
+      .populate('recipient', 'name')
+      .populate('parentMessage'); // Populate parent message for replies
 
-// Function to get all messages for a user
+    res.status(200).json(messages);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+// Get messafe by id
 const getMessagesForUser = async (req, res) => {
   try {
-    const userId = req.params.userId;
+    const { userId } = req.params;
+
+    // Check if `userId` is a valid ObjectId
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      return res.status(400).json({ message: 'Invalid user ID' });
+    }
+
+    // Convert the string `userId` to a MongoDB ObjectId
+    const objectId = new mongoose.Types.ObjectId(userId);
+
+    // Fetch messages where the user is either the sender or recipient
     const messages = await Message.find({
-      $or: [{ sender: userId }, { receiver: userId }],
+      $or: [{ sender: objectId }, { recipient: objectId }],
     })
       .populate('sender', 'name')
-      .populate('receiver', 'name');
+      .populate('recipient', 'name')
+      .populate('parentMessage'); // Populate parent message for replies
+
     res.status(200).json(messages);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -92,6 +126,7 @@ const deleteMessageById = async (req, res) => {
 
 module.exports = {
   createMessage,
+  getAllMessages,
   getMessagesForUser,
   updateMessageStatus,
   deleteMessageById,
@@ -99,33 +134,38 @@ module.exports = {
 
 {
   /*
-const Message = require('./messages');
-const User = require('../users/userModel');
-const Filter = require('bad-words-next');
-const filter = new Filter();
+// messages controller
+const Message = require('./messageModel');
+const Admin = require('../admin/adminModel');
+const Employee = require('../employees/employeeModel');
 
 // Function to create a new message
 const createMessage = async (req, res) => {
   try {
-    const { senderId, receiverId, content } = req.body;
+    const { sender, recipient, senderModel, recipientModel, messageContent } =
+      req.body;
 
-    // Fetch sender and receiver from the database
-    const sender = await User.findById(senderId);
-    const receiver = await User.findById(receiverId);
+    // Determine the models to use based on the senderModel and recipientModel
+    const SenderModel = senderModel === 'Admin' ? Admin : Employee;
+    const RecipientModel = recipientModel === 'Admin' ? Admin : Employee;
 
-    if (!sender || !receiver) {
-      return res.status(404).json({ error: 'Sender or receiver not found' });
+    // Fetch sender and recipient from the appropriate models
+    const senderDoc = await SenderModel.findById(sender);
+    const recipientDoc = await RecipientModel.findById(recipient);
+
+    if (!senderDoc || !recipientDoc) {
+      return res.status(404).json({ error: 'Sender or recipient not found' });
     }
 
-    // Check if the content contains profanity
-    const isProfane = filter.isProfane(content);
-
-    // Create a new message with filtered content and flag if profane
+    // Create a new message without profanity filtering
     const newMessage = new Message({
-      sender: senderId,
-      receiver: receiverId,
-      content: filter.clean(content),
-      flagged: isProfane,
+      sender,
+      recipient,
+      senderModel,
+      recipientModel,
+      messageContent,
+      timestamp: Date.now(),
+      flagged: false, // Set flagged to false since we are not checking for profanity
     });
 
     // Save the message to the database
@@ -141,10 +181,10 @@ const getMessagesForUser = async (req, res) => {
   try {
     const userId = req.params.userId;
     const messages = await Message.find({
-      $or: [{ sender: userId }, { receiver: userId }],
+      $or: [{ sender: userId }, { recipient: userId }],
     })
       .populate('sender', 'name')
-      .populate('receiver', 'name');
+      .populate('recipient', 'name');
     res.status(200).json(messages);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -196,6 +236,7 @@ module.exports = {
   updateMessageStatus,
   deleteMessageById,
 };
+
 
 */
 }

@@ -1,4 +1,4 @@
-//  admin
+// admin controller
 const Admin = require('./adminModel');
 const mongoose = require('mongoose');
 

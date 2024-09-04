@@ -43,35 +43,3 @@ const adminSchema = new mongoose.Schema(
 const Admin = mongoose.model('Admin', adminSchema);
 
 module.exports = Admin;
-
-{
-  /*
-
-const mongoose = require('mongoose');
-
-const adminSchema = new mongoose.Schema({
-  name: String,
-  image: String,
-  email: String,
-  phone: String,
-  address: String,
-  city: String,
-  state: String,
-  empId: String,
-  socialSec: String,
-  hireDate: Date,
-  wage: Number,
-  emergencyContacts: [
-    {
-      name: String,
-      phone: String,
-    },
-  ],
-});
-
-const Admin = mongoose.model('Admin', adminSchema);
-
-module.exports = Admin;
-
-*/
-}

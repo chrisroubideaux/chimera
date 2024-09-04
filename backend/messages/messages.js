@@ -1,35 +1,26 @@
-// messages schema
+// messages routes
+const express = require('express');
+const messageRoutes = express.Router();
 
-const mongoose = require('mongoose');
+const {
+  createMessage,
+  getAllMessages,
+  getMessagesForUser,
+  updateMessageStatus,
+  deleteMessageById,
+} = require('./messageController');
 
-const messageSchema = new mongoose.Schema({
-  sender: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-  receiver: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-  content: String,
-  timestamp: { type: Date, default: Date.now },
-  read: { type: Boolean, default: false },
-  flagged: { type: Boolean, default: false }, // Field for flagging messages
-});
+// Create a new message
+messageRoutes.post('/', createMessage);
+// Get all messages
+messageRoutes.get('/', getAllMessages);
+// Get all messages for user
+messageRoutes.get('/:userId', getMessagesForUser);
 
-const Message = mongoose.model('Message', messageSchema);
+// Update/achive or mark as read
+messageRoutes.put('/:id', updateMessageStatus);
 
-// Function to create a new message
-const createMessage = async (senderId, receiverId, content) => {
-  // Check if the content contains profanity
-  const isProfane = filter.isProfane(content);
+// Delete an existing message by ID
+messageRoutes.delete('/:id', deleteMessageById);
 
-  // Create a new message with filtered content and flag if profane
-  const newMessage = new Message({
-    sender: senderId,
-    receiver: receiverId,
-    content: filter.clean(content),
-    flagged: isProfane,
-  });
-
-  // Save the message to the database
-  await newMessage.save();
-  console.log('Message sent!');
-};
-
-// Export the Message model and createMessage function
-module.exports = { Message, createMessage };
+module.exports = messageRoutes;

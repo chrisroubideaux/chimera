@@ -56,36 +56,41 @@ const getEmployeeById = async (req, res) => {
 
 const updateEmployeeById = async (req, res) => {
   try {
-    const updateFields = req.body;
+    const { id } = req.params;
+    console.log('Update Request Body:', req.body);
+    const updatedEmployee = await Employee.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
 
-    // Validate fields
-    if (!validateUpdateFields(updateFields)) {
-      return res.status(400).json({ error: 'Invalid fields for update' });
-    }
-
-    const updatedEmployee = await Employee.findByIdAndUpdate(
-      req.params.id,
-      updateFields,
-      { new: true, runValidators: true }
-    );
     if (!updatedEmployee) {
-      return res.status(404).json({ error: 'Employee not found' });
+      res.status(404).json({ message: 'Employee not found' });
+      return;
     }
+
+    console.log('Updated Employee:', updatedEmployee);
     res.status(200).json(updatedEmployee);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+  } catch (error) {
+    console.error('Update Error:', error);
+    res
+      .status(500)
+      .json({ message: 'Failed to update employee', error: error.message });
   }
 };
-
 const deleteEmployeeById = async (req, res) => {
   try {
-    const deletedEmployee = await Employee.findByIdAndRemove(req.params.id);
+    const { id } = req.params;
+    const deletedEmployee = await Employee.findByIdAndDelete(id);
+
     if (!deletedEmployee) {
-      return res.status(404).json({ error: 'Employee not found' });
+      res.status(404).json({ message: 'Employee not found' });
+      return;
     }
+
     res.status(200).json({ message: 'Employee deleted successfully' });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: 'Failed to delete admin', error: error.message });
   }
 };
 
