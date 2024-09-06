@@ -3,7 +3,13 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-export default function Chat({ setActiveComponent }) {
+export default function Chat({
+  setActiveComponent,
+  senderId,
+  senderModel,
+  recipientId,
+  recipientModel,
+}) {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
 
@@ -27,13 +33,62 @@ export default function Chat({ setActiveComponent }) {
     if (newMessage.trim()) {
       try {
         const response = await axios.post('http://localhost:3001/messages', {
-          content: newMessage,
+          sender: senderId,
+          recipient: recipientId,
+          senderModel: senderModel,
+          recipientModel: recipientModel,
+          messageContent: newMessage,
+          parentMessage: null, // Or the ID of the parent message if any
         });
         setMessages([...messages, response.data]);
         setNewMessage('');
       } catch (error) {
         console.error('Error sending message:', error);
       }
+    }
+  };
+  // Mark a message as read
+  const handleMarkAsRead = async () => {
+    try {
+      // Replace with actual API call to mark as read
+      await axios.post('http://localhost:3001/messages/markAsRead');
+      // Handle UI updates if needed
+    } catch (error) {
+      console.error('Error marking messages as read:', error);
+    }
+  };
+
+  // Mute chat
+  const handleMute = async () => {
+    try {
+      // Replace with actual API call to mute chat
+      await axios.post('http://localhost:3001/messages/mute');
+      // Handle UI updates if needed
+    } catch (error) {
+      console.error('Error muting chat:', error);
+    }
+  };
+
+  // Delete chat
+  const handleDeleteChat = async () => {
+    try {
+      // Replace with actual API call to delete chat
+      await axios.delete('http://localhost:3001/messages');
+      setMessages([]);
+      // Handle UI updates if needed
+    } catch (error) {
+      console.error('Error deleting chat:', error);
+    }
+  };
+
+  // Archive chat
+  const handleArchiveChat = async () => {
+    try {
+      // Replace with actual API call to archive chat
+      await axios.post('http://localhost:3001/messages/archive');
+      // Handle UI updates if needed
+    } catch (error) {
+      console.error('Error archiving chat:', error);
     }
   };
 
@@ -111,13 +166,21 @@ export default function Chat({ setActiveComponent }) {
                       aria-labelledby="chatcoversationDropdown"
                     >
                       <li>
-                        <a className="dropdown-item" href="#">
+                        <a
+                          className="dropdown-item"
+                          href="#"
+                          onClick={handleMarkAsRead}
+                        >
                           <i className="social-icon fs-6 fa-solid fa-check me-2"></i>
                           Mark as read
                         </a>
                       </li>
                       <li>
-                        <a className="dropdown-item" href="#">
+                        <a
+                          className="dropdown-item"
+                          href="#"
+                          onClick={handleMute}
+                        >
                           <i className="social-icon fs-6 fa-solid fa-microphone-slash me-2"></i>
                           Mute
                         </a>
@@ -129,17 +192,25 @@ export default function Chat({ setActiveComponent }) {
                         </Link>
                       </li>
                       <li>
-                        <Link className="dropdown-item" href="/">
+                        <a
+                          className="dropdown-item"
+                          href="#"
+                          onClick={handleDeleteChat}
+                        >
                           <i className="social-icon fs-6 fa-solid fa-trash me-2"></i>
                           Delete chat
-                        </Link>
+                        </a>
                       </li>
                       <li className="dropdown-divider"></li>
                       <li>
-                        <Link className="dropdown-item" href="/">
+                        <a
+                          className="dropdown-item"
+                          href="#"
+                          onClick={handleArchiveChat}
+                        >
                           <i className="social-icon fs-6 fa-solid fa-box-archive me-2"></i>
                           Archive chat
-                        </Link>
+                        </a>
                       </li>
                     </ul>
                   </div>
@@ -219,9 +290,9 @@ export default function Chat({ setActiveComponent }) {
                     value={newMessage}
                     onChange={(e) => setNewMessage(e.target.value)}
                   />
-                  <button className="btn btn-primary" type="submit">
+                  <a className="btn btn-primary" type="submit">
                     <i className="fa-solid fa-paper-plane"></i>
-                  </button>
+                  </a>
                 </div>
               </form>
             </div>
@@ -234,7 +305,7 @@ export default function Chat({ setActiveComponent }) {
 
 {
   /*
-mport Link from 'next/link';
+import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -272,6 +343,51 @@ export default function Chat({ setActiveComponent }) {
     }
   };
 
+  // Mark a message as read
+  const handleMarkAsRead = async () => {
+    try {
+      // Replace with actual API call to mark as read
+      await axios.post('http://localhost:3001/messages/markAsRead');
+      // Handle UI updates if needed
+    } catch (error) {
+      console.error('Error marking messages as read:', error);
+    }
+  };
+
+  // Mute chat
+  const handleMute = async () => {
+    try {
+      // Replace with actual API call to mute chat
+      await axios.post('http://localhost:3001/messages/mute');
+      // Handle UI updates if needed
+    } catch (error) {
+      console.error('Error muting chat:', error);
+    }
+  };
+
+  // Delete chat
+  const handleDeleteChat = async () => {
+    try {
+      // Replace with actual API call to delete chat
+      await axios.delete('http://localhost:3001/messages');
+      setMessages([]);
+      // Handle UI updates if needed
+    } catch (error) {
+      console.error('Error deleting chat:', error);
+    }
+  };
+
+  // Archive chat
+  const handleArchiveChat = async () => {
+    try {
+      // Replace with actual API call to archive chat
+      await axios.post('http://localhost:3001/messages/archive');
+      // Handle UI updates if needed
+    } catch (error) {
+      console.error('Error archiving chat:', error);
+    }
+  };
+
   return (
     <div className="chat-container mt-3">
       <div className="card card-chat rounded-start-lg-0 border-start-lg-0">
@@ -346,13 +462,21 @@ export default function Chat({ setActiveComponent }) {
                       aria-labelledby="chatcoversationDropdown"
                     >
                       <li>
-                        <a className="dropdown-item" href="#">
+                        <a
+                          className="dropdown-item"
+                          href="#"
+                          onClick={handleMarkAsRead}
+                        >
                           <i className="social-icon fs-6 fa-solid fa-check me-2"></i>
                           Mark as read
                         </a>
                       </li>
                       <li>
-                        <a className="dropdown-item" href="#">
+                        <a
+                          className="dropdown-item"
+                          href="#"
+                          onClick={handleMute}
+                        >
                           <i className="social-icon fs-6 fa-solid fa-microphone-slash me-2"></i>
                           Mute
                         </a>
@@ -364,17 +488,25 @@ export default function Chat({ setActiveComponent }) {
                         </Link>
                       </li>
                       <li>
-                        <Link className="dropdown-item" href="/">
+                        <a
+                          className="dropdown-item"
+                          href="#"
+                          onClick={handleDeleteChat}
+                        >
                           <i className="social-icon fs-6 fa-solid fa-trash me-2"></i>
                           Delete chat
-                        </Link>
+                        </a>
                       </li>
                       <li className="dropdown-divider"></li>
                       <li>
-                        <Link className="dropdown-item" href="/">
+                        <a
+                          className="dropdown-item"
+                          href="#"
+                          onClick={handleArchiveChat}
+                        >
                           <i className="social-icon fs-6 fa-solid fa-box-archive me-2"></i>
                           Archive chat
-                        </Link>
+                        </a>
                       </li>
                     </ul>
                   </div>
@@ -466,5 +598,6 @@ export default function Chat({ setActiveComponent }) {
     </div>
   );
 }
+
 */
 }
