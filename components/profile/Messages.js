@@ -58,11 +58,12 @@ export default function Chat({ setActiveComponent }) {
                     />
                   </div>
                   <div className="d-block flex-grow-1">
-                    <h6 className="mb-0 mt-1">Name Here: test</h6>
-                    <div className="small text-secondary">
-                      <i className="fa-solid fa-circle text-success me-1"></i>
-                      Online
-                    </div>
+                    <h6 className="mb-0 mt-1">
+                      {messages.length > 0
+                        ? messages[0].recipient.name
+                        : 'Recipient Name'}
+                    </h6>
+                    <div className="small text-secondary"></div>
                   </div>
                 </div>
                 <div className="d-flex align-items-center">
@@ -182,10 +183,9 @@ export default function Chat({ setActiveComponent }) {
                                   : 'align-items-start'
                               }`}
                             >
-                              <h6 className="mb-0 mt-1">
-                                {message.sender.name}{' '}
-                                {/* Display sender's name */}
-                              </h6>
+                              <div className="small mb-1">
+                                <h6 className="mt-1">{message.sender.name}</h6>
+                              </div>
                               <div
                                 className={`bg-${
                                   message.sender._id === 'currentUserId'
@@ -193,14 +193,12 @@ export default function Chat({ setActiveComponent }) {
                                     : 'light text-secondary'
                                 } p-2 px-3 rounded-2`}
                               >
-                                {message.messageContent}{' '}
-                                {/* Display message content */}
+                                {message.messageContent}
                               </div>
                               <div className="small my-2">
                                 {new Date(
                                   message.timestamp
-                                ).toLocaleTimeString()}{' '}
-                                {/* Display timestamp */}
+                                ).toLocaleTimeString()}
                               </div>
                             </div>
                           </div>
@@ -236,7 +234,7 @@ export default function Chat({ setActiveComponent }) {
 
 {
   /*
-import Link from 'next/link';
+mport Link from 'next/link';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -295,11 +293,12 @@ export default function Chat({ setActiveComponent }) {
                     />
                   </div>
                   <div className="d-block flex-grow-1">
-                    <h6 className="mb-0 mt-1">Name Here: test</h6>
-                    <div className="small text-secondary">
-                      <i className="fa-solid fa-circle text-success me-1"></i>
-                      Online
-                    </div>
+                    <h6 className="mb-0 mt-1">
+                      {messages.length > 0
+                        ? messages[0].recipient.name
+                        : 'Recipient Name'}
+                    </h6>
+                    <div className="small text-secondary"></div>
                   </div>
                 </div>
                 <div className="d-flex align-items-center">
@@ -419,56 +418,53 @@ export default function Chat({ setActiveComponent }) {
                                   : 'align-items-start'
                               }`}
                             >
-                              <h6 className="mb-0 mt-1">
-                                {message.sender.name}{' '}
-                              
-                                </h6>
-                                <div
-                                  className={`bg-${
-                                    message.sender._id === 'currentUserId'
-                                      ? 'primary text-white'
-                                      : 'light text-secondary'
-                                  } p-2 px-3 rounded-2`}
-                                >
-                                  {message.messageContent}{' '}
-                                
-                                </div>
-                                <div className="small my-2">
-                                  {new Date(
-                                    message.timestamp
-                                  ).toLocaleTimeString()}{' '}
-                                 
-                                </div>
+                              <div className="small mb-1">
+                                <h6 className="mt-1">{message.sender.name}</h6>
+                              </div>
+                              <div
+                                className={`bg-${
+                                  message.sender._id === 'currentUserId'
+                                    ? 'primary text-white'
+                                    : 'light text-secondary'
+                                } p-2 px-3 rounded-2`}
+                              >
+                                {message.messageContent}
+                              </div>
+                              <div className="small my-2">
+                                {new Date(
+                                  message.timestamp
+                                ).toLocaleTimeString()}
                               </div>
                             </div>
                           </div>
                         </div>
-                        <hr />
                       </div>
-                    ))
-                  )}
-                </div>
-                <hr />
-                <form className="chat-input-form" onSubmit={handleSubmit}>
-                  <div className="input-group">
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Type a message"
-                      value={newMessage}
-                      onChange={(e) => setNewMessage(e.target.value)}
-                    />
-                    <button className="btn btn-primary" type="submit">
-                      <i className="fa-solid fa-paper-plane"></i>
-                    </button>
-                  </div>
-                </form>
+                      <hr />
+                    </div>
+                  ))
+                )}
               </div>
+              <hr />
+              <form className="chat-input-form" onSubmit={handleSubmit}>
+                <div className="input-group">
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Type a message"
+                    value={newMessage}
+                    onChange={(e) => setNewMessage(e.target.value)}
+                  />
+                  <button className="btn btn-primary" type="submit">
+                    <i className="fa-solid fa-paper-plane"></i>
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
+}
 */
 }
