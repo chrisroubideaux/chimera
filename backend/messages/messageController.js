@@ -16,6 +16,69 @@ const createMessage = async (req, res) => {
       parentMessage,
     } = req.body;
 
+    // Determine the models based on sender and recipient types
+    const SenderModel = senderModel === 'Admin' ? Admin : Employee;
+    const RecipientModel = recipientModel === 'Admin' ? Admin : Employee;
+
+    // Fetch sender and recipient documents
+    const senderDoc = await SenderModel.findById(sender);
+    const recipientDoc = await RecipientModel.findById(recipient);
+
+    // Check if sender and recipient documents exist
+    if (!senderDoc || !recipientDoc) {
+      return res.status(404).json({ error: 'Sender or recipient not found' });
+    }
+
+    // Create new message
+    const newMessage = new Message({
+      sender,
+      recipient,
+      senderModel,
+      recipientModel,
+      messageContent,
+      timestamp: Date.now(),
+      flagged: false,
+      parentMessage,
+    });
+
+    // Save the message
+    const savedMessage = await newMessage.save();
+
+    // Prepare response with names
+    const response = {
+      _id: savedMessage._id,
+      sender: savedMessage.sender,
+      recipient: savedMessage.recipient,
+      senderModel: savedMessage.senderModel,
+      recipientModel: savedMessage.recipientModel,
+      senderName: senderDoc.name, // Ensure sender's name is included
+      recipientName: recipientDoc.name, // Ensure recipient's name is included
+      messageContent: savedMessage.messageContent,
+      timestamp: savedMessage.timestamp,
+      flagged: savedMessage.flagged,
+      parentMessage: savedMessage.parentMessage,
+    };
+
+    res.status(201).json(response);
+  } catch (err) {
+    console.error('Error in createMessage:', err);
+    res.status(500).json({ error: err.message });
+  }
+};
+
+{
+  /*
+const createMessage = async (req, res) => {
+  try {
+    const {
+      sender,
+      recipient,
+      senderModel,
+      recipientModel,
+      messageContent,
+      parentMessage,
+    } = req.body;
+
     const SenderModel = senderModel === 'Admin' ? Admin : Employee;
     const RecipientModel = recipientModel === 'Admin' ? Admin : Employee;
 
@@ -34,7 +97,7 @@ const createMessage = async (req, res) => {
       messageContent,
       timestamp: Date.now(),
       flagged: false,
-      parentMessage, // Link to the original message if this is a reply
+      parentMessage,
     });
 
     const savedMessage = await newMessage.save();
@@ -43,6 +106,8 @@ const createMessage = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+*/
+}
 // Get all messages
 const getAllMessages = async (req, res) => {
   try {
@@ -57,8 +122,39 @@ const getAllMessages = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+// Get messages for user
+const getMessagesForUser = async (req, res) => {
+  try {
+    const userId = req.params.userId; // Get userId from URL parameter
 
-// Get messafe by id
+    // Fetch messages with sender and recipient populated
+    const messages = await Message.find({
+      $or: [{ sender: userId }, { recipient: userId }],
+    })
+      .populate({
+        path: 'sender',
+        select: 'name',
+        model: function () {
+          return this.senderModel;
+        },
+      })
+      .populate({
+        path: 'recipient',
+        select: 'name',
+        model: function () {
+          return this.recipientModel;
+        },
+      })
+      .populate('parentMessage'); // Populate parent message for replies
+
+    res.status(200).json(messages);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+{
+  /*
 const getMessagesForUser = async (req, res) => {
   try {
     const { userId } = req.params;
@@ -84,7 +180,8 @@ const getMessagesForUser = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
-
+*/
+}
 // Function to update message status (read/archived)
 const updateMessageStatus = async (req, res) => {
   try {

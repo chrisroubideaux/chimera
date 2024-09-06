@@ -2,12 +2,14 @@
 const express = require('express');
 const passport = require('./googlePassport');
 const authRoutes = express.Router();
-
+{
+  /*
 authRoutes.get(
   '/google/login',
   passport.authenticate('google', { scope: ['profile', 'email'] })
 );
-
+*/
+}
 authRoutes.get(
   '/google/callback',
   passport.authenticate('google', { failureRedirect: '/' }),

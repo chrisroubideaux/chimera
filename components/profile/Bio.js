@@ -1,6 +1,42 @@
 // Bio component
+import { useState } from 'react';
 
-export default function Bio() {
+export default function Bio({ employees }) {
+  const [isEditing, setIsEditing] = useState(false);
+  const [employee, setEmployee] = useState(employees);
+
+  if (!employees || Object.keys(employees).length === 0) {
+    return <p>No employee data available.</p>;
+  }
+
+  const handleEditClick = () => {
+    if (isEditing) {
+      handleSaveChanges();
+    }
+    setIsEditing(!isEditing);
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setAdmin((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleSaveChanges = async () => {
+    try {
+      const id = employee.id;
+      await axios.put(`http://localhost:3001/employees/${id}`, employee);
+      console.log('employee data updated successfully');
+      const updatedEmployee = await axios.get(
+        `http://localhost:3001/employees/${id}`
+      );
+      setAdmin(updatedEmployee.data);
+    } catch (error) {
+      console.error('Error updating admin data:', error);
+    }
+  };
   return (
     <div className="mt-3">
       <div className="col-lg-9">
@@ -34,7 +70,10 @@ export default function Bio() {
                         id="firstNameLabel"
                         placeholder="First Name"
                         aria-label="First Name"
+                        value={employees.name}
+                        readOnly={!isEditing}
                       />
+                      {/*
                       <input
                         type="text"
                         className="form-control"
@@ -43,6 +82,7 @@ export default function Bio() {
                         placeholder="Last Name"
                         aria-label="Last Name"
                       />
+                      */}
                     </div>
                   </div>
                 </div>
@@ -62,6 +102,8 @@ export default function Bio() {
                       id="emailLabel"
                       placeholder="email@example.com"
                       aria-label="emaile@example.com"
+                      value={employees.email}
+                      readOnly={!isEditing}
                     />
                   </div>
                 </div>
@@ -80,6 +122,8 @@ export default function Bio() {
                       id="emailLabel"
                       placeholder="xxx-xxx-xxxx"
                       aria-label="phone"
+                      value={employees.phone}
+                      readOnly={!isEditing}
                     />
                   </div>
                 </div>
@@ -99,6 +143,8 @@ export default function Bio() {
                       id="addressLabel"
                       placeholder="1234 Main St"
                       aria-label="addresss"
+                      value={employees.address}
+                      readOnly={!isEditing}
                     />
                   </div>
                 </div>
@@ -118,6 +164,8 @@ export default function Bio() {
                       id="CityLabel"
                       placeholder="City"
                       aria-label="City"
+                      value={employees.city}
+                      readOnly={!isEditing}
                     />
 
                     <select id="inputState" className="form-select ">
@@ -149,6 +197,8 @@ export default function Bio() {
                         id="employeeLabel"
                         placeholder="Employee ID"
                         aria-label="Employee ID"
+                        value={employees.empId}
+                        readOnly={!isEditing}
                       />
                       <input
                         type="text"
@@ -157,6 +207,8 @@ export default function Bio() {
                         id="ssn"
                         placeholder="Social security"
                         aria-label="ssn"
+                        value={employees.socialSec}
+                        readOnly={!isEditing}
                       />
                     </div>
                   </div>
@@ -183,6 +235,8 @@ export default function Bio() {
                         id="hiredLabel"
                         placeholder="07/22/24"
                         aria-label="Hired"
+                        value={employees.hireDate}
+                        readOnly={!isEditing}
                       />
                     </div>
                   </div>
@@ -208,7 +262,9 @@ export default function Bio() {
                         name="wage"
                         id="wageLabel"
                         placeholder="$28.00/hr"
-                        aria-label="Hired"
+                        aria-label="Wage"
+                        value={employees.wage}
+                        readOnly={!isEditing}
                       />
                     </div>
                   </div>
@@ -236,7 +292,10 @@ export default function Bio() {
                         id="firstNameLabel"
                         placeholder="First Name"
                         aria-label="First Name"
+                        value={employees.emergencyContacts}
+                        readOnly={!isEditing}
                       />
+                      {/*
                       <input
                         type="text"
                         className="form-control"
@@ -245,6 +304,7 @@ export default function Bio() {
                         placeholder="Last Name"
                         aria-label="Last Name"
                       />
+                    */}
                     </div>
                   </div>
                 </div>
@@ -263,6 +323,8 @@ export default function Bio() {
                       id="emailLabel"
                       placeholder="xxx-xxx-xxxx"
                       aria-label="phone"
+                      value={employees.emergencyContacts}
+                      readOnly={!isEditing}
                     />
                   </div>
                 </div>
@@ -321,8 +383,8 @@ export default function Bio() {
               </form>
               <div className="card-footer pt-0">
                 <div className="d-flex justify-content-end gap-3 mt-2">
-                  <a className="btn btn-sm" href="#!">
-                    Edit Profile
+                  <a className="btn btn-sm" onClick={handleEditClick}>
+                    {isEditing ? 'Save Changes' : 'Edit Profile'}
                   </a>
                 </div>
               </div>

@@ -6,7 +6,7 @@ export default function Chats() {
       <div className="chat-container ">
         <div className="card card-chat rounded-start-lg-0 border-start-lg-0">
           <div className="card-body h-100">
-            <h5 className=" d-flex ">Messages</h5>
+            <h5 className=" d-flex ">Message</h5>
 
             <div className="accordion" id="accordionExample">
               <div className="accordion-item">

@@ -1,7 +1,7 @@
 // Chat component
 import Link from 'next/link';
 
-export default function Chat() {
+export default function Chat({ setActiveComponent }) {
   return (
     <div className="chat-container mt-3">
       <div className="card card-chat rounded-start-lg-0 border-start-lg-0">
@@ -23,7 +23,7 @@ export default function Chat() {
                     />
                   </div>
                   <div className="d-block flex-grow-1">
-                    <h6 className="mb-0 mt-1">Name: Here</h6>
+                    <h6 className="mb-0 mt-1">Name Here:test</h6>
                     <div className="small text-secondary">
                       <i className="fa-solid fa-circle text-success me-1"></i>
                       Online
@@ -49,7 +49,6 @@ export default function Chat() {
                   >
                     <i className="social-icon fa-solid fa-video"></i>
                   </a>
-
                   <a
                     href="#!"
                     className="icon-md me-2 px-2"
@@ -138,7 +137,6 @@ export default function Chat() {
                     </div>
                   </div>
                 </div>
-
                 <div className="d-flex justify-content-end text-end mb-1">
                   <div className="w-100">
                     <div className="d-flex flex-column align-items-end">
@@ -149,9 +147,7 @@ export default function Chat() {
                   </div>
                 </div>
               </div>
-
               <hr />
-
               <form className="chat-input-form">
                 <div className="input-group">
                   <input

@@ -64,7 +64,7 @@ export default function Bio({ admins }) {
                         id="firstNameLabel"
                         placeholder="First Name"
                         aria-label="First Name"
-                        value={admins.firstName}
+                        value={admins.name}
                         //value={admin.firstName}
                         readOnly={!isEditing}
                         //  onChange={handleChange}
@@ -304,7 +304,7 @@ export default function Bio({ admins }) {
                         id="firstNameLabel"
                         placeholder="First Name"
                         aria-label="First Name"
-                        value={admins.emergencyContacts}
+                        value={admins.name}
                         readOnly={!isEditing}
                         // onChange={handleChange}
                       />

@@ -20,8 +20,8 @@ adminRoutes.post('/', createAdmin);
 adminRoutes.get('/', getAllAdmins);
 
 // Get a single admin by ID
-
 adminRoutes.get('/:id', getAdminById);
+
 // Update an existing admin by ID
 adminRoutes.put('/:id', updateAdminById);
 

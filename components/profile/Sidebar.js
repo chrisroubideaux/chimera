@@ -1,7 +1,7 @@
 // Sidebar component
 import Link from 'next/link';
 
-export default function Sidebar({ setActiveComponent }) {
+export default function Sidebar({ setActiveComponent, employees }) {
   return (
     <div className="d-flex flex-column p-4 gap-4 py-md-3">
       <div className="card mb-5">
@@ -22,12 +22,11 @@ export default function Sidebar({ setActiveComponent }) {
                 title="Verified user"
               />
             </div>
-            <h4 className="card-title mb-0">Name Here</h4>
-            <p className="card-text small">example@example.com</p>
+            <h4 className="card-title mb-0">{employees.name}</h4>
+            <p className="card-text small">{employees.email}</p>
             <span className="text-cap">
               <h4>Account</h4>
             </span>
-
             <ul className=" nav nav-sm nav-tabs nav-vertical mb-4">
               <li className="nav-item">
                 <a

@@ -1,5 +1,7 @@
 // profile page
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import axios from 'axios';
 import Head from 'next/head';
 import Navbar from '@/components/Nav/Navbar';
 import Tab from '@/components/profile/Tab';
@@ -7,7 +9,7 @@ import Sidebar from '@/components/profile/Sidebar';
 import Notifications from '@/components/profile/Notifications';
 import Messages from '@/components/profile/Messages';
 import Hours from '@/components/profile/Hours';
-import Chats from '@/components/profile/Chats';
+//import Chat from '@/components/messages/Chat';
 import Schedule from '@/components/profile/Schedule';
 import Bio from '@/components/profile/Bio';
 import Calendar from '@/components/profile/Calendar';
@@ -16,6 +18,48 @@ import Form from '@/components/profile/Form';
 
 export default function Profile() {
   const [activeComponent, setActiveComponent] = useState('PersonalInfo');
+  const router = useRouter();
+  const { id } = router.query;
+  const [employee, setEmployee] = useState([]);
+  const [message, setMessage] = useState([]);
+
+  // employee
+  useEffect(() => {
+    if (id) {
+      const fetchEmployeeData = async () => {
+        try {
+          const response = await axios.get(
+            `http://localhost:3001/employees/${id}`
+          );
+          console.log('Employee data:', response.data);
+          setEmployee(response.data);
+        } catch (error) {
+          console.error('Error fetching employee data:', error);
+        }
+      };
+
+      fetchEmployeeData();
+    }
+  }, [id]);
+
+  // messages
+  useEffect(() => {
+    if (id) {
+      const fetchMessageData = async () => {
+        try {
+          const response = await axios.get(
+            `http://localhost:3001/messages/${id}`
+          );
+          console.log('messagese data:', response.data);
+          setMessage(response.data);
+        } catch (error) {
+          console.error('Error fetching message data:', error);
+        }
+      };
+
+      fetchMessageData();
+    }
+  }, [id]);
 
   const renderComponent = () => {
     switch (activeComponent) {
@@ -27,17 +71,25 @@ export default function Profile() {
         return <Schedule setActiveComponent={setActiveComponent} />;
       case 'Hours':
         return <Hours setActiveComponent={setActiveComponent} />;
+        {
+          /*
       case 'Events':
-        return <Chats />;
+        return <Chat messages={message} />;
+    */
+        }
       case 'Messages':
-        return <Messages setActiveComponent={setActiveComponent} />;
+        return (
+          <Messages
+            messages={message}
+            setActiveComponent={setActiveComponent}
+          />
+        );
       case 'Notifications':
         return <Notifications setActiveComponent={setActiveComponent} />;
       case 'CalendarTab':
         return <CalendarTab setActiveComponent={setActiveComponent} />;
-
       default:
-        return <Bio />;
+        return <Bio employees={employee} />;
     }
   };
 
@@ -64,7 +116,10 @@ export default function Profile() {
         <div className="container-fluid py-3">
           <div className="row">
             <div className="col-lg-4 col-xxl-3">
-              <Sidebar setActiveComponent={setActiveComponent} />
+              <Sidebar
+                employees={employee}
+                setActiveComponent={setActiveComponent}
+              />
             </div>
             <div className="col-lg-8 col-xxl-9">{renderComponent()}</div>
           </div>

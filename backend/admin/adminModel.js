@@ -17,8 +17,7 @@ const timeOffRequestSchema = new mongoose.Schema({
 const adminSchema = new mongoose.Schema(
   {
     googleId: String,
-    firstName: String,
-    LastName: String,
+    name: String,
     image: String,
     email: String,
     role: String,
@@ -28,9 +27,9 @@ const adminSchema = new mongoose.Schema(
     state: String,
     empId: String,
     socialSec: String,
-    hireDate: Date,
-    endDate: Date,
-    wage: Number,
+    hireDate: String,
+    endDate: String,
+    wage: String,
     emergencyContact1: String,
     emergencyContact2: String,
     timeOffRequests: [timeOffRequestSchema],

@@ -102,13 +102,14 @@ const updateAdminById = async (req, res) => {
   try {
     const { id } = req.params;
     console.log('Update Request Body:', req.body);
+
     const updatedAdmin = await Admin.findByIdAndUpdate(id, req.body, {
       new: true,
+      runValidators: true,
     });
 
     if (!updatedAdmin) {
-      res.status(404).json({ message: 'Admin not found' });
-      return;
+      return res.status(404).json({ message: 'Admin not found' });
     }
 
     console.log('Updated Admin:', updatedAdmin);

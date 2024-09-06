@@ -16,7 +16,6 @@ messageRoutes.post('/', createMessage);
 messageRoutes.get('/', getAllMessages);
 // Get all messages for user
 messageRoutes.get('/:userId', getMessagesForUser);
-
 // Update/achive or mark as read
 messageRoutes.put('/:id', updateMessageStatus);
 

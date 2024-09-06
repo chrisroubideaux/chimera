@@ -34,14 +34,11 @@ export default function Sidebar({ setActiveComponent, admins }) {
                 title="Verified user"
               />
             </div>
-
             <h5 className="card-title mb-0">{admins.firstName}</h5>
             <p className="card-text small">{admins.email}</p>
-
             <span className="text-cap">
               <h4>Account</h4>
             </span>
-
             <ul className=" nav nav-sm nav-tabs nav-vertical mb-4">
               <li className="nav-item">
                 <a

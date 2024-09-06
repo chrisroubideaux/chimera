@@ -11,7 +11,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: 'http://localhost:3001/auth/google/callback',
+      callbackURL: process.env.GOOGLE_CALLBACK_URL,
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
@@ -45,12 +45,12 @@ passport.use(
   )
 );
 passport.serializeUser((admin, done) => {
-  done(null, admin._id); // Use _id here
+  done(null, admin._id);
 });
 
 passport.deserializeUser(async (_id, done) => {
   try {
-    const admin = await Admin.findById(_id); // Use _id here
+    const admin = await Admin.findById(_id);
     done(null, admin);
   } catch (err) {
     done(err, null);
