@@ -1,4 +1,3 @@
-// profile page
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
@@ -22,6 +21,8 @@ export default function Profile() {
   const { id } = router.query;
   const [employee, setEmployee] = useState([]);
   const [message, setMessage] = useState([]);
+  const [selectedRecipient, setSelectedRecipient] = useState(null);
+  //
 
   // employee
   useEffect(() => {
@@ -43,6 +44,31 @@ export default function Profile() {
   }, [id]);
 
   // messages
+  // Fetch message data
+  useEffect(() => {
+    if (id) {
+      const fetchMessageData = async () => {
+        try {
+          const response = await axios.get(
+            `http://localhost:3001/messages/${id}`
+          );
+          console.log('Message data:', response.data);
+          setMessage(response.data);
+
+          // Set the selected recipient based on the first message or some logic
+          if (response.data.length > 0) {
+            setSelectedRecipient(response.data[0].recipient);
+          }
+        } catch (error) {
+          console.error('Error fetching message data:', error);
+        }
+      };
+
+      fetchMessageData();
+    }
+  }, [id]);
+  {
+    /*
   useEffect(() => {
     if (id) {
       const fetchMessageData = async () => {
@@ -61,6 +87,8 @@ export default function Profile() {
     }
   }, [id]);
 
+*/
+  }
   const renderComponent = () => {
     switch (activeComponent) {
       case 'Form':
@@ -82,6 +110,10 @@ export default function Profile() {
           <Messages
             messages={message}
             setActiveComponent={setActiveComponent}
+            senderId={id}
+            recipientId={selectedRecipient?.id}
+            senderRole="user"
+            recipientRole={selectedRecipient?.role}
           />
         );
       case 'Notifications':
