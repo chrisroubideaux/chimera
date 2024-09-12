@@ -37,21 +37,6 @@ const messageSchema = new mongoose.Schema({
     ref: 'Message',
   },
 });
-// Virtual for sender's name
-messageSchema.virtual('senderName').get(function () {
-  return this.senderModel === 'Admin' ? this._senderName : this._senderName;
-});
-
-// Virtual for recipient's name
-messageSchema.virtual('recipientName').get(function () {
-  return this.recipientModel === 'Admin'
-    ? this._recipientName
-    : this._recipientName;
-});
-
-// Ensure virtuals are serialized
-messageSchema.set('toObject', { virtuals: true });
-messageSchema.set('toJSON', { virtuals: true });
 
 const Message = mongoose.model('Message', messageSchema);
 

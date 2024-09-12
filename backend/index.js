@@ -12,6 +12,7 @@ const passport = require('passport');
 const employeeRoutes = require('./employees/employees');
 const adminRoutes = require('./admin/admins');
 const messageRoutes = require('./messages/messages');
+const meetingRoutes = require('./meetings/meetings');
 const userRoutes = require('./users/userRoutes');
 const authRoutes = require('./routes/auth');
 const starterRoutes = require('./starters/starters');
@@ -108,6 +109,7 @@ app.use('/drinks', drinkRoutes);
 app.use('/dryGoods', dryGoodRoutes);
 app.use('/paperProducts', paperProductRoutes);
 app.use('/messages', messageRoutes);
+app.use('/meetings', meetingRoutes);
 app.use('/users', userRoutes);
 app.use('/auth', authRoutes);
 
