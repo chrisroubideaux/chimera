@@ -21,17 +21,24 @@ export default function Tab({ setActiveComponent }) {
               </ol>
             </nav>
           </div>
-          <div className="col-auto">
-            <div className="d-none d-lg-block">
-              <a
-                className="btn btn-soft-light btn-sm m-1"
-                href="#"
-                onClick={() => setActiveComponent('Hours')}
-              >
-                Hours
-                <i className=" m-1 fa-solid fa-hourglass-end fs-sm"></i>
-              </a>
 
+          <div className="col-auto">
+            <ul className="nav">
+              <li className="nav-item me-3">
+                <div className="gap-2 justify-content-center">
+                  <span className="me-1 badge bg-primary-subtle border border-primary-subtle text-primary-emphasis rounded-pill">
+                    Payday
+                  </span>
+                  <span className="me-1 badge bg-success-subtle border border-success-subtle text-success-emphasis rounded-pill">
+                    Shifts
+                  </span>
+                  <span className="me-1 badge bg-success-subtle border border-success-subtle text-success-emphasis rounded-pill">
+                    Meetings
+                  </span>
+                </div>
+              </li>
+            </ul>
+            <div className="d-none d-lg-block">
               <a
                 className="btn btn-soft-light btn-sm m-1"
                 href="#"
@@ -39,6 +46,17 @@ export default function Tab({ setActiveComponent }) {
               >
                 Schedule
                 <i className="m-1 fa-solid fa-calendar-plus fs-sm"></i>
+              </a>
+              <a
+                className="btn btn-soft-light btn-sm m-1"
+                href="#"
+                onClick={() => setActiveComponent('Notifications')}
+              >
+                Notifications
+                <i className=" m-1 fa-solid fa-bell"></i>
+                <span className="badge bg-soft-dark text-grey rounded-pill nav-link-badge">
+                  1
+                </span>
               </a>
 
               <a

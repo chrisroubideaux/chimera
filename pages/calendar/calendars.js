@@ -13,8 +13,10 @@ import Badge from '@/components/calendar/Badge';
 export default function Calendars() {
   const [activeComponent, setActiveComponent] = useState('Calendars');
   const [admins, setAdmins] = useState([]);
+  const [meetings, setMeetings] = useState([]);
 
   useEffect(() => {
+    // Fetch admins
     axios
       .get('http://localhost:3001/admins')
       .then((response) => {
@@ -22,6 +24,16 @@ export default function Calendars() {
       })
       .catch((error) => {
         console.error('Error fetching admins:', error);
+      });
+
+    // Fetch meetings
+    axios
+      .get('http://localhost:3001/meetings')
+      .then((response) => {
+        setMeetings(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching meetings:', error);
       });
   }, []);
 
@@ -61,6 +73,7 @@ export default function Calendars() {
             setActiveComponent={setActiveComponent}
             key={admins.id}
             admins={admins}
+            meetings={meetings} // Pass meetings to Tab
           />
         ))}
 

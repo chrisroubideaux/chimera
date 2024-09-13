@@ -19,6 +19,7 @@ export default function Admin({}) {
   const [activeComponent, setActiveComponent] = useState('PersonalInfo');
   const [admin, setAdmin] = useState([]);
   const [message, setMessage] = useState([]);
+  const [meetings, setMeetings] = useState([]);
   const [selectedRecipient, setSelectedRecipient] = useState(null);
 
   useEffect(() => {
@@ -39,7 +40,7 @@ export default function Admin({}) {
       fetchAdminData();
     }
   }, [id]);
-  //
+
   // Fetch message data
   useEffect(() => {
     if (id) {
@@ -63,6 +64,20 @@ export default function Admin({}) {
       fetchMessageData();
     }
   }, [id]);
+  // Fetch meeting data
+
+  // Fetch meetings
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/meetings')
+      .then((response) => {
+        setMeetings(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching meetings:', error);
+      });
+  }, []);
+
   //
   const renderComponent = () => {
     console.log('Admin data for Bio:', admin);
@@ -74,8 +89,8 @@ export default function Admin({}) {
           <Messages
             messages={message}
             setActiveComponent={setActiveComponent}
-            senderId={id} // Ensure this ID is correctly set
-            recipientId={selectedRecipient?.id} // Ensure this ID is correctly set
+            senderId={id}
+            recipientId={selectedRecipient?.id}
             senderRole="Admin"
             recipientRole={selectedRecipient?.role}
           />
@@ -83,9 +98,19 @@ export default function Admin({}) {
       case 'Calendar':
         return <Calendar setActiveComponent={setActiveComponent} />;
       case 'Notifications':
-        return <Notifications setActiveComponent={setActiveComponent} />;
+        return (
+          <Notifications
+            meetings={meetings}
+            setActiveComponent={setActiveComponent}
+          />
+        );
       case 'Schedule':
-        return <Schedule setActiveComponent={setActiveComponent} />;
+        return (
+          <Schedule
+            meetings={meetings}
+            setActiveComponent={setActiveComponent}
+          />
+        );
       case 'TimeOff':
         return <TimeOff setActiveComponent={setActiveComponent} />;
       default:

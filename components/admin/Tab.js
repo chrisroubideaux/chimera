@@ -59,22 +59,6 @@ export default function Tab({ setActiveComponent }) {
                 <i className=" m-1 fa-solid fa-calendar-plus"></i>
               </Link>
             </div>
-            <button
-              className="navbar-toggler d-lg-none"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#sidebarNav"
-              aria-controls="sidebarNav"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span className="navbar-toggler-default">
-                <i className="fs-6 fa-solid fa-list"></i>
-              </span>
-              <span className="navbar-toggler-toggled">
-                <i className="fs-6 fa-solid fa-x"></i>
-              </span>
-            </button>
           </div>
         </div>
       </div>

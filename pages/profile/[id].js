@@ -21,6 +21,7 @@ export default function Profile() {
   const { id } = router.query;
   const [employee, setEmployee] = useState([]);
   const [message, setMessage] = useState([]);
+  const [meetings, setMeetings] = useState([]);
   const [selectedRecipient, setSelectedRecipient] = useState(null);
   //
 
@@ -89,6 +90,18 @@ export default function Profile() {
 
 */
   }
+  //
+  // Fetch meetings
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/meetings')
+      .then((response) => {
+        setMeetings(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching meetings:', error);
+      });
+  }, []);
   const renderComponent = () => {
     switch (activeComponent) {
       case 'Form':
@@ -117,7 +130,12 @@ export default function Profile() {
           />
         );
       case 'Notifications':
-        return <Notifications setActiveComponent={setActiveComponent} />;
+        return (
+          <Notifications
+            meetings={meetings}
+            setActiveComponent={setActiveComponent}
+          />
+        );
       case 'CalendarTab':
         return <CalendarTab setActiveComponent={setActiveComponent} />;
       default:
