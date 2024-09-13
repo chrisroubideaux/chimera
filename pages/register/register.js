@@ -8,7 +8,7 @@ import Link from 'next/link';
 const Register = () => {
   // Google registration function
   const handleGoogleRegister = () => {
-    const googleOAuthURL = 'http://localhost:3001/auth/google';
+    const googleOAuthURL = 'http://localhost:3001/auth/google/login';
 
     window.open(
       googleOAuthURL,

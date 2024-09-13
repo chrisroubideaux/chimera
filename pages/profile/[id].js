@@ -44,7 +44,7 @@ export default function Profile() {
   }, [id]);
 
   // messages
-  // Fetch message data
+
   useEffect(() => {
     if (id) {
       const fetchMessageData = async () => {
@@ -94,7 +94,7 @@ export default function Profile() {
       case 'Form':
         return <Form />;
       case 'Calendar':
-        return <Calendar />;
+        return <Calendar setActiveComponent={setActiveComponent} />;
       case 'Schedule':
         return <Schedule setActiveComponent={setActiveComponent} />;
       case 'Hours':
@@ -112,7 +112,7 @@ export default function Profile() {
             setActiveComponent={setActiveComponent}
             senderId={id}
             recipientId={selectedRecipient?.id}
-            senderRole="user"
+            senderRole="employee"
             recipientRole={selectedRecipient?.role}
           />
         );

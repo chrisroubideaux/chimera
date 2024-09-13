@@ -34,20 +34,16 @@ export default function Sidebar({ setActiveComponent, admins }) {
                 title="Verified user"
               />
             </div>
-            <h5 className="card-title mb-0">{admins.firstName}</h5>
+            <h4 className="card-title mb-0">{admins.name}</h4>
             <p className="card-text small">{admins.email}</p>
             <span className="text-cap">
               <h4>Account</h4>
             </span>
             <ul className=" nav nav-sm nav-tabs nav-vertical mb-4">
               <li className="nav-item">
-                <a
-                  className="nav-link"
-                  href="#"
-                  onClick={() => setActiveComponent('Bio')}
-                >
-                  <i className="fs-6 fa-solid fa-person"></i> Bio
-                </a>
+                <Link className="nav-link" href={`/admins/${admins._id}`}>
+                  <i className=" me-1 fs-6 fa-solid fa-person"></i>Bio
+                </Link>
               </li>
               <li className="nav-item">
                 <Link className="nav-link" href="/sales/sales">

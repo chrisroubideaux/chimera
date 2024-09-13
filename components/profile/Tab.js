@@ -51,7 +51,8 @@ export default function Tab({ setActiveComponent }) {
               </a>
               <Link
                 className="btn btn-soft-light btn-sm m-1"
-                href="/calendar/calendars/"
+                href="#"
+                onClick={() => setActiveComponent('Calendar')}
               >
                 Calendar
                 <i className=" m-1 fa-solid fa-calendar-plus"></i>

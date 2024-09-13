@@ -1,11 +1,12 @@
 // Messages component
+// Messages component
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 
 const Messages = () => {
   const [newMessage, setNewMessage] = useState('');
-  const [sender, setSender] = useState('66d920a7274f0ef93f9dc3bd'); // Admin sender ID
-  const [recipient, setRecipient] = useState('66d7d2c380470662dbca3239'); // Employee recipient ID
+  const [sender, setSender] = useState([]); // Admin sender ID
+  const [recipient, setRecipient] = useState([]); // Employee recipient ID
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
@@ -46,8 +47,8 @@ const Messages = () => {
     }
 
     const messageData = {
-      sender: sender, // Admin's ID sending the message
-      recipient: recipient, // Employee's ID receiving the message
+      sender: '66d920a7274f0ef93f9dc3bd', // Admin's ID sending the message
+      recipient: '66d7d2c380470662dbca3239', // Employee's ID receiving the message
       senderModel: 'Admin',
       recipientModel: 'Employee',
       messageContent: newMessage,
