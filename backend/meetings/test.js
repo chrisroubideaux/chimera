@@ -1,4 +1,3 @@
-// meeting model.js
 const mongoose = require('mongoose');
 
 const meetingSchema = new mongoose.Schema({
@@ -28,7 +27,7 @@ const meetingSchema = new mongoose.Schema({
     required: true,
   },
   time: {
-    type: String,
+    type: String, // Could be stored as "HH:mm"
     required: true,
   },
   isVideo: {
@@ -61,8 +60,9 @@ const meetingSchema = new mongoose.Schema({
     type: String,
   },
   days: {
-    type: [String],
+    type: String,
   },
+
   timestamp: {
     type: Date,
     default: Date.now,

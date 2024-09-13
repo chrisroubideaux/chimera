@@ -27,9 +27,12 @@ const createMeeting = async (req, res) => {
       days,
     } = req.body;
 
+    console.log('Request Body:', req.body);
+
     // Validate sender
     const SenderModel = senderModel === 'Admin' ? Admin : Employee;
     const senderDoc = await SenderModel.findById(senderId);
+    console.log('SenderDoc:', senderDoc);
     if (!senderDoc) {
       return res.status(404).json({ error: 'Sender not found' });
     }
@@ -39,6 +42,7 @@ const createMeeting = async (req, res) => {
     const recipientDocs = await RecipientModel.find({
       _id: { $in: recipientIds },
     });
+    console.log('RecipientDocs:', recipientDocs);
     if (recipientDocs.length !== recipientIds.length) {
       return res
         .status(404)
