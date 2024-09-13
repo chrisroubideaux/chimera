@@ -137,7 +137,7 @@ const deleteMeeting = async (req, res) => {
   try {
     const meetingId = req.params.id;
 
-    const deletedMeeting = await Meeting.findByIdAndRemove(meetingId);
+    const deletedMeeting = await Meeting.findByIdAndDelete(meetingId); // Use findByIdAndDelete instead
 
     if (!deletedMeeting) {
       return res.status(404).json({ error: 'Meeting not found' });

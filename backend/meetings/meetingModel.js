@@ -23,14 +23,7 @@ const meetingSchema = new mongoose.Schema({
     required: true,
     enum: ['Admin', 'Employee'],
   },
-  date: {
-    type: Date,
-    required: true,
-  },
-  time: {
-    type: String,
-    required: true,
-  },
+
   isVideo: {
     type: Boolean,
     default: false,
