@@ -26,12 +26,26 @@ import ManagersPayroll from '@/components/payroll/Payroll';
 export default function Team() {
   const [activeComponent, setActiveComponent] = useState('Team');
   const [admins, setAdmins] = useState([]);
+  const [employees, setEmployees] = useState([]);
 
+  // useEffect
   useEffect(() => {
     axios
       .get('http://localhost:3001/admins')
       .then((response) => {
         setAdmins(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching admins:', error);
+      });
+  }, []);
+
+  // useEffect
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/employees')
+      .then((response) => {
+        setEmployees(response.data);
       })
       .catch((error) => {
         console.error('Error fetching admins:', error);
@@ -59,8 +73,17 @@ export default function Team() {
       case 'Form':
         return <Form setActiveComponent={setActiveComponent} />;
       default:
-        return <Employees setActiveComponent={setActiveComponent} />;
-
+        return (
+          <>
+            {employees.map((employee) => (
+              <Employees
+                setActiveComponent={setActiveComponent}
+                key={employee.id}
+                employees={employee} // Use singular for the mapped item
+              />
+            ))}
+          </>
+        );
       // payroll
       case 'HostsPayroll':
         return <HostsPayroll setActiveComponent={setActiveComponent} />;

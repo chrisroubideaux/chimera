@@ -36,7 +36,7 @@ const Tab = ({ setActiveComponent, admins, meetings }) => {
                 Meetings
               </span>
               <span className="me-1 badge bg-warning-subtle border border-warning-subtle text-warning-emphasis rounded-pill">
-                Food Order
+                Orders
               </span>
               <span className="badge bg-info-subtle border border-info-subtle text-info-emphasis rounded-pill">
                 Truck

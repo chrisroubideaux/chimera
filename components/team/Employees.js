@@ -1,6 +1,6 @@
 // Employee component
-
-const Employees = ({ setActiveComponent }) => {
+import Link from 'next/link';
+const Employees = ({ setActiveComponent, employees }) => {
   return (
     <div>
       <div className="container-fluid p-0 mt-3">
@@ -64,25 +64,24 @@ const Employees = ({ setActiveComponent }) => {
                         />
                       </div>
                       <div className="mb-0">
-                        <h6>Name</h6>
+                        <h6>{employees.name}</h6>
                         <br />
                       </div>
                     </td>
-                    <td># xxxx</td>
-                    <td>xxx-xxx-xxxx</td>
-                    <td>Server</td>
-                    <td>7/12/23</td>
+                    <td>{employees.empId}</td>
+                    <td>{employees.phone}</td>
+                    <td>{employees.title}</td>
+                    <td>{employees.hireDate}</td>
                     <td>7/31/24</td>
                     <td>34 min ago</td>
 
                     <td className="text-end">
-                      <a
+                      <Link
                         className="btn btn-sm me-1"
-                        href="#"
-                        onClick={() => setActiveComponent('PayrollForm')}
+                        href={`/team/${employees._id}`}
                       >
                         View
-                      </a>
+                      </Link>
                     </td>
                   </tr>
                 </tbody>
