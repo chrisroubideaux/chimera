@@ -40,16 +40,6 @@ export default function Hours({ setActiveComponent }) {
                       >
                         <i className="social-icon fa-solid fa-calendar"></i>
                       </a>
-
-                      <a
-                        href="#!"
-                        className="icon-md me-2 px-2"
-                        data-bs-toggle="tooltip"
-                        data-bs-placement="top"
-                        title="Create new message"
-                      >
-                        <i className="social-icon fa-solid fa-square-pen"></i>
-                      </a>
                     </div>
                   </div>
                   <hr />

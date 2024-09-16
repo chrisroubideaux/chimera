@@ -34,24 +34,6 @@ export default function Schedule({ setActiveComponent }) {
                       </div>
                     </div>
                     <div className="d-flex align-items-center">
-                      <a
-                        href="#!"
-                        className="icon-md me-2 px-2"
-                        title="Request time off"
-                        onClick={() => setActiveComponent('TimeOff')}
-                      >
-                        <i className="social-icon fa-solid fa-book"></i>
-                      </a>
-
-                      <a
-                        href="#!"
-                        className="icon-md me-2 px-2"
-                        data-bs-toggle="tooltip"
-                        data-bs-placement="top"
-                        title="Create new message"
-                      >
-                        <i className="social-icon fa-solid fa-square-pen"></i>
-                      </a>
                       <div className="dropdown">
                         <a
                           className="icon-md rounded-circle me-2 px-2"
@@ -70,38 +52,24 @@ export default function Schedule({ setActiveComponent }) {
                         >
                           <li>
                             <a className="dropdown-item" href="#">
-                              <i className="social-icon fs-6 fa-solid fa-check"></i>
-                              Mark as read
+                              <i className="social-icon fs-6 fa-solid fa-check me-1"></i>
+                              Modify
                             </a>
                           </li>
                           <li>
                             <a className="dropdown-item" href="#">
-                              <i className="social-icon fa-solid fa-microphone-slash fs-6"></i>
+                              <i className="social-icon fa-solid fa-microphone-slash fs-6 me-1"></i>
                               Mute
                             </a>
                           </li>
-                          <li>
-                            <Link
-                              className="dropdown-item"
-                              href="/messages/messages"
-                            >
-                              <i className="social-icon fs-6 fa-solid fa-user-check"></i>
-                              View all
-                            </Link>
-                          </li>
+
                           <li>
                             <Link className="dropdown-item" href="/">
-                              <i className="social-icon fs-6 fa-solid fa-trash"></i>
-                              Delete chat
+                              <i className="social-icon fs-6 fa-solid fa-trash me-1"></i>
+                              Delete
                             </Link>
                           </li>
                           <li className="dropdown-divider"></li>
-                          <li>
-                            <Link className="dropdown-item" href="/">
-                              <i className="social-icon fs-6 fa-solid fa-box-archive"></i>
-                              Archive chat
-                            </Link>
-                          </li>
                         </ul>
                       </div>
                     </div>

@@ -30,25 +30,8 @@ export default function Schedule({ setActiveComponent }) {
                         </h6>
                       </div>
                     </div>
-                    <div className="d-flex align-items-center">
-                      <a
-                        href="#!"
-                        className="icon-md me-2 px-2"
-                        title="Request time off"
-                        onClick={() => setActiveComponent('Form')}
-                      >
-                        <i className="social-icon fa-solid fa-book"></i>
-                      </a>
-                      <a
-                        href="#!"
-                        className="icon-md me-2 px-2"
-                        data-bs-toggle="tooltip"
-                        data-bs-placement="top"
-                        title="Calendar"
-                        onClick={() => setActiveComponent('Calendar')}
-                      >
-                        <i className="social-icon fa-solid fa-calendar"></i>
-                      </a>
+
+                    <div>
                       <a
                         href="#!"
                         className="icon-md me-2 px-2"

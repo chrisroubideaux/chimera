@@ -1,12 +1,12 @@
 // Team page
-// Employee page
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Head from 'next/head';
 import Navbar from '@/components/Nav/Navbar';
-import Tab from '@/components/team/Tab';
-import Sidebar from '@/components/admin/Sidebar';
-import Employees from '@/components/team/Employees';
+//import Tab from '@/components/team/Tab';
+//import Sidebar from '@/components/admin/Sidebar';
+//import Employees from '@/components/team/Employees';
+import Card from '@/components/team/Card';
 import Hosts from '@/components/team/Hosts';
 import Servers from '@/components/team/Servers';
 import Bar from '@/components/team/Bar';
@@ -14,32 +14,10 @@ import Dish from '@/components/team/Dish';
 import Kitchen from '@/components/team/Kitchen';
 import Managers from '@/components/team/Managers';
 import Form from '@/components/team/Form';
-// payroll imports
-import Payroll from '@/components/payroll/Payroll';
-import PayrollForm from '@/components/payroll/PayrollForm';
-import HostsPayroll from '@/components/payroll/HostsPayroll';
-import ServersPayroll from '@/components/payroll/ServersPayroll';
-import BarPayroll from '@/components/payroll/BarPayroll';
-import DishPayroll from '@/components/payroll/DishPayroll';
-import KitchenPayroll from '@/components/payroll/KitchenPayroll';
-import ManagersPayroll from '@/components/payroll/Payroll';
 
 export default function Team() {
   const [activeComponent, setActiveComponent] = useState('Team');
-  const [admins, setAdmins] = useState([]);
   const [employees, setEmployees] = useState([]);
-
-  // useEffect
-  useEffect(() => {
-    axios
-      .get('http://localhost:3001/admins')
-      .then((response) => {
-        setAdmins(response.data);
-      })
-      .catch((error) => {
-        console.error('Error fetching admins:', error);
-      });
-  }, []);
 
   // useEffect
   useEffect(() => {
@@ -55,10 +33,6 @@ export default function Team() {
 
   const renderComponent = () => {
     switch (activeComponent) {
-      case 'Payroll':
-        return <Payroll setActiveComponent={setActiveComponent} />;
-      case 'PayrollForm':
-        return <PayrollForm setActiveComponent={setActiveComponent} />;
       case 'Hosts':
         return <Hosts setActiveComponent={setActiveComponent} />;
       case 'Servers':
@@ -77,27 +51,14 @@ export default function Team() {
         return (
           <>
             {employees.map((employee) => (
-              <Employees
+              <Card
                 setActiveComponent={setActiveComponent}
                 key={employee.id}
-                employees={employee} // Use singular for the mapped item
+                employees={employee}
               />
             ))}
           </>
         );
-      // payroll
-      case 'HostsPayroll':
-        return <HostsPayroll setActiveComponent={setActiveComponent} />;
-      case 'ServersPayroll':
-        return <ServersPayroll setActiveComponent={setActiveComponent} />;
-      case 'BarPayroll':
-        return <BarPayroll setActiveComponent={setActiveComponent} />;
-      case 'DishPayroll':
-        return <DishPayroll setActiveComponent={setActiveComponent} />;
-      case 'KitchenPayroll':
-        return <KitchenPayroll setActiveComponent={setActiveComponent} />;
-      case 'ManagersPayroll':
-        return <ManagersPayroll setActiveComponent={setActiveComponent} />;
     }
   };
 
@@ -119,26 +80,9 @@ export default function Team() {
       </Head>
       <div className="layout h-100">
         <Navbar />
-        {admins.map((admins) => (
-          <Tab
-            setActiveComponent={setActiveComponent}
-            key={admins.id}
-            admins={admins}
-          />
-        ))}
+
         <div className="container-fluid ">
-          <div className="row">
-            <div className="col-lg-4 col-xxl-3">
-              {admins.map((admins) => (
-                <Sidebar
-                  setActiveComponent={setActiveComponent}
-                  key={admins.id}
-                  admins={admins}
-                />
-              ))}
-            </div>
-            <div className="col-lg-8 col-xxl-9">{renderComponent()}</div>
-          </div>
+          <div className="row row-cols-1 row-cols-1">{renderComponent()}</div>
         </div>
       </div>
     </>

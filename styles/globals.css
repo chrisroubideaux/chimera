@@ -54,6 +54,10 @@ h5 {
   transform: scale(1.07);
   background-color:  #b1bcff;
 }
+      
+.card-link {
+  text-decoration: none;
+}
 
 /* accordion */
 
