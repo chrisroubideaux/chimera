@@ -7,12 +7,12 @@ import Navbar from '@/components/Nav/Navbar';
 import Tab from '@/components/team/Tab';
 //import Sidebar from '@/components/admin/Sidebar';
 import Employees from '@/components/team/Employees';
-import Hosts from '@/components/team/Hosts';
-import Servers from '@/components/team/Servers';
-import Bar from '@/components/team/Bar';
-import Dish from '@/components/team/Dish';
-import Kitchen from '@/components/team/Kitchen';
-import Managers from '@/components/team/Managers';
+//import Hosts from '@/components/team/Hosts';
+//import Servers from '@/components/team/Servers';
+//import Bar from '@/components/team/Bar';
+//import Dish from '@/components/team/Dish';
+//import Kitchen from '@/components/team/Kitchen';
+//import Managers from '@/components/team/Managers';
 
 export default function Team() {
   const router = useRouter();

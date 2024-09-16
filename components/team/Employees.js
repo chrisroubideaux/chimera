@@ -74,14 +74,14 @@ const Employees = ({ setActiveComponent, employees }) => {
                     <td>{employees.hireDate}</td>
                     <td>7/31/24</td>
                     <td>34 min ago</td>
-
                     <td className="text-end">
-                      <Link
+                      <a
                         className="btn btn-sm me-1"
-                        href={`/team/${employees._id}`}
+                        href="#"
+                        onClick={() => setActiveComponent('PayrollForm')}
                       >
                         View
-                      </Link>
+                      </a>
                     </td>
                   </tr>
                 </tbody>

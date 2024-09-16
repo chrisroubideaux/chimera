@@ -66,6 +66,11 @@ export default function Sidebar({ setActiveComponent, admins }) {
                 </Link>
               </li>
               <li className="nav-item">
+                <Link className="nav-link" href="/payroll/Payroll">
+                  <i className=" fs-6 fa-solid fa-money-bill"></i> Payroll
+                </Link>
+              </li>
+              <li className="nav-item">
                 <Link className="nav-link" href="/team/Team">
                   <i className="fs-6 fa-solid fa-users"></i> Team
                 </Link>

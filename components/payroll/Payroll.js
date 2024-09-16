@@ -1,4 +1,5 @@
 // Payroll component
+
 const Payroll = ({ setActiveComponent }) => {
   return (
     <div>
