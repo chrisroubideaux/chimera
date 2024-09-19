@@ -13,7 +13,7 @@ export default function Card({ employees }) {
                 src={employees.image}
                 width={120}
                 height={120}
-                className="avatar mx-3 my-3"
+                className="media mx-3 my-3"
                 alt="..."
               />
             </div>
@@ -38,7 +38,6 @@ export default function Card({ employees }) {
                       {employees.phone}
                     </h6>
                   </span>
-
                   <span className="d-inline-block me-2">
                     <h6 className=" fs-sm fw-normal">
                       <i className="fs-6 social-icons fa-solid fa-briefcase me-1"></i>
@@ -46,7 +45,10 @@ export default function Card({ employees }) {
                     </h6>
                   </span>
                   <span className="d-inline-block">
-                    <h6 className="fs-sm fw-normal">socials</h6>
+                    <h6 className=" fs-sm fw-normal">
+                      <i className="fs-6 social-icons fa-solid fa-briefcase me-1"></i>
+                      Title: {employees.title}
+                    </h6>
                   </span>
                 </div>
               </div>

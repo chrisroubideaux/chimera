@@ -20,6 +20,7 @@ const employeeSchema = new mongoose.Schema(
     email: String,
     role: String,
     title: String,
+    experience: String,
     dept: String,
     phone: String,
     address: String,

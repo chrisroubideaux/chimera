@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Head from 'next/head';
 import Navbar from '@/components/Nav/Navbar';
-//import Tab from '@/components/team/Tab';
+import Nav from '@/components/team/Nav';
 //import Sidebar from '@/components/admin/Sidebar';
 //import Employees from '@/components/team/Employees';
 import Card from '@/components/team/Card';
@@ -82,6 +82,7 @@ export default function Team() {
         <Navbar />
 
         <div className="container-fluid ">
+          <Nav />
           <div className="row row-cols-1 row-cols-1">{renderComponent()}</div>
         </div>
       </div>

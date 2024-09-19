@@ -1,5 +1,6 @@
 // Sidebar component
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Sidebar({ setActiveComponent, employees }) {
   return (
@@ -8,14 +9,11 @@ export default function Sidebar({ setActiveComponent, employees }) {
         <div className="card-body">
           <div className="d-none d-lg-block mb-5">
             <div className="avatar avatar-xxl avatar-circle mb-3">
-              <img
-                className="avatar"
-                src="./assets/img/160x160/img9.jpg"
-                alt=""
-              />
-              <img
-                className="avatar-status avatar-lg-status"
-                src="./assets/svg/illustrations/top-vendor.svg"
+              <Image
+                className="small-avatar"
+                src={employees.image}
+                width={60}
+                height={60}
                 alt=""
                 data-bs-toggle="tooltip"
                 data-bs-placement="top"
