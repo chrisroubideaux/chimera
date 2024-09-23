@@ -33,7 +33,7 @@ export default function Home() {
                   <div className="row align-items-center py-lg-8">
                     <div className="col-md-6 col-12">
                       <p className="">
-                        Chimera is a cutting-edge application designed to
+                        Chimera AI is a cutting-edge application designed to
                         streamline business operations by tracking sales and
                         automating inventory management. By leveraging advanced
                         AI techniques such as machine learning and deep
@@ -46,7 +46,7 @@ export default function Home() {
               </div>
               <div className="mb-7">
                 <div className="mb-3">
-                  <Link href="/dashboard/dashboard/" className="btn btn-md me-2">
+                  <Link href="/menu/menu" className="btn btn-md me-2">
                     Try for free
                   </Link>
                   <button
@@ -81,7 +81,7 @@ export default function Home() {
                         </div>
                         <div className="modal-body">
                           <p className="">
-                            Chimera is a cutting-edge application designed to
+                            Chimera AI is a cutting-edge application designed to
                             streamline business operations by tracking sales and
                             automating inventory management. By leveraging
                             advanced AI techniques such as machine learning and
@@ -99,7 +99,7 @@ export default function Home() {
                           </p>
                         </div>
                         <div className="modal-footer">
-                          <Link href="/dashboard/dashboard/" className="btn btn-md">
+                          <Link href="/menu" className="btn btn-md">
                             View Demo
                           </Link>
                         </div>

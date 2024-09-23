@@ -50,7 +50,7 @@ const Login = () => {
       <div className="text-center py-5 mt-5">
         <Link href="/" className="nav-item"></Link>
         <Link className="nav-link" href="/">
-          Back to Dashboard
+          Back to Menu
         </Link>
         <h1 className="fw-normal">Login</h1>
 

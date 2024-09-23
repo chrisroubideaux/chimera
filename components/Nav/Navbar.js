@@ -74,17 +74,10 @@ export default function Navbar() {
                     Home
                   </Link>
                 </li>
-
                 <li className="nav-item d-flex align-items-center">
-                  <i className="social-icons fs-5 fa-solid fa-calendar-days me-3"></i>
-                  <Link className="nav-link" href="/calendar/calendars/">
-                    Calendar
-                  </Link>
-                </li>
-                <li className="nav-item d-flex align-items-center">
-                  <i className="social-icons fs-5 fa-solid fa-message me-3"></i>
-                  <Link className="nav-link" href="/messages/messages/">
-                    Messages
+                  <i className="social-icons fs-5 fa-solid fa-folder-tree me-3"></i>
+                  <Link className="nav-link" href="/menu/menu">
+                    Menu
                   </Link>
                 </li>
                 <li className="nav-item d-flex align-items-center">
@@ -93,17 +86,22 @@ export default function Navbar() {
                     Calculator
                   </Link>
                 </li>
-
                 <li className="nav-item d-flex align-items-center">
-                  <i className="social-icons fs-5 fa-solid fa-user me-3"></i>
-                  <Link className="nav-link" href="/login/login/">
-                    Login
+                  <i className="social-icons fs-5 fa-solid fa-globe me-3"></i>
+                  <Link className="nav-link" href="/about/about/">
+                    About
                   </Link>
                 </li>
                 <li className="nav-item d-flex align-items-center">
-                  <i className="social-icons fs-5 fa-solid fa-envelope me-3"></i>
-                  <Link className="nav-link" href="/">
-                    Email
+                  <i className="social-icons fs-5 fa-solid fa-person-walking me-3"></i>
+                  <Link className="nav-link" href="/register/Register">
+                    Register
+                  </Link>
+                </li>
+                <li className="nav-item d-flex align-items-center">
+                  <i className="social-icons fa-solid fa-person-walking-arrow-loop-left fs-5 me-3"></i>
+                  <Link className="nav-link" href="/login/login/">
+                    Login
                   </Link>
                 </li>
               </ul>
