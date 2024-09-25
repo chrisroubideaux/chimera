@@ -66,6 +66,39 @@ export default function Messages({ setActiveComponent }) {
     }
   };
 
+  // Handle other actions (mark as read, mute, delete, archive)
+  const handleMarkAsRead = async () => {
+    try {
+      await axios.post('http://localhost:3001/messages/markAsRead');
+    } catch (error) {
+      console.error('Error marking messages as read:', error);
+    }
+  };
+
+  const handleMute = async () => {
+    try {
+      await axios.post('http://localhost:3001/messages/mute');
+    } catch (error) {
+      console.error('Error muting chat:', error);
+    }
+  };
+
+  const handleDeleteChat = async () => {
+    try {
+      await axios.delete('http://localhost:3001/messages');
+      setMessages([]);
+    } catch (error) {
+      console.error('Error deleting chat:', error);
+    }
+  };
+
+  const handleArchiveChat = async () => {
+    try {
+      await axios.post('http://localhost:3001/messages/archive');
+    } catch (error) {
+      console.error('Error archiving chat:', error);
+    }
+  };
   return (
     <div className="mt-3">
       <div className="chat-container ">
@@ -142,33 +175,45 @@ export default function Messages({ setActiveComponent }) {
                         aria-labelledby="chatcoversationDropdown"
                       >
                         <li>
-                          <a className="dropdown-item" href="#">
+                          <a
+                            className="dropdown-item"
+                            href="#"
+                            onClick={handleMarkAsRead}
+                          >
+                            <i className=" fs-6 social-icon fa-solid fa-check me-2"></i>
                             Mark as read
                           </a>
                         </li>
                         <li>
-                          <a className="dropdown-item" href="#">
+                          <a
+                            className="dropdown-item"
+                            href="#"
+                            onClick={handleMute}
+                          >
+                            <i className=" fs-6 social-icon fa-solid fa-microphone-slash me-2"></i>
                             Mute
                           </a>
                         </li>
                         <li>
                           <Link
                             className="dropdown-item"
-                            href="/messages/messages"
+                            href="/"
+                            onClick={handleDeleteChat}
                           >
-                            View all
-                          </Link>
-                        </li>
-                        <li>
-                          <Link className="dropdown-item" href="/">
+                            <i className="fs-6 social-icon fa-solid fa-trash me-2"></i>
                             Delete chat
                           </Link>
                         </li>
                         <li className="dropdown-divider"></li>
                         <li>
-                          <Link className="dropdown-item" href="/">
+                          <a
+                            className="dropdown-item"
+                            href="#"
+                            onClick={handleArchiveChat}
+                          >
+                            <i className="fs-6 social-icon fa-solid fa-box-archive me-2"></i>
                             Archive chat
-                          </Link>
+                          </a>
                         </li>
                       </ul>
                     </div>

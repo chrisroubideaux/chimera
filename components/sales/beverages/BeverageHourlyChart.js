@@ -76,7 +76,7 @@ const labels = [
 // Function to generate hourly sales data in the range of 1k to 3k
 const generateHourlySalesData = (min, max, currentHour) => {
   return Array.from({ length: labels.length }, (_, index) => {
-    if (index > currentHour) return 0; // No actual sales for future hours
+    if (index > currentHour) return 0;
     const baseSales = faker.datatype.float({ min, max, precision: 0.1 });
     return (baseSales / 1000).toFixed(1);
   });
@@ -85,7 +85,7 @@ const generateHourlySalesData = (min, max, currentHour) => {
 // Function to generate sales data based on current day
 const generateSalesData = (currentHour) => {
   const now = new Date();
-  const dayOfWeek = now.getDay(); // 0 (Sunday) to 6 (Saturday)
+  const dayOfWeek = now.getDay();
 
   // If today is Sunday (dayOfWeek === 0), no sales data
   if (dayOfWeek === 0) {
@@ -112,11 +112,11 @@ export default function BeverageHourlyChart({ setActiveComponent }) {
 
   useEffect(() => {
     const now = new Date();
-    const formattedDate = format(now, 'MMMM dd, yyyy');
+    const formattedDate = format(now, 'MM/dd/yyyy');
     const formattedTime = format(now, 'h:mm a');
     setCurrentDateTime(`${formattedDate}, ${formattedTime}`);
 
-    const currentHour = now.getHours() - 11; // Calculate current hour in the range of 0 to 10
+    const currentHour = now.getHours() - 11; // Calculate current hour
 
     // Ensure current hour is within the chart's hour range
     if (currentHour < 0 || currentHour > 10) return;

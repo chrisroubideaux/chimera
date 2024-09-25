@@ -82,7 +82,7 @@ export default function StarterMonthlyChart({ setActiveComponent }) {
     const months = eachMonthOfInterval({
       start: new Date(currentDate.getFullYear(), currentDate.getMonth() - 7, 1),
       end: currentDate,
-    }).map((date) => format(date, 'MMMM yyyy'));
+    }).map((date) => format(date, 'MMMM'));
 
     const averageMonthlySales = 35400;
 
@@ -155,6 +155,7 @@ export default function StarterMonthlyChart({ setActiveComponent }) {
 
 {
   /*
+import { useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -213,7 +214,7 @@ const generateMonthlySalesData = (averageSales, months) => {
     const daysInMonth = getDaysInMonth(
       new Date(
         new Date().getFullYear(),
-        new Date().getMonth() - months.length + index
+        new Date().getMonth() - months.length + index + 1
       )
     );
     const daysElapsed = isCurrentMonth ? getDate(new Date()) : daysInMonth;
@@ -224,50 +225,66 @@ const generateMonthlySalesData = (averageSales, months) => {
   });
 };
 
-// Generate labels for the last 8 months
-const months = eachMonthOfInterval({
-  start: new Date(new Date().getFullYear(), new Date().getMonth() - 7, 1),
-  end: new Date(),
-}).map((date) => format(date, 'MMMM yyyy'));
-
-// Define average monthly sales
-const averageMonthlySales = 35400;
-
-// Generate sales data using faker
-const projectedSalesData = generateMonthlySalesData(
-  averageMonthlySales,
-  months
-);
-const actualSalesData = generateMonthlySalesData(averageMonthlySales, months);
-
-// Get current date in MM/dd/yyyy format
-const currentDate = format(new Date(), 'MM/dd/yyyy');
-
-const chartData = {
-  labels: months,
-  datasets: [
-    {
-      label: 'Projected Sales',
-      data: projectedSalesData,
-      borderColor: 'rgb(126, 142, 241)',
-      backgroundColor: 'rgb(177, 188, 255)',
-    },
-    {
-      label: 'Actual Sales',
-      data: actualSalesData,
-      borderColor: 'rgb(53, 162, 235)',
-      backgroundColor: 'rgba(53, 162, 235, 0.5)',
-    },
-    {
-      label: 'Average Sales',
-      data: new Array(months.length).fill(averageMonthlySales),
-      borderColor: 'rgb(255, 205, 86)',
-      backgroundColor: 'rgba(255, 205, 86, 0.5)',
-    },
-  ],
-};
-
 export default function StarterMonthlyChart({ setActiveComponent }) {
+  const [chartData, setChartData] = useState({
+    labels: [],
+    projectedSalesData: [],
+    actualSalesData: [],
+    averageSales: [],
+  });
+
+  useEffect(() => {
+    const currentDate = new Date();
+    const months = eachMonthOfInterval({
+      start: new Date(currentDate.getFullYear(), currentDate.getMonth() - 7, 1),
+      end: currentDate,
+    }).map((date) => format(date, 'MMMM yyyy'));
+
+    const averageMonthlySales = 35400;
+
+    const projectedSalesData = generateMonthlySalesData(
+      averageMonthlySales,
+      months
+    );
+    const actualSalesData = generateMonthlySalesData(
+      averageMonthlySales,
+      months
+    );
+
+    setChartData({
+      labels: months,
+      projectedSalesData,
+      actualSalesData,
+      averageSales: new Array(months.length).fill(averageMonthlySales),
+    });
+  }, []);
+
+  const data = {
+    labels: chartData.labels,
+    datasets: [
+      {
+        label: 'Projected Sales',
+        data: chartData.projectedSalesData,
+        borderColor: 'rgb(126, 142, 241)',
+        backgroundColor: 'rgb(177, 188, 255)',
+      },
+      {
+        label: 'Actual Sales',
+        data: chartData.actualSalesData,
+        borderColor: 'rgb(53, 162, 235)',
+        backgroundColor: 'rgba(53, 162, 235, 0.5)',
+      },
+      {
+        label: 'Average Sales',
+        data: chartData.averageSales,
+        borderColor: 'rgb(255, 205, 86)',
+        backgroundColor: 'rgba(255, 205, 86, 0.5)',
+      },
+    ],
+  };
+
+  const currentDate = format(new Date(), 'MM/dd/yyyy');
+
   return (
     <div className="container-fluid">
       <div className="card">
@@ -285,12 +302,14 @@ export default function StarterMonthlyChart({ setActiveComponent }) {
               </div>
             </div>
           </div>
-          <Bar className="" options={options} data={chartData} />
+          <Bar className="" options={options} data={data} />
         </div>
       </div>
     </div>
   );
 }
+
+
 
 */
 }

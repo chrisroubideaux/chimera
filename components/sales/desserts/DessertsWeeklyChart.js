@@ -42,7 +42,7 @@ const generateWeeklySalesData = (weeklyTotal, days = 7) => {
     const variance = faker.datatype.float({
       min: -dailyAverage * 0.2,
       max: dailyAverage * 0.2,
-    }); // Random variance +/- 20% of daily average
+    }); // Random avg +/- 20% of daily average
     return dailyAverage + variance;
   });
 };

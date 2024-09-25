@@ -51,7 +51,7 @@ export const options = {
 };
 
 const generateMonthlySales = () => {
-  const currentMonth = new Date().getMonth(); // 0-11 (January is 0)
+  const currentMonth = new Date().getMonth();
   const monthlyData = {
     labels: [
       'January',
@@ -115,7 +115,7 @@ export default function MonthlyChart({ setActiveComponent }) {
 
   useEffect(() => {
     const now = new Date();
-    const formattedDate = format(now, 'MMMM dd, yyyy');
+    const formattedDate = format(now, 'MM/dd/yyyy');
     setCurrentDate(formattedDate);
 
     const { labels, datasets } = generateMonthlySales();
@@ -133,7 +133,7 @@ export default function MonthlyChart({ setActiveComponent }) {
       const newNow = new Date();
       const newMonth = newNow.getMonth();
       if (newMonth !== currentMonth) {
-        const newFormattedDate = format(newNow, 'MMMM dd, yyyy');
+        const newFormattedDate = format(newNow, 'MM/dd/yyyy');
         setCurrentDate(newFormattedDate);
 
         const { labels, datasets } = generateMonthlySales();

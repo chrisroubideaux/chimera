@@ -53,7 +53,7 @@ export const options = {
         stepSize: 500,
       },
       min: 0,
-      max: 4500, // Updated max value to 4.5k
+      max: 4500, // Max value to 4.5k
     },
   },
 };
@@ -68,7 +68,7 @@ const labels = [
 ];
 
 const dailySalesRange = {
-  min: 2000, // Increase range for more variability
+  min: 2000, //
   max: 4000,
 };
 
@@ -116,7 +116,7 @@ export default function StarterDailyChart({ setActiveComponent }) {
     const formattedDate = format(now, 'EEEE, MM/dd/yyyy');
     setCurrentDate(formattedDate);
 
-    const currentDay = now.getDay() - 1; // getDay() returns 0 for Sunday, so subtract 1 to align with our labels
+    const currentDay = now.getDay() - 1; // Get current day
 
     const updateSalesData = () => {
       const { projectedSales, actualSales, averageSales } =

@@ -65,31 +65,46 @@ const dailySalesRange = {
 };
 
 // Function to generate daily sales data
-const generateDailySalesData = () => {
+const generateDailySalesData = (currentDayIndex) => {
   const projectedSales = [];
   const actualSales = [];
   const averageSales = [];
 
-  labels.forEach((day) => {
+  const now = new Date();
+  const currentHour = now.getHours();
+
+  labels.forEach((day, index) => {
     const projected = faker.datatype.number({
       min: dailySalesRange.min,
       max: dailySalesRange.max,
     });
 
-    let actual;
-    if (day === 'Saturday') {
-      actual = faker.datatype.number({
-        min: dailySalesRange.min * 0.7,
-        max: dailySalesRange.max * 0.7,
-      });
-    } else {
+    let actual = null;
+
+    // Generate actual sales for previous days
+    if (index < currentDayIndex) {
       actual = faker.datatype.number({
         min: dailySalesRange.min * 0.9,
         max: dailySalesRange.max * 1.1,
       });
     }
 
-    const average = (projected + actual) / 2;
+    // Generate sales for today only if within 11 AM - 9 PM
+    if (index === currentDayIndex) {
+      if (currentHour >= 11 && currentHour <= 21) {
+        actual = faker.datatype.number({
+          min: dailySalesRange.min * 0.9,
+          max: dailySalesRange.max * 1.1,
+        });
+      }
+    }
+
+    // No sales for future days
+    if (index > currentDayIndex) {
+      actual = null;
+    }
+
+    const average = (projected + (actual ?? 0)) / 2; // Use 0 for missing actual sales
 
     projectedSales.push(projected);
     actualSales.push(actual);
@@ -112,9 +127,11 @@ export default function DailyChart({ setActiveComponent }) {
     const formattedDate = format(now, 'EEEE, MM/dd/yyyy');
     setCurrentDate(formattedDate);
 
+    const currentDayIndex = now.getDay() - 1; // Get the index for current day (0 = Monday, 1 = Tuesday, etc.)
+
     const updateSalesData = () => {
       const { projectedSales, actualSales, averageSales } =
-        generateDailySalesData();
+        generateDailySalesData(currentDayIndex);
       setChartData({ projectedSales, actualSales, averageSales });
     };
 

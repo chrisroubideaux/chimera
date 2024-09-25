@@ -53,7 +53,7 @@ export const options = {
         stepSize: 500,
       },
       min: 0,
-      max: 4500, // Updated max value to 4.5k
+      max: 4500, // Max value to 4.5k
     },
   },
 };

@@ -45,7 +45,7 @@ export const options = {
           return `$${(value / 1000).toFixed(0)}k`;
         },
       },
-      suggestedMax: 30000, // Max value to $30k
+      suggestedMax: 30000, // Max value $30k
     },
   },
 };
@@ -63,7 +63,7 @@ const generateMonthlySalesData = (averageSales, months) => {
     const daysElapsed = isCurrentMonth ? getDate(new Date()) : daysInMonth;
     const averageDailySales = averageSales / daysInMonth;
     const dailySales = averageDailySales * daysElapsed;
-    const variance = faker.datatype.float({ min: -2000, max: 2000 }); // Reduced variance range
+    const variance = faker.datatype.float({ min: -2000, max: 2000 });
     return Math.max(0, dailySales + variance);
   });
 };
@@ -81,14 +81,14 @@ const calculateSlidingWindowAverage = (data, windowSize) => {
   return result;
 };
 
-// Generate labels for the last 8 months
+// Generate labels for the last 8 months (only the month name)
 const months = eachMonthOfInterval({
   start: new Date(new Date().getFullYear(), new Date().getMonth() - 7, 1),
   end: new Date(),
-}).map((date) => format(date, 'MMMM yyyy'));
+}).map((date) => format(date, 'MMMM'));
 
 // Define average monthly sales
-const averageMonthlySales = 20000; // Adjust this value based on your data
+const averageMonthlySales = 20000;
 
 // Generate sales data using faker
 const projectedSalesData = generateMonthlySalesData(
@@ -168,6 +168,7 @@ export default function DessertsMonthlyChart({ setActiveComponent }) {
 
 {
   /*
+// Monthly sales chart
 import { useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
 import {
@@ -232,7 +233,7 @@ const generateMonthlySalesData = (averageSales, months) => {
     const daysElapsed = isCurrentMonth ? getDate(new Date()) : daysInMonth;
     const averageDailySales = averageSales / daysInMonth;
     const dailySales = averageDailySales * daysElapsed;
-    const variance = faker.datatype.float({ min: -5000, max: 5000 });
+    const variance = faker.datatype.float({ min: -2000, max: 2000 }); // Reduced variance range
     return Math.max(0, dailySales + variance);
   });
 };

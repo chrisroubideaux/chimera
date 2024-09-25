@@ -1,5 +1,6 @@
 // test component
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -114,20 +115,17 @@ export default function Messages({ setActiveComponent }) {
             >
               <div className="d-sm-flex justify-content-between align-items-center">
                 <div className="d-flex mb-2 mb-sm-0">
-                  <div className="flex-shrink-0 avatar me-2">
-                    <img
-                      className="avatar-img rounded-circle"
-                      src="assets/images/avatar/10.jpg"
-                      alt="Avatar"
-                    />
-                  </div>
+                  <div className="flex-shrink-0 avatar me-2"></div>
                   <div className="d-block flex-grow-1">
                     <h6 className="mb-0 mt-1">
                       {messages.length > 0
                         ? messages[0].sender.name
                         : 'Recipient Name'}
                     </h6>
-                    <div className="small text-secondary"></div>
+                    <div className="small text-secondary">
+                      <i className="fa-solid fa-circle text-success me-1"></i>{' '}
+                      Online
+                    </div>
                   </div>
                 </div>
                 <div className="d-flex align-items-center">
@@ -149,35 +147,46 @@ export default function Messages({ setActiveComponent }) {
                     >
                       <i className="social-icon fa-solid fa-ellipsis-vertical"></i>
                     </a>
-                    <ul className="dropdown-menu dropdown-menu-end">
+                    <ul className="dropdown-menu dropdown-menu-end w-75">
                       <li>
-                        <a href="#" onClick={handleMarkAsRead}>
-                          <i className="social-icon fa-solid fa-check me-2"></i>
+                        <a
+                          className="dropdown-item"
+                          href="#"
+                          onClick={handleMarkAsRead}
+                        >
+                          <i className=" fs-6 social-icon fa-solid fa-check me-2"></i>
                           Mark as read
                         </a>
                       </li>
                       <li>
-                        <a href="#" onClick={handleMute}>
-                          <i className="social-icon fa-solid fa-microphone-slash me-2"></i>
+                        <a
+                          className="dropdown-item"
+                          href="#"
+                          onClick={handleMute}
+                        >
+                          <i className=" fs-6 social-icon fa-solid fa-microphone-slash me-2"></i>
                           Mute
                         </a>
                       </li>
+
                       <li>
-                        <Link href="/profile/profile">
-                          <i className="social-icon fa-solid fa-user-check me-2"></i>
-                          Profile
-                        </Link>
-                      </li>
-                      <li>
-                        <a href="#" onClick={handleDeleteChat}>
-                          <i className="social-icon fa-solid fa-trash me-2"></i>
+                        <a
+                          className="dropdown-item"
+                          href="#"
+                          onClick={handleDeleteChat}
+                        >
+                          <i className="fs-6 social-icon fa-solid fa-trash me-2"></i>
                           Delete chat
                         </a>
                       </li>
                       <li className="dropdown-divider"></li>
-                      <li>
-                        <a href="#" onClick={handleArchiveChat}>
-                          <i className="social-icon fa-solid fa-box-archive me-2"></i>
+                      <li className="">
+                        <a
+                          className="dropdown-item"
+                          href="#"
+                          onClick={handleArchiveChat}
+                        >
+                          <i className="fs-6 social-icon fa-solid fa-box-archive me-2"></i>
                           Archive chat
                         </a>
                       </li>
@@ -206,10 +215,12 @@ export default function Messages({ setActiveComponent }) {
                             message.sender._id === sender ? 'd-none' : ''
                           }`}
                         >
-                          <img
+                          <Image
                             className="avatar-img rounded-circle"
-                            src="assets/images/avatar/10.jpg"
+                            src="/"
                             alt="Avatar"
+                            width={20}
+                            height={10}
                           />
                         </div>
                         <div className="flex-grow-1">
@@ -227,7 +238,7 @@ export default function Messages({ setActiveComponent }) {
                               <div
                                 className={`bg-${
                                   message.sender._id === sender
-                                    ? 'primary text-white'
+                                    ? 'light text-dark'
                                     : 'light text-secondary'
                                 } p-2 px-3 rounded-2`}
                               >
