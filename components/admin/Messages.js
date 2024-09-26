@@ -7,8 +7,8 @@ import Link from 'next/link';
 
 export default function Messages({ setActiveComponent }) {
   const [newMessage, setNewMessage] = useState('');
-  const [sender, setSender] = useState('66d920a7274f0ef93f9dc3bd'); // Admin sender ID
-  const [recipient, setRecipient] = useState('66d7d2c380470662dbca3239'); // Employee recipient ID
+  const [sender, setSender] = useState(''); // Admin sender ID
+  const [recipient, setRecipient] = useState(''); // Employee recipient ID
   const [messages, setMessages] = useState([]);
 
   // Fetch messages on load
