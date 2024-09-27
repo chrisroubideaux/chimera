@@ -40,9 +40,22 @@ export default function Calendars() {
   const renderComponent = () => {
     switch (activeComponent) {
       case 'Week':
-        return <Week setActiveComponent={setActiveComponent} />;
+        return (
+          <Week
+            meetings={meetings}
+            key={meetings.id}
+            setActiveComponent={setActiveComponent}
+          />
+        );
       case 'Day':
-        return <Day setActiveComponent={setActiveComponent} />;
+        return (
+          <Day
+            meetings={meetings}
+            key={meetings.id}
+            setActiveComponent={setActiveComponent}
+          />
+        );
+
       case 'Calendar':
         return <Calendar setActiveComponent={setActiveComponent} />;
       default:
