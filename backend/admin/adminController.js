@@ -143,6 +143,7 @@ const deleteAdminById = async (req, res) => {
 // Get all pending time-off requests
 const getPendingRequests = async (req, res) => {
   try {
+    // Fetch pending requests for admins
     const admins = await Admin.find(
       { 'timeOffRequests.status': 'pending' },
       'name timeOffRequests'
@@ -156,7 +157,26 @@ const getPendingRequests = async (req, res) => {
           ...request.toObject(),
         }))
     );
-    res.status(200).json(pendingRequests);
+
+    // Fetch pending requests for employees
+    const employees = await Employee.find(
+      { 'timeOffRequests.status': 'pending' },
+      'name timeOffRequests'
+    );
+    const pendingEmployeeRequests = employees.flatMap((employee) =>
+      employee.timeOffRequests
+        .filter((request) => request.status === 'pending')
+        .map((request) => ({
+          employeeId: employee._id,
+          employeeName: employee.name,
+          ...request.toObject(),
+        }))
+    );
+
+    // Combine both results
+    const allPendingRequests = [...pendingRequests, ...pendingEmployeeRequests];
+
+    res.status(200).json(allPendingRequests);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -172,6 +192,7 @@ const updateRequestStatus = async (req, res) => {
   }
 
   try {
+    // Update request status in Admin
     const admin = await Admin.findOneAndUpdate(
       { _id: adminId, 'timeOffRequests._id': requestId },
       { $set: { 'timeOffRequests.$.status': status } },
@@ -182,6 +203,21 @@ const updateRequestStatus = async (req, res) => {
       return res
         .status(404)
         .json({ error: 'Admin or time-off request not found' });
+    }
+
+    // Update request status in Employee (assuming employeeId is stored in the request)
+    const employee = await employee.findOneAndUpdate(
+      { _id: admin.timeOffRequests.id, 'timeOffRequests._id': requestId },
+      { $set: { 'timeOffRequests.$.status': status } },
+      { new: true }
+    );
+
+    if (!employee) {
+      return res
+        .status(404)
+        .json({
+          error: 'Employee or time-off request not found in Employee model',
+        });
     }
 
     res.status(200).json({ message: 'Request status updated successfully' });

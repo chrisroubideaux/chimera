@@ -26,7 +26,6 @@ const meetingSchema = new mongoose.Schema({
 
   meetingType: {
     type: String,
-    default: null,
   },
   description: String,
   times: {

@@ -57,10 +57,12 @@ const Week = ({ setActiveComponent, meetings }) => {
 
           return (
             <div key={index}>
-              <strong>{timeRange}</strong>
-              <br />
+              {/*
+                <strong>{timeRange}</strong>
+                <br />
+                */}
               <span>
-                Attendees: <h6 className="fs-6"> {attendees} </h6>
+                <h6 className="fs-6">Attendies: {attendees} </h6>
               </span>
             </div>
           );

@@ -95,17 +95,21 @@ const deleteEmployeeById = async (req, res) => {
 };
 
 // Time off request functions
-
 const requestTimeOff = async (req, res) => {
   try {
     const employeeId = req.params.id;
-    const timeOffRequest = req.body;
+    const { startDate, endDate, reason } = req.body;
+
+    if (!startDate || !endDate || !reason) {
+      return res.status(400).json({ error: 'All fields are required' });
+    }
 
     const employee = await Employee.findById(employeeId);
     if (!employee) {
       return res.status(404).json({ error: 'Employee not found' });
     }
 
+    const timeOffRequest = { startDate, endDate, reason };
     employee.timeOffRequests.push(timeOffRequest);
     const updatedEmployee = await employee.save();
     res.status(201).json(updatedEmployee);

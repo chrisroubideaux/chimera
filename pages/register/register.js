@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import Head from 'next/head';
 import { useEffect } from 'react';
-import Typewriter from 'typewriter-effect/dist/core'; // Import typewriter core
+import Typewriter from 'typewriter-effect/dist/core';
 
 const Register = () => {
   useEffect(() => {

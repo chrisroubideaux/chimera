@@ -13,6 +13,7 @@ const employeeRoutes = require('./employees/employees');
 const adminRoutes = require('./admin/admins');
 const messageRoutes = require('./messages/messages');
 const meetingRoutes = require('./meetings/meetings');
+const timeOffRoutes = require('./timeoff/timeOff');
 const userRoutes = require('./users/userRoutes');
 const authRoutes = require('./routes/auth');
 const starterRoutes = require('./starters/starters');
@@ -110,6 +111,7 @@ app.use('/dryGoods', dryGoodRoutes);
 app.use('/paperProducts', paperProductRoutes);
 app.use('/messages', messageRoutes);
 app.use('/meetings', meetingRoutes);
+app.use('/timeOff', timeOffRoutes);
 app.use('/users', userRoutes);
 app.use('/auth', authRoutes);
 

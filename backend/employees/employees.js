@@ -10,6 +10,8 @@ const {
   deleteEmployeeById,
 } = require('./employeeController');
 
+const { requestTimeOff } = require('./employeeController');
+
 // Create a new employee
 employeeRoutes.post('/', createEmployee);
 
@@ -24,5 +26,7 @@ employeeRoutes.put('/:id', updateEmployeeById);
 
 // Delete an existing employee by ID
 employeeRoutes.delete('/:id', deleteEmployeeById);
+
+employeeRoutes.post('/:id/time-off', requestTimeOff);
 
 module.exports = employeeRoutes;

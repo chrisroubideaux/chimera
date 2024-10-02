@@ -23,6 +23,8 @@ export default function Profile() {
   const [message, setMessage] = useState([]);
   const [meetings, setMeetings] = useState([]);
   const [selectedRecipient, setSelectedRecipient] = useState(null);
+  const [timeOffRequests, setTimeOffRequests] = useState([]);
+
   //
 
   // employee
@@ -68,6 +70,21 @@ export default function Profile() {
       fetchMessageData();
     }
   }, [id]);
+
+  useEffect(() => {
+    const fetchTimeOffRequests = async () => {
+      try {
+        const response = await axios.get('http://localhost:3001/timeOff');
+        setTimeOffRequests(response.data);
+        console.log('Time-off data:', response.data);
+      } catch (error) {
+        console.error('Error fetching time-off data:', error);
+      }
+    };
+
+    fetchTimeOffRequests();
+  }, []);
+
   {
     /*
   useEffect(() => {
@@ -105,7 +122,7 @@ export default function Profile() {
   const renderComponent = () => {
     switch (activeComponent) {
       case 'Form':
-        return <Form />;
+        return <Form timeOffRequests={timeOffRequests} />;
       case 'Calendar':
         return <Calendar setActiveComponent={setActiveComponent} />;
       case 'Schedule':
