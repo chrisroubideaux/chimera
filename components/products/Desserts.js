@@ -14,7 +14,7 @@ const Desserts = ({ setActiveComponent, desserts }) => {
 
   // Function to generate daily sales data
   const generateDailySalesData = () => {
-    const averageDailySales = 500; // You can adjust this value based on your requirements
+    const averageDailySales = 500;
     return desserts.map((dessert) => ({
       ...dessert,
       sales: faker.datatype.float({

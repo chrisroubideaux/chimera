@@ -116,37 +116,3 @@ const InStore = ({ setActiveComponent }) => {
 };
 
 export default InStore;
-{
-  /*
-<a
-                    className="btn btn-sm me-2"
-                    href="#"
-                    onClick={() => setActiveComponent('HourlyChart')}
-                  >
-                    Hourly
-                  </a>
-
-                  <a
-                    className="btn btn-sm me-2"
-                    href="#"
-                    onClick={() => setActiveComponent('DailyChart')}
-                  >
-                    Daily
-                  </a>
-                  <a
-                    className="btn btn-sm me-2"
-                    href="#"
-                    onClick={() => setActiveComponent('WeeklyChart')}
-                  >
-                    Weekly
-                  </a>
-                  <a
-                    className="btn btn-sm me-2"
-                    href="#"
-                    onClick={() => setActiveComponent('MonthlyChart')}
-                  >
-                    Monthly
-                  </a>
-
-*/
-}

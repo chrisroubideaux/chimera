@@ -45,4 +45,12 @@
     border-radius: 30px;
     margin-bottom: 10px;
   }
-    
+  
+  .toast-body {
+    width: 100%;
+    background-color: black;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+    border-radius: 30px;
+}    

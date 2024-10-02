@@ -2,6 +2,8 @@
 const TimeOff = require('./TimeOffModel');
 
 // Create a new time-off request
+{
+  /*
 const createTimeOffRequest = async (req, res) => {
   try {
     const {
@@ -44,7 +46,85 @@ const createTimeOffRequest = async (req, res) => {
     });
 
     await timeOffRequest.save();
-    res.status(201).json(timeOffRequest);
+
+    // Return success message along with the created request
+    return res.status(201).json({
+      message: 'Time-off request submitted successfully',
+      timeOffRequest,
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+*/
+}
+// Create a new time-off request
+
+// Create a new time-off request
+const createTimeOffRequest = async (req, res) => {
+  try {
+    const {
+      employee,
+      admin,
+      name,
+      email,
+      phone,
+      empId,
+      requestType,
+      startDate,
+      endDate,
+    } = req.body;
+
+    // Validate required fields
+    if (
+      !employee ||
+      !name ||
+      !email ||
+      !phone ||
+      !empId ||
+      !requestType ||
+      !startDate ||
+      !endDate
+    ) {
+      return res.status(400).json({ error: 'All fields are required' });
+    }
+
+    // Check if start date is at least two weeks from now
+    const currentDate = new Date();
+    const twoWeeksFromNow = new Date(currentDate);
+    twoWeeksFromNow.setDate(currentDate.getDate() + 14);
+    const startDateObj = new Date(startDate);
+
+    if (startDateObj < twoWeeksFromNow) {
+      return res
+        .status(400)
+        .json({
+          error:
+            'All time-off requests need two weeks notice from the current date.',
+        });
+    }
+
+    // Create a new time-off request
+    const timeOffRequest = new TimeOff({
+      employee,
+      admin,
+      name,
+      email,
+      phone,
+      empId,
+      requestType,
+      startDate,
+      endDate,
+    });
+
+    await timeOffRequest.save();
+
+    // Return success message along with the created request
+    return res.status(201).json({
+      message: 'Time-off request submitted successfully',
+      timeOffRequest,
+    });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

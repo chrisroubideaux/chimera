@@ -83,6 +83,16 @@
   padding: 2px 5px;
   font-size: 0.8em;
 }
+   
+.list-group {
+  cursor: pointer;
+  background-color: #e0e0e0;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  color: #333;
+ 
+
+}
     
 .meeting {
   background-color: rgb(126, 142, 241);

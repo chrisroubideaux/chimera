@@ -150,6 +150,7 @@ export default function Profile() {
         return (
           <Notifications
             meetings={meetings}
+            timeOffRequests={timeOffRequests}
             setActiveComponent={setActiveComponent}
           />
         );
