@@ -1,11 +1,22 @@
 // Time off request component
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { format, isValid, addDays, subDays, startOfDay } from 'date-fns';
+import {
+  format,
+  isValid,
+  addDays,
+  subDays,
+  startOfDay,
+  isSameDay,
+} from 'date-fns';
 
 export default function TimeOff() {
   const [timeOffRequests, setTimeOffRequests] = useState([]);
   const [currentDate, setCurrentDate] = useState(startOfDay(new Date()));
+
+  // Calculate the maximum range for 3 days back and 3 days forward
+  const threeDaysAgo = subDays(new Date(), 3);
+  const threeDaysAhead = addDays(new Date(), 3);
 
   useEffect(() => {
     const fetchTimeOffRequests = async () => {
@@ -56,6 +67,32 @@ export default function TimeOff() {
     }
   };
 
+  const renderHeader = () => {
+    const dateFormat = 'EEEE, MMM d yyyy';
+    return (
+      <div className="d-flex justify-content-between align-items-center">
+        <h6>{format(currentDate, dateFormat)}</h6>
+        <div>
+          <button
+            className="btn btn-sm me-2"
+            onClick={previousDay}
+            disabled={isSameDay(currentDate, threeDaysAgo)}
+          >
+            Previous Day
+          </button>
+
+          <button
+            className="btn btn-sm"
+            onClick={nextDay}
+            disabled={isSameDay(currentDate, threeDaysAhead)}
+          >
+            Next Day
+          </button>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div>
       <div className="mt-3">
@@ -73,14 +110,7 @@ export default function TimeOff() {
                     <h6 className="mb-0 mt-1 fw-bold d-flex px-1">
                       Time Off Requests
                     </h6>
-                    <div className="d-flex align-items-center">
-                      <button onClick={previousDay} className="btn btn-sm me-2">
-                        Previous Day
-                      </button>
-                      <button onClick={nextDay} className="btn btn-sm">
-                        Next Day
-                      </button>
-                    </div>
+                    {renderHeader()}
                   </div>
                   <hr />
 
@@ -112,7 +142,7 @@ export default function TimeOff() {
                                 <button
                                   className="btn btn-sm"
                                   onClick={() =>
-                                    updateRequestStatus(request._id, 'Rejected')
+                                    updateRequestStatus(request._id, 'Denied')
                                   }
                                 >
                                   Deny
@@ -139,7 +169,7 @@ export default function TimeOff() {
 {
   /*
 
- import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { format, isValid, addDays, subDays, startOfDay } from 'date-fns';
 
@@ -252,7 +282,7 @@ export default function TimeOff() {
                                 <button
                                   className="btn btn-sm"
                                   onClick={() =>
-                                    updateRequestStatus(request._id, 'Rejected')
+                                    updateRequestStatus(request._id, 'Denied')
                                   }
                                 >
                                   Deny
@@ -275,7 +305,6 @@ export default function TimeOff() {
     </div>
   );
 }
-
 
   */
 }
