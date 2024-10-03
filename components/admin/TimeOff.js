@@ -1,12 +1,11 @@
 // Time off request component
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
 import axios from 'axios';
 import { format, isValid, addDays, subDays, startOfDay } from 'date-fns';
 
-export default function TimeOff({ setActiveComponent }) {
+export default function TimeOff() {
   const [timeOffRequests, setTimeOffRequests] = useState([]);
-  const [currentDate, setCurrentDate] = useState(startOfDay(new Date())); // Initialize to today's date without time
+  const [currentDate, setCurrentDate] = useState(startOfDay(new Date()));
 
   useEffect(() => {
     const fetchTimeOffRequests = async () => {
@@ -21,11 +20,6 @@ export default function TimeOff({ setActiveComponent }) {
     fetchTimeOffRequests();
   }, []);
 
-  // Function to format the current date using date-fns
-  const formatCurrentDate = () => {
-    return format(currentDate, 'MM/dd/yyyy');
-  };
-
   const formatDate = (date) => {
     const parsedDate = new Date(date);
     return isValid(parsedDate)
@@ -33,33 +27,33 @@ export default function TimeOff({ setActiveComponent }) {
       : 'Invalid Date';
   };
 
-  // Function to navigate to the next day
   const nextDay = () => {
     const newDate = addDays(currentDate, 1);
-    if (newDate <= addDays(startOfDay(new Date()), 7)) {
-      setCurrentDate(newDate);
-    }
+    setCurrentDate(newDate);
   };
 
-  // Function to navigate to the previous day
   const previousDay = () => {
     const newDate = subDays(currentDate, 1);
-    // Check if newDate is not in the past
-    if (newDate >= startOfDay(new Date())) {
-      setCurrentDate(newDate);
+    setCurrentDate(newDate);
+  };
+
+  // Function to update time-off request status
+  const updateRequestStatus = async (id, status) => {
+    try {
+      const response = await axios.put(`http://localhost:3001/timeoff/${id}`, {
+        status,
+      });
+      // Update the state with the new status
+      setTimeOffRequests((prevRequests) =>
+        prevRequests.map((request) =>
+          request._id === id
+            ? { ...request, status: response.data.status }
+            : request
+        )
+      );
+    } catch (error) {
+      console.error(`Error updating request ${id} status:`, error);
     }
-  };
-
-  // Handle approve request
-  const handleApprove = (requestId) => {
-    // Implement approval logic here, e.g., send a request to your API
-    console.log(`Approved request ID: ${requestId}`);
-  };
-
-  // Handle deny request
-  const handleDeny = (requestId) => {
-    // Implement denial logic here, e.g., send a request to your API
-    console.log(`Denied request ID: ${requestId}`);
   };
 
   return (
@@ -76,35 +70,14 @@ export default function TimeOff({ setActiveComponent }) {
                   aria-labelledby="chat-1-tab"
                 >
                   <div className="d-sm-flex justify-content-between align-items-center">
-                    <div className="d-flex mb-2 mb-sm-0">
-                      <div className="flex-shrink-0 avatar me-2">
-                        <img
-                          className="avatar-img rounded-circle"
-                          src="assets/images/avatar/10.jpg"
-                          alt=""
-                        />
-                      </div>
-                      <div className="d-block flex-grow-1">
-                        <h6 className="mb-0 mt-1 fw-bold d-flex px-1">
-                          Time Off Request: {formatCurrentDate()}
-                        </h6>
-                      </div>
-                    </div>
+                    <h6 className="mb-0 mt-1 fw-bold d-flex px-1">
+                      Time Off Requests
+                    </h6>
                     <div className="d-flex align-items-center">
-                      <button
-                        onClick={previousDay}
-                        disabled={currentDate < startOfDay(new Date())}
-                        className="btn btn-sm me-2"
-                      >
+                      <button onClick={previousDay} className="btn btn-sm me-2">
                         Previous Day
                       </button>
-                      <button
-                        onClick={nextDay}
-                        disabled={
-                          currentDate >= addDays(startOfDay(new Date()), 7)
-                        }
-                        className="btn btn-sm"
-                      >
+                      <button onClick={nextDay} className="btn btn-sm">
                         Next Day
                       </button>
                     </div>
@@ -118,28 +91,29 @@ export default function TimeOff({ setActiveComponent }) {
                           <label className="list-group-item d-flex gap-3">
                             <span className="pt-1 form-checked-content">
                               <h6 className="fs-6 fw-bold">
-                                <i className="social-icon fa-solid fa-person me-1"></i>
                                 Name: {request.name || 'N/A'}
                               </h6>
                               <h6 className="fs-6 fw-bold">
-                                <i className="social-icon fa-solid fa-book me-1"></i>
                                 Request Type: {request.requestType || 'N/A'}
                               </h6>
                               <h6 className="d-block fw-bold">
-                                <i className="social-icon fa-solid fa-calendar-days me-1"></i>
                                 {formatDate(request.startDate)} -{' '}
                                 {formatDate(request.endDate)}
                               </h6>
                               <div className="d-flex">
                                 <button
                                   className="btn btn-sm me-2"
-                                  onClick={() => handleApprove(request._id)}
+                                  onClick={() =>
+                                    updateRequestStatus(request._id, 'Approved')
+                                  }
                                 >
                                   Approve
                                 </button>
                                 <button
                                   className="btn btn-sm"
-                                  onClick={() => handleDeny(request._id)}
+                                  onClick={() =>
+                                    updateRequestStatus(request._id, 'Rejected')
+                                  }
                                 >
                                   Deny
                                 </button>
@@ -164,14 +138,14 @@ export default function TimeOff({ setActiveComponent }) {
 
 {
   /*
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
+
+ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { format, isValid, addDays, subDays, startOfDay } from 'date-fns';
 
-export default function TimeOff({ setActiveComponent }) {
+export default function TimeOff() {
   const [timeOffRequests, setTimeOffRequests] = useState([]);
-  const [currentDate, setCurrentDate] = useState(startOfDay(new Date())); // Initialize to today's date without time
+  const [currentDate, setCurrentDate] = useState(startOfDay(new Date()));
 
   useEffect(() => {
     const fetchTimeOffRequests = async () => {
@@ -186,11 +160,6 @@ export default function TimeOff({ setActiveComponent }) {
     fetchTimeOffRequests();
   }, []);
 
-  // Function to format the current date using date-fns
-  const formatCurrentDate = () => {
-    return format(currentDate, 'MM/dd/yyyy');
-  };
-
   const formatDate = (date) => {
     const parsedDate = new Date(date);
     return isValid(parsedDate)
@@ -198,20 +167,32 @@ export default function TimeOff({ setActiveComponent }) {
       : 'Invalid Date';
   };
 
-  // Function to navigate to the next day
   const nextDay = () => {
     const newDate = addDays(currentDate, 1);
-    if (newDate <= addDays(startOfDay(new Date()), 7)) {
-      setCurrentDate(newDate);
-    }
+    setCurrentDate(newDate);
   };
 
-  // Function to navigate to the previous day
   const previousDay = () => {
     const newDate = subDays(currentDate, 1);
-    // Check if newDate is not in the past
-    if (newDate >= startOfDay(new Date())) {
-      setCurrentDate(newDate);
+    setCurrentDate(newDate);
+  };
+
+  // Function to update time-off request status
+  const updateRequestStatus = async (id, status) => {
+    try {
+      const response = await axios.put(`http://localhost:3001/timeoff/${id}`, {
+        status,
+      });
+      // Update the state with the new status
+      setTimeOffRequests((prevRequests) =>
+        prevRequests.map((request) =>
+          request._id === id
+            ? { ...request, status: response.data.status }
+            : request
+        )
+      );
+    } catch (error) {
+      console.error(`Error updating request ${id} status:`, error);
     }
   };
 
@@ -229,35 +210,14 @@ export default function TimeOff({ setActiveComponent }) {
                   aria-labelledby="chat-1-tab"
                 >
                   <div className="d-sm-flex justify-content-between align-items-center">
-                    <div className="d-flex mb-2 mb-sm-0">
-                      <div className="flex-shrink-0 avatar me-2">
-                        <img
-                          className="avatar-img rounded-circle"
-                          src="assets/images/avatar/10.jpg"
-                          alt=""
-                        />
-                      </div>
-                      <div className="d-block flex-grow-1">
-                        <h6 className="mb-0 mt-1 fw-bold d-flex px-1">
-                          Time Off Request: {formatCurrentDate()}
-                        </h6>
-                      </div>
-                    </div>
+                    <h6 className="mb-0 mt-1 fw-bold d-flex px-1">
+                      Time Off Requests
+                    </h6>
                     <div className="d-flex align-items-center">
-                      <button
-                        onClick={previousDay}
-                        disabled={currentDate < startOfDay(new Date())}
-                        className="btn btn-sm me-2"
-                      >
+                      <button onClick={previousDay} className="btn btn-sm me-2">
                         Previous Day
                       </button>
-                      <button
-                        onClick={nextDay}
-                        disabled={
-                          currentDate >= addDays(startOfDay(new Date()), 7)
-                        }
-                        className="btn btn-sm"
-                      >
+                      <button onClick={nextDay} className="btn btn-sm">
                         Next Day
                       </button>
                     </div>
@@ -271,18 +231,33 @@ export default function TimeOff({ setActiveComponent }) {
                           <label className="list-group-item d-flex gap-3">
                             <span className="pt-1 form-checked-content">
                               <h6 className="fs-6 fw-bold">
-                                <i className="social-icon fa-solid fa-person me-1"></i>
                                 Name: {request.name || 'N/A'}
                               </h6>
                               <h6 className="fs-6 fw-bold">
-                                <i className="social-icon fa-solid fa-book me-1"></i>
                                 Request Type: {request.requestType || 'N/A'}
                               </h6>
                               <h6 className="d-block fw-bold">
-                                <i className="social-icon fa-solid fa-calendar-days me-1"></i>
                                 {formatDate(request.startDate)} -{' '}
                                 {formatDate(request.endDate)}
                               </h6>
+                              <div className="d-flex">
+                                <button
+                                  className="btn btn-sm me-2"
+                                  onClick={() =>
+                                    updateRequestStatus(request._id, 'Approved')
+                                  }
+                                >
+                                  Approve
+                                </button>
+                                <button
+                                  className="btn btn-sm"
+                                  onClick={() =>
+                                    updateRequestStatus(request._id, 'Rejected')
+                                  }
+                                >
+                                  Deny
+                                </button>
+                              </div>
                             </span>
                           </label>
                         </div>
@@ -300,5 +275,7 @@ export default function TimeOff({ setActiveComponent }) {
     </div>
   );
 }
+
+
   */
 }

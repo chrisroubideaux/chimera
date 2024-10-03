@@ -97,12 +97,10 @@ const createTimeOffRequest = async (req, res) => {
     const startDateObj = new Date(startDate);
 
     if (startDateObj < twoWeeksFromNow) {
-      return res
-        .status(400)
-        .json({
-          error:
-            'All time-off requests need two weeks notice from the current date.',
-        });
+      return res.status(400).json({
+        error:
+          'All time-off requests need two weeks notice from the current date.',
+      });
     }
 
     // Create a new time-off request
@@ -158,7 +156,6 @@ const getTimeOffRequestById = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
-
 // Update a time-off request (e.g., change status)
 const updateTimeOffRequest = async (req, res) => {
   try {
