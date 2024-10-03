@@ -31,7 +31,9 @@ const adminSchema = new mongoose.Schema(
     endDate: String,
     wage: String,
     emergencyContact1: String,
+    emergencyName: String,
     emergencyContact2: String,
+    emergencyName2: String,
     timeOffRequests: [timeOffRequestSchema],
   },
   {

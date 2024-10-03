@@ -125,7 +125,7 @@ const getAllMessages = async (req, res) => {
 // Get messages for user
 const getMessagesForUser = async (req, res) => {
   try {
-    const userId = req.params.userId; // Get userId from URL parameter
+    const userId = req.params.userId;
 
     // Fetch messages with sender and recipient populated
     const messages = await Message.find({

@@ -1,4 +1,5 @@
 // Messages component
+
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import axios from 'axios';
@@ -6,8 +7,8 @@ import Link from 'next/link';
 
 export default function Messages({ setActiveComponent }) {
   const [newMessage, setNewMessage] = useState('');
-  const [sender, setSender] = useState(''); // Admin sender ID
-  const [recipient, setRecipient] = useState(''); // Employee recipient ID
+  const [sender, setSender] = useState('66feb2d7bfdb4d747e58bcb9'); // Admin sender ID
+  const [recipient, setRecipient] = useState('66d7d2c380470662dbca3239'); // Employee recipient ID
   const [messages, setMessages] = useState([]);
 
   // Fetch messages on load
@@ -118,7 +119,7 @@ export default function Messages({ setActiveComponent }) {
                     <div className="d-block flex-grow-1">
                       <h6 className="mb-0 mt-1">
                         {messages.length > 0
-                          ? messages[0].recipient.name
+                          ? messages[0].sender.name
                           : 'No Sender'}
                       </h6>
                       <div className="small text-secondary">

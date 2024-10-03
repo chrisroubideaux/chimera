@@ -86,7 +86,7 @@ export default function Calendars() {
             setActiveComponent={setActiveComponent}
             key={admins.id}
             admins={admins}
-            meetings={meetings} // Pass meetings to Tab
+            meetings={meetings}
           />
         ))}
 

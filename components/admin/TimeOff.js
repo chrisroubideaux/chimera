@@ -56,6 +56,19 @@ export default function TimeOff() {
     }
   };
 
+  // Filter the requests based on the current date
+  const filteredRequests = timeOffRequests.filter((request) => {
+    const startDate = new Date(request.startDate);
+    const endDate = new Date(request.endDate);
+    return (
+      isValid(startDate) &&
+      isValid(endDate) &&
+      startDate <= currentDate &&
+      endDate >= currentDate &&
+      request.status !== 'Approved' // Exclude approved requests
+    );
+  });
+
   return (
     <div>
       <div className="mt-3">
@@ -72,7 +85,7 @@ export default function TimeOff() {
                   <div className="d-sm-flex justify-content-between align-items-center">
                     <h6 className="mb-0 mt-1 fw-bold d-flex px-1">
                       Time Off Requests
-                      {format(currentDate, 'MM/dd/yyyy')} {/* Current Date */}
+                      {format(currentDate, 'MM/dd/yyyy')}
                     </h6>
 
                     <div className="d-flex align-items-center">
@@ -86,8 +99,8 @@ export default function TimeOff() {
                   </div>
                   <hr />
 
-                  {timeOffRequests.length > 0 ? (
-                    timeOffRequests.map((request) => (
+                  {filteredRequests.length > 0 ? (
+                    filteredRequests.map((request) => (
                       <div key={request._id}>
                         <div className="list-group" style={{ width: '50rem' }}>
                           <label className="list-group-item d-flex gap-3">
@@ -103,21 +116,29 @@ export default function TimeOff() {
                                 {formatDate(request.endDate)}
                               </h6>
                               <div className="d-flex">
+                                {/* Approve Button */}
                                 <button
                                   className="btn btn-sm me-2"
                                   onClick={() =>
                                     updateRequestStatus(request._id, 'Approved')
                                   }
+                                  disabled={request.status === 'Approved'}
                                 >
-                                  Approve
+                                  {request.status === 'Approved'
+                                    ? 'Approved'
+                                    : 'Approve'}
                                 </button>
+                                {/* Deny Button */}
                                 <button
                                   className="btn btn-sm"
                                   onClick={() =>
                                     updateRequestStatus(request._id, 'Denied')
                                   }
+                                  disabled={request.status === 'Denied'}
                                 >
-                                  Deny
+                                  {request.status === 'Denied'
+                                    ? 'Denied'
+                                    : 'Deny'}
                                 </button>
                               </div>
                             </span>
@@ -165,7 +186,7 @@ export default function TimeOff() {
   const formatDate = (date) => {
     const parsedDate = new Date(date);
     return isValid(parsedDate)
-      ? format(parsedDate, 'MM/dd/yyyy')
+      ? format(parsedDate, 'MM/dd/yyyy') // Format to MM/DD/YYYY
       : 'Invalid Date';
   };
 
@@ -214,7 +235,9 @@ export default function TimeOff() {
                   <div className="d-sm-flex justify-content-between align-items-center">
                     <h6 className="mb-0 mt-1 fw-bold d-flex px-1">
                       Time Off Requests
+                      {format(currentDate, 'MM/dd/yyyy')}
                     </h6>
+
                     <div className="d-flex align-items-center">
                       <button onClick={previousDay} className="btn btn-sm me-2">
                         Previous Day
@@ -243,21 +266,29 @@ export default function TimeOff() {
                                 {formatDate(request.endDate)}
                               </h6>
                               <div className="d-flex">
+                             
                                 <button
                                   className="btn btn-sm me-2"
                                   onClick={() =>
                                     updateRequestStatus(request._id, 'Approved')
                                   }
+                                  disabled={request.status === 'Approved'}
                                 >
-                                  Approve
+                                  {request.status === 'Approved'
+                                    ? 'Approved'
+                                    : 'Approve'}
                                 </button>
+                              
                                 <button
                                   className="btn btn-sm"
                                   onClick={() =>
                                     updateRequestStatus(request._id, 'Denied')
                                   }
+                                  disabled={request.status === 'Denied'}
                                 >
-                                  Deny
+                                  {request.status === 'Denied'
+                                    ? 'Denied'
+                                    : 'Deny'}
                                 </button>
                               </div>
                             </span>
@@ -278,5 +309,6 @@ export default function TimeOff() {
   );
 }
 
+  
   */
 }
