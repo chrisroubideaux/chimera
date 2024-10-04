@@ -31,6 +31,9 @@ const Calendar = ({ onSelectDate }) => {
     const end = endOfMonth(currentMonth);
     let day = start;
 
+    let isPayrollWeek = true; // Toggle for payroll every other week
+    let isPaydayWeek = true; // Toggle for payday every other week
+
     while (day <= end) {
       const dayOfWeek = getDay(day);
 
@@ -43,24 +46,6 @@ const Calendar = ({ onSelectDate }) => {
         });
       }
 
-      // Add Payroll (Tuesday)
-      if (dayOfWeek === 3) {
-        events.push({
-          date: format(day, 'yyyy-MM-dd'),
-          type: eventTypes.payroll,
-          title: 'Payroll',
-        });
-      }
-
-      // Add Payday (Friday)
-      if (dayOfWeek === 6) {
-        events.push({
-          date: format(day, 'yyyy-MM-dd'),
-          type: eventTypes.payday,
-          title: 'Payday',
-        });
-      }
-
       // Add Inventory (Sunday)
       if (dayOfWeek === 0) {
         events.push({
@@ -68,6 +53,30 @@ const Calendar = ({ onSelectDate }) => {
           type: eventTypes.inventory,
           title: 'Inventory',
         });
+      }
+
+      // Add Payroll every other Tuesday
+      if (dayOfWeek === 3 && isPayrollWeek) {
+        events.push({
+          date: format(day, 'yyyy-MM-dd'),
+          type: eventTypes.payroll,
+          title: 'Payroll',
+        });
+        isPayrollWeek = false; // Toggle payroll off for the next week
+      } else if (dayOfWeek === 3 && !isPayrollWeek) {
+        isPayrollWeek = true; // Toggle payroll back on for the next cycle
+      }
+
+      // Add Payday every other Friday
+      if (dayOfWeek === 6 && isPaydayWeek) {
+        events.push({
+          date: format(day, 'yyyy-MM-dd'),
+          type: eventTypes.payday,
+          title: 'Payday',
+        });
+        isPaydayWeek = false; // Toggle payday off for the next week
+      } else if (dayOfWeek === 6 && !isPaydayWeek) {
+        isPaydayWeek = true; // Toggle payday back on for the next cycle
       }
 
       day = addDays(day, 1);
