@@ -1,5 +1,4 @@
 /* styles/globals.css */
-
 .calendar {
   color: #333;
   font-family: 'Kanit', sans-serif;
@@ -78,8 +77,6 @@
   position: absolute;
   bottom: 10px;
   right: 10px;
-  background-color: #7E8EF1;
-  border-radius: 50%;
   padding: 2px 5px;
   font-size: 0.8em;
 }
@@ -90,12 +87,31 @@
   border-radius: 6px;
   border: 1px solid #ddd;
   color: #333;
- 
-
 }
     
 .meeting {
-  background-color: rgb(126, 142, 241);
+  background-color: #7E8EF1;;
+
+}
+
+.inventory {
+  background-color: #c9ecfd;
+  border-color: #c9ecfd;
+  font-size: small;
+}
+
+.payroll {
+  background-color:#faca9a;
+  border-color:  #faca9a; 
+}
+
+.payday {
+  background-color:#CDC1FF;
+  border-color:  #CDC1FF; 
+}
+.orders {
+  background-color:#f9f4d3;
+  border-color: #FFF7D1; 
 }
     
 .video-chat {

@@ -1,4 +1,192 @@
-// Calendar component
+import { useState, useEffect } from 'react';
+import {
+  format,
+  addMonths,
+  subMonths,
+  startOfMonth,
+  endOfMonth,
+  startOfWeek,
+  endOfWeek,
+  addDays,
+  isSameMonth,
+  isSameDay,
+  getDay,
+} from 'date-fns';
+
+const Calendar = ({ onSelectDate }) => {
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const today = new Date();
+
+  const eventTypes = {
+    payroll: 'payroll',
+    payday: 'payday',
+    inventory: 'inventory',
+    orders: 'orders',
+  };
+
+  const generateRecurringEvents = (currentMonth) => {
+    let events = [];
+    const start = startOfMonth(currentMonth);
+    const end = endOfMonth(currentMonth);
+    let day = start;
+
+    while (day <= end) {
+      const dayOfWeek = getDay(day);
+
+      // Add Orders (Monday and Wednesday)
+      if (dayOfWeek === 2 || dayOfWeek === 4) {
+        events.push({
+          date: format(day, 'yyyy-MM-dd'),
+          type: eventTypes.orders,
+          title: 'Orders',
+        });
+      }
+
+      // Add Payroll (Tuesday)
+      if (dayOfWeek === 3) {
+        events.push({
+          date: format(day, 'yyyy-MM-dd'),
+          type: eventTypes.payroll,
+          title: 'Payroll',
+        });
+      }
+
+      // Add Payday (Friday)
+      if (dayOfWeek === 6) {
+        events.push({
+          date: format(day, 'yyyy-MM-dd'),
+          type: eventTypes.payday,
+          title: 'Payday',
+        });
+      }
+
+      // Add Inventory (Sunday)
+      if (dayOfWeek === 0) {
+        events.push({
+          date: format(day, 'yyyy-MM-dd'),
+          type: eventTypes.inventory,
+          title: 'Inventory',
+        });
+      }
+
+      day = addDays(day, 1);
+    }
+
+    return events;
+  };
+
+  const [events, setEvents] = useState(generateRecurringEvents(currentDate));
+
+  useEffect(() => {
+    setEvents(generateRecurringEvents(currentDate));
+  }, [currentDate]);
+
+  const renderHeader = () => {
+    const dateFormat = 'MMMM yyyy';
+
+    return (
+      <div className="header py-3">
+        <button className="btn btn-sm" onClick={prevMonth}>
+          <i className="fa-solid fa-arrow-left"></i>
+        </button>
+        <div>{format(currentDate, dateFormat)}</div>
+        <button className="btn btn-sm" onClick={nextMonth}>
+          <i className="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    );
+  };
+
+  const renderDays = () => {
+    const daysOfWeek = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+    return (
+      <div className="daysRow">
+        {daysOfWeek.map((day, i) => (
+          <div className="day container-fluid" key={i}>
+            {day}
+          </div>
+        ))}
+      </div>
+    );
+  };
+
+  const renderCells = () => {
+    const monthStart = startOfMonth(currentDate);
+    const monthEnd = endOfMonth(monthStart);
+    const startDate = startOfWeek(monthStart);
+    const endDate = endOfWeek(monthEnd);
+
+    const rows = [];
+    let days = [];
+    let day = startDate;
+    let formattedDate = '';
+
+    while (day <= endDate) {
+      for (let i = 0; i < 7; i++) {
+        formattedDate = format(day, 'd');
+        const cloneDay = day;
+        const event = events.find((event) =>
+          isSameDay(day, new Date(event.date))
+        );
+        days.push(
+          <div
+            className={`cell ${
+              !isSameMonth(day, monthStart)
+                ? 'disabled'
+                : isSameDay(day, selectedDate)
+                ? 'selected'
+                : isSameDay(day, today)
+                ? 'today'
+                : ''
+            } ${event ? event.type : ''}`}
+            key={day}
+            onClick={() => onDateClick(cloneDay)}
+          >
+            <span className="number">{formattedDate}</span>
+            {event && <span className="event">{event.title}</span>}
+          </div>
+        );
+        day = addDays(day, 1);
+      }
+      rows.push(
+        <div className="row" key={day}>
+          {days}
+        </div>
+      );
+      days = [];
+    }
+    return <div className="body">{rows}</div>;
+  };
+
+  const onDateClick = (day) => {
+    setSelectedDate(day);
+    if (onSelectDate) {
+      onSelectDate(day);
+    }
+  };
+
+  const nextMonth = () => {
+    setCurrentDate(addMonths(currentDate, 1));
+  };
+
+  const prevMonth = () => {
+    setCurrentDate(subMonths(currentDate, 1));
+  };
+
+  return (
+    <div className="calendar">
+      <div className="align-items-center">{renderHeader()}</div>
+      {renderDays()}
+      {renderCells()}
+    </div>
+  );
+};
+
+export default Calendar;
+
+{
+  /*
 import { useState, useEffect } from 'react';
 import {
   format,
@@ -164,3 +352,5 @@ const Calendar = ({ setActiveComponent, onSelectDate }) => {
 };
 
 export default Calendar;
+*/
+}

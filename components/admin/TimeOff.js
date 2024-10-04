@@ -1,4 +1,5 @@
 // Time off request component
+
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { format, isValid, addDays, subDays, startOfDay } from 'date-fns';
@@ -56,19 +57,6 @@ export default function TimeOff() {
     }
   };
 
-  // Filter the requests based on the current date
-  const filteredRequests = timeOffRequests.filter((request) => {
-    const startDate = new Date(request.startDate);
-    const endDate = new Date(request.endDate);
-    return (
-      isValid(startDate) &&
-      isValid(endDate) &&
-      startDate <= currentDate &&
-      endDate >= currentDate &&
-      request.status !== 'Approved' // Exclude approved requests
-    );
-  });
-
   return (
     <div>
       <div className="mt-3">
@@ -99,8 +87,8 @@ export default function TimeOff() {
                   </div>
                   <hr />
 
-                  {filteredRequests.length > 0 ? (
-                    filteredRequests.map((request) => (
+                  {timeOffRequests.length > 0 ? (
+                    timeOffRequests.map((request) => (
                       <div key={request._id}>
                         <div className="list-group" style={{ width: '50rem' }}>
                           <label className="list-group-item d-flex gap-3">
@@ -116,7 +104,6 @@ export default function TimeOff() {
                                 {formatDate(request.endDate)}
                               </h6>
                               <div className="d-flex">
-                                {/* Approve Button */}
                                 <button
                                   className="btn btn-sm me-2"
                                   onClick={() =>
@@ -128,7 +115,7 @@ export default function TimeOff() {
                                     ? 'Approved'
                                     : 'Approve'}
                                 </button>
-                                {/* Deny Button */}
+
                                 <button
                                   className="btn btn-sm"
                                   onClick={() =>

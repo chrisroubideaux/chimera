@@ -9,7 +9,7 @@ import DayChart from '@/components/charts/DayChart';
 import Revenue from '@/components/charts/Revenue';
 import TopSeller from '@/components/charts/TopSeller';
 import Totals from '@/components/charts/Totals';
-import Activity from '@/components/messages/Activity';
+//import Activity from '@/components/messages/Activity';
 
 export default function dashboard() {
   return (
@@ -69,9 +69,7 @@ export default function dashboard() {
             <div className="col-xl-3 col-lg-6 order-lg-1">
               <Totals />
             </div>
-            <div className="col-xl-3 col-lg-6 order-lg-1">
-              <Activity />
-            </div>
+            <div className="col-xl-3 col-lg-6 order-lg-1">test</div>
           </div>
           {/*sales by hour */}
         </div>
