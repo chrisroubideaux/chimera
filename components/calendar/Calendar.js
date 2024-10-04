@@ -250,7 +250,10 @@ const Calendar = ({ onSelectDate, meetings = [] }) => {
           aria-hidden="true"
           tabIndex="-1"
         >
-          <div className="modal-dialog modal-dialog-centered">
+          <div
+            className="modal-dialog modal-dialog-centered"
+            style={{ maxWidth: '750px' }}
+          >
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title" id="exampleModalToggleLabel">
@@ -262,16 +265,16 @@ const Calendar = ({ onSelectDate, meetings = [] }) => {
                   onClick={() => setShowModal(false)}
                 />
               </div>
-              <div className="modal-body">
+              <div className="modal-body ">
                 {selectedDayEvents.length > 0 ? (
                   selectedDayEvents.map((event, index) => (
-                    <div key={index} className={`box ${event.type}`}>
-                      <div className="py-3">{event.title}</div>
+                    <div key={index} className={`box  ${event.type}`}>
+                      <div className="py-3 fs-6 mt-2">{event.title}</div>
                       {/* Render additional details in the modal */}
                       {event.type === eventTypes.meeting && (
-                        <div>
+                        <div className="fs-6">
                           <p>
-                            <strong>Slot:</strong> {event.slot}
+                            <strong>Time:</strong> {event.slot}
                           </p>
                           <p>
                             <strong>Sender:</strong> {event.sender}

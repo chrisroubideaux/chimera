@@ -115,7 +115,10 @@ export default function CreateEvent({ meetings }) {
           tabIndex="-1"
           style={{ display: 'block' }}
         >
-          <div className="modal-dialog modal-dialog-centered modal-lg">
+          <div
+            className="modal-dialog modal-dialog-centered modal-lg"
+            style={{ maxWidth: '750px' }}
+          >
             <div className="modal-content">
               <div className="modal-header">
                 <h1 className="modal-title fs-5" id="exampleModalToggleLabel2">
