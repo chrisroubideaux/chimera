@@ -120,6 +120,9 @@ const Calendar = ({ onSelectDate, meetings = [] }) => {
             Meeting: {meeting.sender.name} & {meeting.recipient.name}
           </div>
         ),
+        slot: meeting.slot, // Add the slot information
+        sender: meeting.sender.name,
+        recipient: meeting.recipient.name,
       }));
     });
   };
@@ -264,6 +267,20 @@ const Calendar = ({ onSelectDate, meetings = [] }) => {
                   selectedDayEvents.map((event, index) => (
                     <div key={index} className={`box ${event.type}`}>
                       <div className="py-3">{event.title}</div>
+                      {/* Render additional details in the modal */}
+                      {event.type === eventTypes.meeting && (
+                        <div>
+                          <p>
+                            <strong>Slot:</strong> {event.slot}
+                          </p>
+                          <p>
+                            <strong>Sender:</strong> {event.sender}
+                          </p>
+                          <p>
+                            <strong>Recipient:</strong> {event.recipient}
+                          </p>
+                        </div>
+                      )}
                     </div>
                   ))
                 ) : (
