@@ -1,8 +1,10 @@
 // Tab component
 import Link from 'next/link';
-import CreateEvent from '../calendar/CreateEvent';
+import CalendarEvent from '../calendar/CreateEvent';
+import { format } from 'date-fns';
 
 const Tab = ({ setActiveComponent, admins, meetings }) => {
+  const today = format(new Date(), 'MM/dd/yyyy');
   return (
     <>
       <div className="d-flex justify-content-between align-items-center mt-3 me-4">
@@ -26,24 +28,39 @@ const Tab = ({ setActiveComponent, admins, meetings }) => {
         <ul className="nav">
           <li className="nav-item me-3">
             <div className="gap-2 justify-content-center">
-              <span className="me-1 badge payroll text-dark rounded-pill">
+              <span className="me-2 badge payroll text-dark rounded-pill">
                 Payroll
               </span>
-              <span className="me-1 badge payday text-dark rounded-pill">
+              <span className="me-2 badge payday text-dark rounded-pill">
                 Payday
               </span>
-              <span className="me-1 inventory fw-bold text-dark rounded-pill">
+              <span className="me-2 inventory fw-bold text-dark rounded-pill">
                 Inventory
               </span>
-              <span className="me-1 badge orders text-dark rounded-pill">
+              <span className="me-2 badge orders text-dark rounded-pill">
                 Orders
               </span>
-              <span className="badge meeting rounded-pill">Day</span>
             </div>
           </li>
           <li className="nav-item me-2">
+            <form className="d-flex" style={{ width: '10rem' }}>
+              <div className="input-group">
+                <input
+                  type="text"
+                  className="form-control"
+                  id="dash-daterange"
+                  value={today}
+                  readOnly
+                />
+                <button className="input-group-text bg-sm">
+                  <i className="social-icon fa-solid fa-calendar-days"></i>
+                </button>
+              </div>
+            </form>
+          </li>
+          <li className="nav-item me-2">
             {/* CreateEvent button and modal */}
-            <CreateEvent meetings={meetings} />
+            <CalendarEvent meetings={meetings} />
           </li>
           <li className="nav-item me-2">
             <div className="btn-group" role="group" aria-label="Basic example">

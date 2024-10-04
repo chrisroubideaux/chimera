@@ -1,8 +1,10 @@
 // Tab component
 import Link from 'next/link';
-import Bookings from '../calendar/Bookings';
+import { format } from 'date-fns';
+//import Bookings from '../calendar/Bookings';
 
 export default function Tab({ setActiveComponent, admins }) {
+  const today = format(new Date(), 'MM/dd/yyyy');
   return (
     <div className="d-flex justify-content-between align-items-center mt-3 me-4">
       <div className="row align-items-center">
@@ -24,7 +26,20 @@ export default function Tab({ setActiveComponent, admins }) {
       </div>
       <ul className="nav">
         <li className="nav-item me-2">
-          <Bookings />
+          <form className="d-flex" style={{ width: '10rem' }}>
+            <div className="input-group">
+              <input
+                type="text"
+                className="form-control"
+                id="dash-daterange"
+                value={today}
+                readOnly
+              />
+              <button className="input-group-text bg-sm">
+                <i className="social-icon fa-solid fa-calendar-days"></i>
+              </button>
+            </div>
+          </form>
         </li>
 
         <li className="nav-item me-2">

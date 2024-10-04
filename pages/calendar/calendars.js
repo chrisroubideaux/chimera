@@ -57,9 +57,21 @@ export default function Calendars() {
         );
 
       case 'Calendar':
-        return <Calendar setActiveComponent={setActiveComponent} />;
+        return (
+          <Calendar
+            meetings={meetings}
+            key={meetings.id}
+            setActiveComponent={setActiveComponent}
+          />
+        );
       default:
-        return <Calendar setActiveComponent={setActiveComponent} />;
+        return (
+          <Calendar
+            meetings={meetings}
+            key={meetings.id}
+            setActiveComponent={setActiveComponent}
+          />
+        );
     }
   };
 

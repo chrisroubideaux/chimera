@@ -49,7 +49,7 @@
   border-radius: 6px;
   border: 1px solid #ddd;
   color: #333;
-  height: 50px;
+  height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -90,7 +90,8 @@
 }
     
 .meeting {
-  background-color: #7E8EF1;;
+  background-color: #7E8EF1;
+  font-size: xx-small;
 
 }
 

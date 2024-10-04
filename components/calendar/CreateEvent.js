@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { format } from 'date-fns';
 import axios from 'axios';
-import Calendar from './Calendar';
+import CalendarEvent from './CalendarEvent';
 
 const today = format(new Date(), 'MM/dd/yyyy');
 
@@ -90,14 +90,14 @@ export default function CreateEvent({ meetings }) {
                 aria-label="Close"
               ></button>
             </div>
-            <div className="modal-body">
+            <div className="modal-body w-100">
               <div className="mt-2">
                 <button
                   type="button"
                   className="btn btn-md bg-transparent align-items-center w-100"
                   onClick={() => setShowDatePickerModal(true)}
                 >
-                  <Calendar onSelectDate={handleDateSelection} />
+                  <CalendarEvent onSelectDate={handleDateSelection} />
                 </button>
               </div>
             </div>
