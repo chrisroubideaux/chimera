@@ -1,4 +1,4 @@
-// Employee page
+// Payroll page
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Head from 'next/head';
@@ -80,13 +80,10 @@ export default function Payrolls() {
       default:
         return (
           <>
-            {employees.map((employee) => (
-              <Employees
-                setActiveComponent={setActiveComponent}
-                key={employee.id}
-                employees={employee} // Use singular for the mapped item
-              />
-            ))}
+            <Employees
+              setActiveComponent={setActiveComponent}
+              employees={employees} // Use singular for the mapped item
+            />
           </>
         );
       // payroll

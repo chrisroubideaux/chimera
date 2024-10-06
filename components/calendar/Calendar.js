@@ -269,19 +269,19 @@ const Calendar = ({ onSelectDate, meetings = [] }) => {
                 {selectedDayEvents.length > 0 ? (
                   selectedDayEvents.map((event, index) => (
                     <div key={index} className={`box  ${event.type}`}>
-                      <div className="py-3 fs-6 mt-2">{event.title}</div>
+                      <h6 className="py-3 fs-6 mt-2">{event.title}</h6>
                       {/* Render additional details in the modal */}
                       {event.type === eventTypes.meeting && (
                         <div className="fs-6">
-                          <p>
+                          <h6>
                             <strong>Time:</strong> {event.slot}
-                          </p>
-                          <p>
+                          </h6>
+                          <h6>
                             <strong>Sender:</strong> {event.sender}
-                          </p>
-                          <p>
+                          </h6>
+                          <h6>
                             <strong>Recipient:</strong> {event.recipient}
-                          </p>
+                          </h6>
                         </div>
                       )}
                     </div>

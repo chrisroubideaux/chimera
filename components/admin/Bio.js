@@ -302,22 +302,11 @@ export default function Bio({ admins }) {
                         className="form-control"
                         name="firstName"
                         id="firstNameLabel"
-                        placeholder="First Name"
-                        aria-label="First Name"
-                        value={admins.name}
+                        placeholder="Full name"
+                        aria-label="Full Name"
+                        value={admins.emergencyName}
                         readOnly={!isEditing}
                         // onChange={handleChange}
-                      />
-                      <input
-                        type="text"
-                        className="form-control"
-                        name="lastName"
-                        id="lastNameLabel"
-                        placeholder="Last Name"
-                        aria-label="Last Name"
-                        value={admins.name}
-                        readOnly={!isEditing}
-                        //   onChange={handleChange}
                       />
                     </div>
                   </div>
@@ -337,7 +326,7 @@ export default function Bio({ admins }) {
                       id="emailLabel"
                       placeholder="xxx-xxx-xxxx"
                       aria-label="phone"
-                      value={admins.emergencyContacts}
+                      value={admins.emergencyContact1}
                       readOnly={!isEditing}
                       // onChange={handleChange}
                     />
