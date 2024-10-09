@@ -30,18 +30,11 @@ export default function Schedule({ setActiveComponent }) {
                         </h6>
                       </div>
                     </div>
-
                     <div>
-                      <a
-                        href="#!"
-                        className="icon-md me-2 px-2"
-                        data-bs-toggle="tooltip"
-                        data-bs-placement="top"
-                        title="Hours Worked"
-                        onClick={() => setActiveComponent('Hours')}
-                      >
+                      <h6 className="fw-bold me-2 px-2">
+                        Total Hours
                         <i className=" social-icon fa-solid fa-hourglass-end"></i>
-                      </a>
+                      </h6>
                     </div>
                   </div>
 

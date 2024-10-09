@@ -50,6 +50,14 @@ export default function Tab({ setActiveComponent }) {
               <a
                 className="btn btn-soft-light btn-sm m-1"
                 href="#"
+                onClick={() => setActiveComponent('Payments')}
+              >
+                Payment Info
+                <i className="m-1 fa-solid fa-calendar-plus fs-sm"></i>
+              </a>
+              <a
+                className="btn btn-soft-light btn-sm m-1"
+                href="#"
                 onClick={() => setActiveComponent('Form')}
               >
                 Time off

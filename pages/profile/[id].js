@@ -14,6 +14,7 @@ import Bio from '@/components/profile/Bio';
 import Calendar from '@/components/profile/Calendar';
 import CalendarTab from '@/components/profile/CalendarTab';
 import Form from '@/components/profile/Form';
+import Payments from '@/components/profile/Payments';
 
 export default function Profile() {
   const [activeComponent, setActiveComponent] = useState('PersonalInfo');
@@ -151,6 +152,13 @@ export default function Profile() {
           <Notifications
             meetings={meetings}
             timeOffRequests={timeOffRequests}
+            setActiveComponent={setActiveComponent}
+          />
+        );
+      case 'Payments':
+        return (
+          <Payments
+            employees={employee}
             setActiveComponent={setActiveComponent}
           />
         );

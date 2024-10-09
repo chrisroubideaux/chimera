@@ -68,7 +68,6 @@ export default function Bio({ employees }) {
             </div>
             <div className="card-body">
               <form onSubmit={handleSaveChanges}>
-                {/* Full Name */}
                 <div className="row mb-4">
                   <label
                     htmlFor="nameLabel"
@@ -89,7 +88,7 @@ export default function Bio({ employees }) {
                     />
                   </div>
                 </div>
-                {/* Email */}
+
                 <div className="row mb-4">
                   <label
                     htmlFor="emailLabel"
@@ -130,55 +129,9 @@ export default function Bio({ employees }) {
                     />
                   </div>
                 </div>
-
-                {/* Title */}
                 <div className="row mb-4">
                   <label
-                    htmlFor="titleLabel"
-                    className="col-sm-3 col-form-label form-label"
-                  >
-                    Title
-                  </label>
-                  <div className="col-sm-9">
-                    <input
-                      type="text"
-                      className="form-control"
-                      name="title"
-                      id="titleLabel"
-                      placeholder="Title"
-                      value={employee.title || ''}
-                      readOnly={!isEditing}
-                      onChange={handleChange}
-                    />
-                  </div>
-                </div>
-
-                {/* Department */}
-                <div className="row mb-4">
-                  <label
-                    htmlFor="deptLabel"
-                    className="col-sm-3 col-form-label form-label"
-                  >
-                    Dept
-                  </label>
-                  <div className="col-sm-9">
-                    <input
-                      type="text"
-                      className="form-control"
-                      name="dept"
-                      id="deptLabel"
-                      placeholder="Department"
-                      value={employee.dept || ''}
-                      readOnly={!isEditing}
-                      onChange={handleChange}
-                    />
-                  </div>
-                </div>
-
-                {/* Address */}
-                <div className="row mb-4">
-                  <label
-                    htmlFor="addressLabel"
+                    htmlFor="homeLabel"
                     className="col-sm-3 col-form-label form-label"
                   >
                     Address
@@ -196,38 +149,30 @@ export default function Bio({ employees }) {
                     />
                   </div>
                 </div>
-
-                {/* City */}
                 <div className="row mb-4">
-                  <label
-                    htmlFor="cityLabel"
-                    className="col-sm-3 col-form-label form-label"
-                  >
-                    City
-                  </label>
-                  <div className="col-sm-9">
+                  <div className="input-group">
+                    <label
+                      htmlFor="cityLabel"
+                      className="col-sm-3 col-form-label form-label"
+                    >
+                      City/St/Zip
+                    </label>
                     <input
-                      type="text"
+                      type="type"
                       className="form-control"
                       name="city"
                       id="cityLabel"
-                      placeholder="City"
+                      placeholder="1234 Main St"
                       value={employee.city || ''}
                       readOnly={!isEditing}
                       onChange={handleChange}
                     />
-                  </div>
-                </div>
-
-                {/* State */}
-                <div className="row mb-4">
-                  <label
-                    htmlFor="stateLabel"
-                    className="col-sm-3 col-form-label form-label"
-                  >
-                    State
-                  </label>
-                  <div className="col-sm-9">
+                    {/*
+                    <select id="inputState" className="form-select ">
+                      <option selected>State</option>
+                      <option>...</option>
+                    </select>
+                    */}
                     <input
                       type="text"
                       className="form-control"
@@ -241,31 +186,43 @@ export default function Bio({ employees }) {
                   </div>
                 </div>
 
-                {/* Employee ID */}
                 <div className="row mb-4">
                   <label
-                    htmlFor="empIdLabel"
+                    htmlFor="titleLabel"
                     className="col-sm-3 col-form-label form-label"
                   >
-                    Employee ID
+                    Title
                   </label>
                   <div className="col-sm-9">
                     <input
                       type="text"
                       className="form-control"
-                      name="empId"
-                      id="empIdLabel"
-                      placeholder="Employee ID"
-                      value={employee.empId || ''}
-                      readOnly={!isEditing}
-                      onChange={handleChange}
+                      name="title"
+                      id="titleLabel"
+                      placeholder="Title"
+                      value={employee.title || ''}
                     />
                   </div>
                 </div>
 
-                {/* Social Security Number */}
-
-                {/* Hire Date */}
+                <div className="row mb-4">
+                  <label
+                    htmlFor="deptLabel"
+                    className="col-sm-3 col-form-label form-label"
+                  >
+                    Dept
+                  </label>
+                  <div className="col-sm-9">
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="dept"
+                      id="deptLabel"
+                      placeholder="Department"
+                      value={employee.dept || ''}
+                    />
+                  </div>
+                </div>
 
                 <div className="row mb-4">
                   <label
@@ -289,8 +246,6 @@ export default function Bio({ employees }) {
                         id="empIdLabel"
                         placeholder="Employee ID"
                         value={employee.empId || ''}
-                        readOnly={!isEditing}
-                        onChange={handleChange}
                       />
                       <input
                         type="text"
@@ -299,8 +254,6 @@ export default function Bio({ employees }) {
                         id="socialSecLabel"
                         placeholder="Social Security Number"
                         value={employee.socialSec || ''}
-                        readOnly={!isEditing}
-                        onChange={handleChange}
                       />
                     </div>
                   </div>
@@ -322,12 +275,113 @@ export default function Bio({ employees }) {
                       id="wageLabel"
                       placeholder="$28.00/hr"
                       value={employee.wage || ''}
+                    />
+                  </div>
+                </div>
+                <div className="row mb-4">
+                  <label
+                    htmlFor="firstNameLabel"
+                    className="col-sm-3 col-form-label form-label"
+                  >
+                    Emergency 1
+                    <i
+                      className="bi-question-circle text-body ms-1"
+                      data-bs-toggle="tooltip"
+                      data-bs-placement="top"
+                      title=""
+                    ></i>
+                  </label>
+                  <div className="col-sm-9">
+                    <div className="input-group">
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Full name"
+                        name="emergencyName"
+                        id="emergencyName"
+                        value={employee.emergencyName || ''}
+                        readOnly={!isEditing}
+                        onChange={handleChange}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="row mb-4">
+                  <label
+                    htmlFor="emailLabel"
+                    className="col-sm-3 col-form-label form-label"
+                  >
+                    Phone 1
+                  </label>
+                  <div className="col-sm-9">
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="xxx-xxx-xxxx"
+                      value={employee.emergencyContact1 || ''}
                       readOnly={!isEditing}
                       onChange={handleChange}
                     />
                   </div>
                 </div>
-
+                <div className="row mb-4">
+                  <label
+                    htmlFor="firstNameLabel"
+                    className="col-sm-3 col-form-label form-label"
+                  >
+                    Emergency 2
+                    <i
+                      className="bi-question-circle text-body ms-1"
+                      data-bs-toggle="tooltip"
+                      data-bs-placement="top"
+                      title=""
+                    ></i>
+                  </label>
+                  <div className="col-sm-9">
+                    <div className="input-group">
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="firstName"
+                        id="firstNameLabel"
+                        placeholder="First Name"
+                        aria-label="First Name"
+                        readOnly={!isEditing}
+                        onChange={handleChange}
+                      />
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="lastName"
+                        id="lastNameLabel"
+                        placeholder="Last Name"
+                        aria-label="Last Name"
+                        readOnly={!isEditing}
+                        onChange={handleChange}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="row mb-4">
+                  <label
+                    htmlFor="emailLabel"
+                    className="col-sm-3 col-form-label form-label"
+                  >
+                    Phone 2
+                  </label>
+                  <div className="col-sm-9">
+                    <input
+                      type="phone"
+                      className="form-control"
+                      name="phone"
+                      id="emailLabel"
+                      placeholder="xxx-xxx-xxxx"
+                      aria-label="phone"
+                      readOnly={!isEditing}
+                      onChange={handleChange}
+                    />
+                  </div>
+                </div>
                 {/* Additional fields can be added similarly */}
 
                 <div className="card-footer pt-0">

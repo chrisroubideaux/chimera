@@ -4,7 +4,6 @@ import { format, isValid } from 'date-fns';
 import axios from 'axios';
 
 export default function Notifications() {
-  // State to manage visible notifications for both meetings and time-off requests
   const [visibleMeetings, setVisibleMeetings] = useState([]);
   const [visibleRequests, setVisibleRequests] = useState([]);
 
