@@ -15,15 +15,7 @@ const Employees = ({ setActiveComponent, employees, setActiveEmployeeId }) => {
                 <h5>Employees</h5>
               </div>
               <div className="col-md-6 col-xl-8">
-                <div className="text-sm-end">
-                  <a
-                    className="btn btn-sm me-1"
-                    href="#"
-                    onClick={() => setActiveComponent('Form')}
-                  >
-                    <i className="fa-solid fa-plus me-1"></i>Employee
-                  </a>
-                </div>
+                <div className="text-sm-end"></div>
               </div>
             </div>
 

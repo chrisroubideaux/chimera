@@ -10,7 +10,7 @@ const Tab = ({ setActiveComponent, admins }) => {
         <div className="row align-items-center">
           <div className="col">
             <div className="d-none d-lg-block">
-              <h3 className="fw-normal">Employees</h3>
+              <h3 className="fw-normal">Employees/Payroll</h3>
             </div>
             <nav aria-label="breadcrumb">
               <ol className="breadcrumb">
@@ -29,82 +29,13 @@ const Tab = ({ setActiveComponent, admins }) => {
             <Bookings />
           </li>
           <li className="nav-item me-2">
-            <div className="dropdown">
-              <button
-                className="btn btn-sm dropdown-toggle"
-                type="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Employees
-              </button>
-              <ul className="dropdown-menu">
-                <li>
-                  <a
-                    className="dropdown-item"
-                    href="#"
-                    onClick={() => setActiveComponent('Employees')}
-                  >
-                    Employees
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="dropdown-item"
-                    href="#"
-                    onClick={() => setActiveComponent('Hosts')}
-                  >
-                    Hosts
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="dropdown-item"
-                    href="#"
-                    onClick={() => setActiveComponent('Servers')}
-                  >
-                    Servers
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="dropdown-item"
-                    href="#"
-                    onClick={() => setActiveComponent('Bar')}
-                  >
-                    Bar
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="dropdown-item"
-                    href="#"
-                    onClick={() => setActiveComponent('Dish')}
-                  >
-                    Dish
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                    className="dropdown-item"
-                    href="#"
-                    onClick={() => setActiveComponent('Kitchen')}
-                  >
-                    Kitchen
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="dropdown-item"
-                    href="#"
-                    onClick={() => setActiveComponent('Managers')}
-                  >
-                    Managment
-                  </a>
-                </li>
-              </ul>
-            </div>
+            <a
+              className="btn btn-sm me-1"
+              href="#"
+              onClick={() => setActiveComponent('Form')}
+            >
+              <i className="fa-solid fa-plus me-1"></i>Employee
+            </a>
           </li>
           <li className="nav-item me-2">
             <div className="dropdown">

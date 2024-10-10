@@ -4,6 +4,7 @@ import axios from 'axios';
 
 export default function Form({ activeEmployeeId }) {
   const [employee, setEmployee] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
     // Fetch a specific employee based on the activeEmployeeId
@@ -22,6 +23,48 @@ export default function Form({ activeEmployeeId }) {
   if (!employee) {
     return <div>Loading employee details...</div>;
   }
+  // put method
+  // Toggle between edit and view mode
+  const handleEditClick = () => {
+    setIsEditing(!isEditing);
+  };
+
+  // Update employee state when input changes
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setEmployee((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+    console.log('Field Changed:', name, value); // Debugging log
+  };
+
+  const handleSaveChanges = async () => {
+    try {
+      const id = employee._id; // Use _id instead of id
+      await axios.put(`http://localhost:3001/employees/${id}`, employee);
+      console.log('Employee data updated successfully');
+
+      // Optionally, fetch the updated employee from the server
+      const updatedEmployee = await axios.get(
+        `http://localhost:3001/employees/${id}`
+      );
+      setEmployee(updatedEmployee.data);
+      setIsEditing(false);
+    } catch (error) {
+      if (error.response) {
+        console.error('Error response:', error.response.data);
+        console.error('Status code:', error.response.status);
+      } else if (error.request) {
+        console.error('Error request:', error.request);
+      } else {
+        console.error('Error message:', error.message);
+      }
+      alert(
+        'Failed to save employee data. Check the console for more details.'
+      );
+    }
+  };
   return (
     <div className="mt-3">
       <div className="col-lg-9">
@@ -31,7 +74,7 @@ export default function Form({ activeEmployeeId }) {
               <h4 className="card-header-title">Payroll</h4>
             </div>
             <div className="card-body">
-              <form>
+              <form onSubmit={handleSaveChanges}>
                 <div className="row mb-4"></div>
                 <div className="row mb-4">
                   <label
@@ -56,6 +99,8 @@ export default function Form({ activeEmployeeId }) {
                         placeholder="First Name"
                         value={employee.name}
                         aria-label="First Name"
+                        readOnly={!isEditing}
+                        onChange={handleChange}
                       />
                     </div>
                   </div>
@@ -76,6 +121,8 @@ export default function Form({ activeEmployeeId }) {
                       placeholder="email@example.com"
                       value={employee.email}
                       aria-label="emaile@example.com"
+                      readOnly={!isEditing}
+                      onChange={handleChange}
                     />
                   </div>
                 </div>
@@ -95,6 +142,8 @@ export default function Form({ activeEmployeeId }) {
                       placeholder="xxx-xxx-xxxx"
                       value={employee.phone}
                       aria-label="phone"
+                      readOnly={!isEditing}
+                      onChange={handleChange}
                     />
                   </div>
                 </div>
@@ -114,6 +163,8 @@ export default function Form({ activeEmployeeId }) {
                       placeholder="1234 Main St"
                       value={employee.address}
                       aria-label="addresss"
+                      readOnly={!isEditing}
+                      onChange={handleChange}
                     />
                   </div>
                 </div>
@@ -165,6 +216,8 @@ export default function Form({ activeEmployeeId }) {
                         placeholder="Employee ID"
                         value={employee.empId}
                         aria-label="Employee ID"
+                        readOnly={!isEditing}
+                        onChange={handleChange}
                       />
                       <input
                         type="text"
@@ -201,6 +254,8 @@ export default function Form({ activeEmployeeId }) {
                         placeholder="Employee ID"
                         value={employee.role}
                         aria-label="Employee ID"
+                        readOnly={!isEditing}
+                        onChange={handleChange}
                       />
                       <input
                         type="text"
@@ -210,6 +265,8 @@ export default function Form({ activeEmployeeId }) {
                         placeholder="Social security"
                         value={employee.title}
                         aria-label="ssn"
+                        readOnly={!isEditing}
+                        onChange={handleChange}
                       />
                     </div>
                   </div>
@@ -238,6 +295,8 @@ export default function Form({ activeEmployeeId }) {
                         placeholder="07/22/24"
                         value={employee.hireDate}
                         aria-label="Hired"
+                        readOnly={!isEditing}
+                        onChange={handleChange}
                       />
                       <input
                         type="text"
@@ -246,6 +305,8 @@ export default function Form({ activeEmployeeId }) {
                         id="lastDayLabel"
                         placeholder="08/10/24"
                         aria-label="Last day"
+                        readOnly={!isEditing}
+                        onChange={handleChange}
                       />
                     </div>
                   </div>
@@ -273,6 +334,8 @@ export default function Form({ activeEmployeeId }) {
                         placeholder="$28.00/hr"
                         value={employee.wage}
                         aria-label="Hired"
+                        readOnly={!isEditing}
+                        onChange={handleChange}
                       />
                       <input
                         type="text"
@@ -281,6 +344,8 @@ export default function Form({ activeEmployeeId }) {
                         id="wageLabel"
                         placeholder="$28.00/hr"
                         aria-label="Last day"
+                        readOnly={!isEditing}
+                        onChange={handleChange}
                       />
                     </div>
                   </div>
@@ -301,6 +366,8 @@ export default function Form({ activeEmployeeId }) {
                         id="hoursLabel"
                         placeholder="Hours"
                         aria-label="Hours"
+                        readOnly={!isEditing}
+                        onChange={handleChange}
                       />
                       <input
                         type="text"
@@ -309,6 +376,8 @@ export default function Form({ activeEmployeeId }) {
                         id="breaksrLabel"
                         placeholder="Breaks"
                         aria-label="Breaks"
+                        readOnly={!isEditing}
+                        onChange={handleChange}
                       />
                       <input
                         type="text"
@@ -317,6 +386,8 @@ export default function Form({ activeEmployeeId }) {
                         id="overTime"
                         placeholder="Overtime"
                         aria-label="Overtime"
+                        readOnly={!isEditing}
+                        onChange={handleChange}
                       />
                     </div>
                   </div>
@@ -337,6 +408,8 @@ export default function Form({ activeEmployeeId }) {
                         id="bankNameLabel"
                         placeholder="Bank Name"
                         aria-label="Bank Name"
+                        readOnly={!isEditing}
+                        onChange={handleChange}
                       />
                       <input
                         type="text"
@@ -345,6 +418,8 @@ export default function Form({ activeEmployeeId }) {
                         id="accountNumberLabel"
                         placeholder="Account Number"
                         aria-label="Account Number"
+                        readOnly={!isEditing}
+                        onChange={handleChange}
                       />
                       <input
                         type="text"
@@ -353,6 +428,8 @@ export default function Form({ activeEmployeeId }) {
                         id="routingNumberLabel"
                         placeholder="Routing Number"
                         aria-label="Routing Number"
+                        readOnly={!isEditing}
+                        onChange={handleChange}
                       />
                     </div>
                   </div>
@@ -372,6 +449,8 @@ export default function Form({ activeEmployeeId }) {
                       id="payDateLabel"
                       placeholder="Payment Total"
                       aria-label="Payment Total"
+                      readOnly={!isEditing}
+                      onChange={handleChange}
                     />
                   </div>
                 </div>
@@ -391,12 +470,26 @@ export default function Form({ activeEmployeeId }) {
                       id="payDateLabel"
                       placeholder="Pay Date"
                       aria-label="Pay Date"
+                      readOnly={!isEditing}
+                      onChange={handleChange}
                     />
                   </div>
                 </div>
               </form>
               <div className="card-footer pt-0">
                 <div className="d-flex justify-content-end gap-3 mt-2">
+                  <button
+                    type="button"
+                    className="btn btn-sm btn-primary"
+                    onClick={handleEditClick}
+                  >
+                    {isEditing ? 'Cancel' : 'Edit Payment'}
+                  </button>
+                  {isEditing && (
+                    <button type="submit" className="btn btn-sm btn-success">
+                      Save
+                    </button>
+                  )}
                   <a className="btn btn-sm" href="#!">
                     Process Payment
                   </a>
