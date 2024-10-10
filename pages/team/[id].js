@@ -19,6 +19,7 @@ export default function Team() {
   const router = useRouter();
   const { id } = router.query;
   const [employee, setEmployee] = useState([]);
+
   // employee
   useEffect(() => {
     if (id) {

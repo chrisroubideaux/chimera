@@ -27,6 +27,7 @@ export default function Payrolls() {
   const [activeComponent, setActiveComponent] = useState('Team');
   const [admins, setAdmins] = useState([]);
   const [employees, setEmployees] = useState([]);
+  const [activeEmployeeId, setActiveEmployeeId] = useState(null);
 
   // useEffect
   useEffect(() => {
@@ -60,6 +61,9 @@ export default function Payrolls() {
         return (
           <PayrollForm
             setActiveComponent={setActiveComponent}
+            activeEmployeeId={activeEmployeeId} // Pass the active employee ID to PayrollForm
+            //  employees={employees}
+
             employees={employees}
           />
         );
@@ -82,7 +86,8 @@ export default function Payrolls() {
           <>
             <Employees
               setActiveComponent={setActiveComponent}
-              employees={employees} // Use singular for the mapped item
+              employees={employees}
+              setActiveEmployeeId={setActiveEmployeeId}
             />
           </>
         );
