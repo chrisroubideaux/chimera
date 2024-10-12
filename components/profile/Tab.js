@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 
-export default function Tab({ setActiveComponent }) {
+export default function Tab({ setActiveComponent, employees }) {
   return (
     <div className="mt-2">
       <div className="container content-space-1 content-space-b-lg-3">

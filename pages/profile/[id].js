@@ -22,9 +22,10 @@ export default function Profile() {
   const { id } = router.query;
   const [employee, setEmployee] = useState([]);
   const [message, setMessage] = useState([]);
-  const [meetings, setMeetings] = useState([]);
+  // const [meetings, setMeetings] = useState([]);
   const [selectedRecipient, setSelectedRecipient] = useState(null);
   const [timeOffRequests, setTimeOffRequests] = useState([]);
+  const [adminId, setAdminId] = useState('66d920a7274f0ef93f9dc3bd');
 
   //
 
@@ -59,7 +60,6 @@ export default function Profile() {
           console.log('Message data:', response.data);
           setMessage(response.data);
 
-          // Set the selected recipient based on the first message or some logic
           if (response.data.length > 0) {
             setSelectedRecipient(response.data[0].recipient);
           }
@@ -73,57 +73,64 @@ export default function Profile() {
   }, [id]);
 
   useEffect(() => {
-    const fetchTimeOffRequests = async () => {
-      try {
-        const response = await axios.get('http://localhost:3001/timeOff');
-        setTimeOffRequests(response.data);
-        console.log('Time-off data:', response.data);
-      } catch (error) {
-        console.error('Error fetching time-off data:', error);
-      }
-    };
-
-    fetchTimeOffRequests();
-  }, []);
-
-  {
-    /*
-  useEffect(() => {
     if (id) {
-      const fetchMessageData = async () => {
+      const fetchTimeOffRequests = async () => {
         try {
           const response = await axios.get(
-            `http://localhost:3001/messages/${id}`
+            `http://localhost:3001/timeOff/${id}`
           );
-          console.log('messagese data:', response.data);
-          setMessage(response.data);
+          setTimeOffRequests(response.data);
+          console.log('Time-off data:', response.data);
         } catch (error) {
-          console.error('Error fetching message data:', error);
+          console.error('Error fetching time-off data:', error);
         }
       };
 
-      fetchMessageData();
+      fetchTimeOffRequests();
     }
   }, [id]);
+  {
+    /*
+// time off
 
-*/
+useEffect(() => {
+  const fetchTimeOffRequests = async () => {
+    try {
+      const response = await axios.get(`http://localhost:3001/timeOff/${id}`);
+      setTimeOffRequests(response.data);
+      console.log('Time-off data:', response.data);
+    } catch (error) {
+      console.error('Error fetching time-off data:', error);
+    }
+  };
+  fetchTimeOffRequests();
+}, [id]);
+
+// Fetch meetings
+
+useEffect(() => {
+  axios
+    .get(`http://localhost:3001/meetings/${id}`)
+    .then((response) => {
+      setMeetings(response.data);
+    })
+    .catch((error) => {
+      console.error('Error fetching meetings:', error);
+    });
+}, [id]);
+
+  */
   }
-  //
-  // Fetch meetings
-  useEffect(() => {
-    axios
-      .get('http://localhost:3001/meetings')
-      .then((response) => {
-        setMeetings(response.data);
-      })
-      .catch((error) => {
-        console.error('Error fetching meetings:', error);
-      });
-  }, []);
   const renderComponent = () => {
     switch (activeComponent) {
       case 'Form':
-        return <Form timeOffRequests={timeOffRequests} />;
+        return (
+          <Form
+            adminId={adminId}
+            currentEmployeeId={id}
+            timeOffRequests={timeOffRequests}
+          />
+        );
       case 'Calendar':
         return <Calendar setActiveComponent={setActiveComponent} />;
       case 'Schedule':
@@ -150,9 +157,10 @@ export default function Profile() {
       case 'Notifications':
         return (
           <Notifications
-            meetings={meetings}
-            timeOffRequests={timeOffRequests}
+            //   meetings={meetings}
+            //  timeOffRequests={timeOffRequests}
             setActiveComponent={setActiveComponent}
+            currentEmployeeId={id}
           />
         );
       case 'Payments':
