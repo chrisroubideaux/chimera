@@ -25,7 +25,7 @@ export default function Profile() {
   // const [meetings, setMeetings] = useState([]);
   const [selectedRecipient, setSelectedRecipient] = useState(null);
   const [timeOffRequests, setTimeOffRequests] = useState([]);
-  const [adminId, setAdminId] = useState('66d920a7274f0ef93f9dc3bd');
+  const [adminId, setAdminId] = useState('');
 
   //
 
@@ -47,6 +47,22 @@ export default function Profile() {
       fetchEmployeeData();
     }
   }, [id]);
+
+  // admins
+
+  useEffect(() => {
+    const fetchAdminData = async () => {
+      try {
+        const response = await axios.get('http://localhost:3001/admins');
+        if (response.data.length > 0) {
+          setAdminId(response.data[0]._id); // Assuming you take the first admin’s ID
+        }
+      } catch (error) {
+        console.error('Error fetching admin data:', error);
+      }
+    };
+    fetchAdminData();
+  }, []);
 
   // messages
 
@@ -148,10 +164,11 @@ useEffect(() => {
           <Messages
             messages={message}
             setActiveComponent={setActiveComponent}
-            senderId={id}
-            recipientId={selectedRecipient?.id}
-            senderRole="employee"
-            recipientRole={selectedRecipient?.role}
+            currentEmployeeId={employee._id} // Replace with the actual employee ID
+            recipientId={adminId} // Pass dynamic adminId here
+            //   recipientId="66feb2d7bfdb4d747e58bcb9" // Example admin ID, make it dynamic if needed
+            senderModel="Employee"
+            recipientModel="Admin"
           />
         );
       case 'Notifications':

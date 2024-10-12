@@ -21,15 +21,14 @@ export default function Admin({}) {
   const [meetings, setMeetings] = useState([]);
   const [selectedRecipient, setSelectedRecipient] = useState(null);
   const [timeOffRequests, setTimeOffRequests] = useState([]);
+  const [employeeId, setEmployeeId] = useState('');
   // admin
   useEffect(() => {
     if (id) {
       // Ensure userId is defined
       const fetchAdminData = async () => {
         try {
-          const response = await axios.get(
-            `http://localhost:3001/admins/${id}`
-          );
+          const response = await axios.get(`//localhost:3001/admins/${id}`);
           console.log('Admin data:', response.data);
           setAdmin(response.data);
         } catch (error) {
@@ -40,6 +39,20 @@ export default function Admin({}) {
       fetchAdminData();
     }
   }, [id]);
+
+  useEffect(() => {
+    const fetchEmployeeData = async () => {
+      try {
+        const response = await axios.get('http://localhost:3001/employees');
+        if (response.data.length > 0) {
+          setEmployeeId(response.data[0]._id); // Assuming you take the first admin’s ID
+        }
+      } catch (error) {
+        console.error('Error fetching admin data:', error);
+      }
+    };
+    fetchEmployeeData();
+  }, []);
 
   // Fetch message data
   useEffect(() => {
@@ -100,10 +113,11 @@ export default function Admin({}) {
           <Messages
             messages={message}
             setActiveComponent={setActiveComponent}
-            senderId={id}
-            recipientId={selectedRecipient?.id}
-            senderRole="Admin"
-            recipientRole={selectedRecipient?.role}
+            currentAdminId={admin._id} // Replace with the actual employee ID
+            recipientId={employeeId} // Pass dynamic adminId here
+            //   recipientId="66feb2d7bfdb4d747e58bcb9" // Example admin ID, make it dynamic if needed
+            senderModel="Admin"
+            recipientModel="Employee"
           />
         );
       case 'Calendar':
