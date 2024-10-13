@@ -55,7 +55,7 @@ export default function Profile() {
       try {
         const response = await axios.get('http://localhost:3001/admins');
         if (response.data.length > 0) {
-          setAdminId(response.data[0]._id); // Assuming you take the first admin’s ID
+          setAdminId(response.data[0]._id);
         }
       } catch (error) {
         console.error('Error fetching admin data:', error);

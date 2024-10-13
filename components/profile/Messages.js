@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Image from 'next/image';
+import NewMessage from './newMessage';
 
 export default function Messages({
   setActiveComponent,
@@ -83,21 +84,15 @@ export default function Messages({
             >
               <div className="d-sm-flex justify-content-between align-items-center">
                 <div className="d-flex mb-2 mb-sm-0">
-                  <div className="flex-shrink-0 avatar me-2">
-                    <Image
-                      src="/path/to/recipient-image.jpg"
-                      alt="Recipient Avatar"
-                      width={40}
-                      height={40}
-                      className="rounded-circle"
-                    />
-                  </div>
+                  <div className="flex-shrink-0 avatar me-2"></div>
                   <div className="d-block flex-grow-1">
-                    <h6 className="mb-0 mt-1">Recipient Name</h6>
+                    <h6>Messages</h6>
+                    {/*
                     <div className="small text-secondary">
                       <i className="fa-solid fa-circle text-success me-1"></i>
                       Online
                     </div>
+                    */}
                   </div>
                 </div>
                 <div className="d-flex align-items-center">
@@ -108,7 +103,7 @@ export default function Messages({
                     <i className="social-icon fa-solid fa-video"></i>
                   </a>
                   <a href="#!" className="icon-md me-2 px-2">
-                    <i className="social-icon fa-solid fa-square-pen"></i>
+                    <NewMessage />
                   </a>
                   <div className="dropdown">
                     <a
@@ -149,9 +144,7 @@ export default function Messages({
                   </div>
                 </div>
               </div>
-
               <hr />
-
               <div className="chat-conversation-content custom-scrollbar">
                 {messages.length === 0 ? (
                   <div className="text-center small my-2">No messages yet</div>
@@ -316,10 +309,7 @@ export default function Messages({ setActiveComponent }) {
               <hr />
 
               <div className="chat-conversation-content custom-scrollbar">
-              
                   <div className="text-center small my-2">No messages yet</div>
-              
-                 
                     <div
                     
                       className=
