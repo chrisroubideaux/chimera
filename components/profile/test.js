@@ -1,142 +1,335 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-export default function Bio({ employees }) {
-  const [isEditing, setIsEditing] = useState(false);
-  const [employee, setEmployee] = useState(employees || {});
+export default function Messages({
+  setActiveComponent,
+  currentEmployeeId,
+  recipientId,
+  senderModel = 'Employee',
+  recipientModel = 'Admin',
+}) {
+  const [newMessage, setNewMessage] = useState('');
+  const [messages, setMessages] = useState([]);
 
-  // Update employee state when prop changes
+  // Fetch messages on load
   useEffect(() => {
-    if (employees) {
-      setEmployee(employees);
-    }
-  }, [employees]);
-
-  if (!employee || Object.keys(employee).length === 0) {
-    return <p>No employee data available.</p>;
-  }
-
-  // Toggle between edit and view mode
-  const handleEditClick = () => {
-    setIsEditing(!isEditing);
-  };
-
-  // Update employee state when input changes
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setEmployee((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-    console.log('Field Changed:', name, value); // Debugging log
-  };
-
-  const handleSaveChanges = async () => {
-    try {
-      const id = employee._id; // Use _id instead of id
-      await axios.put(`http://localhost:3001/employees/${id}`, employee);
-      console.log('Employee data updated successfully');
-
-      // Optionally, fetch the updated employee from the server
-      const updatedEmployee = await axios.get(
-        `http://localhost:3001/employees/${id}`
-      );
-      setEmployee(updatedEmployee.data);
-      setIsEditing(false);
-    } catch (error) {
-      if (error.response) {
-        // The request was made and the server responded with a status code
-        console.error('Error response:', error.response.data);
-        console.error('Status code:', error.response.status);
-      } else if (error.request) {
-        // The request was made but no response was received
-        console.error('Error request:', error.request);
-      } else {
-        // Something happened in setting up the request that triggered an error
-        console.error('Error message:', error.message);
+    async function fetchMessages() {
+      try {
+        const response = await axios.get('http://localhost:3001/messages');
+        setMessages(response.data);
+        console.log('Fetched messages:', response.data);
+      } catch (error) {
+        console.error(
+          'Error fetching messages:',
+          error.response ? error.response.data : error.message
+        );
       }
-      alert(
-        'Failed to save employee data. Check the console for more details.'
+    }
+
+    fetchMessages();
+  }, []);
+
+  // Send message function
+  const sendMessage = async () => {
+    if (!newMessage.trim()) {
+      console.error('Message content must be provided');
+      return;
+    }
+
+    const messageData = {
+      sender: currentEmployeeId,
+      recipient: recipientId,
+      senderModel,
+      recipientModel,
+      messageContent: newMessage,
+    };
+
+    console.log('Sending message:', messageData);
+
+    try {
+      const response = await axios.post(
+        'http://localhost:3001/messages',
+        messageData
       );
+      setMessages((prevMessages) => [...prevMessages, response.data]);
+      setNewMessage('');
+      console.log('Message sent:', response.data);
+    } catch (error) {
+      console.error('Failed to send message:', error);
     }
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    sendMessage();
+  };
   return (
-    <div className="mt-3">
-      <div className="col-lg-9">
-        <div className="d-grid gap-3 gap-lg-5">
-          <div className="card">
-            <div className="card-header border-bottom">
-              <h4 className="card-header-title">Profile</h4>
-            </div>
-            <div className="card-body">
-              <form onSubmit={handleSaveChanges}>
-                <div className="row mb-4">
-                  <label
-                    htmlFor="firstNameLabel"
-                    className="col-sm-3 col-form-label form-label"
+    <div className="chat-container mt-3">
+      <div className="card card-chat rounded-start-lg-0 border-start-lg-0">
+        <div className="card-body h-100">
+          <div className="chat-conversation-content custom-scrollbar">
+            {messages.length === 0 ? (
+              <div className="text-center small my-2">No messages yet</div>
+            ) : (
+              messages.map((message) => (
+                <div
+                  key={message._id}
+                  className={`d-flex mb-1 ${
+                    message.sender._id === currentEmployeeId
+                      ? 'justify-content-end'
+                      : ''
+                  }`}
+                >
+                  <div
+                    className={`flex-shrink-0 avatar avatar-xs me-2 ${
+                      message.sender._id === currentEmployeeId ? 'd-none' : ''
+                    }`}
                   >
-                    Full name
-                  </label>
-                  <div className="col-sm-9">
-                    <input
-                      type="text"
-                      className="form-control"
-                      name="name"
-                      id="firstNameLabel"
-                      placeholder="Full Name"
-                      value={employee.name || ''}
-                      readOnly={!isEditing}
-                      onChange={handleChange}
+                    <img
+                      src={message.sender.image || ''}
+                      alt=""
+                      className="avatar-img rounded-circle"
                     />
                   </div>
-                </div>
-
-                {/* Add similar structure for other fields */}
-                <div className="row mb-4">
-                  <label
-                    htmlFor="emailLabel"
-                    className="col-sm-3 col-form-label form-label"
-                  >
-                    Email
-                  </label>
-                  <div className="col-sm-9">
-                    <input
-                      type="email"
-                      className="form-control"
-                      name="email"
-                      id="emailLabel"
-                      placeholder="email@example.com"
-                      value={employee.email || ''}
-                      readOnly={!isEditing}
-                      onChange={handleChange}
-                    />
+                  <div className="flex-grow-1">
+                    <div className="w-100">
+                      <div className="d-flex flex-column">
+                        <h6 className="mt-1">{message.sender.name}</h6>
+                        <div
+                          className={`bg-${
+                            message.sender._id === currentEmployeeId
+                              ? 'light text-grey'
+                              : 'light text-secondary'
+                          } p-2 px-3 rounded-2`}
+                        >
+                          {message.messageContent}
+                        </div>
+                        <div className="small my-2">
+                          {new Date(message.timestamp).toLocaleTimeString()}
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-
-                {/* Add similar input fields as necessary */}
-
-                <div className="card-footer pt-0">
-                  <div className="d-flex justify-content-end gap-3 mt-2">
-                    <button
-                      type="button"
-                      className="btn btn-sm btn-primary"
-                      onClick={handleEditClick}
-                    >
-                      {isEditing ? 'Cancel' : 'Edit Profile'}
-                    </button>
-                    {isEditing && (
-                      <button type="submit" className="btn btn-sm btn-success">
-                        Save
-                      </button>
-                    )}
-                  </div>
-                </div>
-              </form>
-            </div>
+              ))
+            )}
           </div>
+          <form className="chat-input-form" onSubmit={handleSubmit}>
+            <div className="input-group">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Message"
+                value={newMessage}
+                onChange={(e) => setNewMessage(e.target.value)}
+              />
+              <button className="btn btn-primary" type="submit">
+                <i className="fa-solid fa-paper-plane"></i>
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
   );
+}
+
+{
+  /*
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+
+export default function Messages({
+  setActiveComponent,
+  currentEmployeeId,
+  recipientId,
+  senderModel = 'Employee',
+  recipientModel = 'Admin',
+}) {
+  const [newMessage, setNewMessage] = useState('');
+  const [messages, setMessages] = useState([]);
+
+  // Fetch messages for the current employee
+  useEffect(() => {
+    async function fetchMessages() {
+      try {
+        const response = await axios.get('http://localhost:3001/messages');
+        const allMessages = response.data;
+
+        const filteredMessages = allMessages.filter(
+          (msg) =>
+            msg.sender._id === currentEmployeeId ||
+            msg.recipient._id === currentEmployeeId
+        );
+
+        setMessages(filteredMessages);
+        console.log('Fetched messages:', filteredMessages);
+      } catch (error) {
+        console.error(
+          'Error fetching messages:',
+          error.response ? error.response.data : error.message
+        );
+      }
+    }
+
+    fetchMessages();
+  }, [currentEmployeeId]);
+
+  // Send a new message
+  const sendMessage = async () => {
+    if (!newMessage.trim()) {
+      console.error('Message content must be provided');
+      return;
+    }
+
+    const messageData = {
+      sender: { _id: currentEmployeeId },
+      recipient: { _id: recipientId },
+      senderModel,
+      recipientModel,
+      messageContent: newMessage,
+      timestamp: new Date().toISOString(),
+    };
+
+    console.log('Sending message:', messageData);
+
+    try {
+      const response = await axios.post(
+        'http://localhost:3001/messages',
+        messageData
+      );
+      setMessages((prevMessages) => [...prevMessages, response.data]);
+      setNewMessage('');
+      console.log('Message sent:', response.data);
+    } catch (error) {
+      console.error('Failed to send message:', error);
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    sendMessage();
+  };
+
+  return (
+    <div className="chat-container mt-3">
+      <div className="card card-chat rounded-start-lg-0 border-start-lg-0">
+        <div className="card-body h-100">
+        <div className="d-flex align-items-center">
+                  <a href="#!" className="icon-md me-2 px-2">
+                    <i className="social-icon fa-solid fa-comments"></i>
+                  </a>
+                  <a href="#!" className="icon-md me-2 px-2">
+                    <i className="social-icon fa-solid fa-video"></i>
+                  </a>
+                  <a href="#!" className="icon-md me-2 px-2">
+                    <i className="social-icon fa-solid fa-square-pen"></i>
+                  </a>
+                  <div className="dropdown">
+                    <a
+                      className="icon-md rounded-circle me-2 px-2"
+                      href="#"
+                      id="chatcoversationDropdown"
+                      data-bs-toggle="dropdown"
+                    >
+                      <i className="social-icon fa-solid fa-ellipsis-vertical"></i>
+                    </a>
+                    <ul className="dropdown-menu dropdown-menu-end w-75">
+                      <li>
+                        <a className="dropdown-item" href="#">
+                          <i className="fs-6 social-icon fa-solid fa-check me-2"></i>
+                          Mark as read
+                        </a>
+                      </li>
+                      <li>
+                        <a className="dropdown-item" href="#">
+                          <i className="fs-6 social-icon fa-solid fa-microphone-slash me-2"></i>
+                          Mute
+                        </a>
+                      </li>
+                      <li>
+                        <a className="dropdown-item" href="#">
+                          <i className="fs-6 social-icon fa-solid fa-trash me-2"></i>
+                          Delete chat
+                        </a>
+                      </li>
+                      <li className="dropdown-divider"></li>
+                      <li>
+                        <a className="dropdown-item" href="#">
+                          <i className="fs-6 social-icon fa-solid fa-box-archive me-2"></i>
+                          Archive chat
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+          <div className="chat-conversation-content custom-scrollbar">
+            {messages.length === 0 ? (
+              <div className="text-center small my-2">No messages yet</div>
+            ) : (
+              messages.map((message) => (
+                <div
+                  key={message._id}
+                  className={`d-flex mb-1 ${
+                    message.sender._id === currentEmployeeId
+                      ? 'justify-content-end'
+                      : ''
+                  }`}
+                >
+                  <div
+                    className={`flex-shrink-0 avatar avatar-xs me-2 ${
+                      message.sender._id === currentEmployeeId ? 'd-none' : ''
+                    }`}
+                  >
+                    <img
+                      src={message.sender.image || ''}
+                      alt=""
+                      className="avatar-img rounded-circle"
+                    />
+                  </div>
+                  <div className="flex-grow-1">
+                    <div className="w-100">
+                      <div className="d-flex flex-column">
+                        <h6 className="mt-1">{message.sender.name}</h6>
+                        <div
+                          className={`bg-${
+                            message.sender._id === currentEmployeeId
+                              ? 'light text-grey'
+                              : 'light text-secondary'
+                          } p-2 px-3 rounded-2`}
+                        >
+                          {message.messageContent}
+                        </div>
+                        <div className="small my-2">
+                          {new Date(message.timestamp).toLocaleTimeString()}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+          <form className="chat-input-form" onSubmit={handleSubmit}>
+            <div className="input-group">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Message"
+                value={newMessage}
+                onChange={(e) => setNewMessage(e.target.value)}
+              />
+              <button className="btn btn-primary" type="submit">
+                <i className="fa-solid fa-paper-plane"></i>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+*/
 }

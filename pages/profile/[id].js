@@ -164,9 +164,8 @@ useEffect(() => {
           <Messages
             messages={message}
             setActiveComponent={setActiveComponent}
-            currentEmployeeId={employee._id} // Replace with the actual employee ID
-            recipientId={adminId} // Pass dynamic adminId here
-            //   recipientId="66feb2d7bfdb4d747e58bcb9" // Example admin ID, make it dynamic if needed
+            currentEmployeeId={employee._id}
+            recipientId={adminId}
             senderModel="Employee"
             recipientModel="Admin"
           />
