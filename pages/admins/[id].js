@@ -113,9 +113,9 @@ export default function Admin({}) {
           <Messages
             messages={message}
             setActiveComponent={setActiveComponent}
-            currentAdminId={admin._id} // Replace with the actual employee ID
-            recipientId={employeeId} // Pass dynamic adminId here
-            //   recipientId="66feb2d7bfdb4d747e58bcb9" // Example admin ID, make it dynamic if needed
+            currentAdminId={admin._id}
+            selectedRecipientId={employeeId}
+            recipientId={employeeId}
             senderModel="Admin"
             recipientModel="Employee"
           />

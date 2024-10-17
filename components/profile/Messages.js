@@ -12,6 +12,8 @@ export default function Messages({
 }) {
   const [newMessage, setNewMessage] = useState('');
   const [messages, setMessages] = useState([]);
+  const [employees, setEmployees] = useState([]); // Initialize as an array
+  const [admins, setAdmins] = useState([]); // Initialize as an array
 
   // Fetch messages for the current employee
   useEffect(() => {
@@ -45,6 +47,9 @@ export default function Messages({
       return;
     }
 
+    const isRecipientAdmin = admins.some((admin) => admin._id === recipientId);
+    const recipientModel = isRecipientAdmin ? 'Admin' : 'Employee';
+
     const messageData = {
       sender: { _id: currentEmployeeId },
       recipient: { _id: recipientId },
@@ -53,7 +58,6 @@ export default function Messages({
       messageContent: newMessage,
       timestamp: new Date().toISOString(),
     };
-
     try {
       const response = await axios.post(
         'http://localhost:3001/messages',
@@ -71,6 +75,32 @@ export default function Messages({
     sendMessage();
   };
 
+  useEffect(() => {
+    const fetchEmployees = async () => {
+      try {
+        const response = await axios.get('http://localhost:3001/employees');
+        setEmployees(response.data);
+      } catch (error) {
+        console.error('Error fetching employees:', error);
+      }
+    };
+
+    fetchEmployees();
+  }, []);
+  // admins
+
+  useEffect(() => {
+    async function fetchAdmins() {
+      try {
+        const response = await axios.get('http://localhost:3001/admins');
+        setAdmins(response.data);
+      } catch (error) {
+        console.error('Error fetching admins:', error);
+      }
+    }
+
+    fetchAdmins();
+  }, []);
   return (
     <div className="chat-container mt-3">
       <div className="card card-chat rounded-start-lg-0 border-start-lg-0">
@@ -96,14 +126,29 @@ export default function Messages({
                   </div>
                 </div>
                 <div className="d-flex align-items-center">
-                  <a href="#!" className="icon-md me-2 px-2">
+                  <a
+                    href="#"
+                    className="icon-md me-2 px-2"
+                    onClick={() => setActiveComponent('ViewMessages')}
+                  >
                     <i className="social-icon fa-solid fa-comments"></i>
                   </a>
                   <a href="#!" className="icon-md me-2 px-2">
                     <i className="social-icon fa-solid fa-video"></i>
                   </a>
                   <a href="#!" className="icon-md me-2 px-2">
-                    <NewMessage />
+                    <NewMessage
+                      //  currentEmployeeId={currentEmployeeId}
+                      //recipientId={recipientId}
+                      //senderModel={senderModel}
+                      //recipientModel={recipientModel}
+                      //employees={employees}
+                      //admins={admins}
+                      currentEmployeeId={currentEmployeeId}
+                      employees={employees}
+                      admins={admins}
+                      senderModel="Employee"
+                    />
                   </a>
                   <div className="dropdown">
                     <a

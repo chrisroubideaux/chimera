@@ -7,6 +7,7 @@ import Tab from '@/components/profile/Tab';
 import Sidebar from '@/components/profile/Sidebar';
 import Notifications from '@/components/profile/Notifications';
 import Messages from '@/components/profile/Messages';
+import ViewMessages from '@/components/profile/ViewMessages';
 import Hours from '@/components/profile/Hours';
 //import Chat from '@/components/messages/Chat';
 import Schedule from '@/components/profile/Schedule';
@@ -151,6 +152,8 @@ useEffect(() => {
         return <Calendar setActiveComponent={setActiveComponent} />;
       case 'Schedule':
         return <Schedule setActiveComponent={setActiveComponent} />;
+      case 'Schedule':
+        return <ViewMessages setActiveComponent={setActiveComponent} />;
       case 'Hours':
         return <Hours setActiveComponent={setActiveComponent} />;
         {

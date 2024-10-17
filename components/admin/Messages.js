@@ -1,23 +1,51 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import NewMessage from './NewMessage';
 
 export default function Messages({
   setActiveComponent,
   currentAdminId,
-  recipientId,
+  currentEmployeeId,
   senderModel = 'Admin',
   recipientModel = 'Employee',
+  selectedRecipientId,
 }) {
   const [newMessage, setNewMessage] = useState('');
   const [messages, setMessages] = useState([]);
+  const [employees, setEmployees] = useState([]); // Initialize as an array
+  const [admins, setAdmins] = useState([]); // Initialize admins state
 
-  // Fetch messages on load
+  // Fetch admins on component load
+  useEffect(() => {
+    const fetchAdmins = async () => {
+      try {
+        const response = await axios.get('http://localhost:3001/admins');
+        setAdmins(response.data);
+      } catch (error) {
+        console.error('Error fetching admins:', error);
+      }
+    };
+
+    fetchAdmins();
+  }, []);
+
+  // Fetch and filter messages on load
   useEffect(() => {
     async function fetchMessages() {
       try {
         const response = await axios.get('http://localhost:3001/messages');
-        setMessages(response.data);
-        console.log('Fetched messages:', response.data);
+        const allMessages = response.data;
+
+        const filteredMessages = allMessages.filter(
+          (message) =>
+            (message.sender._id === currentAdminId &&
+              message.senderModel === 'Admin') ||
+            (message.recipient._id === currentAdminId &&
+              message.recipientModel === 'Admin')
+        );
+
+        setMessages(filteredMessages);
+        console.log('Filtered messages:', filteredMessages);
       } catch (error) {
         console.error(
           'Error fetching messages:',
@@ -27,18 +55,22 @@ export default function Messages({
     }
 
     fetchMessages();
-  }, []);
+  }, [currentAdminId]);
 
-  // Send message function
   const sendMessage = async () => {
     if (!newMessage.trim()) {
       console.error('Message content must be provided');
       return;
     }
 
+    if (!selectedRecipientId) {
+      console.error('Recipient ID must be selected');
+      return;
+    }
+
     const messageData = {
-      sender: currentAdminId,
-      recipient: recipientId,
+      sender: { _id: currentAdminId },
+      recipient: { _id: selectedRecipientId },
       senderModel,
       recipientModel,
       messageContent: newMessage,
@@ -64,10 +96,81 @@ export default function Messages({
     sendMessage();
   };
 
+  useEffect(() => {
+    const fetchEmployees = async () => {
+      try {
+        const response = await axios.get('http://localhost:3001/employees');
+        setEmployees(response.data);
+      } catch (error) {
+        console.error('Error fetching employees:', error);
+      }
+    };
+
+    fetchEmployees();
+  }, []);
+
   return (
     <div className="chat-container mt-3">
       <div className="card card-chat rounded-start-lg-0 border-start-lg-0">
         <div className="card-body h-100">
+          <div className="d-flex align-items-center">
+            <a
+              href="#"
+              className="icon-md me-2 px-2"
+              onClick={() => setActiveComponent('ViewMessages')}
+            >
+              <i className="social-icon fa-solid fa-comments"></i>
+            </a>
+            <a href="#!" className="icon-md me-2 px-2">
+              <i className="social-icon fa-solid fa-video"></i>
+            </a>
+            <a href="#!" className="icon-md me-2 px-2">
+              <NewMessage
+                currentEmployeeId={currentEmployeeId}
+                employees={employees}
+                admins={admins} // Pass admins state here
+                senderModel="Employee"
+              />
+            </a>
+            <div className="dropdown">
+              <a
+                className="icon-md rounded-circle me-2 px-2"
+                href="#"
+                id="chatcoversationDropdown"
+                data-bs-toggle="dropdown"
+              >
+                <i className="social-icon fa-solid fa-ellipsis-vertical"></i>
+              </a>
+              <ul className="dropdown-menu dropdown-menu-end w-75">
+                <li>
+                  <a className="dropdown-item" href="#">
+                    <i className="fs-6 social-icon fa-solid fa-check me-2"></i>
+                    Mark as read
+                  </a>
+                </li>
+                <li>
+                  <a className="dropdown-item" href="#">
+                    <i className="fs-6 social-icon fa-solid fa-microphone-slash me-2"></i>
+                    Mute
+                  </a>
+                </li>
+                <li>
+                  <a className="dropdown-item" href="#">
+                    <i className="fs-6 social-icon fa-solid fa-trash me-2"></i>
+                    Delete chat
+                  </a>
+                </li>
+                <li className="dropdown-divider"></li>
+                <li>
+                  <a className="dropdown-item" href="#">
+                    <i className="fs-6 social-icon fa-solid fa-box-archive me-2"></i>
+                    Archive chat
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
           <div className="chat-conversation-content custom-scrollbar">
             {messages.length === 0 ? (
               <div className="text-center small my-2">No messages yet</div>
