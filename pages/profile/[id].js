@@ -152,7 +152,7 @@ useEffect(() => {
         return <Calendar setActiveComponent={setActiveComponent} />;
       case 'Schedule':
         return <Schedule setActiveComponent={setActiveComponent} />;
-      case 'Schedule':
+      case 'ViewMessages':
         return <ViewMessages setActiveComponent={setActiveComponent} />;
       case 'Hours':
         return <Hours setActiveComponent={setActiveComponent} />;

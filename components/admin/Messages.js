@@ -126,10 +126,10 @@ export default function Messages({
             </a>
             <a href="#!" className="icon-md me-2 px-2">
               <NewMessage
-                currentEmployeeId={currentEmployeeId}
+                currentAdminId={currentAdminId}
                 employees={employees}
                 admins={admins} // Pass admins state here
-                senderModel="Employee"
+                senderModel="Admin"
               />
             </a>
             <div className="dropdown">

@@ -12,8 +12,8 @@ export default function Messages({
 }) {
   const [newMessage, setNewMessage] = useState('');
   const [messages, setMessages] = useState([]);
-  const [employees, setEmployees] = useState([]); // Initialize as an array
-  const [admins, setAdmins] = useState([]); // Initialize as an array
+  const [employees, setEmployees] = useState([]);
+  const [admins, setAdmins] = useState([]);
 
   // Fetch messages for the current employee
   useEffect(() => {

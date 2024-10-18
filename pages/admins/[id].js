@@ -7,6 +7,7 @@ import Tab from '@/components/admin/Tab';
 import Sidebar from '@/components/admin/Sidebar';
 import Bio from '@/components/admin/Bio';
 import Messages from '@/components/admin/Messages';
+import ViewMessages from '@/components/admin/ViewMessages';
 import Notifications from '@/components/admin/Notifications';
 import Calendar from '@/components/calendar/Calendar';
 import Schedule from '@/components/admin/Schedule';
@@ -122,6 +123,8 @@ export default function Admin({}) {
         );
       case 'Calendar':
         return <Calendar setActiveComponent={setActiveComponent} />;
+      case 'ViewMessages':
+        return <ViewMessages setActiveComponent={setActiveComponent} />;
       case 'Notifications':
         return (
           <Notifications

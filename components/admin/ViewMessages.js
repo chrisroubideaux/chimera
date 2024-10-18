@@ -1,14 +1,17 @@
 // View messages componet
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import Image from 'next/image';
+import NewMessage from './NewMessage';
 
 export default function ViewMessages({
   setActiveComponent,
   currentEmployeeId,
+  currentAdminId,
 }) {
   const [messages, setMessages] = useState([]);
-  const [admins, setAdmins] = useState([]); // Track admins in state
-  const [employees, setEmployees] = useState([]); // Track employees in state
+  const [admins, setAdmins] = useState([]);
+  const [employees, setEmployees] = useState([]);
   const [loading, setLoading] = useState(true);
 
   // Fetch messages, admins, and employees data on load
@@ -21,8 +24,8 @@ export default function ViewMessages({
           axios.get('http://localhost:3001/employees'),
         ]);
 
-        setAdmins(adminsRes.data); // Store admins
-        setEmployees(employeesRes.data); // Store employees
+        setAdmins(adminsRes.data);
+        setEmployees(employeesRes.data);
         const allMessages = messagesRes.data;
 
         // Attach sender/recipient names to messages
@@ -51,7 +54,7 @@ export default function ViewMessages({
     fetchData();
   }, []);
 
-  // Helper function to find a user by ID and model (Admin/Employee)
+  // Find a user by ID and model (Admin/Employee)
   const findUserById = (id, model, admins, employees) => {
     if (model === 'Admin') return admins.find((admin) => admin._id === id);
     if (model === 'Employee') return employees.find((emp) => emp._id === id);
@@ -83,21 +86,22 @@ export default function ViewMessages({
                         />
                       </div>
                       <div className="d-block flex-grow-1">
-                        <h6 className="mb-0 mt-1 fw-bold d-flex px-1">
-                          View Messages
+                        <h6 className="mb-0 mt-1 fw-bold d-flex px-1 fs-4">
+                          Messages
                         </h6>
                       </div>
                     </div>
-                    <div>
-                      <h6 className="fw-bold me-2 px-2">
-                        Total Hours
-                        <i className="social-icon fa-solid fa-hourglass-end"></i>
-                      </h6>
-                    </div>
+
+                    <a href="#" className=" me-2">
+                      <NewMessage
+                        currentAdminId={currentAdminId}
+                        employees={employees}
+                        admins={admins} // Pass admins state here
+                        senderModel="Admin"
+                      />
+                    </a>
                   </div>
-
                   <hr />
-
                   <div className="list-group" style={{ width: '50rem' }}>
                     {messages.map((message) => (
                       <label
@@ -108,10 +112,18 @@ export default function ViewMessages({
                           <strong className="d-flex me-5">
                             {message.senderName}
                           </strong>
-                          <h5 className="d-block">
-                            <i className="social-icon fa-solid fa-calendar-days me-1"></i>
+                          <h6 className="d-block text-dark">
+                            <Image
+                              src={
+                                message.sender.image ||
+                                '/path/to/default-avatar.jpg'
+                              }
+                              width={30}
+                              height={30}
+                              className="rounded-circle"
+                            />
                             {message.messageContent}
-                          </h5>
+                          </h6>
                           {message.timestamp}
                         </span>
                       </label>

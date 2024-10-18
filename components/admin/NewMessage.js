@@ -3,14 +3,14 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 export default function NewMessage({
-  currentEmployeeId,
+  currentAdminId,
   employees,
   admins,
-  senderModel = 'Employee', // Default sender model is 'Employee'
+  senderModel = 'Admin',
 }) {
   const [newMessage, setNewMessage] = useState('');
-  const [recipientId, setRecipientId] = useState(''); // Dynamic recipient ID state
-  const [recipientModel, setRecipientModel] = useState(''); // Dynamic recipient model
+  const [recipientId, setRecipientId] = useState('');
+  const [recipientModel, setRecipientModel] = useState('');
 
   // Send a new message
   const sendMessage = async () => {
@@ -20,10 +20,10 @@ export default function NewMessage({
     }
 
     const messageData = {
-      sender: { _id: currentEmployeeId },
-      recipient: { _id: recipientId }, // Use recipientId from the state
+      sender: { _id: currentAdminId },
+      recipient: { _id: recipientId },
       senderModel,
-      recipientModel, // Use the dynamic recipient model
+      recipientModel,
       messageContent: newMessage,
       timestamp: new Date().toISOString(),
     };
@@ -35,8 +35,8 @@ export default function NewMessage({
       );
       console.log('Message sent successfully:', response.data);
       setNewMessage('');
-      setRecipientId(''); // Clear after sending
-      setRecipientModel(''); // Reset model after sending
+      setRecipientId('');
+      setRecipientModel('');
     } catch (error) {
       console.error('Failed to send message:', error);
     }
@@ -95,7 +95,7 @@ export default function NewMessage({
                 <select
                   className="form-select"
                   value={recipientId}
-                  onChange={handleRecipientChange} // Set recipient ID and model
+                  onChange={handleRecipientChange}
                 >
                   <option value="">Select Recipient</option>
                   {employees.map((employee) => (
