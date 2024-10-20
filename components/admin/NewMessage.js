@@ -1,4 +1,66 @@
-// New messgaes component
+import { useEffect, useState } from 'react';
+
+export default function NewMessage({
+  currentAdminId,
+  employees,
+  admins,
+  onRecipientSelect,
+}) {
+  const [selectedId, setSelectedId] = useState(''); // Track the selected recipient's ID
+
+  // Load the selected recipient from localStorage on component mount
+  useEffect(() => {
+    const storedRecipient = localStorage.getItem('selectedRecipientId');
+    if (storedRecipient) {
+      setSelectedId(storedRecipient);
+    }
+  }, []);
+
+  const handleRecipientChange = (e) => {
+    const selectedId = e.target.value;
+    setSelectedId(selectedId); // Update the selected recipient's ID
+    localStorage.setItem('selectedRecipientId', selectedId); // Save the selection in localStorage
+
+    const selectedRecipient =
+      employees.find((emp) => emp._id === selectedId) ||
+      admins.find((admin) => admin._id === selectedId);
+
+    if (selectedRecipient) {
+      const recipientModel = selectedRecipient._id.startsWith('66')
+        ? 'Admin'
+        : 'Employee';
+      onRecipientSelect({ ...selectedRecipient, model: recipientModel });
+    }
+  };
+
+  return (
+    <div>
+      <div className="input-group mb-3">
+        <span className="input-group-text">To</span>
+        <select
+          className="form-select"
+          onChange={handleRecipientChange}
+          value={selectedId} // Set the selected value from state
+        >
+          <option value="">Contacts</option>
+          {employees.map((emp) => (
+            <option key={emp._id} value={emp._id}>
+              {emp.name}
+            </option>
+          ))}
+          {admins.map((admin) => (
+            <option key={admin._id} value={admin._id}>
+              {admin.name}
+            </option>
+          ))}
+        </select>
+      </div>
+    </div>
+  );
+}
+
+{
+  /*
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -89,7 +151,6 @@ export default function NewMessage({
             </div>
 
             <div className="modal-body">
-              {/* Recipient Dropdown */}
               <div className="input-group mb-3">
                 <span className="input-group-text">To</span>
                 <select
@@ -97,7 +158,7 @@ export default function NewMessage({
                   value={recipientId}
                   onChange={handleRecipientChange}
                 >
-                  <option value="">Select Recipient</option>
+                  <option value="">Contacts</option>
                   {employees.map((employee) => (
                     <option key={employee._id} value={employee._id}>
                       {employee.name}
@@ -111,7 +172,6 @@ export default function NewMessage({
                 </select>
               </div>
 
-              {/* Message Input */}
               <form onSubmit={handleSubmit}>
                 <div className="input-group" style={{ width: '30rem' }}>
                   <input
@@ -132,4 +192,6 @@ export default function NewMessage({
       </div>
     </div>
   );
+}
+*/
 }
