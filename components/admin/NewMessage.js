@@ -1,123 +1,56 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function NewMessage({
-  currentAdminId,
-  employees,
-  admins,
+  employees = [],
+  admins = [],
   onRecipientSelect,
 }) {
-  const [selectedId, setSelectedId] = useState(''); // Track the selected recipient's ID
+  const [selectedId, setSelectedId] = useState('');
+  const [isDataLoaded, setIsDataLoaded] = useState(false); // Track loading state
 
-  // Load the selected recipient from localStorage on component mount
+  // Load employees/admins, and only then read from localStorage
   useEffect(() => {
-    const storedRecipient = localStorage.getItem('selectedRecipientId');
-    if (storedRecipient) {
-      setSelectedId(storedRecipient);
+    if (employees.length > 0 || admins.length > 0) {
+      const storedRecipientId = localStorage.getItem('selectedRecipientId');
+      console.log('Stored Recipient ID:', storedRecipientId);
+
+      if (storedRecipientId) {
+        const selectedRecipient =
+          employees.find((emp) => emp._id === storedRecipientId) ||
+          admins.find((admin) => admin._id === storedRecipientId);
+
+        if (selectedRecipient) {
+          console.log('Selected Recipient Found:', selectedRecipient);
+          setSelectedId(storedRecipientId);
+          const recipientModel = storedRecipientId.startsWith('66')
+            ? 'Admin'
+            : 'Employee';
+          onRecipientSelect({ ...selectedRecipient, model: recipientModel });
+        }
+      }
+
+      setIsDataLoaded(true); // Mark data as loaded
     }
-  }, []);
+  }, [employees, admins]);
 
   const handleRecipientChange = (e) => {
     const selectedId = e.target.value;
-    setSelectedId(selectedId); // Update the selected recipient's ID
-    localStorage.setItem('selectedRecipientId', selectedId); // Save the selection in localStorage
+    setSelectedId(selectedId);
+    localStorage.setItem('selectedRecipientId', selectedId);
 
     const selectedRecipient =
       employees.find((emp) => emp._id === selectedId) ||
       admins.find((admin) => admin._id === selectedId);
 
     if (selectedRecipient) {
-      const recipientModel = selectedRecipient._id.startsWith('66')
-        ? 'Admin'
-        : 'Employee';
+      const recipientModel = selectedId.startsWith('66') ? 'Admin' : 'Employee';
       onRecipientSelect({ ...selectedRecipient, model: recipientModel });
     }
   };
 
-  return (
-    <div>
-      <div className="input-group mb-3">
-        <span className="input-group-text">To</span>
-        <select
-          className="form-select"
-          onChange={handleRecipientChange}
-          value={selectedId} // Set the selected value from state
-        >
-          <option value="">Contacts</option>
-          {employees.map((emp) => (
-            <option key={emp._id} value={emp._id}>
-              {emp.name}
-            </option>
-          ))}
-          {admins.map((admin) => (
-            <option key={admin._id} value={admin._id}>
-              {admin.name}
-            </option>
-          ))}
-        </select>
-      </div>
-    </div>
-  );
-}
-
-{
-  /*
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-
-export default function NewMessage({
-  currentAdminId,
-  employees,
-  admins,
-  senderModel = 'Admin',
-}) {
-  const [newMessage, setNewMessage] = useState('');
-  const [recipientId, setRecipientId] = useState('');
-  const [recipientModel, setRecipientModel] = useState('');
-
-  // Send a new message
-  const sendMessage = async () => {
-    if (!newMessage.trim() || !recipientId) {
-      console.error('Message content and recipient must be provided');
-      return;
-    }
-
-    const messageData = {
-      sender: { _id: currentAdminId },
-      recipient: { _id: recipientId },
-      senderModel,
-      recipientModel,
-      messageContent: newMessage,
-      timestamp: new Date().toISOString(),
-    };
-
-    try {
-      const response = await axios.post(
-        'http://localhost:3001/messages',
-        messageData
-      );
-      console.log('Message sent successfully:', response.data);
-      setNewMessage('');
-      setRecipientId('');
-      setRecipientModel('');
-    } catch (error) {
-      console.error('Failed to send message:', error);
-    }
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    sendMessage();
-  };
-
-  const handleRecipientChange = (e) => {
-    const selectedId = e.target.value;
-    setRecipientId(selectedId);
-
-    // Dynamically determine if the recipient is an Admin or Employee
-    const isAdmin = admins.some((admin) => admin._id === selectedId);
-    setRecipientModel(isAdmin ? 'Admin' : 'Employee');
-  };
-
+  if (!isDataLoaded) {
+    return <div>Loading contacts...</div>; // Prevent rendering until data is ready
+  }
   return (
     <div>
       <button
@@ -155,13 +88,13 @@ export default function NewMessage({
                 <span className="input-group-text">To</span>
                 <select
                   className="form-select"
-                  value={recipientId}
                   onChange={handleRecipientChange}
+                  value={selectedId}
                 >
                   <option value="">Contacts</option>
-                  {employees.map((employee) => (
-                    <option key={employee._id} value={employee._id}>
-                      {employee.name}
+                  {employees.map((emp) => (
+                    <option key={emp._id} value={emp._id}>
+                      {emp.name}
                     </option>
                   ))}
                   {admins.map((admin) => (
@@ -172,14 +105,88 @@ export default function NewMessage({
                 </select>
               </div>
 
+              <form>
+                <div className="input-group" style={{ width: '30rem' }}>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Message"
+                  />
+                  <button className="btn btn-primary" type="submit">
+                    <i className="fa-solid fa-paper-plane"></i>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+{
+  /*
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+
+export default function NewMessage({
+  
+}) {
+  
+
+ return (
+    <div>
+      <button
+        type="button"
+        className="btn btn-sm bg-transparent me-1 px-2"
+        data-bs-toggle="modal"
+        data-bs-target="#newMessageModal"
+      >
+        <i className="social-icon fa-solid fa-square-pen"></i>
+      </button>
+
+      <div
+        className="modal fade"
+        id="newMessageModal"
+        tabIndex="-1"
+        aria-labelledby="newMessageModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h1 className="modal-title fs-5" id="newMessageModalLabel">
+                New Message
+              </h1>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+
+            <div className="modal-body">
+              <div className="input-group mb-3">
+                <span className="input-group-text">To</span>
+                <select
+                  className="form-select"
+                
+                >
+                  <option value="">Contacts</option>
+                 
+                 
+                </select>
+              </div>
+
               <form onSubmit={handleSubmit}>
                 <div className="input-group" style={{ width: '30rem' }}>
                   <input
                     type="text"
                     className="form-control"
                     placeholder="Message"
-                    value={newMessage}
-                    onChange={(e) => setNewMessage(e.target.value)}
+                  
                   />
                   <button className="btn btn-primary" type="submit">
                     <i className="fa-solid fa-paper-plane"></i>

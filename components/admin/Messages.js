@@ -7,7 +7,7 @@ export default function Messages({ setActiveComponent, currentAdminId }) {
   const [messages, setMessages] = useState([]);
   const [employees, setEmployees] = useState([]);
   const [admins, setAdmins] = useState([]);
-  const [activeRecipient, setActiveRecipient] = useState(null); // Track the active recipient
+  const [activeRecipient, setActiveRecipient] = useState(null);
 
   // Fetch admins on component load
   useEffect(() => {
@@ -83,7 +83,7 @@ export default function Messages({ setActiveComponent, currentAdminId }) {
   };
 
   const handleRecipientSelect = (recipient) => {
-    setActiveRecipient(recipient); // Set the active recipient for the conversation
+    setActiveRecipient(recipient);
   };
 
   return (
@@ -103,7 +103,7 @@ export default function Messages({ setActiveComponent, currentAdminId }) {
               currentAdminId={currentAdminId}
               employees={employees}
               admins={admins}
-              onRecipientSelect={handleRecipientSelect} // Pass recipient selection handler
+              onRecipientSelect={handleRecipientSelect}
             />
           </div>
 
@@ -145,7 +145,10 @@ export default function Messages({ setActiveComponent, currentAdminId }) {
                           {msg.messageContent}
                         </div>
                         <div className="small my-2">
-                          {new Date(msg.timestamp).toLocaleTimeString()}
+                          {new Date(msg.timestamp).toLocaleTimeString([], {
+                            hour: '2-digit',
+                            minute: '2-digit',
+                          })}
                         </div>
                       </div>
                     </div>
