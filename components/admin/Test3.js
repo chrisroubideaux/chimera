@@ -9,43 +9,36 @@ export default function Messages({ setActiveComponent, currentAdminId }) {
   const [admins, setAdmins] = useState([]);
   const [activeRecipient, setActiveRecipient] = useState(null);
 
-  // Fetch admins on component load
+  // Fetch employees and admins on component load
   useEffect(() => {
-    const fetchAdmins = async () => {
+    const fetchContacts = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/admins');
-        setAdmins(response.data);
+        const [adminsRes, employeesRes] = await Promise.all([
+          axios.get('http://localhost:3001/admins'),
+          axios.get('http://localhost:3001/employees'),
+        ]);
+        setAdmins(adminsRes.data);
+        setEmployees(employeesRes.data);
       } catch (error) {
-        console.error('Error fetching admins:', error);
+        console.error('Error fetching contacts:', error);
       }
     };
-    fetchAdmins();
+    fetchContacts();
   }, []);
 
-  // Fetch employees on component load
-  useEffect(() => {
-    const fetchEmployees = async () => {
-      try {
-        const response = await axios.get('http://localhost:3001/employees');
-        setEmployees(response.data);
-      } catch (error) {
-        console.error('Error fetching employees:', error);
-      }
-    };
-    fetchEmployees();
-  }, []);
-
-  // Fetch and filter messages on load
+  // Fetch messages when the recipient changes
   useEffect(() => {
     const fetchMessages = async () => {
+      if (!activeRecipient) return; // Prevent fetching if no recipient selected
+
       try {
         const response = await axios.get('http://localhost:3001/messages');
         const filteredMessages = response.data.filter(
           (msg) =>
             (msg.sender._id === currentAdminId &&
-              msg.senderModel === 'Admin') ||
-            (msg.recipient._id === currentAdminId &&
-              msg.recipientModel === 'Admin')
+              msg.recipient._id === activeRecipient._id) ||
+            (msg.sender._id === activeRecipient._id &&
+              msg.recipient._id === currentAdminId)
         );
         setMessages(filteredMessages);
       } catch (error) {
@@ -53,7 +46,7 @@ export default function Messages({ setActiveComponent, currentAdminId }) {
       }
     };
     fetchMessages();
-  }, [currentAdminId]);
+  }, [currentAdminId, activeRecipient]);
 
   const sendMessage = async () => {
     if (!newMessage.trim() || !activeRecipient) {
@@ -64,8 +57,8 @@ export default function Messages({ setActiveComponent, currentAdminId }) {
     const messageData = {
       sender: { _id: currentAdminId },
       recipient: { _id: activeRecipient._id },
-      senderModel: 'Admin',
-      recipientModel: activeRecipient.model,
+      senderModel: 'Admin', // Adjust this if using employee roles
+      recipientModel: activeRecipient.role === 'Admin' ? 'Admin' : 'Employee',
       messageContent: newMessage,
       timestamp: new Date().toISOString(),
     };
@@ -83,7 +76,37 @@ export default function Messages({ setActiveComponent, currentAdminId }) {
   };
 
   const handleRecipientSelect = (recipient) => {
-    setActiveRecipient(recipient);
+    setActiveRecipient(recipient); // Update active recipient
+    setMessages([]); // Clear previous messages
+  };
+
+  const formatTimestamp = (timestamp) => {
+    const messageDate = new Date(timestamp);
+    const today = new Date();
+    const yesterday = new Date(today);
+    yesterday.setDate(today.getDate() - 1);
+
+    const isToday = messageDate.toDateString() === today.toDateString();
+    const isYesterday = messageDate.toDateString() === yesterday.toDateString();
+
+    if (isToday) {
+      return messageDate.toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit',
+      });
+    } else if (isYesterday) {
+      return `Yesterday, ${messageDate.toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit',
+      })}`;
+    } else {
+      return messageDate.toLocaleDateString([], {
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+      });
+    }
   };
 
   return (
@@ -145,10 +168,7 @@ export default function Messages({ setActiveComponent, currentAdminId }) {
                           {msg.messageContent}
                         </div>
                         <div className="small my-2">
-                          {new Date(msg.timestamp).toLocaleTimeString([], {
-                            hour: '2-digit',
-                            minute: '2-digit',
-                          })}
+                          {formatTimestamp(msg.timestamp)}
                         </div>
                       </div>
                     </div>

@@ -124,18 +124,62 @@ export default function NewMessage({
     </div>
   );
 }
-
 {
   /*
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 
 export default function NewMessage({
-  
+  employees = [],
+  admins = [],
+  onRecipientSelect,
 }) {
-  
+  const [selectedId, setSelectedId] = useState('');
+  const [isDataLoaded, setIsDataLoaded] = useState(false); // Track loading state
 
- return (
+  // Load employees/admins, and only then read from localStorage
+  useEffect(() => {
+    if (employees.length > 0 || admins.length > 0) {
+      const storedRecipientId = localStorage.getItem('selectedRecipientId');
+      console.log('Stored Recipient ID:', storedRecipientId);
+
+      if (storedRecipientId) {
+        const selectedRecipient =
+          employees.find((emp) => emp._id === storedRecipientId) ||
+          admins.find((admin) => admin._id === storedRecipientId);
+
+        if (selectedRecipient) {
+          console.log('Selected Recipient Found:', selectedRecipient);
+          setSelectedId(storedRecipientId);
+          const recipientModel = storedRecipientId.startsWith('66')
+            ? 'Admin'
+            : 'Employee';
+          onRecipientSelect({ ...selectedRecipient, model: recipientModel });
+        }
+      }
+
+      setIsDataLoaded(true); // Mark data as loaded
+    }
+  }, [employees, admins]);
+
+  const handleRecipientChange = (e) => {
+    const selectedId = e.target.value;
+    setSelectedId(selectedId);
+    localStorage.setItem('selectedRecipientId', selectedId);
+
+    const selectedRecipient =
+      employees.find((emp) => emp._id === selectedId) ||
+      admins.find((admin) => admin._id === selectedId);
+
+    if (selectedRecipient) {
+      const recipientModel = selectedId.startsWith('66') ? 'Admin' : 'Employee';
+      onRecipientSelect({ ...selectedRecipient, model: recipientModel });
+    }
+  };
+
+  if (!isDataLoaded) {
+    return <div>Loading contacts...</div>; // Prevent rendering until data is ready
+  }
+  return (
     <div>
       <button
         type="button"
@@ -172,21 +216,29 @@ export default function NewMessage({
                 <span className="input-group-text">To</span>
                 <select
                   className="form-select"
-                
+                  onChange={handleRecipientChange}
+                  value={selectedId}
                 >
                   <option value="">Contacts</option>
-                 
-                 
+                  {employees.map((emp) => (
+                    <option key={emp._id} value={emp._id}>
+                      {emp.name}
+                    </option>
+                  ))}
+                  {admins.map((admin) => (
+                    <option key={admin._id} value={admin._id}>
+                      {admin.name}
+                    </option>
+                  ))}
                 </select>
               </div>
 
-              <form onSubmit={handleSubmit}>
+              <form>
                 <div className="input-group" style={{ width: '30rem' }}>
                   <input
                     type="text"
                     className="form-control"
                     placeholder="Message"
-                  
                   />
                   <button className="btn btn-primary" type="submit">
                     <i className="fa-solid fa-paper-plane"></i>
@@ -200,5 +252,6 @@ export default function NewMessage({
     </div>
   );
 }
+
 */
 }

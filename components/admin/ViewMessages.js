@@ -131,7 +131,6 @@ export default function ViewMessages({
                     </a>
                   </div>
                   <hr />
-
                   <div className="list-group" style={{ width: '50rem' }}>
                     {conversations.map((conversation) => (
                       <label

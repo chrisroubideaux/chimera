@@ -9,43 +9,36 @@ export default function Messages({ setActiveComponent, currentAdminId }) {
   const [admins, setAdmins] = useState([]);
   const [activeRecipient, setActiveRecipient] = useState(null);
 
-  // Fetch admins on component load
+  // Fetch employees and admins on component load
   useEffect(() => {
-    const fetchAdmins = async () => {
+    const fetchContacts = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/admins');
-        setAdmins(response.data);
+        const [adminsRes, employeesRes] = await Promise.all([
+          axios.get('http://localhost:3001/admins'),
+          axios.get('http://localhost:3001/employees'),
+        ]);
+        setAdmins(adminsRes.data);
+        setEmployees(employeesRes.data);
       } catch (error) {
-        console.error('Error fetching admins:', error);
+        console.error('Error fetching contacts:', error);
       }
     };
-    fetchAdmins();
+    fetchContacts();
   }, []);
 
-  // Fetch employees on component load
-  useEffect(() => {
-    const fetchEmployees = async () => {
-      try {
-        const response = await axios.get('http://localhost:3001/employees');
-        setEmployees(response.data);
-      } catch (error) {
-        console.error('Error fetching employees:', error);
-      }
-    };
-    fetchEmployees();
-  }, []);
-
-  // Fetch and filter messages on load
+  // Fetch messages when the recipient changes
   useEffect(() => {
     const fetchMessages = async () => {
+      if (!activeRecipient) return; // Prevent fetching if no recipient selected
+
       try {
         const response = await axios.get('http://localhost:3001/messages');
         const filteredMessages = response.data.filter(
           (msg) =>
             (msg.sender._id === currentAdminId &&
-              msg.senderModel === 'Admin') ||
-            (msg.recipient._id === currentAdminId &&
-              msg.recipientModel === 'Admin')
+              msg.recipient._id === activeRecipient._id) ||
+            (msg.sender._id === activeRecipient._id &&
+              msg.recipient._id === currentAdminId)
         );
         setMessages(filteredMessages);
       } catch (error) {
@@ -53,7 +46,7 @@ export default function Messages({ setActiveComponent, currentAdminId }) {
       }
     };
     fetchMessages();
-  }, [currentAdminId]);
+  }, [currentAdminId, activeRecipient]);
 
   const sendMessage = async () => {
     if (!newMessage.trim() || !activeRecipient) {
@@ -64,8 +57,8 @@ export default function Messages({ setActiveComponent, currentAdminId }) {
     const messageData = {
       sender: { _id: currentAdminId },
       recipient: { _id: activeRecipient._id },
-      senderModel: 'Admin',
-      recipientModel: activeRecipient.model,
+      senderModel: 'Admin', // Adjust this if using employee roles
+      recipientModel: activeRecipient.role === 'Admin' ? 'Admin' : 'Employee',
       messageContent: newMessage,
       timestamp: new Date().toISOString(),
     };
@@ -83,7 +76,37 @@ export default function Messages({ setActiveComponent, currentAdminId }) {
   };
 
   const handleRecipientSelect = (recipient) => {
-    setActiveRecipient(recipient);
+    setActiveRecipient(recipient); // Update active recipient
+    setMessages([]); // Clear previous messages
+  };
+
+  const formatTimestamp = (timestamp) => {
+    const messageDate = new Date(timestamp);
+    const today = new Date();
+    const yesterday = new Date(today);
+    yesterday.setDate(today.getDate() - 1);
+
+    const isToday = messageDate.toDateString() === today.toDateString();
+    const isYesterday = messageDate.toDateString() === yesterday.toDateString();
+
+    if (isToday) {
+      return messageDate.toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit',
+      });
+    } else if (isYesterday) {
+      return `Yesterday, ${messageDate.toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit',
+      })}`;
+    } else {
+      return messageDate.toLocaleDateString([], {
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+      });
+    }
   };
 
   return (
@@ -145,10 +168,7 @@ export default function Messages({ setActiveComponent, currentAdminId }) {
                           {msg.messageContent}
                         </div>
                         <div className="small my-2">
-                          {new Date(msg.timestamp).toLocaleTimeString([], {
-                            hour: '2-digit',
-                            minute: '2-digit',
-                          })}
+                          {formatTimestamp(msg.timestamp)}
                         </div>
                       </div>
                     </div>
@@ -191,81 +211,66 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import NewMessage from './NewMessage';
 
-export default function Messages({
-  setActiveComponent,
-  currentAdminId,
-  currentEmployeeId,
-  senderModel = 'Admin',
-  recipientModel = 'Employee',
-  selectedRecipientId,
-}) {
+export default function Messages({ setActiveComponent, currentAdminId }) {
   const [newMessage, setNewMessage] = useState('');
   const [messages, setMessages] = useState([]);
-  const [employees, setEmployees] = useState([]); // Initialize as an array
-  const [admins, setAdmins] = useState([]); // Initialize admins state
+  const [employees, setEmployees] = useState([]);
+  const [admins, setAdmins] = useState([]);
+  const [activeRecipient, setActiveRecipient] = useState(null);
 
-  // Fetch admins on component load
+  // Fetch employees and admins on component load
   useEffect(() => {
-    const fetchAdmins = async () => {
+    const fetchContacts = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/admins');
-        setAdmins(response.data);
+        const [adminsRes, employeesRes] = await Promise.all([
+          axios.get('http://localhost:3001/admins'),
+          axios.get('http://localhost:3001/employees'),
+        ]);
+        setAdmins(adminsRes.data);
+        setEmployees(employeesRes.data);
       } catch (error) {
-        console.error('Error fetching admins:', error);
+        console.error('Error fetching contacts:', error);
       }
     };
-
-    fetchAdmins();
+    fetchContacts();
   }, []);
 
-  // Fetch and filter messages on load
+  // Fetch messages when the recipient changes
   useEffect(() => {
-    async function fetchMessages() {
+    const fetchMessages = async () => {
+      if (!activeRecipient) return; // Prevent fetching if no recipient selected
+
       try {
         const response = await axios.get('http://localhost:3001/messages');
-        const allMessages = response.data;
-
-        const filteredMessages = allMessages.filter(
-          (message) =>
-            (message.sender._id === currentAdminId &&
-              message.senderModel === 'Admin') ||
-            (message.recipient._id === currentAdminId &&
-              message.recipientModel === 'Admin')
+        const filteredMessages = response.data.filter(
+          (msg) =>
+            (msg.sender._id === currentAdminId &&
+              msg.recipient._id === activeRecipient._id) ||
+            (msg.sender._id === activeRecipient._id &&
+              msg.recipient._id === currentAdminId)
         );
-
         setMessages(filteredMessages);
-        console.log('Filtered messages:', filteredMessages);
       } catch (error) {
-        console.error(
-          'Error fetching messages:',
-          error.response ? error.response.data : error.message
-        );
+        console.error('Error fetching messages:', error);
       }
-    }
-
+    };
     fetchMessages();
-  }, [currentAdminId]);
+  }, [currentAdminId, activeRecipient]);
 
   const sendMessage = async () => {
-    if (!newMessage.trim()) {
-      console.error('Message content must be provided');
-      return;
-    }
-
-    if (!selectedRecipientId) {
-      console.error('Recipient ID must be selected');
+    if (!newMessage.trim() || !activeRecipient) {
+      console.error('Message content and recipient must be provided');
       return;
     }
 
     const messageData = {
       sender: { _id: currentAdminId },
-      recipient: { _id: selectedRecipientId },
-      senderModel,
-      recipientModel,
+      recipient: { _id: activeRecipient._id },
+      senderModel: 'Admin',
+      recipientModel: activeRecipient.model,
       messageContent: newMessage,
+      timestamp: new Date().toISOString(),
     };
-
-    console.log('Sending message:', messageData);
 
     try {
       const response = await axios.post(
@@ -274,29 +279,44 @@ export default function Messages({
       );
       setMessages((prevMessages) => [...prevMessages, response.data]);
       setNewMessage('');
-      console.log('Message sent:', response.data);
     } catch (error) {
       console.error('Failed to send message:', error);
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    sendMessage();
+  const handleRecipientSelect = (recipient) => {
+    setActiveRecipient(recipient); // Update active recipient
+    setMessages([]); // Clear previous messages
   };
 
-  useEffect(() => {
-    const fetchEmployees = async () => {
-      try {
-        const response = await axios.get('http://localhost:3001/employees');
-        setEmployees(response.data);
-      } catch (error) {
-        console.error('Error fetching employees:', error);
-      }
-    };
+  const formatTimestamp = (timestamp) => {
+    const messageDate = new Date(timestamp);
+    const today = new Date();
+    const yesterday = new Date(today);
+    yesterday.setDate(today.getDate() - 1);
 
-    fetchEmployees();
-  }, []);
+    const isToday = messageDate.toDateString() === today.toDateString();
+    const isYesterday = messageDate.toDateString() === yesterday.toDateString();
+
+    if (isToday) {
+      return messageDate.toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit',
+      });
+    } else if (isYesterday) {
+      return `Yesterday, ${messageDate.toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit',
+      })}`;
+    } else {
+      return messageDate.toLocaleDateString([], {
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+      });
+    }
+  };
 
   return (
     <div className="chat-container mt-3">
@@ -310,76 +330,35 @@ export default function Messages({
             >
               <i className="social-icon fa-solid fa-comments"></i>
             </a>
-            <a href="#!" className="icon-md me-2 px-2">
-              <i className="social-icon fa-solid fa-video"></i>
-            </a>
-            <a href="#!" className="icon-md me-2 px-2">
-              <NewMessage
-                currentAdminId={currentAdminId}
-                employees={employees}
-                admins={admins} // Pass admins state here
-                senderModel="Admin"
-              />
-            </a>
-            <div className="dropdown">
-              <a
-                className="icon-md rounded-circle me-2 px-2"
-                href="#"
-                id="chatcoversationDropdown"
-                data-bs-toggle="dropdown"
-              >
-                <i className="social-icon fa-solid fa-ellipsis-vertical"></i>
-              </a>
-              <ul className="dropdown-menu dropdown-menu-end w-75">
-                <li>
-                  <a className="dropdown-item" href="#">
-                    <i className="fs-6 social-icon fa-solid fa-check me-2"></i>
-                    Mark as read
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    <i className="fs-6 social-icon fa-solid fa-microphone-slash me-2"></i>
-                    Mute
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    <i className="fs-6 social-icon fa-solid fa-trash me-2"></i>
-                    Delete chat
-                  </a>
-                </li>
-                <li className="dropdown-divider"></li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    <i className="fs-6 social-icon fa-solid fa-box-archive me-2"></i>
-                    Archive chat
-                  </a>
-                </li>
-              </ul>
-            </div>
+
+            <NewMessage
+              currentAdminId={currentAdminId}
+              employees={employees}
+              admins={admins}
+              onRecipientSelect={handleRecipientSelect}
+            />
           </div>
 
           <div className="chat-conversation-content custom-scrollbar">
             {messages.length === 0 ? (
               <div className="text-center small my-2">No messages yet</div>
             ) : (
-              messages.map((message) => (
+              messages.map((msg) => (
                 <div
-                  key={message._id}
+                  key={msg._id}
                   className={`d-flex mb-1 ${
-                    message.sender._id === currentAdminId
+                    msg.sender._id === currentAdminId
                       ? 'justify-content-end'
                       : ''
                   }`}
                 >
                   <div
                     className={`flex-shrink-0 avatar avatar-xs me-2 ${
-                      message.sender._id === currentAdminId ? 'd-none' : ''
+                      msg.sender._id === currentAdminId ? 'd-none' : ''
                     }`}
                   >
                     <img
-                      src={message.sender.image || ''}
+                      src={msg.sender.image || ''}
                       alt=""
                       className="avatar-img rounded-circle"
                     />
@@ -387,18 +366,18 @@ export default function Messages({
                   <div className="flex-grow-1">
                     <div className="w-100">
                       <div className="d-flex flex-column">
-                        <h6 className="mt-1">{message.sender.name}</h6>
+                        <h6 className="mt-1">{msg.sender.name}</h6>
                         <div
                           className={`bg-${
-                            message.sender._id === currentAdminId
+                            msg.sender._id === currentAdminId
                               ? 'light text-grey'
                               : 'light text-secondary'
                           } p-2 px-3 rounded-2`}
                         >
-                          {message.messageContent}
+                          {msg.messageContent}
                         </div>
                         <div className="small my-2">
-                          {new Date(message.timestamp).toLocaleTimeString()}
+                          {formatTimestamp(msg.timestamp)}
                         </div>
                       </div>
                     </div>
@@ -408,7 +387,13 @@ export default function Messages({
             )}
           </div>
 
-          <form className="chat-input-form" onSubmit={handleSubmit}>
+          <form
+            className="chat-input-form"
+            onSubmit={(e) => {
+              e.preventDefault();
+              sendMessage();
+            }}
+          >
             <div className="input-group">
               <input
                 type="text"
@@ -427,6 +412,5 @@ export default function Messages({
     </div>
   );
 }
-
 */
 }
