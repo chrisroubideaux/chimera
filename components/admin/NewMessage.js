@@ -124,6 +124,8 @@ export default function NewMessage({
     </div>
   );
 }
+
+//
 {
   /*
 import { useState, useEffect } from 'react';
@@ -252,6 +254,5 @@ export default function NewMessage({
     </div>
   );
 }
-
 */
 }
