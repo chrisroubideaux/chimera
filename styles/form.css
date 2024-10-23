@@ -12,10 +12,20 @@
     color: #7E8EF1;
   }
      
+      
+  .form-control:focus {
+    outline: none; /* Remove default outline */
+    box-shadow: none; /* Remove default shadow */
+  }
   .form-select {
    border-radius: 10px;
+   
   }
       
+  .form-select:focus {
+    outline: none; /* Remove default outline */
+    box-shadow: none; /* Remove default shadow */
+  }
   .form-signin .checkbox {
     font-weight: 30px;
   }
