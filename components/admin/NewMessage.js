@@ -192,9 +192,21 @@ export default function NewMessage({
     }
   };
 
+  const handleSendMessage = (e) => {
+    e.preventDefault(); // Prevent default form submission
+    const messageContent = e.target.elements.message.value;
+    if (selectedId && messageContent) {
+      // Send the message logic can go here
+      console.log('Message sent to:', selectedId, 'Content:', messageContent);
+      // Clear the message input after sending
+      e.target.reset();
+    }
+  };
+
   if (!isDataLoaded) {
     return <div>Loading contacts...</div>; // Prevent rendering until data is ready
   }
+
   return (
     <div>
       <button
@@ -249,12 +261,14 @@ export default function NewMessage({
                 </select>
               </div>
 
-              <form>
+              <form onSubmit={handleSendMessage}>
                 <div className="input-group" style={{ width: '30rem' }}>
                   <input
                     type="text"
                     className="form-control"
                     placeholder="Message"
+                    name="message" // Add name for the input
+                    required
                   />
                   <button className="btn btn-primary" type="submit">
                     <i className="fa-solid fa-paper-plane"></i>

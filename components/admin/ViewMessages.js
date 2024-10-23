@@ -12,6 +12,7 @@ export default function ViewMessages({
   const [admins, setAdmins] = useState([]);
   const [employees, setEmployees] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [activeRecipient, setActiveRecipient] = useState(null); // Added state for activeRecipient
 
   // Fetch messages, admins, and employees data on load
   useEffect(() => {
@@ -71,7 +72,7 @@ export default function ViewMessages({
           senderId: msg.sender._id,
           senderModel: msg.senderModel,
           recipientId: msg.recipient._id,
-          latestMessage: msg, // Store the latest message
+          latestMessage: msg,
         };
       }
     });
@@ -92,7 +93,7 @@ export default function ViewMessages({
 
   // Function to handle recipient selection
   const handleRecipientSelect = (recipient) => {
-    // You can handle what happens when a recipient is selected here
+    setActiveRecipient(recipient); // Set the selected recipient
     console.log('Recipient selected:', recipient);
   };
 
@@ -131,7 +132,7 @@ export default function ViewMessages({
                       employees={employees}
                       admins={admins}
                       senderModel="Admin"
-                      onRecipientSelect={handleRecipientSelect} // Pass the function here
+                      onRecipientSelect={handleRecipientSelect}
                     />
                   </div>
                   <hr />
@@ -148,11 +149,10 @@ export default function ViewMessages({
                           href="#"
                           className="nav-link bg-transparent fs-6 me-2 text-dark"
                           onClick={() => {
-                            // Call setActiveComponent to navigate to the Messages component
                             setActiveComponent(
                               'Messages',
                               conversation.recipientId
-                            ); // Pass the recipient ID
+                            );
                           }}
                         >
                           <span className="pt-1 form-checked-content">
@@ -161,13 +161,13 @@ export default function ViewMessages({
                             </strong>
                             <div className="mb-1">
                               <Image
-                                src={
-                                  conversation.latestMessage.sender.image ||
-                                  '/path/to/default-avatar.jpg'
+                                src={activeRecipient?.image || ''}
+                                alt={
+                                  activeRecipient?.name || 'Recipient Avatar'
                                 }
-                                width={30}
-                                height={30}
-                                className="rounded-circle"
+                                className="avatar-img rounded-circle"
+                                width={40}
+                                height={40}
                               />
                               {conversation.latestMessage.messageContent}
                             </div>

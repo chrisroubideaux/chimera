@@ -48,7 +48,7 @@ export default function Messages({ setActiveComponent, currentAdminId }) {
     };
     fetchMessages();
   }, [currentAdminId, activeRecipient]);
-
+  // Post method
   const sendMessage = async () => {
     if (!newMessage.trim() || !activeRecipient) {
       console.error('Message content and recipient must be provided');
@@ -58,7 +58,7 @@ export default function Messages({ setActiveComponent, currentAdminId }) {
     const messageData = {
       sender: { _id: currentAdminId },
       recipient: { _id: activeRecipient._id },
-      senderModel: 'Admin', // Adjust this if using employee roles
+      senderModel: 'Admin',
       recipientModel: activeRecipient.role === 'Admin' ? 'Admin' : 'Employee',
       messageContent: newMessage,
       timestamp: new Date().toISOString(),

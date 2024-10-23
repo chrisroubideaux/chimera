@@ -150,6 +150,8 @@ useEffect(() => {
         );
       case 'Calendar':
         return <Calendar setActiveComponent={setActiveComponent} />;
+      case 'ViewMessages':
+        return <ViewMessages setActiveComponent={setActiveComponent} />;
       case 'Schedule':
         return <Schedule setActiveComponent={setActiveComponent} />;
       case 'ViewMessages':
@@ -168,6 +170,7 @@ useEffect(() => {
             messages={message}
             setActiveComponent={setActiveComponent}
             currentEmployeeId={employee._id}
+            selectedRecipientId={adminId}
             recipientId={adminId}
             senderModel="Employee"
             recipientModel="Admin"
