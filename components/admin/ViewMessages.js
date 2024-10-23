@@ -203,8 +203,8 @@ export default function ViewMessages({
   const [admins, setAdmins] = useState([]);
   const [employees, setEmployees] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [activeConversation, setActiveConversation] = useState(null);
 
+  // Fetch messages, admins, and employees data on load
   useEffect(() => {
     async function fetchData() {
       try {
@@ -217,6 +217,7 @@ export default function ViewMessages({
         setAdmins(adminsRes.data);
         setEmployees(employeesRes.data);
 
+        // Group messages and keep only the latest message per conversation
         const groupedConversations = groupMessagesByConversation(
           messagesRes.data
         );
@@ -229,17 +230,9 @@ export default function ViewMessages({
             employeesRes.data
           );
 
-          const recipient = findUserById(
-            conv.recipientId,
-            conv.recipientModel,
-            adminsRes.data,
-            employeesRes.data
-          );
-
           return {
             ...conv,
             senderName: sender?.name || 'Unknown Sender',
-            recipientName: recipient?.name || 'Unknown Recipient',
             timestamp: new Date(conv.latestMessage.timestamp).toLocaleString(),
           };
         });
@@ -255,8 +248,10 @@ export default function ViewMessages({
     fetchData();
   }, [currentAdminId]);
 
+  // Group messages by sender and recipient, keeping only the latest message
   const groupMessagesByConversation = (allMessages) => {
     const grouped = {};
+
     allMessages.forEach((msg) => {
       const key = generateConversationKey(msg.sender._id, msg.recipient._id);
       if (
@@ -267,31 +262,29 @@ export default function ViewMessages({
           senderId: msg.sender._id,
           senderModel: msg.senderModel,
           recipientId: msg.recipient._id,
-          recipientModel: msg.recipientModel,
-          latestMessage: msg,
+          latestMessage: msg, // Store the latest message
         };
       }
     });
+
     return Object.values(grouped);
   };
 
+  // Generate a unique key for each conversation (sender/recipient pair)
   const generateConversationKey = (senderId, recipientId) =>
     [senderId, recipientId].sort().join('-');
 
+  // Find a user by ID and model (Admin/Employee)
   const findUserById = (id, model, admins, employees) => {
     if (model === 'Admin') return admins.find((admin) => admin._id === id);
     if (model === 'Employee') return employees.find((emp) => emp._id === id);
     return null;
   };
 
-  const handleConversationClick = (conversation) => {
-    setActiveConversation(conversation);
-    setActiveComponent('Messages', conversation.recipientId); // Pass the recipient ID
-  };
-
+  // Function to handle recipient selection
   const handleRecipientSelect = (recipient) => {
+    // You can handle what happens when a recipient is selected here
     console.log('Recipient selected:', recipient);
-    // Add any additional handling logic here
   };
 
   if (loading) return <div>Loading messages...</div>;
@@ -329,7 +322,7 @@ export default function ViewMessages({
                       employees={employees}
                       admins={admins}
                       senderModel="Admin"
-                      onRecipientSelect={handleRecipientSelect}
+                      onRecipientSelect={handleRecipientSelect} // Pass the function here
                     />
                   </div>
                   <hr />
@@ -340,21 +333,22 @@ export default function ViewMessages({
                           conversation.senderId,
                           conversation.recipientId
                         )}
-                        className={`list-group-item d-flex gap-3 ${
-                          activeConversation?.recipientId ===
-                          conversation.recipientId
-                            ? 'active'
-                            : ''
-                        }`}
+                        className="list-group-item d-flex gap-3"
                       >
                         <a
                           href="#"
                           className="nav-link bg-transparent fs-6 me-2 text-dark"
-                          onClick={() => handleConversationClick(conversation)}
+                          onClick={() => {
+                            // Call setActiveComponent to navigate to the Messages component
+                            setActiveComponent(
+                              'Messages',
+                              conversation.recipientId
+                            ); // Pass the recipient ID
+                          }}
                         >
                           <span className="pt-1 form-checked-content">
                             <strong className="d-flex me-5 text-dark">
-                              {conversation.recipientName}
+                              {conversation.senderName}
                             </strong>
                             <div className="mb-1">
                               <Image
