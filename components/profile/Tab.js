@@ -26,14 +26,14 @@ export default function Tab({ setActiveComponent, employees }) {
             <ul className="nav">
               <li className="nav-item me-3">
                 <div className="gap-2 justify-content-center">
-                  <span className="me-1 badge bg-primary-subtle border border-primary-subtle text-primary-emphasis rounded-pill">
+                  <span className="me-2 badge payday text-dark rounded-pill">
                     Payday
                   </span>
-                  <span className="me-1 badge bg-success-subtle border border-success-subtle text-success-emphasis rounded-pill">
-                    Shifts
-                  </span>
-                  <span className="me-1 badge bg-success-subtle border border-success-subtle text-success-emphasis rounded-pill">
+                  <span className="me-2 inventory fw-bold text-dark rounded-pill">
                     Meetings
+                  </span>
+                  <span className="me-2 badge orders text-dark rounded-pill">
+                    Shifts
                   </span>
                 </div>
               </li>
@@ -83,14 +83,14 @@ export default function Tab({ setActiveComponent, employees }) {
                 Messages
                 <i className="m-1 fa-solid fa-message fs-sm"></i>
               </a>
-              <Link
+              <a
                 className="btn btn-soft-light btn-sm m-1"
                 href="#"
                 onClick={() => setActiveComponent('Calendar')}
               >
                 Calendar
                 <i className=" m-1 fa-solid fa-calendar-plus"></i>
-              </Link>
+              </a>
             </div>
 
             <button

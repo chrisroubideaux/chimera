@@ -22,8 +22,8 @@ const Calendar = ({ onSelectDate, meetings = [] }) => {
   const eventTypes = {
     payroll: 'payroll',
     payday: 'payday',
-    inventory: 'inventory',
     orders: 'orders',
+    inventory: 'inventory',
     meeting: 'meeting',
   };
 

@@ -23,6 +23,7 @@ export default function Profile() {
   const { id } = router.query;
   const [employee, setEmployee] = useState([]);
   const [message, setMessage] = useState([]);
+  const [meeting, setMeeting] = useState([]);
   // const [meetings, setMeetings] = useState([]);
   const [selectedRecipient, setSelectedRecipient] = useState(null);
   const [timeOffRequests, setTimeOffRequests] = useState([]);
@@ -89,6 +90,19 @@ export default function Profile() {
     }
   }, [id]);
 
+  // meetings
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/meetings')
+      .then((response) => {
+        setMeeting(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching meetings:', error);
+      });
+  }, []);
+  // time off
   useEffect(() => {
     if (id) {
       const fetchTimeOffRequests = async () => {
@@ -149,7 +163,14 @@ useEffect(() => {
           />
         );
       case 'Calendar':
-        return <Calendar setActiveComponent={setActiveComponent} />;
+        return (
+          <Calendar
+            setActiveComponent={setActiveComponent}
+            meetings={meeting}
+            key={meeting.id}
+            timeOffRequests={timeOffRequests}
+          />
+        );
       case 'ViewMessages':
         return <ViewMessages setActiveComponent={setActiveComponent} />;
       case 'Schedule':

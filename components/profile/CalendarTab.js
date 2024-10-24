@@ -12,15 +12,19 @@ const CalendarTab = ({ setActiveComponent }) => {
         <ul className="nav">
           <li className="nav-item me-3">
             <div className=" gap-2 justify-content-center">
-              <span className="me-1 badge bg-primary-subtle border border-primary-subtle text-primary-emphasis rounded-pill">
-                Schedule
-              </span>
-              <span className="me-1 badge bg-secondary-subtle border border-secondary-subtle text-secondary-emphasis rounded-pill">
-                Time off
-              </span>
-              <span className=" me-1 badge bg-success-subtle border border-success-subtle text-success-emphasis rounded-pill">
-                Meetings
-              </span>
+              <li className="nav-item me-3">
+                <div className="gap-2 justify-content-center">
+                  <span className="me-2 badge payday text-dark rounded-pill">
+                    Payday
+                  </span>
+                  <span className="me-2 inventory fw-bold text-dark rounded-pill">
+                    Meeting
+                  </span>
+                  <span className="me-2 badge orders text-dark rounded-pill">
+                    Orders
+                  </span>
+                </div>
+              </li>
             </div>
           </li>
 
