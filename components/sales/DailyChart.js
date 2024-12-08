@@ -156,7 +156,8 @@ export default function DailyChart({ setActiveComponent }) {
       chartData.averageSales[index] || '',
     ]);
 
-    const csvContent = [headers, ...rows].map((e) => e.join(',')).join('\n');
+    const csvContent =
+      [headers, ...rows].map((e) => e.join(',')).join('\n') + '\n';
 
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);
@@ -200,7 +201,8 @@ export default function DailyChart({ setActiveComponent }) {
 
 {
   /*
-import { useState, useEffect } from 'react';
+// Daily Sales chart
+import { useState, useEffect, useRef } from 'react';
 import { Bar } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -228,9 +230,7 @@ ChartJS.register(
 export const options = {
   responsive: true,
   plugins: {
-    legend: {
-      position: 'top',
-    },
+    legend: { position: 'top' },
     datalabels: {
       display: true,
       align: 'end',
@@ -241,12 +241,10 @@ export const options = {
   scales: {
     y: {
       ticks: {
-        callback: function (value) {
-          return `${(value / 1000).toFixed(1)}k`;
-        },
+        callback: (value) => `${(value / 1000).toFixed(1)}k`,
         stepSize: 2000,
       },
-      max: 14000, // Set the max value to 14,000
+      max: 14000,
     },
   },
 };
@@ -259,11 +257,7 @@ const labels = [
   'Friday',
   'Saturday',
 ];
-
-const dailySalesRange = {
-  min: 11000, // Min daily sales
-  max: 12000, // Max daily sales
-};
+const dailySalesRange = { min: 11000, max: 12000 };
 
 // Function to generate daily sales data
 const generateDailySalesData = (currentDayIndex) => {
@@ -281,32 +275,17 @@ const generateDailySalesData = (currentDayIndex) => {
     });
 
     let actual = null;
-
-    // Generate actual sales for previous days
-    if (index < currentDayIndex) {
+    if (
+      index < currentDayIndex ||
+      (index === currentDayIndex && currentHour >= 11 && currentHour <= 21)
+    ) {
       actual = faker.datatype.number({
         min: dailySalesRange.min * 0.9,
         max: dailySalesRange.max * 1.1,
       });
     }
 
-    // Generate sales for today only if within 11 AM - 9 PM
-    if (index === currentDayIndex) {
-      if (currentHour >= 11 && currentHour <= 21) {
-        actual = faker.datatype.number({
-          min: dailySalesRange.min * 0.9,
-          max: dailySalesRange.max * 1.1,
-        });
-      }
-    }
-
-    // No sales for future days
-    if (index > currentDayIndex) {
-      actual = null;
-    }
-
-    const average = (projected + (actual ?? 0)) / 2; // Use 0 for missing actual sales
-
+    const average = (projected + (actual ?? 0)) / 2;
     projectedSales.push(projected);
     actualSales.push(actual);
     averageSales.push(average);
@@ -325,10 +304,8 @@ export default function DailyChart({ setActiveComponent }) {
 
   useEffect(() => {
     const now = new Date();
-    const formattedDate = format(now, 'EEEE, MM/dd/yyyy');
-    setCurrentDate(formattedDate);
-
-    const currentDayIndex = now.getDay() - 1; // Get the index for current day (0 = Monday, 1 = Tuesday, etc.)
+    setCurrentDate(format(now, 'EEEE, MM/dd/yyyy'));
+    const currentDayIndex = now.getDay() - 1;
 
     const updateSalesData = () => {
       const { projectedSales, actualSales, averageSales } =
@@ -338,18 +315,10 @@ export default function DailyChart({ setActiveComponent }) {
 
     updateSalesData();
 
-    // Set interval to update sales data at midnight
-    const nowTime = now.getTime();
-    const midnight = new Date().setHours(24, 0, 0, 0);
-    const timeToMidnight = midnight - nowTime;
-
+    const timeToMidnight = new Date().setHours(24, 0, 0, 0) - now.getTime();
     const firstInterval = setTimeout(() => {
       updateSalesData();
-
-      const interval = setInterval(() => {
-        updateSalesData();
-      }, 24 * 60 * 60 * 1000); // 24 hours
-
+      const interval = setInterval(updateSalesData, 24 * 60 * 60 * 1000);
       return () => clearInterval(interval);
     }, timeToMidnight);
 
@@ -380,6 +349,28 @@ export default function DailyChart({ setActiveComponent }) {
     ],
   };
 
+  // Helper to generate CSV data
+  const generateCSV = () => {
+    const headers = ['Day', 'Projected Sales', 'Actual Sales', 'Average Sales'];
+    const rows = labels.map((label, index) => [
+      label,
+      chartData.projectedSales[index] || '',
+      chartData.actualSales[index] || '',
+      chartData.averageSales[index] || '',
+    ]);
+
+    const csvContent = [headers, ...rows].map((e) => e.join(',')).join('\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', `sales_report_${currentDate}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div className="container-fluid">
       <div className="card">
@@ -393,13 +384,17 @@ export default function DailyChart({ setActiveComponent }) {
             </div>
             <div className="col-md-6 col-xl-8">
               <div className="d-flex justify-content-end">
-                <button type="button" className="btn btn-sm me-2">
-                  <i className="fa-solid fa-download"></i> Export
+                <button
+                  type="button"
+                  className="btn btn-sm me-2"
+                  onClick={generateCSV}
+                >
+                  <i className="fa-solid fa-download"></i> Export CSV
                 </button>
               </div>
             </div>
           </div>
-          <Bar className="" options={options} data={data} />
+          <Bar options={options} data={data} />
         </div>
       </div>
     </div>

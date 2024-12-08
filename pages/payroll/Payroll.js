@@ -61,7 +61,7 @@ export default function Payrolls() {
         return (
           <PayrollForm
             setActiveComponent={setActiveComponent}
-            activeEmployeeId={activeEmployeeId} // Pass the active employee ID to PayrollForm
+            activeEmployeeId={activeEmployeeId}
             //  employees={employees}
 
             employees={employees}

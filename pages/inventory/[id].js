@@ -1,31 +1,35 @@
-// inventory page
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import axios from 'axios';
 import Head from 'next/head';
 import Navbar from '@/components/Nav/Navbar';
 import Tab from '@/components/inventory/Tab';
-import Sidebar from '@/components/admin/Sidebar';
-import Produce from '@/components/inventory/Produce';
+//import Sidebar from '@/components/admin/Sidebar';
+//import Produce from '@/components/inventory/Produce';
 import Dairy from '@/components/inventory/Dairy';
 import Proteins from '@/components/inventory/Proteins';
-import Beverages from '@/components/inventory/Beverages';
 import Dry from '@/components/inventory/Dry';
 import Paper from '@/components/inventory/Paper';
 import Linens from '@/components/inventory/Linens';
-
+//import BevDetails from '@/components/inventory/drinks/BevDetails';
+//import Sales from '@/components/inventory/Sales';
+import Details from '@/components/inventory/inventoryDetails/Details';
+import Footer from '@/components/misc/Footer';
 // data imports
-
 export default function Inventory() {
+  const router = useRouter();
+  const { id } = router.query;
   const [activeComponent, setActiveComponent] = useState('Inventory');
   const [admins, setAdmins] = useState([]);
   const [produce, setProduce] = useState([]);
   const [dairy, setDairy] = useState([]);
   const [proteins, setProteins] = useState([]);
   const [linens, setLinens] = useState([]);
-  const [drinks, setDrinks] = useState([]);
+  const [drink, setDrink] = useState([]);
   const [dryGoods, setDryGoods] = useState([]);
   const [paperProducts, setPaperProducts] = useState([]);
-  // admins
+
+  // admin
   useEffect(() => {
     axios
       .get('http://localhost:3001/admins')
@@ -37,85 +41,43 @@ export default function Inventory() {
       });
   }, []);
 
-  // produce
-  useEffect(() => {
-    axios
-      .get('http://localhost:3001/produce')
-      .then((response) => {
-        setProduce(response.data);
-      })
-      .catch((error) => {
-        console.error('Error fetching produce items:', error);
-      });
-  }, []);
-
-  // dairy inventory
-  useEffect(() => {
-    axios
-      .get('http://localhost:3001/dairy')
-      .then((response) => {
-        setDairy(response.data);
-      })
-      .catch((error) => {
-        console.error('Error fetching dairy items:', error);
-      });
-  }, []);
-
-  // protein inventory
-  useEffect(() => {
-    axios
-      .get('http://localhost:3001/proteins')
-      .then((response) => {
-        setProteins(response.data);
-      })
-      .catch((error) => {
-        console.error('Error fetching protein items:', error);
-      });
-  }, []);
-  // linen inventory
-  useEffect(() => {
-    axios
-      .get('http://localhost:3001/linens')
-      .then((response) => {
-        setLinens(response.data);
-      })
-      .catch((error) => {
-        console.error('Error fetching linens items:', error);
-      });
-  }, []);
   // beverage inventory
+
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/drinks')
-      .then((response) => {
-        setDrinks(response.data);
-      })
-      .catch((error) => {
-        console.error('Error fetching beverage items:', error);
-      });
-  }, []);
-  // dry goods inventory
+    if (id) {
+      const fetchDrinkData = async () => {
+        try {
+          const response = await axios.get(
+            `http://localhost:3001/drinks/${id}`
+          );
+          console.log('Bev data:', response.data);
+          setDrink(response.data);
+        } catch (error) {
+          console.error('Error fetching Beverage data:', error);
+        }
+      };
+
+      fetchDrinkData();
+    }
+  }, [id]);
+
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/dryGoods')
-      .then((response) => {
-        setDryGoods(response.data);
-      })
-      .catch((error) => {
-        console.error('Error fetching dry good items:', error);
-      });
-  }, []);
-  // paper products inventory
-  useEffect(() => {
-    axios
-      .get('http://localhost:3001/paperProducts')
-      .then((response) => {
-        setPaperProducts(response.data);
-      })
-      .catch((error) => {
-        console.error('Error fetching paper products items:', error);
-      });
-  }, []);
+    if (id) {
+      const fetchProduceData = async () => {
+        try {
+          const response = await axios.get(
+            `http://localhost:3001/produce/${id}`
+          );
+          console.log('Bev data:', response.data);
+          setProduce(response.data);
+        } catch (error) {
+          console.error('Error fetching Beverage data:', error);
+        }
+      };
+
+      fetchProduceData();
+    }
+  }, [id]);
 
   const renderComponent = () => {
     switch (activeComponent) {
@@ -128,10 +90,7 @@ export default function Inventory() {
             proteins={proteins}
           />
         );
-      case 'Beverages':
-        return (
-          <Beverages setActiveComponent={setActiveComponent} drinks={drinks} />
-        );
+
       case 'Dry':
         return (
           <Dry setActiveComponent={setActiveComponent} dryGoods={dryGoods} />
@@ -146,12 +105,6 @@ export default function Inventory() {
       case 'Linens':
         return (
           <Linens setActiveComponent={setActiveComponent} linens={linens} />
-        );
-      // chart analytics
-
-      default:
-        return (
-          <Produce setActiveComponent={setActiveComponent} produce={produce} />
         );
     }
   };
@@ -181,22 +134,55 @@ export default function Inventory() {
           />
         ))}
         <div className="container-fluid ">
-          <div className="row">
-            <div className="col-lg-4 col-xxl-3">
-              {admins.map((admins) => (
-                <Sidebar
-                  setActiveComponent={setActiveComponent}
-                  key={admins.id}
-                  admins={admins}
-                />
-              ))}
-            </div>
-            <div className="col-lg-8 col-xxl-9">
-              <div className="mt-4">{renderComponent()}</div>
+          <div className="container mt-5 py-4 my-4">
+            <hr className="hr w-25 mx-auto pt-5" />
+            <div className="row">
+              <div className="col-md-6">
+                <div className="container">
+                  <h3 className="fw-bold me-5 text-center">Product Details</h3>
+                </div>
+                <div className=" ">
+                  <Details drink={drink} produce={produce} />
+                </div>
+              </div>
+              <div className="col-md-6">
+                <h3 className="fw-bold text-center">Description</h3>
+                <div className="container d-flex justify-content-end fs-6 m-4">
+                  {drink && drink.description ? (
+                    <p>{drink.description}</p>
+                  ) : produce && produce.description ? (
+                    <p>{produce.description}</p>
+                  ) : (
+                    <p>No description available.</p>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
         </div>
+        <div className="container">
+          <div className="row py-4">
+            <div className="col-md-6">
+              <h2 className=" text-center fw-bold">Analytics</h2>
+              Test
+            </div>
+            <div className="col-md-6">
+              <h3 className=" text-center fw-bold">Devlivery</h3>
+              <div className="d-flex justify-content-end"></div>
+            </div>
+          </div>
+        </div>
+
+        <Footer />
       </div>
     </>
   );
+}
+
+{
+  /*
+
+    {renderComponent()}
+
+*/
 }

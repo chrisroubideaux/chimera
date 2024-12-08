@@ -1,5 +1,6 @@
 // Produce component inventory
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { faker } from '@faker-js/faker';
 import { format } from 'date-fns';
 
@@ -105,9 +106,12 @@ export default function Produce({ produce }) {
                         <td>{item.actual}</td>
                         <td>{item.date}</td> {/* Display current date */}
                         <td className="text-end">
-                          <button type="button" className="btn btn-sm">
+                          <Link
+                            className="btn btn-sm"
+                            href={`/inventory/${item._id}`}
+                          >
                             View
-                          </button>
+                          </Link>
                         </td>
                       </tr>
                     ))}

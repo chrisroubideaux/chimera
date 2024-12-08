@@ -34,7 +34,7 @@ export default function Sidebar({ setActiveComponent, admins }) {
                 title="Verified user"
               />
             </div>
-            <h4 className="card-title mb-0">{admins.name}</h4>
+            <h4 className="card-title mb-0"> {admins.name}</h4>
             <p className="card-text small">{admins.email}</p>
             <span className="text-cap">
               <h4>Account</h4>

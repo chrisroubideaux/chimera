@@ -41,7 +41,7 @@ const labels = [
 // Utility function to format numbers as "1.5k"
 const formatNumber = (number) => {
   if (number === null || number === undefined) {
-    return ''; // Return an empty string or a placeholder if number is null/undefined
+    return '';
   }
 
   if (number >= 1000) {
@@ -99,7 +99,6 @@ export const options = {
   },
 };
 
-// Function to generate hourly sales data until the current hour
 const generateHourlySalesData = (
   averageHourlySales,
   openHour,
@@ -201,10 +200,39 @@ export default function HourlyChart() {
     };
 
     updateSalesData();
-    const intervalId = setInterval(updateSalesData, 60 * 60 * 1000); // Update every hour
+    const intervalId = setInterval(updateSalesData, 60 * 60 * 1000);
 
     return () => clearInterval(intervalId);
   }, []);
+
+  // csv
+  const generateCSV = () => {
+    const headers = [
+      'Hour',
+      'Actual Sales',
+      'Projected Sales',
+      'Average Sales',
+    ];
+
+    const rows = labels.map((label, index) => [
+      `"${label}"`,
+      data.datasets[0]?.data[index]?.toFixed(2) || '0.00',
+      data.datasets[1]?.data[index]?.toFixed(2) || '0.00',
+      data.datasets[2]?.data[index]?.toFixed(2) || '0.00',
+    ]);
+
+    const csvContent =
+      [headers, ...rows].map((row) => row.join(',')).join('\n') + '\n';
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', 'hourly_sales.csv');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <div className="container-fluid">
@@ -219,8 +247,12 @@ export default function HourlyChart() {
             </div>
             <div className="col-md-6 col-xl-8">
               <div className="d-flex justify-content-end">
-                <button type="button" className="btn btn-sm me-2">
-                  <i className="fa-solid fa-download"></i> Export
+                <button
+                  type="button"
+                  className="btn btn-sm me-2"
+                  onClick={generateCSV}
+                >
+                  <i className="fa-solid fa-download"></i> Export CSV
                 </button>
               </div>
             </div>

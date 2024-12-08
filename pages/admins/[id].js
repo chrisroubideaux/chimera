@@ -46,7 +46,7 @@ export default function Admin({}) {
       try {
         const response = await axios.get('http://localhost:3001/employees');
         if (response.data.length > 0) {
-          setEmployeeId(response.data[0]._id); // Assuming you take the first admin’s ID
+          setEmployeeId(response.data[0]._id);
         }
       } catch (error) {
         console.error('Error fetching admin data:', error);
@@ -66,7 +66,6 @@ export default function Admin({}) {
           console.log('Message data:', response.data);
           setMessage(response.data);
 
-          // Set the selected recipient based on the first message or some logic
           if (response.data.length > 0) {
             setSelectedRecipient(response.data[0].recipient);
           }

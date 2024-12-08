@@ -1,5 +1,5 @@
-// Beverage inventory
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { faker } from '@faker-js/faker';
 import { format } from 'date-fns';
 //import beverages from '@/data/inventory/beverages';
@@ -11,7 +11,6 @@ const generateSalesData = (data, minSales, maxSales) => {
     const projected = item.count;
     const actual = sold;
 
-    // Generate random weekly and monthly sales data
     const WeeklySales = {};
     const MonthlySales = {};
 
@@ -126,9 +125,12 @@ export default function Beverages({ drinks }) {
                         <td>{item.actual}</td>
                         <td>{item.date}</td>
                         <td className="text-end">
-                          <button type="button" className="btn btn-sm">
+                          <Link
+                            className="btn btn-sm"
+                            href={`/inventory/${item._id}`}
+                          >
                             View
-                          </button>
+                          </Link>
                         </td>
                       </tr>
                     ))}
