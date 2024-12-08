@@ -56,7 +56,7 @@ export default function Home() {
               <div className="mb-7">
                 <div className="mb-3">
                   <Link href="/menu/menu" className="btn btn-md me-2">
-                    Try for free
+                    View Demo
                   </Link>
                   <button
                     type="button"
