@@ -28,16 +28,15 @@ export default function Bio({ employees }) {
       ...prevState,
       [name]: value,
     }));
-    console.log('Field Changed:', name, value); // Debugging log
+    console.log('Field Changed:', name, value);
   };
 
   const handleSaveChanges = async () => {
     try {
-      const id = employee._id; // Use _id instead of id
+      const id = employee._id;
       await axios.put(`http://localhost:3001/employees/${id}`, employee);
       console.log('Employee data updated successfully');
 
-      // Optionally, fetch the updated employee from the server
       const updatedEmployee = await axios.get(
         `http://localhost:3001/employees/${id}`
       );
