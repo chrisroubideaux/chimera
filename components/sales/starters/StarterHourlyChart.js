@@ -182,6 +182,34 @@ export default function StartersHourlyChart({ setActiveComponent }) {
       ],
     });
   }, []);
+  // Function to generate CSV from sales data
+  const generateCSV = () => {
+    const headers = [
+      'Time',
+      'Actual Sales',
+      'Projected Sales',
+      'Average Sales',
+    ];
+    const rows = labels.map((time, index) => [
+      time,
+      `${(data.datasets[0].data[index] / 1000).toFixed(1)}k`,
+      `${(data.datasets[1].data[index] / 1000).toFixed(1)}k`,
+      `${(data.datasets[2].data[index] / 1000).toFixed(1)}k`,
+    ]);
+
+    const csvContent = [
+      headers.join(','),
+      ...rows.map((row) => row.join(',')),
+    ].join('\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = `hourly_sales_${new Date().toISOString()}.csv`;
+
+    link.click();
+  };
 
   return (
     <div className="container-fluid">
@@ -196,6 +224,9 @@ export default function StartersHourlyChart({ setActiveComponent }) {
             </div>
             <div className="col-md-6 col-xl-8">
               <div className="d-flex justify-content-end">
+                <button onClick={generateCSV} className="btn btn-sm me-2">
+                  Export CSV
+                </button>
                 <Nav setActiveComponent={setActiveComponent} />
               </div>
             </div>

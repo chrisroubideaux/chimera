@@ -143,6 +143,43 @@ export default function DessertsWeeklyChart({ setActiveComponent }) {
       },
     ],
   };
+  //
+  // Function to generate CSV from sales data
+  const generateCSV = () => {
+    const headers = [
+      'Day',
+      'Current Week Sales',
+      'Previous Week Sales',
+      'Average Sales',
+    ];
+    const rows = [
+      'Sunday',
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+    ].map((day, index) => [
+      day,
+      `${(allDaysSales[index] / 1000).toFixed(1)}k`,
+      `${(previousWeekSales[index] / 1000).toFixed(1)}k`,
+      `${(averageData[index] / 1000).toFixed(1)}k`,
+    ]);
+
+    const csvContent = [
+      headers.join(','),
+      ...rows.map((row) => row.join(',')),
+    ].join('\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = `weekly_sales_${new Date().toISOString()}.csv`;
+
+    link.click();
+  };
 
   return (
     <div className="container-fluid">
@@ -157,6 +194,9 @@ export default function DessertsWeeklyChart({ setActiveComponent }) {
             </div>
             <div className="col-md-6 col-xl-8">
               <div className="d-flex justify-content-end">
+                <button onClick={generateCSV} className="btn btn-sm me-2">
+                  Export CSV
+                </button>
                 <Nav setActiveComponent={setActiveComponent} />
               </div>
             </div>

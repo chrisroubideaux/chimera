@@ -2,9 +2,6 @@ export default function Nav({ setActiveComponent }) {
   return (
     <div>
       <div className="dropdown">
-        <button type="button" className="btn btn-sm me-2">
-          <i className="fa-solid fa-download"></i> Export
-        </button>
         <button
           className="btn btn-sm dropdown-toggle"
           type="button"

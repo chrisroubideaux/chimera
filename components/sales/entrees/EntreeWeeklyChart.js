@@ -122,11 +122,10 @@ export default function EntreeWeeklyChart({ setActiveComponent }) {
       'Average Sales',
     ];
 
-    // Format numbers with "k" notation, ensuring value is a number before calling toFixed
     const formatNumber = (value) => {
-      const numericValue = parseFloat(value); // Ensure it's a number
-      if (isNaN(numericValue)) return 'N/A'; // Return 'N/A' if value is not a valid number
-      return `${numericValue.toFixed(1)}k`; // Shows 1 decimal place and adds "k"
+      const numericValue = parseFloat(value);
+      if (isNaN(numericValue)) return 'N/A';
+      return `${numericValue.toFixed(1)}k`;
     };
 
     const rows = labels.map((label, index) => [
