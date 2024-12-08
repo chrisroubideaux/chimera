@@ -107,7 +107,31 @@ const lineChartData = {
     },
   ],
 };
+///
+const generateCSV = () => {
+  const csvRows = [
+    ['Day', 'Current Week Sales', 'Previous Week Sales', 'Average Sales'],
+    ...labels.map((label, index) => [
+      label,
+      `${(currentWeekData[index] / 1000).toFixed(2)}k`,
+      `${(previousWeekData[index] / 1000).toFixed(2)}k`,
+      `${(averageSales(currentWeekData) / 1000).toFixed(2)}k`,
+    ]),
+  ];
 
+  const csvContent = csvRows.map((row) => row.join(',')).join('\n');
+
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.setAttribute('download', 'weekly_sales.csv');
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+};
+
+///
 export default function BeverageWeeklyChart({ setActiveComponent }) {
   const [currentWeek, setCurrentWeek] = useState('');
 
@@ -133,6 +157,9 @@ export default function BeverageWeeklyChart({ setActiveComponent }) {
             </div>
             <div className="col-md-6 col-xl-8">
               <div className="d-flex justify-content-end">
+                <button className="btn btn-sm me-2" onClick={generateCSV}>
+                  Download CSV
+                </button>
                 <Nav setActiveComponent={setActiveComponent} />
               </div>
             </div>

@@ -116,12 +116,10 @@ export default function BeverageHourlyChart({ setActiveComponent }) {
     const formattedTime = format(now, 'h:mm a');
     setCurrentDateTime(`${formattedDate}, ${formattedTime}`);
 
-    const currentHour = now.getHours() - 11; // Calculate current hour
+    const currentHour = now.getHours() - 11;
 
-    // Ensure current hour is within the chart's hour range
     if (currentHour < 0 || currentHour > 10) return;
 
-    // Generate sales data
     const { actual, projected } = generateSalesData(currentHour);
     const averageData = Array.from({ length: labels.length }, (_, index) =>
       parseFloat(
@@ -168,6 +166,31 @@ export default function BeverageHourlyChart({ setActiveComponent }) {
       },
     ],
   };
+  ///
+  // Function to generate CSV
+  const generateCSV = () => {
+    const header = ['Hour', 'Actual Sales', 'Projected Sales', 'Average Sales'];
+    const rows = labels.map((label, index) => [
+      label,
+      `${actual[index]}k`,
+      `${projected[index]}k`,
+      `${average[index]}k`,
+    ]);
+
+    const csvContent = [header, ...rows].map((row) => row.join(',')).join('\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.setAttribute('href', url);
+    link.setAttribute('download', 'hourly_sales_data.csv');
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  ///
 
   return (
     <div className="container-fluid">
@@ -182,6 +205,13 @@ export default function BeverageHourlyChart({ setActiveComponent }) {
             </div>
             <div className="col-md-6 col-xl-8">
               <div className="d-flex justify-content-end">
+                <button
+                  type="button"
+                  className="btn btn-sm me-2"
+                  onClick={generateCSV}
+                >
+                  <i className="fa-solid fa-download"></i> Export CSV
+                </button>{' '}
                 <Nav setActiveComponent={setActiveComponent} />
               </div>
             </div>

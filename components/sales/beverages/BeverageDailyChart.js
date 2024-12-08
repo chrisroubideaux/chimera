@@ -161,6 +161,30 @@ export default function BeverageDailyChart({ setActiveComponent }) {
     ],
   };
 
+  ///
+  const generateCSV = () => {
+    const header = ['Day', 'Projected Sales', 'Actual Sales', 'Average Sales'];
+    const rows = labels.map((label, index) => [
+      label,
+      `${chartData.projectedSales[index].toFixed(2)}K`,
+      `${chartData.actualSales[index].toFixed(2)}K`,
+      `${chartData.averageSales[index].toFixed(2)}K`,
+    ]);
+
+    const csvContent = [header, ...rows].map((row) => row.join(',')).join('\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.setAttribute('href', url);
+    link.setAttribute('download', 'sales_data.csv');
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  ///
   return (
     <div className="container-fluid">
       <div className="card">
@@ -174,6 +198,13 @@ export default function BeverageDailyChart({ setActiveComponent }) {
             </div>
             <div className="col-md-6 col-xl-8">
               <div className="d-flex justify-content-end">
+                <button
+                  type="button"
+                  className="btn btn-sm me-2"
+                  onClick={generateCSV}
+                >
+                  <i className="fa-solid fa-download"></i> Export CSV
+                </button>{' '}
                 <Nav setActiveComponent={setActiveComponent} />
               </div>
             </div>
