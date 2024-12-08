@@ -29,6 +29,7 @@ const createUser = async (req, res) => {
 */
 }
 //
+
 const createUser = async (req, res) => {
   const {
     name,
@@ -104,12 +105,9 @@ const createUser = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
     const newUser = new User({
-      googleId,
-      facebookId,
-      facebookDisplayName,
-      facebookEmail,
       name,
       email,
+      password: hashedPassword,
       photo,
       phone,
       address,
@@ -127,7 +125,7 @@ const createUser = async (req, res) => {
       message: 'User created successfully.',
       user: newUser,
       token,
-      redirectTo: `http://localhost:3000/profile/${newUser._id}`,
+      redirectTo: `http://localhost:3000/users/${newUser._id}`,
     });
   } catch (err) {
     console.error(err);
@@ -161,7 +159,6 @@ const getUserById = async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 };
-// Update user by id
 
 // Update an existing user by ID
 const updateUserById = async (req, res) => {
