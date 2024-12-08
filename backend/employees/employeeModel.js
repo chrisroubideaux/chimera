@@ -15,6 +15,9 @@ const timeOffRequestSchema = new mongoose.Schema({
 const employeeSchema = new mongoose.Schema(
   {
     googleId: String,
+    facebookId: String,
+    facebookDisplayName: String,
+    facebookEmail: String,
     name: String,
     image: String,
     email: String,

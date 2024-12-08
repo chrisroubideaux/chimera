@@ -80,10 +80,24 @@ export default function Navbar() {
                     Menu
                   </Link>
                 </li>
-                <li className="nav-item d-flex align-items-center">
-                  <i className="social-icons fs-5 fa-solid fa-calculator me-3"></i>
-                  <Link className="nav-link" href="/calculator/calculator/">
-                    Calculator
+                <li className=" nav-item d-flex align-items-center">
+                  <Link className="nav-link" href="/products/products">
+                    <i className="fs-6 fa-solid fa-shop"></i> Products
+                  </Link>
+                </li>
+                <li className="nav-item d-flex align-items-center ">
+                  <Link className="nav-link" href="/orders/orders">
+                    <i className="fs-6 fa-solid fa-clipboard-list"></i> Orders
+                  </Link>
+                </li>
+                <li className="nav-item d-flex align-items-center ">
+                  <Link className="nav-link" href="/inventory/inventory">
+                    <i className="fs-6 fa-solid fa-list-check"></i> Inventory
+                  </Link>
+                </li>
+                <li className=" nav-item d-flex align-items-center">
+                  <Link className="nav-link" href="/payroll/Payroll">
+                    <i className=" fs-6 fa-solid fa-money-bill"></i> Payroll
                   </Link>
                 </li>
                 <li className="nav-item d-flex align-items-center">

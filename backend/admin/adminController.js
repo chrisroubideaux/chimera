@@ -1,6 +1,9 @@
 // admin controller
 const Admin = require('./adminModel');
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 // Define allowed fields for update
 const allowedUpdateFields = [
@@ -14,6 +17,18 @@ const allowedUpdateFields = [
   'endDate',
   'wage',
 ];
+
+// Function to check if a string contains at least one digit and one special character
+function isPasswordValid(password) {
+  const digitRegex = /\d/;
+  const specialCharRegex = /[!@#$%^&*]/;
+
+  return (
+    password.length >= 10 &&
+    digitRegex.test(password) &&
+    specialCharRegex.test(password)
+  );
+}
 
 // Function to validate update fields
 const validateUpdateFields = (updateFields) => {
@@ -213,11 +228,9 @@ const updateRequestStatus = async (req, res) => {
     );
 
     if (!employee) {
-      return res
-        .status(404)
-        .json({
-          error: 'Employee or time-off request not found in Employee model',
-        });
+      return res.status(404).json({
+        error: 'Employee or time-off request not found in Employee model',
+      });
     }
 
     res.status(200).json({ message: 'Request status updated successfully' });

@@ -3,10 +3,14 @@ const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema(
   {
+    googleId: String,
     name: String,
     photo: String,
     email: String,
-    role: String,
+    password: String,
+    facebookId: String,
+    facebookDisplayName: String,
+    facebookEmail: String,
     phone: String,
     address: String,
     city: String,
@@ -22,11 +26,6 @@ const userSchema = new mongoose.Schema(
     wage: Number,
     emergencyContact1: String,
     emergencyContact2: String,
-    role: {
-      type: String,
-      enum: ['admin', 'employee'],
-      required: true,
-    },
   },
   {
     timestamps: true,

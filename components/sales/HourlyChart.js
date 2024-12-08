@@ -110,7 +110,7 @@ const generateHourlySalesData = (
 
   for (let i = 0; i < hours; i++) {
     if (i < openHour || i > closeHour || i > currentHour) {
-      salesData.push(null); // Future hours or closed hours set to null
+      salesData.push(null);
     } else {
       const variance = faker.datatype.number({ min: -300, max: 300 });
       const hourlySales = Math.max(0, averageHourlySales + variance);

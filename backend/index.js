@@ -3,7 +3,7 @@ const express = require('express');
 const session = require('express-session');
 const { json, urlencoded } = require('body-parser');
 const mongoose = require('mongoose');
-//const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 const MongoStore = require('connect-mongo');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const cors = require('cors');
@@ -28,7 +28,7 @@ const drinkRoutes = require('./drinks/drinks');
 const linenRoutes = require('./linens/linens');
 const dryGoodRoutes = require('./dryGoods/dryGoods');
 const paperProductRoutes = require('./paperProducts/paperProducts');
-
+require('./routes/facebookConfig');
 require('dotenv').config();
 
 const app = express();
@@ -45,24 +45,13 @@ mongoose
     console.error('Error connecting to MongoDB:', error);
   });
 
-{
-  /*
-mongoose
-  .connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => {
-    console.log('Connected to MongoDB');
-  })
-  .catch((error) => {
-    console.error('Error connecting to MongoDB:', error);
-  });
-
-*/
-}
-// CORS setup
+// CORS
 app.use(
   cors({
     origin: process.env.CLIENT_ORIGIN,
     credentials: true,
+    allowedHeaders: ['Authorization', 'Content-Type'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   })
 );
 // Session setup with connect-mongo
@@ -85,6 +74,39 @@ app.use(urlencoded({ extended: true }));
 // Passport initialization
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(express.json());
+app.use(urlencoded({ extended: true }));
+
+// Verify Token  for middleware function
+function verifyToken(req, res, next) {
+  const authHeader = req.headers['authorization'];
+  console.log('Authorization Header:', authHeader);
+
+  if (!authHeader) {
+    return res.status(401).json({ error: 'Authentication token is missing' });
+  }
+
+  const token = authHeader.split(' ')[1];
+  console.log('Extracted Token:', token);
+
+  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+    if (err) {
+      console.error('Token verification failed:', err.message);
+      return res.status(401).json({ error: 'Invalid token' });
+    }
+
+    req.userId = decoded._id;
+    console.log('Token Verified, User ID:', req.userId);
+    next();
+  });
+}
+
+const sessionMiddleware = session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true,
+});
+app.use(sessionMiddleware);
 
 // routes
 app.get('/', (req, res) => {
@@ -151,7 +173,39 @@ app.get(
     res.redirect(`http://localhost:3000/admins/${userId}`);
   }
 );
+// // Facebook OAuth registration route
+app.get(
+  '/auth/facebook/register',
+  passport.authenticate('facebook', { scope: ['email'] })
+);
 
+// Facebook OAuth callback route (Updated to handle dynamic redirect)
+app.get(
+  '/auth/facebook/callback',
+  passport.authenticate('facebook', { failureRedirect: '/' }),
+  (req, res) => {
+    console.log('Authenticated user:', req.user);
+    if (req.user) {
+      const { role, id } = req.user;
+
+      if (role === 'admin') {
+        res.redirect(`http://localhost:3000/admins/${id}`);
+      } else if (role === 'agent') {
+        res.redirect(`http://localhost:3000/employees/${id}`);
+      } else if (role === 'user') {
+        res.redirect(`http://localhost:3000/users/${id}`);
+      } else {
+        res.redirect('/login');
+      }
+    } else {
+      res.redirect('/login');
+    }
+  }
+);
+app.get(
+  '/auth/facebook/login',
+  passport.authenticate('facebook', { scope: ['email'] })
+);
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
