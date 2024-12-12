@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { format } from 'date-fns';
-//import { faker } from '@faker-js/faker';
+import { faker } from '@faker-js/faker';
 
 const Starters = ({ setActiveComponent, starters }) => {
   //  const [dailySales, setDailySales] = useState([]);
@@ -13,63 +13,10 @@ const Starters = ({ setActiveComponent, starters }) => {
     time: '',
   });
 
-  // Calculates the index of the first and last items to display on the current page
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = starters.slice(indexOfFirstItem, indexOfLastItem);
-  {
-    /*
-  // Function to generate daily sales data only between 11 AM and 9 PM
-  const generateDailySalesData = () => {
-    const now = new Date();
-    const currentHour = now.getHours();
 
-    if (currentHour >= 11 && currentHour <= 21) {
-      return starters.map((starter) => ({
-        ...starter,
-        count: starter.count || '',
-        par: starter.par || '',
-        projected: starter.projected || '',
-        actual: starter.actual || '',
-        sales: faker.datatype.float({
-          min: 100,
-          max: 500,
-          precision: 0.01,
-        }),
-      }));
-    }
-
-    return starters;
-  };
-
-  // Call generateDailySalesData and update dailySales state
-  useEffect(() => {
-    const salesData = generateDailySalesData();
-    setDailySales(salesData);
-
-    // Send the generated data to the backend for storage
-    const now = new Date();
-    const formattedDate = format(now, 'MM/dd/yy');
-    const formattedTime = format(now, 'hh:mm:ss a');
-    const dataToStore = salesData.map((item) => ({
-      ...item,
-      date: formattedDate,
-      time: formattedTime,
-    }));
-
-    // Use axios to send the data to your backend API
-    axios
-      .post('http://localhost:3001/starters', dataToStore)
-      .then((response) => {
-        console.log('Sales data stored successfully:', response.data);
-      })
-      .catch((error) => {
-        console.error('Error storing sales data:', error);
-      });
-  }, [starters]);
-*/
-  }
-  // update date/time
   useEffect(() => {
     const updateDateTime = () => {
       const now = new Date();

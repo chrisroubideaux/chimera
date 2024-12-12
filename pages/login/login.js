@@ -35,7 +35,6 @@ const Login = () => {
       if (response.status === 200) {
         const { token, user } = response.data;
 
-        // Save data to localStorage
         localStorage.setItem('authToken', token);
         localStorage.setItem('userId', user._id);
         localStorage.setItem('userRole', user.role);
@@ -140,6 +139,7 @@ const Login = () => {
 };
 
 export default Login;
+
 {
   /*
 import Head from 'next/head';

@@ -1,5 +1,5 @@
 html, body {
-  height: 100%;
+  min-height: 100%; 
   background: rgb(249,248,252);
   background: linear-gradient(234deg, rgba(249,248,252,1) 0%, rgba(205,205,225,1) 50%, rgba(253,253,255,1) 100%);
   background-size: cover;
