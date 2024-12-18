@@ -31,7 +31,8 @@ const linenRoutes = require('./linens/linens');
 const dryGoodRoutes = require('./dryGoods/dryGoods');
 const paperProductRoutes = require('./paperProducts/paperProducts');
 require('./routes/facebookConfig');
-
+const dotenv = require('dotenv');
+dotenv.config();
 const app = express();
 //const port = process.env.PORT || 3001;
 const PORT = process.env.PORT || 3001;
@@ -52,7 +53,6 @@ mongoose
 app.use(
   cors({
     origin: process.env.CLIENT_ORIGIN || 'http://localhost:3000',
-
     credentials: true,
     allowedHeaders: ['Authorization', 'Content-Type'],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
