@@ -2,7 +2,7 @@
 import Head from 'next/head';
 import Navbar from '@/components/Nav/Navbar';
 import SideBar from '@/components/messages/SideBar';
-import Chat from '@/components/messages/Chat';
+//import Chat from '@/components/messages/Chat';
 
 export default function messages() {
   return (
@@ -29,9 +29,7 @@ export default function messages() {
             <div className="col-lg-4 col-xxl-3">
               <SideBar />
             </div>
-            <div className="col-lg-8 col-xxl-9">
-              <Chat />
-            </div>
+            <div className="col-lg-8 col-xxl-9"></div>
           </div>
         </div>
       </div>
