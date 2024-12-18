@@ -56,9 +56,9 @@ const timeOffSchema = new mongoose.Schema(
   }
 );
 
-const TimeOff = mongoose.model('TimeOff', timeOffSchema);
+const TimeOffModel = mongoose.model('TimeOffModel', timeOffSchema);
 
-module.exports = TimeOff;
+module.exports = TimeOffModel;
 
 {
   /*
