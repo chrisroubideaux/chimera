@@ -42,12 +42,8 @@ const PORT = process.env.PORT || 3001;
 const mongoURI = process.env.MONGO_URI;
 
 // mongoose connection
-
 mongoose
-  .connect(mongoURI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(mongoURI)
   .then(() => {
     console.log('Connected to MongoDB');
   })
