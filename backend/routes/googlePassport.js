@@ -15,17 +15,14 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
-        // Check if the user already exists
         let admin = await Admin.findOne({ googleId: profile.id });
 
         if (!admin) {
-          // Determine the role (main admin or employee)
           const role =
             profile.emails[0].value === process.env.MAIN_ADMIN_EMAIL
               ? 'admin'
               : 'employee';
 
-          // Create a new user if they don't exist
           admin = new Admin({
             googleId: profile.id,
             name: profile.displayName,
