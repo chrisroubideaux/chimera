@@ -47,7 +47,6 @@ mongoose
   .connect(mongoURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    sslValidate: false, // Disable SSL verification
   })
   .then(() => {
     console.log('Connected to MongoDB');
