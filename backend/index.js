@@ -79,18 +79,24 @@ app.use(
 );
 
 // Session setup with connect-mongo
+const sessionMiddleware = session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true,
+});
+
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: false,
-    store: MongoStore.create({ mongoUrl: mongoURI }),
+    saveUninitialized: true,
     cookie: {
-      maxAge: 1000 * 60 * 60 * 24,
+      secure: false,
     },
   })
 );
 
+app.use(sessionMiddleware);
 // Body parsing middleware
 app.use(json());
 app.use(urlencoded({ extended: true }));
@@ -124,13 +130,6 @@ function verifyToken(req, res, next) {
     next();
   });
 }
-
-const sessionMiddleware = session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: true,
-});
-app.use(sessionMiddleware);
 
 // Routes
 app.get('/', (req, res) => {
