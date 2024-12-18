@@ -7,8 +7,8 @@ export default function Navbar() {
     <>
       <nav className="navbar fixed-top">
         <div className="container-fluid">
-          <Link className=" fs-4 fw-bold nav-link" href="/">
-            Chimera
+          <Link className=" fs-4 fw-semi-bold nav-link" href="/">
+            Chimera AI
           </Link>
 
           <div className="nav justify-content-center pt-2">
@@ -93,11 +93,6 @@ export default function Navbar() {
                 <li className="nav-item d-flex align-items-center ">
                   <Link className="nav-link" href="/inventory/inventory">
                     <i className="fs-6 fa-solid fa-list-check"></i> Inventory
-                  </Link>
-                </li>
-                <li className=" nav-item d-flex align-items-center">
-                  <Link className="nav-link" href="/payroll/Payroll">
-                    <i className=" fs-6 fa-solid fa-money-bill"></i> Payroll
                   </Link>
                 </li>
                 <li className="nav-item d-flex align-items-center">

@@ -4,6 +4,7 @@ import Head from 'next/head';
 import Navbar from '@/components/Nav/Navbar';
 import Footer from '@/components/Misc/Footer';
 import Header from '@/components/menu/Header';
+
 export default function menu() {
   return (
     <>

@@ -1,4 +1,5 @@
 // Main index.js
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 const express = require('express');
 const session = require('express-session');
 const { json, urlencoded } = require('body-parser');
@@ -32,7 +33,8 @@ require('./routes/facebookConfig');
 require('dotenv').config();
 
 const app = express();
-const port = process.env.PORT || 3001;
+//const port = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3001;
 const mongoURI = process.env.MONGO_URI;
 
 // mongoose
@@ -46,14 +48,16 @@ mongoose
   });
 
 // CORS
+
 app.use(
   cors({
-    origin: process.env.CLIENT_ORIGIN,
+    origin: process.env.CLIENT_BASE_URL || 'http://localhost:3000',
     credentials: true,
     allowedHeaders: ['Authorization', 'Content-Type'],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   })
 );
+
 // Session setup with connect-mongo
 app.use(
   session({
@@ -206,6 +210,15 @@ app.get(
   '/auth/facebook/login',
   passport.authenticate('facebook', { scope: ['email'] })
 );
+
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server running on port ${PORT}`);
+});
+
+{
+  /*
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
+*/
+}
