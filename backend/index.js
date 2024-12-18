@@ -1,4 +1,5 @@
 // Main index.js
+// Main index.js
 require('dotenv').config();
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
