@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import Head from 'next/head';
 import Navbar from '@/components/Nav/Navbar';
-import Footer from '@/components/Misc/Footer';
+//import Footer from '@/components/Misc/Footer';
 
 export default function about() {
   return (
@@ -23,7 +23,6 @@ export default function about() {
       </Head>
       <div>
         <Navbar />
-        <Footer />
       </div>
     </>
   );

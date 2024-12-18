@@ -4,7 +4,7 @@ import Navbar from '@/components/Nav/Navbar';
 import Card from '@/components/charts/Card';
 //import Bookings from '@/components/calendar/Bookings';
 import Tab from '@/components/charts/Tab';
-import Chart from '@/components/charts/chart';
+import Chart from '@/components/charts/Chart';
 import DayChart from '@/components/charts/DayChart';
 import Revenue from '@/components/charts/Revenue';
 import TopSeller from '@/components/charts/TopSeller';
