@@ -1,4 +1,6 @@
 // Main index.js
+require('dotenv').config();
+
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 const express = require('express');
 const session = require('express-session');
@@ -30,7 +32,6 @@ const linenRoutes = require('./linens/linens');
 const dryGoodRoutes = require('./dryGoods/dryGoods');
 const paperProductRoutes = require('./paperProducts/paperProducts');
 require('./routes/facebookConfig');
-require('dotenv').config();
 
 const app = express();
 //const port = process.env.PORT || 3001;
