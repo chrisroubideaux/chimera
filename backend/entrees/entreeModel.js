@@ -44,7 +44,7 @@ const entreeSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
-// Middleware to generate sales data before saving
+
 entreeSchema.pre('save', function (next) {
   const now = new Date();
   const currentHour = now.getHours();
@@ -64,6 +64,6 @@ entreeSchema.pre('save', function (next) {
   next();
 });
 
-const Entree = mongoose.model('Entree', entreeSchema);
+const Entree = mongoose.model('entree', entreeSchema);
 
 module.exports = Entree;

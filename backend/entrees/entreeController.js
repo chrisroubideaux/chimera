@@ -1,6 +1,6 @@
 // entree controller
 const mongoose = require('mongoose');
-const Entree = require('./EntreeModel');
+const Entree = require('./entree');
 
 // Create a new starter
 const createEntree = async (req, res) => {
