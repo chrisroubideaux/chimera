@@ -5,7 +5,7 @@ import Image from 'next/image';
 export default function Sidebar({ setActiveComponent, users }) {
   const handleLogout = async () => {
     try {
-      await fetch('http://localhost:3001/auth/logout', {
+      await fetch('https://chimera-h56c.onrender.com/auth/logout', {
         method: 'GET',
         credentials: 'include',
       });
@@ -57,7 +57,6 @@ export default function Sidebar({ setActiveComponent, users }) {
                 </a>
               </li>
               <li className="nav-item"></li>
-
               <li className="nav-item">
                 <Link className="nav-link" href="/" onClick={handleLogout}>
                   <i className="fs-6 fa-solid fa-person-walking"></i> Log out

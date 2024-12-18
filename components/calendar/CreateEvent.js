@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import { format } from 'date-fns';
 import axios from 'axios';
 import CalendarEvent from './CalendarEvent';
-
 const today = format(new Date(), 'MM/dd/yyyy');
 
 export default function CreateEvent({ meetings }) {
@@ -37,7 +36,7 @@ export default function CreateEvent({ meetings }) {
 
     try {
       const response = await axios.post(
-        'http://localhost:3001/meetings',
+        'https://chimera-h56c.onrender.com/meetings',
         newMeeting
       );
       if (response.status === 200) {
@@ -58,7 +57,9 @@ export default function CreateEvent({ meetings }) {
   useEffect(() => {
     const fetchEmployees = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/employees');
+        const response = await axios.get(
+          'https://chimera-h56c.onrender.com/employees'
+        );
         setEmployees(response.data);
       } catch (error) {
         console.error('Error fetching employees:', error);

@@ -11,7 +11,9 @@ export default function TimeOff() {
   useEffect(() => {
     const fetchTimeOffRequests = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/timeoff');
+        const response = await axios.get(
+          'https://chimera-h56c.onrender.com/timeoff'
+        );
         setTimeOffRequests(response.data);
       } catch (error) {
         console.error('Error fetching time-off requests:', error);
@@ -24,7 +26,7 @@ export default function TimeOff() {
   const formatDate = (date) => {
     const parsedDate = new Date(date);
     return isValid(parsedDate)
-      ? format(parsedDate, 'MM/dd/yyyy') // Format to MM/DD/YYYY
+      ? format(parsedDate, 'MM/dd/yyyy')
       : 'Invalid Date';
   };
 
@@ -38,13 +40,15 @@ export default function TimeOff() {
     setCurrentDate(newDate);
   };
 
-  // Function to update time-off request status
   const updateRequestStatus = async (id, status) => {
     try {
-      const response = await axios.put(`http://localhost:3001/timeoff/${id}`, {
-        status,
-      });
-      // Update the state with the new status
+      const response = await axios.put(
+        `https://chimera-h56c.onrender.com/timeoff/${id}`,
+        {
+          status,
+        }
+      );
+
       setTimeOffRequests((prevRequests) =>
         prevRequests.map((request) =>
           request._id === id

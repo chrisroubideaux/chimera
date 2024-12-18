@@ -26,10 +26,11 @@ export default function Admin({}) {
   // admin
   useEffect(() => {
     if (id) {
-      // Ensure userId is defined
       const fetchAdminData = async () => {
         try {
-          const response = await axios.get(`//localhost:3001/admins/${id}`);
+          const response = await axios.get(
+            `https://chimera-h56c.onrender.com/admins/${id}`
+          );
           console.log('Admin data:', response.data);
           setAdmin(response.data);
         } catch (error) {
@@ -44,7 +45,9 @@ export default function Admin({}) {
   useEffect(() => {
     const fetchEmployeeData = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/employees');
+        const response = await axios.get(
+          'https://chimera-h56c.onrender.com/employees'
+        );
         if (response.data.length > 0) {
           setEmployeeId(response.data[0]._id);
         }
@@ -61,7 +64,7 @@ export default function Admin({}) {
       const fetchMessageData = async () => {
         try {
           const response = await axios.get(
-            `http://localhost:3001/messages/${id}`
+            `https://chimera-h56c.onrender.com/messages/${id}`
           );
           console.log('Message data:', response.data);
           setMessage(response.data);
@@ -81,7 +84,7 @@ export default function Admin({}) {
   // Fetch meetings
   useEffect(() => {
     axios
-      .get('http://localhost:3001/meetings')
+      .get('https://chimera-h56c.onrender.com/meetings')
       .then((response) => {
         setMeetings(response.data);
       })
@@ -95,7 +98,9 @@ export default function Admin({}) {
   useEffect(() => {
     const fetchTimeOffRequests = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/timeOff');
+        const response = await axios.get(
+          'https://chimera-h56c.onrender.com/timeOff'
+        );
         setTimeOffRequests(response.data);
         console.log('Time-off data:', response.data);
       } catch (error) {

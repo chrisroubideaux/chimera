@@ -3,7 +3,6 @@ import axios from 'axios';
 import Image from 'next/image';
 import NewMessage from './NewMessage';
 
-// Helper function to format message timestamps
 const formatMessageTimestamp = (timestamp) => {
   const messageDate = new Date(timestamp);
   const today = new Date();
@@ -16,7 +15,6 @@ const formatMessageTimestamp = (timestamp) => {
     hour12: true,
   });
 
-  // Format full date as MM/DD/YYYY
   const formattedDate = messageDate.toLocaleDateString('en-US', {
     month: '2-digit',
     day: '2-digit',
@@ -33,13 +31,12 @@ const formatMessageTimestamp = (timestamp) => {
     messageDate.getMonth() === yesterday.getMonth() &&
     messageDate.getFullYear() === yesterday.getFullYear();
 
-  // Display the appropriate message
   if (isToday) {
-    return `${formattedDate}, ${formattedTime}`; // Include today's date
+    return `${formattedDate}, ${formattedTime}`;
   } else if (isYesterday) {
-    return `Yesterday, ${formattedTime}`; // Display 'Yesterday' with time
+    return `Yesterday, ${formattedTime}`;
   } else {
-    return `${formattedDate}, ${formattedTime}`; // Display full date for older messages
+    return `${formattedDate}, ${formattedTime}`;
   }
 };
 
@@ -54,14 +51,13 @@ export default function ViewMessages({
   const [loading, setLoading] = useState(true);
   const [activeRecipient, setActiveRecipient] = useState(null);
 
-  // Fetch messages, admins, and employees data on load
   useEffect(() => {
     async function fetchData() {
       try {
         const [messagesRes, adminsRes, employeesRes] = await Promise.all([
-          axios.get('http://localhost:3001/messages'),
-          axios.get('http://localhost:3001/admins'),
-          axios.get('http://localhost:3001/employees'),
+          axios.get('https://chimera-h56c.onrender.com/messages'),
+          axios.get('https://chimera-h56c.onrender.com/admins'),
+          axios.get('https://chimera-h56c.onrender.com/employees'),
         ]);
 
         setAdmins(adminsRes.data);
@@ -82,7 +78,7 @@ export default function ViewMessages({
           return {
             ...conv,
             senderName: sender?.name || 'Unknown Sender',
-            timestamp: formatMessageTimestamp(conv.latestMessage.timestamp), // Format the timestamp
+            timestamp: formatMessageTimestamp(conv.latestMessage.timestamp),
           };
         });
 
@@ -97,7 +93,6 @@ export default function ViewMessages({
     fetchData();
   }, [currentAdminId]);
 
-  // Group messages by sender and recipient, keeping only the latest message
   const groupMessagesByConversation = (allMessages) => {
     const grouped = {};
 
@@ -119,18 +114,15 @@ export default function ViewMessages({
     return Object.values(grouped);
   };
 
-  // Generate a unique key for each conversation (sender/recipient pair)
   const generateConversationKey = (senderId, recipientId) =>
     [senderId, recipientId].sort().join('-');
 
-  // Find a user by ID and model (Admin/Employee)
   const findUserById = (id, model, admins, employees) => {
     if (model === 'Admin') return admins.find((admin) => admin._id === id);
     if (model === 'Employee') return employees.find((emp) => emp._id === id);
     return null;
   };
 
-  // Function to handle recipient selection
   const handleRecipientSelect = (recipient) => {
     setActiveRecipient(recipient);
     console.log('Recipient selected:', recipient);

@@ -4,7 +4,7 @@ import Link from 'next/link';
 export default function Sidebar({ setActiveComponent, admins }) {
   const handleLogout = async () => {
     try {
-      await fetch('http://localhost:3001/auth/logout', {
+      await fetch('https://chimera-h56c.onrender.com/auth/logout', {
         method: 'GET',
         credentials: 'include',
       });

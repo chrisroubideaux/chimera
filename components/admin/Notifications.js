@@ -7,7 +7,6 @@ export default function Notifications({ meetings }) {
   const [visibleMeetings, setVisibleMeetings] = useState(meetings);
   const [timeOffRequests, setTimeOffRequests] = useState([]);
 
-  // Helper function to format dates
   const formatDate = (dateString) => {
     const date = dateString ? new Date(dateString) : new Date();
 
@@ -19,11 +18,12 @@ export default function Notifications({ meetings }) {
     return format(date, 'MM/dd/yyyy');
   };
 
-  // Fetch time-off requests
   useEffect(() => {
     const fetchTimeOffRequests = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/timeoff');
+        const response = await axios.get(
+          'https://chimera-h56c.onrender.com/timeoff'
+        );
         setTimeOffRequests(response.data);
       } catch (error) {
         console.error('Error fetching time-off requests:', error);
@@ -33,21 +33,18 @@ export default function Notifications({ meetings }) {
     fetchTimeOffRequests();
   }, []);
 
-  // Function to delete a meeting notification
   const deleteNotification = (meetingId) => {
     setVisibleMeetings((prevMeetings) =>
       prevMeetings.filter((meeting) => meeting._id !== meetingId)
     );
   };
 
-  // Function to delete a time-off request
   const deleteTimeOffRequest = (requestId) => {
     setTimeOffRequests((prevRequests) =>
       prevRequests.filter((request) => request._id !== requestId)
     );
   };
 
-  // Function to delete all notifications
   const deleteAllNotifications = () => {
     setVisibleMeetings([]);
     setTimeOffRequests([]);

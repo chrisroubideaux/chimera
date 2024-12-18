@@ -52,7 +52,7 @@ const Calendar = () => {
   };
 
   const renderDays = () => {
-    const daysOfWeek = ['S', 'M', 'T', 'W', 'T', 'F', 'S']; // Abbreviated days of the week
+    const daysOfWeek = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
     const days = [];
 
     for (let i = 0; i < 7; i++) {

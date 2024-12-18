@@ -12,7 +12,6 @@ const Desserts = ({ setActiveComponent, desserts }) => {
     time: '',
   });
 
-  // Function to generate daily sales data
   const generateDailySalesData = () => {
     const averageDailySales = 500;
     return desserts.map((dessert) => ({
@@ -25,7 +24,6 @@ const Desserts = ({ setActiveComponent, desserts }) => {
     }));
   };
 
-  // Call generateDailySalesData and update dailySales state
   useEffect(() => {
     const salesData = generateDailySalesData();
     setDailySales(salesData);
@@ -36,21 +34,17 @@ const Desserts = ({ setActiveComponent, desserts }) => {
       const now = new Date();
       setCurrentDateTime({
         date: format(now, 'MM/dd/yyyy'),
-        time: format(now, 'hh:mm:ss a'), // 12-hour format with seconds
+        time: format(now, 'hh:mm:ss a'),
       });
     };
 
-    // Update the date and time immediately when the component mounts
     updateDateTime();
 
-    // Set up an interval to update the time every second
     const intervalId = setInterval(updateDateTime, 1000);
 
-    // Clear the interval when the component unmounts
     return () => clearInterval(intervalId);
   }, []);
 
-  // Calculates the index of the first and last items to display on the current page
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = desserts.slice(indexOfFirstItem, indexOfLastItem);

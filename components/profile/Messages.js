@@ -14,13 +14,12 @@ export default function Messages({
   const [admins, setAdmins] = useState([]);
   const [activeRecipient, setActiveRecipient] = useState(null);
 
-  // Fetch employees and admins on component load
   useEffect(() => {
     const fetchContacts = async () => {
       try {
         const [adminsRes, employeesRes] = await Promise.all([
-          axios.get('http://localhost:3001/admins'),
-          axios.get('http://localhost:3001/employees'),
+          axios.get('https://chimera-h56c.onrender.com/admins'),
+          axios.get('https://chimera-h56c.onrender.com/employees'),
         ]);
         setAdmins(adminsRes.data);
         setEmployees(employeesRes.data);
@@ -31,13 +30,14 @@ export default function Messages({
     fetchContacts();
   }, []);
 
-  // Fetch messages when the recipient changes
   useEffect(() => {
     const fetchMessages = async () => {
-      if (!activeRecipient) return; // Prevent fetching if no recipient selected
+      if (!activeRecipient) return;
 
       try {
-        const response = await axios.get('http://localhost:3001/messages');
+        const response = await axios.get(
+          'https://chimera-h56c.onrender.com/messages'
+        );
         const filteredMessages = response.data.filter(
           (msg) =>
             (msg.sender._id === currentEmployeeId &&
@@ -52,7 +52,7 @@ export default function Messages({
     };
     fetchMessages();
   }, [currentEmployeeId, activeRecipient]);
-  // Post method
+
   const sendMessage = async () => {
     if (!newMessage.trim() || !activeRecipient) {
       console.error('Message content and recipient must be provided');
@@ -71,7 +71,7 @@ export default function Messages({
 
     try {
       const response = await axios.post(
-        'http://localhost:3001/messages',
+        'https://chimera-h56c.onrender.com/messages',
         messageData
       );
       setMessages((prevMessages) => [...prevMessages, response.data]);
@@ -82,8 +82,8 @@ export default function Messages({
   };
 
   const handleRecipientSelect = (recipient) => {
-    setActiveRecipient(recipient); // Update active recipient
-    setMessages([]); // Clear previous messages
+    setActiveRecipient(recipient);
+    setMessages([]);
   };
 
   const formatTimestamp = (timestamp) => {

@@ -6,9 +6,8 @@ export default function NewMessage({
   onRecipientSelect,
 }) {
   const [selectedId, setSelectedId] = useState('');
-  const [isDataLoaded, setIsDataLoaded] = useState(false); // Track loading state
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
 
-  // Load employees/admins, and only then read from localStorage
   useEffect(() => {
     if (employees.length > 0 || admins.length > 0) {
       const storedRecipientId = localStorage.getItem('selectedRecipientId');
@@ -29,7 +28,7 @@ export default function NewMessage({
         }
       }
 
-      setIsDataLoaded(true); // Mark data as loaded
+      setIsDataLoaded(true);
     }
   }, [employees, admins]);
 
@@ -49,18 +48,17 @@ export default function NewMessage({
   };
 
   const handleSendMessage = (e) => {
-    e.preventDefault(); // Prevent default form submission
+    e.preventDefault();
     const messageContent = e.target.elements.message.value;
     if (selectedId && messageContent) {
-      // Send the message logic can go here
       console.log('Message sent to:', selectedId, 'Content:', messageContent);
-      // Clear the message input after sending
+
       e.target.reset();
     }
   };
 
   if (!isDataLoaded) {
-    return <div>Loading contacts...</div>; // Prevent rendering until data is ready
+    return <div>Loading contacts...</div>;
   }
 
   return (
@@ -123,10 +121,10 @@ export default function NewMessage({
                     type="text"
                     className="form-control"
                     placeholder="Message"
-                    name="message" // Add name for the input
+                    name="message"
                     required
                   />
-                  <button className="btn btn-primary" type="submit">
+                  <button className="btn btn-sm" type="submit">
                     <i className="fa-solid fa-paper-plane"></i>
                   </button>
                 </div>

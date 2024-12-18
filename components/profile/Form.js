@@ -33,7 +33,6 @@ export default function TimeOffRequestForm({ currentEmployeeId, adminId }) {
     const twoWeeksFromNow = new Date(currentDate);
     twoWeeksFromNow.setDate(currentDate.getDate() + 14);
 
-    // Validate if start date is at least two weeks from today
     if (startDateObj < twoWeeksFromNow) {
       return setError(
         'All time-off requests need two weeks notice from the current date.'
@@ -41,16 +40,17 @@ export default function TimeOffRequestForm({ currentEmployeeId, adminId }) {
     }
 
     try {
-      const response = await axios.post('http://localhost:3001/timeOff', {
-        ...formData, // Spread formData to include all fields
-        employee: currentEmployeeId, // Dynamic employee ID
-        admin: adminId, // Dynamic admin ID or fallback '66d920a7274f0ef93f9dc3bd'
-      });
+      const response = await axios.post(
+        'https://chimera-h56c.onrender.com/timeOff',
+        {
+          ...formData,
+          employee: currentEmployeeId,
+          admin: adminId,
+        }
+      );
 
-      // If successful, set success message
       setSuccess('Time-off request submitted successfully!');
     } catch (error) {
-      // Set error message if something goes wrong
       setError('There was an issue submitting the request. Please try again.');
     }
   };

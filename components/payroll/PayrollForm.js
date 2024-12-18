@@ -7,10 +7,9 @@ export default function Form({ activeEmployeeId }) {
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
-    // Fetch a specific employee based on the activeEmployeeId
     if (activeEmployeeId) {
       axios
-        .get(`http://localhost:3001/employees/${activeEmployeeId}`)
+        .get(`https://chimera-h56c.onrender.com/employees/${activeEmployeeId}`)
         .then((response) => {
           setEmployee(response.data);
         })
@@ -23,31 +22,31 @@ export default function Form({ activeEmployeeId }) {
   if (!employee) {
     return <div>Loading employee details...</div>;
   }
-  // put method
-  // Toggle between edit and view mode
+
   const handleEditClick = () => {
     setIsEditing(!isEditing);
   };
 
-  // Update employee state when input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setEmployee((prevState) => ({
       ...prevState,
       [name]: value,
     }));
-    console.log('Field Changed:', name, value); // Debugging log
+    console.log('Field Changed:', name, value);
   };
 
   const handleSaveChanges = async () => {
     try {
-      const id = employee._id; // Use _id instead of id
-      await axios.put(`http://localhost:3001/employees/${id}`, employee);
+      const id = employee._id;
+      await axios.put(
+        `https://chimera-h56c.onrender.com/employees/${id}`,
+        employee
+      );
       console.log('Employee data updated successfully');
 
-      // Optionally, fetch the updated employee from the server
       const updatedEmployee = await axios.get(
-        `http://localhost:3001/employees/${id}`
+        `https://chimera-h56c.onrender.com/employees/${id}`
       );
       setEmployee(updatedEmployee.data);
       setIsEditing(false);

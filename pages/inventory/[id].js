@@ -32,7 +32,7 @@ export default function Inventory() {
   // admin
   useEffect(() => {
     axios
-      .get('http://localhost:3001/admins')
+      .get('https://chimera-h56c.onrender.com/admins')
       .then((response) => {
         setAdmins(response.data);
       })
@@ -48,7 +48,7 @@ export default function Inventory() {
       const fetchDrinkData = async () => {
         try {
           const response = await axios.get(
-            `http://localhost:3001/drinks/${id}`
+            `https://chimera-h56c.onrender.com/drinks/${id}`
           );
           console.log('Bev data:', response.data);
           setDrink(response.data);
@@ -66,7 +66,7 @@ export default function Inventory() {
       const fetchProduceData = async () => {
         try {
           const response = await axios.get(
-            `http://localhost:3001/produce/${id}`
+            `https://chimera-h56c.onrender.com/produce/${id}`
           );
           console.log('Bev data:', response.data);
           setProduce(response.data);

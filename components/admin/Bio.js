@@ -29,15 +29,14 @@ export default function Bio({ admins }) {
   };
 
   const handleSaveChanges = async (e) => {
-    e.preventDefault(); // Prevent form submission
+    e.preventDefault();
     try {
-      const id = admin._id; // Assuming _id is used as the identifier
-      await axios.put(`http://localhost:3001/admins/${id}`, admin);
+      const id = admin._id;
+      await axios.put(`https://chimera-h56c.onrender.com/admins/${id}`, admin);
       console.log('Employee data updated successfully');
 
-      // Optionally, fetch the updated admin from the server
       const updatedAdmin = await axios.get(
-        `http://localhost:3001/admins/${id}`
+        `https://chimera-h56c.onrender.com/admins/${id}`
       );
       setAdmin(updatedAdmin.data);
       setIsEditing(false);

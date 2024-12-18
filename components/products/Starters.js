@@ -47,7 +47,6 @@ const Starters = ({ setActiveComponent, starters }) => {
     setCurrentPage(pageNumber);
   };
 
-  //const totalPages = Math.ceil(starters.length / itemsPerPage);
   const totalPages = Math.min(Math.ceil(starters.length / itemsPerPage), 3);
 
   return (

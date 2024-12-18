@@ -11,7 +11,7 @@ const Beverages = ({ setActiveComponent, beverages }) => {
     date: '',
     time: '',
   });
-  // Function to generate daily sales data
+
   const generateDailySalesData = () => {
     const averageDailySales = 1000;
     return beverages.map((beverage) => ({
@@ -23,13 +23,12 @@ const Beverages = ({ setActiveComponent, beverages }) => {
       }),
     }));
   };
-  // Call generateDailySalesData and update dailySales state
+
   useEffect(() => {
     const salesData = generateDailySalesData();
     setDailySales(salesData);
   }, [beverages]);
 
-  // Calculates the index of the first and last items to display on the current page
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = beverages.slice(indexOfFirstItem, indexOfLastItem);

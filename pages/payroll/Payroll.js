@@ -32,7 +32,7 @@ export default function Payrolls() {
   // useEffect
   useEffect(() => {
     axios
-      .get('http://localhost:3001/admins')
+      .get('https://chimera-h56c.onrender.com/admins')
       .then((response) => {
         setAdmins(response.data);
       })
@@ -44,7 +44,7 @@ export default function Payrolls() {
   // useEffect
   useEffect(() => {
     axios
-      .get('http://localhost:3001/employees')
+      .get('https://chimera-h56c.onrender.com/employees')
       .then((response) => {
         setEmployees(response.data);
       })

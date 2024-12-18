@@ -27,7 +27,6 @@ const generateSalesData = (data, minSales, maxSales) => {
       });
     }
 
-    // Get the current date in MM/DD/YYYY format
     const currentDate = format(new Date(), 'MM/dd/yyyy');
 
     return {

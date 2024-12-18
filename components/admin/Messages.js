@@ -15,8 +15,8 @@ export default function Messages({ setActiveComponent, currentAdminId }) {
     const fetchContacts = async () => {
       try {
         const [adminsRes, employeesRes] = await Promise.all([
-          axios.get('http://localhost:3001/admins'),
-          axios.get('http://localhost:3001/employees'),
+          axios.get('https://chimera-h56c.onrender.com/admins'),
+          axios.get('https://chimera-h56c.onrender.com/employees'),
         ]);
         setAdmins(adminsRes.data);
         setEmployees(employeesRes.data);
@@ -27,13 +27,14 @@ export default function Messages({ setActiveComponent, currentAdminId }) {
     fetchContacts();
   }, []);
 
-  // Fetch messages when the recipient changes
   useEffect(() => {
     const fetchMessages = async () => {
-      if (!activeRecipient) return; // Prevent fetching if no recipient selected
+      if (!activeRecipient) return;
 
       try {
-        const response = await axios.get('http://localhost:3001/messages');
+        const response = await axios.get(
+          'https://chimera-h56c.onrender.com/messages'
+        );
         const filteredMessages = response.data.filter(
           (msg) =>
             (msg.sender._id === currentAdminId &&
@@ -66,7 +67,7 @@ export default function Messages({ setActiveComponent, currentAdminId }) {
 
     try {
       const response = await axios.post(
-        'http://localhost:3001/messages',
+        'https://chimera-h56c.onrender.com/messages',
         messageData
       );
       setMessages((prevMessages) => [...prevMessages, response.data]);
@@ -77,8 +78,8 @@ export default function Messages({ setActiveComponent, currentAdminId }) {
   };
 
   const handleRecipientSelect = (recipient) => {
-    setActiveRecipient(recipient); // Update active recipient
-    setMessages([]); // Clear previous messages
+    setActiveRecipient(recipient);
+    setMessages([]);
   };
 
   const formatTimestamp = (timestamp) => {

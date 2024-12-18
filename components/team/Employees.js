@@ -1,8 +1,8 @@
 // Employee component
 const Employees = ({ setActiveComponent, employees, setActiveEmployeeId }) => {
   const handleViewClick = (id) => {
-    setActiveEmployeeId(id); // Set the active employee ID
-    setActiveComponent('PayrollForm'); // Switch to PayrollForm component
+    setActiveEmployeeId(id);
+    setActiveComponent('PayrollForm');
   };
 
   return (
@@ -19,7 +19,6 @@ const Employees = ({ setActiveComponent, employees, setActiveEmployeeId }) => {
               </div>
             </div>
 
-            {/* Table with multiple employees */}
             <table id="datatables-products" className="table w-100 mt-1">
               <thead>
                 <tr>
@@ -47,7 +46,6 @@ const Employees = ({ setActiveComponent, employees, setActiveEmployeeId }) => {
                 </tr>
               </thead>
               <tbody>
-                {/* Map through employees array */}
                 {employees && employees.length > 0 ? (
                   employees.map((employee) => (
                     <tr key={employee._id}>
@@ -78,7 +76,7 @@ const Employees = ({ setActiveComponent, employees, setActiveEmployeeId }) => {
                         <a
                           className="btn btn-sm me-1"
                           href="#"
-                          onClick={() => handleViewClick(employee._id)} // Pass employee ID on click
+                          onClick={() => handleViewClick(employee._id)}
                         >
                           View
                         </a>
@@ -96,7 +94,6 @@ const Employees = ({ setActiveComponent, employees, setActiveEmployeeId }) => {
             </table>
           </div>
 
-          {/* Pagination */}
           <nav
             className="d-flex justify-content-center align-items-center"
             aria-label="Page navigation example"

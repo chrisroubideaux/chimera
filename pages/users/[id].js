@@ -32,7 +32,9 @@ export default function Profile() {
     if (id) {
       const fetchUserData = async () => {
         try {
-          const response = await axios.get(`http://localhost:3001/users/${id}`);
+          const response = await axios.get(
+            `https://chimera-h56c.onrender.com/users/${id}`
+          );
           console.log('User data:', response.data);
           setUser(response.data);
         } catch (error) {

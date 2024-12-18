@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { format } from 'date-fns';
 import { faker } from '@faker-js/faker';
+
 const Entrees = ({ setActiveComponent, entrees }) => {
   const [dailySales, setDailySales] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -41,17 +42,13 @@ const Entrees = ({ setActiveComponent, entrees }) => {
       });
     };
 
-    // Update the date and time immediately when the component mounts
     updateDateTime();
 
-    // Set up an interval to update the time every second
     const intervalId = setInterval(updateDateTime, 1000);
 
-    // Clear the interval when the component unmounts
     return () => clearInterval(intervalId);
   }, []);
 
-  // Calculates the index of the first and last items to display on the current page
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = entrees.slice(indexOfFirstItem, indexOfLastItem);

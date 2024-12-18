@@ -26,7 +26,7 @@ export default function Team() {
       const fetchEmployeeData = async () => {
         try {
           const response = await axios.get(
-            `http://localhost:3001/employees/${id}`
+            `https://chimera-h56c.onrender.com/employees/${id}`
           );
           console.log('Employee data:', response.data);
           setEmployee(response.data);

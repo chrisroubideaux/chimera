@@ -27,7 +27,6 @@ const Calendar = ({ onSelectDate, meetings = [] }) => {
     meeting: 'meeting',
   };
 
-  // Generate recurring events
   const generateRecurringEvents = (currentMonth) => {
     let events = [];
     const start = startOfMonth(currentMonth);
@@ -40,7 +39,6 @@ const Calendar = ({ onSelectDate, meetings = [] }) => {
     while (day <= end) {
       const dayOfWeek = getDay(day);
 
-      // Orders (Tuesday and Thursday)
       if (dayOfWeek === 2 || dayOfWeek === 4) {
         events.push({
           date: format(day, 'yyyy-MM-dd'),
@@ -49,7 +47,6 @@ const Calendar = ({ onSelectDate, meetings = [] }) => {
         });
       }
 
-      // Inventory (Sunday)
       if (dayOfWeek === 0) {
         events.push({
           date: format(day, 'yyyy-MM-dd'),
@@ -58,7 +55,6 @@ const Calendar = ({ onSelectDate, meetings = [] }) => {
         });
       }
 
-      // Payroll every other Tuesday
       if (dayOfWeek === 3 && isPayrollWeek) {
         events.push({
           date: format(day, 'yyyy-MM-dd'),
@@ -70,7 +66,6 @@ const Calendar = ({ onSelectDate, meetings = [] }) => {
         isPayrollWeek = true;
       }
 
-      // Payday every other Friday
       if (dayOfWeek === 6 && isPaydayWeek) {
         events.push({
           date: format(day, 'yyyy-MM-dd'),
@@ -109,9 +104,8 @@ const Calendar = ({ onSelectDate, meetings = [] }) => {
             ? null
             : format(parsedDate, 'yyyy-MM-dd');
         })
-        .filter(Boolean); // Filter out any null values
+        .filter(Boolean);
 
-      // Map valid dates to meeting objects
       return meetingDates.map((date) => ({
         date,
         type: eventTypes.meeting,
@@ -120,14 +114,13 @@ const Calendar = ({ onSelectDate, meetings = [] }) => {
             Meeting: {meeting.sender.name} & {meeting.recipient.name}
           </div>
         ),
-        slot: meeting.slot, // Add the slot information
+        slot: meeting.slot,
         sender: meeting.sender.name,
         recipient: meeting.recipient.name,
       }));
     });
   };
 
-  // Combine recurring events and meetings
   const combinedEvents = [...recurringEvents, ...formatMeetings(meetings)];
 
   const renderHeader = () => {
@@ -269,7 +262,6 @@ const Calendar = ({ onSelectDate, meetings = [] }) => {
                   selectedDayEvents.map((event, index) => (
                     <div key={index} className={`box  ${event.type}`}>
                       <h6 className="py-3 fs-6 mt-2">{event.title}</h6>
-
                       {event.type === eventTypes.meeting && (
                         <div className="fs-6">
                           <h6>

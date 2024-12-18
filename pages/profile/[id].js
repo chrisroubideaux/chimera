@@ -37,7 +37,7 @@ export default function Profile() {
       const fetchEmployeeData = async () => {
         try {
           const response = await axios.get(
-            `http://localhost:3001/employees/${id}`
+            `https://chimera-h56c.onrender.com/employees/${id}`
           );
           console.log('Employee data:', response.data);
           setEmployee(response.data);
@@ -55,7 +55,9 @@ export default function Profile() {
   useEffect(() => {
     const fetchAdminData = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/admins');
+        const response = await axios.get(
+          'https://chimera-h56c.onrender.com/admins'
+        );
         if (response.data.length > 0) {
           setAdminId(response.data[0]._id);
         }
@@ -73,7 +75,7 @@ export default function Profile() {
       const fetchMessageData = async () => {
         try {
           const response = await axios.get(
-            `http://localhost:3001/messages/${id}`
+            `https://chimera-h56c.onrender.com/messages/${id}`
           );
           console.log('Message data:', response.data);
           setMessage(response.data);

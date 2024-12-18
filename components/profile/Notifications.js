@@ -7,17 +7,16 @@ export default function Notifications({ currentEmployeeId }) {
   const [visibleMeetings, setVisibleMeetings] = useState([]);
   const [visibleRequests, setVisibleRequests] = useState([]);
 
-  // Fetch meetings and time-off requests from the API
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
         const meetingsResponse = await axios.get(
-          'http://localhost:3001/meetings'
+          'https://chimera-h56c.onrender.com/meetings'
         );
         setVisibleMeetings(meetingsResponse.data);
 
         const timeOffResponse = await axios.get(
-          'http://localhost:3001/timeOff'
+          'https://chimera-h56c.onrender.com/timeOff'
         );
         const filteredRequests = timeOffResponse.data.filter(
           (request) => request.employee._id === currentEmployeeId
@@ -33,7 +32,6 @@ export default function Notifications({ currentEmployeeId }) {
     }
   }, [currentEmployeeId]);
 
-  // Helper function to format the date, defaulting to the current date if missing
   const formatDate = (dateString) => {
     const date = dateString ? new Date(dateString) : new Date();
 
@@ -45,21 +43,18 @@ export default function Notifications({ currentEmployeeId }) {
     return format(date, 'MM/dd/yyyy');
   };
 
-  // Function to "delete" a meeting by removing it from local state
   const deleteMeeting = (meetingId) => {
     setVisibleMeetings((prevMeetings) =>
       prevMeetings.filter((meeting) => meeting._id !== meetingId)
     );
   };
 
-  // Function to "delete" a request by removing it from local state
   const deleteRequest = (requestId) => {
     setVisibleRequests((prevRequests) =>
       prevRequests.filter((request) => request._id !== requestId)
     );
   };
 
-  // Function to delete all notifications
   const deleteAllNotifications = () => {
     setVisibleMeetings([]);
     setVisibleRequests([]);

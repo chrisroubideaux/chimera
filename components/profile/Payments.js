@@ -6,7 +6,6 @@ export default function Payments({ employees }) {
   const [isEditing, setIsEditing] = useState(false);
   const [employee, setEmployee] = useState(employees || {});
 
-  // Update employee state when prop changes
   useEffect(() => {
     if (employees) {
       setEmployee(employees);
@@ -17,30 +16,30 @@ export default function Payments({ employees }) {
     return <p>No employee data available.</p>;
   }
 
-  // Toggle between edit and view mode
   const handleEditClick = () => {
     setIsEditing(!isEditing);
   };
 
-  // Update employee state when input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setEmployee((prevState) => ({
       ...prevState,
       [name]: value,
     }));
-    console.log('Field Changed:', name, value); // Debugging log
+    console.log('Field Changed:', name, value);
   };
 
   const handleSaveChanges = async () => {
     try {
-      const id = employee._id; // Use _id instead of id
-      await axios.put(`http://localhost:3001/employees/${id}`, employee);
+      const id = employee._id;
+      await axios.put(
+        `https://chimera-h56c.onrender.com/employees/${id}`,
+        employee
+      );
       console.log('Employee data updated successfully');
 
-      // Optionally, fetch the updated employee from the server
       const updatedEmployee = await axios.get(
-        `http://localhost:3001/employees/${id}`
+        `https://chimera-h56c.onrender.com/employees/${id}`
       );
       setEmployee(updatedEmployee.data);
       setIsEditing(false);
@@ -69,7 +68,6 @@ export default function Payments({ employees }) {
             </div>
             <div className="card-body">
               <form onSubmit={handleSaveChanges}>
-                {/* Full Name */}
                 <div className="row mb-4">
                   <label
                     htmlFor="nameLabel"

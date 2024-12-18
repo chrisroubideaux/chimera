@@ -35,26 +35,23 @@ export default function EmployeeForm() {
     experience: '',
   });
 
-  // State for feedback messages
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
 
-  // Handle form field changes
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        'http://localhost:3001/employees',
+        'https://chimera-h56c.onrender.com/employees',
         formData
       );
       setMessage('Employee added successfully!');
       setError('');
-      // Optionally reset the form
+
       setFormData({
         name: '',
         image: '',

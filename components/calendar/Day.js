@@ -7,7 +7,6 @@ const Day = ({ setActiveComponent, meetings }) => {
   const [currentDay, setCurrentDay] = useState(new Date());
   const [events, setEvents] = useState([]);
 
-  // Calculate the maximum range for 3 days back and 3 days forward
   const threeDaysAgo = subDays(new Date(), 3);
   const threeDaysAhead = addDays(new Date(), 3);
 

@@ -5,7 +5,6 @@ export default function Bio({ users }) {
   const [isEditing, setIsEditing] = useState(false);
   const [user, setUser] = useState(users || {});
 
-  // Update employee state when prop changes
   useEffect(() => {
     if (users) {
       setUser(users);
@@ -16,12 +15,10 @@ export default function Bio({ users }) {
     return <p>No user data available.</p>;
   }
 
-  // Toggle between edit and view mode
   const handleEditClick = () => {
     setIsEditing(!isEditing);
   };
 
-  // Update user state when input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUser((prevState) => ({
@@ -34,10 +31,12 @@ export default function Bio({ users }) {
   const handleSaveChanges = async () => {
     try {
       const id = user._id;
-      await axios.put(`http://localhost:3001/users/${id}`, user);
+      await axios.put(`https://chimera-h56c.onrender.com/users/${id}`, user);
       console.log('User data updated successfully');
 
-      const updatedUser = await axios.get(`http://localhost:3001/users/${id}`);
+      const updatedUser = await axios.get(
+        `https://chimera-h56c.onrender.com/users/${id}`
+      );
       setUser(updatedUser.data);
       setIsEditing(false);
     } catch (error) {

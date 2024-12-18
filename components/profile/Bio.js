@@ -5,7 +5,6 @@ export default function Bio({ employees }) {
   const [isEditing, setIsEditing] = useState(false);
   const [employee, setEmployee] = useState(employees || {});
 
-  // Update employee state when prop changes
   useEffect(() => {
     if (employees) {
       setEmployee(employees);
@@ -16,12 +15,10 @@ export default function Bio({ employees }) {
     return <p>No employee data available.</p>;
   }
 
-  // Toggle between edit and view mode
   const handleEditClick = () => {
     setIsEditing(!isEditing);
   };
 
-  // Update employee state when input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setEmployee((prevState) => ({
@@ -34,11 +31,14 @@ export default function Bio({ employees }) {
   const handleSaveChanges = async () => {
     try {
       const id = employee._id;
-      await axios.put(`http://localhost:3001/employees/${id}`, employee);
+      await axios.put(
+        `https://chimera-h56c.onrender.com/employees/${id}`,
+        employee
+      );
       console.log('Employee data updated successfully');
 
       const updatedEmployee = await axios.get(
-        `http://localhost:3001/employees/${id}`
+        `https://chimera-h56c.onrender.com/employees/${id}`
       );
       setEmployee(updatedEmployee.data);
       setIsEditing(false);

@@ -24,7 +24,7 @@ export default function Orders() {
 
   useEffect(() => {
     axios
-      .get('http://localhost:3001/admins')
+      .get('https://chimera-h56c.onrender.com/admins')
       .then((response) => {
         setAdmins(response.data);
       })
