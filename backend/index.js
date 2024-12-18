@@ -79,11 +79,23 @@ app.use(
 );
 
 // Session setup with connect-mongo
+
+// Session setup with MongoStore
 const sessionMiddleware = session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
+  store: MongoStore.create({
+    mongoUrl: process.env.MONGO_URI,
+    collectionName: 'sessions',
+    ttl: 14 * 24 * 60 * 60,
+  }),
+  cookie: {
+    secure: process.env.NODE_ENV === 'production',
+  },
 });
+
+app.use(sessionMiddleware);
 
 app.use(
   session({
@@ -96,7 +108,6 @@ app.use(
   })
 );
 
-app.use(sessionMiddleware);
 // Body parsing middleware
 app.use(json());
 app.use(urlencoded({ extended: true }));
