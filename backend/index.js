@@ -1,7 +1,6 @@
 // Main index.js
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
-
 const express = require('express');
 const session = require('express-session');
 const { json, urlencoded } = require('body-parser');

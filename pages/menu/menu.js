@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import Head from 'next/head';
 import Navbar from '@/components/Nav/Navbar';
-import Footer from '@/components/Misc/Footer';
+import Footer from '@/components/misc/Footer';
 import Header from '@/components/menu/Header';
 
 export default function menu() {
