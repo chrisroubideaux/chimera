@@ -1,6 +1,7 @@
 // Main index.js
-require('dotenv').config();
+
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+
 const express = require('express');
 const session = require('express-session');
 const { json, urlencoded } = require('body-parser');
@@ -10,6 +11,7 @@ const MongoStore = require('connect-mongo');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const cors = require('cors');
 const passport = require('passport');
+
 // auth routes
 const employeeRoutes = require('./employees/employees');
 const adminRoutes = require('./admin/admins');
@@ -22,6 +24,7 @@ const starterRoutes = require('./starters/starters');
 const entreeRoutes = require('./entrees/entrees');
 const dessertRoutes = require('./desserts/desserts');
 const beverageRoutes = require('./beverages/beverages');
+
 // inventory routes
 const produceRoutes = require('./produce/produce');
 const dairyRoutes = require('./dairy/dairy');
@@ -30,15 +33,15 @@ const drinkRoutes = require('./drinks/drinks');
 const linenRoutes = require('./linens/linens');
 const dryGoodRoutes = require('./dryGoods/dryGoods');
 const paperProductRoutes = require('./paperProducts/paperProducts');
+
 require('./routes/facebookConfig');
-const dotenv = require('dotenv');
-dotenv.config();
+require('dotenv').config();
+
 const app = express();
-//const port = process.env.PORT || 3001;
 const PORT = process.env.PORT || 3001;
 const mongoURI = process.env.MONGO_URI;
 
-// mongoose
+// mongoose connection
 mongoose
   .connect(mongoURI)
   .then(() => {
@@ -48,11 +51,10 @@ mongoose
     console.error('Error connecting to MongoDB:', error);
   });
 
-// CORS
-
+// CORS setup
 app.use(
   cors({
-    origin: process.env.CLIENT_ORIGIN || 'http://localhost:3000',
+    origin: process.env.CLIENT_BASE_URL || 'http://localhost:3000',
     credentials: true,
     allowedHeaders: ['Authorization', 'Content-Type'],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
@@ -60,23 +62,6 @@ app.use(
 );
 
 // Session setup with connect-mongo
-
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    store: MongoStore.create({
-      mongoUrl: process.env.MONGO_URI,
-    }),
-    cookie: {
-      maxAge: 1000 * 60 * 60 * 24, // 1 day
-    },
-  })
-);
-
-{
-  /*
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -88,8 +73,6 @@ app.use(
     },
   })
 );
-*/
-}
 
 // Body parsing middleware
 app.use(json());
@@ -101,7 +84,7 @@ app.use(passport.session());
 app.use(express.json());
 app.use(urlencoded({ extended: true }));
 
-// Verify Token  for middleware function
+// Verify Token middleware function
 function verifyToken(req, res, next) {
   const authHeader = req.headers['authorization'];
   console.log('Authorization Header:', authHeader);
@@ -125,16 +108,24 @@ function verifyToken(req, res, next) {
   });
 }
 
-// routes
+const sessionMiddleware = session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true,
+});
+app.use(sessionMiddleware);
+
+// Routes
 app.get('/', (req, res) => {
   res.send('Hello world!');
 });
 
-// routes
+// Products route
 app.use('/products', (req, res) => {
   res.send('Hello world!');
 });
-// api routes
+
+// API routes
 app.use('/employees', employeeRoutes);
 app.use('/admins', adminRoutes);
 app.use('/starters', starterRoutes);
@@ -169,7 +160,7 @@ app.get('/admins/:id', (req, res) => {
     });
 });
 
-// Oauth
+// OAuth routes
 app.get(
   '/auth/google/register',
   passport.authenticate('google', { scope: ['openid', 'profile', 'email'] })
@@ -190,7 +181,8 @@ app.get(
     res.redirect(`http://localhost:3000/admins/${userId}`);
   }
 );
-// // Facebook OAuth registration route
+
+// Facebook OAuth registration route
 app.get(
   '/auth/facebook/register',
   passport.authenticate('facebook', { scope: ['email'] })
@@ -219,6 +211,7 @@ app.get(
     }
   }
 );
+
 app.get(
   '/auth/facebook/login',
   passport.authenticate('facebook', { scope: ['email'] })
@@ -227,11 +220,3 @@ app.get(
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on port ${PORT}`);
 });
-
-{
-  /*
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
-});
-*/
-}
