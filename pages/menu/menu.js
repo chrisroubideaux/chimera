@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import Head from 'next/head';
 import Navbar from '@/components/Nav/Navbar';
-import Footer from '@/components/misc/Footer';
+import Footer from '@/components/Misc/Footer';
 import Header from '@/components/menu/Header';
 
 export default function menu() {
@@ -22,7 +22,7 @@ export default function menu() {
           href="https://use.fontawesome.com/releases/v6.1.1/css/all.css"
         />
       </Head>
-      <div className="layout ">
+      <div className="layout h-100">
         <Navbar />
         <Header />
         <Footer />
