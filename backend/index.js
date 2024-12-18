@@ -130,13 +130,6 @@ function verifyToken(req, res, next) {
   });
 }
 
-const sessionMiddleware = session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: true,
-});
-app.use(sessionMiddleware);
-
 // routes
 app.get('/', (req, res) => {
   res.send('Hello world!');
