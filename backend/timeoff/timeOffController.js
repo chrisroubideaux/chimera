@@ -1,5 +1,5 @@
 // time off controller file
-const TimeOff = require('./TimeOffModel');
+const TimeOff = require('./timeOffModel');
 
 // Create a new time-off request
 {
