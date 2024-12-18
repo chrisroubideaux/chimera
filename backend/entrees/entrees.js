@@ -1,6 +1,6 @@
 // entrees routes
 const express = require('express');
-const Entree = require('./EntreeModel');
+const Entree = require('./entree');
 const entreeRoutes = express.Router();
 
 const {
