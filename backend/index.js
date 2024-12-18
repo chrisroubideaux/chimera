@@ -42,6 +42,23 @@ const PORT = process.env.PORT || 3001;
 const mongoURI = process.env.MONGO_URI;
 
 // mongoose connection
+
+mongoose
+  .connect(mongoURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    sslValidate: false, // Disable SSL verification
+  })
+  .then(() => {
+    console.log('Connected to MongoDB');
+  })
+  .catch((error) => {
+    console.error('Error connecting to MongoDB:', error);
+  });
+
+{
+  /*
+
 mongoose
   .connect(mongoURI)
   .then(() => {
@@ -50,6 +67,11 @@ mongoose
   .catch((error) => {
     console.error('Error connecting to MongoDB:', error);
   });
+
+
+
+*/
+}
 
 // CORS setup
 app.use(
