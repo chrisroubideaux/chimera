@@ -37,20 +37,8 @@ const validateUpdateFields = (updateFields) => {
     allowedUpdateFields.includes(field)
   );
 };
-{
-  /*
-const createEmployee = async (req, res) => {
-  try {
-    const newEmployee = new Employee(req.body);
-    const savedEmployee = await newEmployee.save();
-    res.status(201).json(savedEmployee);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-};
-*/
-}
-///
+
+/// Create new employee
 const createEmployee = async (req, res) => {
   const {
     name,
@@ -111,7 +99,7 @@ const createEmployee = async (req, res) => {
         message: 'New agent created successfully via OAuth.',
         employee: newEmployee,
         token,
-        redirectTo: `http://localhost:3000/agents/${newEmployee._id}`,
+        redirectTo: `https://chimera-green.vercel.app/employees/${newEmployee._id}`,
       });
     }
 
@@ -158,7 +146,7 @@ const createEmployee = async (req, res) => {
       message: 'New agent created successfully.',
       employee: newEmployee,
       token,
-      redirectTo: `http://localhost:3000/profile/${newEmployee._id}`,
+      redirectTo: `https://chimera-green.vercel.app/profile/${newEmployee._id}`,
     });
   } catch (err) {
     console.error(err);
@@ -374,7 +362,7 @@ const login = async (req, res) => {
       return res.status(401).json({ message: 'Invalid email or password' });
     }
     const token = jwt.sign({ _id: Employee._id }, process.env.JWT_SECRET);
-    const redirectTo = `http://localhost:3000/profile/${Employee._id}`;
+    const redirectTo = `https://chimera-green.vercel.app/profile/${Employee._id}`;
     console.log('Generated Token:', token);
 
     res
@@ -402,7 +390,7 @@ const logout = async (req, res) => {
     res.clearCookie('token');
     return res.status(200).json({
       message: 'Logged out successfully.',
-      redirectTo: 'http://localhost:3000/login',
+      redirectTo: 'https://chimera-green.vercel.app/login',
     });
   } catch (error) {
     console.error('Error during logout:', error);

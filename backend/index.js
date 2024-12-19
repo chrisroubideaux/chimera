@@ -1,5 +1,4 @@
 // Main index.js
-
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 const express = require('express');
 const session = require('express-session');
@@ -195,7 +194,7 @@ app.get(
   '/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
   (req, res) => {
-    res.redirect(`http://localhost:3000/admins/${userId}`);
+    res.redirect(`https://chimera-green.vercel.app/admins/${userId}`);
   }
 );
 
@@ -215,11 +214,11 @@ app.get(
       const { role, id } = req.user;
 
       if (role === 'admin') {
-        res.redirect(`http://localhost:3000/admins/${id}`);
+        res.redirect(`https://chimera-green.vercel.app/admins/${id}`);
       } else if (role === 'agent') {
-        res.redirect(`http://localhost:3000/employees/${id}`);
+        res.redirect(`https://chimera-green.vercel.app/employees/${id}`);
       } else if (role === 'user') {
-        res.redirect(`http://localhost:3000/users/${id}`);
+        res.redirect(`https://chimera-green.vercel.app/users/${id}`);
       } else {
         res.redirect('/login');
       }

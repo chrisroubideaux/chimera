@@ -82,7 +82,7 @@ const createUser = async (req, res) => {
         message: 'User created successfully via OAuth.',
         user: newUser,
         token,
-        redirectTo: `http://localhost:3000/profile/${newUser._id}`,
+        redirectTo: `https://chimera-green.vercel.app/profile/${newUser._id}`,
       });
     }
 
@@ -125,7 +125,7 @@ const createUser = async (req, res) => {
       message: 'User created successfully.',
       user: newUser,
       token,
-      redirectTo: `http://localhost:3000/users/${newUser._id}`,
+      redirectTo: `https://chimera-green.vercel.app/users/${newUser._id}`,
     });
   } catch (err) {
     console.error(err);
@@ -208,7 +208,7 @@ const login = async (req, res) => {
       return res.status(401).json({ message: 'Invalid email or password' });
     }
     const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
-    const redirectTo = `http://localhost:3000/user/${user._id}`;
+    const redirectTo = `https://chimera-green.vercel.app/user/${user._id}`;
     console.log('Generated Token:', token);
 
     res
@@ -237,7 +237,7 @@ const logout = async (req, res) => {
     res.clearCookie('token');
     return res.status(200).json({
       message: 'Logged out successfully.',
-      redirectTo: 'http://localhost:3000/login',
+      redirectTo: 'https://chimera-green.vercel.app/login',
     });
   } catch (error) {
     console.error('Error during logout:', error);

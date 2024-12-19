@@ -158,7 +158,6 @@ const deleteAdminById = async (req, res) => {
 // Get all pending time-off requests
 const getPendingRequests = async (req, res) => {
   try {
-    // Fetch pending requests for admins
     const admins = await Admin.find(
       { 'timeOffRequests.status': 'pending' },
       'name timeOffRequests'
@@ -173,7 +172,6 @@ const getPendingRequests = async (req, res) => {
         }))
     );
 
-    // Fetch pending requests for employees
     const employees = await Employee.find(
       { 'timeOffRequests.status': 'pending' },
       'name timeOffRequests'
@@ -188,7 +186,6 @@ const getPendingRequests = async (req, res) => {
         }))
     );
 
-    // Combine both results
     const allPendingRequests = [...pendingRequests, ...pendingEmployeeRequests];
 
     res.status(200).json(allPendingRequests);
@@ -207,7 +204,6 @@ const updateRequestStatus = async (req, res) => {
   }
 
   try {
-    // Update request status in Admin
     const admin = await Admin.findOneAndUpdate(
       { _id: adminId, 'timeOffRequests._id': requestId },
       { $set: { 'timeOffRequests.$.status': status } },
@@ -220,7 +216,6 @@ const updateRequestStatus = async (req, res) => {
         .json({ error: 'Admin or time-off request not found' });
     }
 
-    // Update request status in Employee (assuming employeeId is stored in the request)
     const employee = await employee.findOneAndUpdate(
       { _id: admin.timeOffRequests.id, 'timeOffRequests._id': requestId },
       { $set: { 'timeOffRequests.$.status': status } },

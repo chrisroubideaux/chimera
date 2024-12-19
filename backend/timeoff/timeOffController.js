@@ -156,11 +156,11 @@ const getTimeOffRequestById = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
-// Update a time-off request (e.g., change status)
+
 const updateTimeOffRequest = async (req, res) => {
   try {
     const { id } = req.params;
-    const { status } = req.body; // Status could be 'Approved' or 'Rejected'
+    const { status } = req.body;
 
     const timeOffRequest = await TimeOff.findByIdAndUpdate(
       id,
@@ -186,7 +186,7 @@ const deleteTimeOffRequest = async (req, res) => {
     if (!timeOffRequest) {
       return res.status(404).json({ error: 'Time-off request not found' });
     }
-    res.status(204).json(); // No content to send back
+    res.status(204).json();
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
