@@ -5,18 +5,14 @@ import Head from 'next/head';
 import Navbar from '@/components/Nav/Navbar';
 import Tab from '@/components/orders/Tab';
 import Sidebar from '@/components/admin/Sidebar';
-// order imports
-
 import InStore from '@/components/orders/InStore';
 import Online from '@/components/orders/Online';
 import GiftCard from '@/components/orders/GiftCard';
 import Refunds from '@/components/orders/Refunds';
-// sale analytics imports
 import DailyChart from '@/components/sales/DailyChart';
 import WeeklyChart from '@/components/sales/WeeklyChart';
 import MonthlyChart from '@/components/sales/MonthlyChart';
 import HourlyChart from '@/components/sales/HourlyChart';
-//import Form from '@/components/orders/Form';
 
 export default function Orders() {
   const [activeComponent, setActiveComponent] = useState('Orders');

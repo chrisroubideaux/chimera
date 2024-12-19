@@ -1,3 +1,4 @@
+// Register page
 import axios from 'axios';
 import Link from 'next/link';
 import Head from 'next/head';
@@ -61,7 +62,7 @@ const Register = () => {
 
     try {
       const response = await axios.post(
-        'https://chimera-green.vercel.app/users',
+        'https://chimera-h56c.onrender.com/users',
         formData
       );
 
@@ -221,7 +222,7 @@ const Register = () => {
                   <li className="ms-3">
                     <button
                       className="text-muted bg-transparent border-0"
-                      onClick={handleGoogleRegister}
+                      onClick={handleFacebookRegister}
                     >
                       <i className="social-icons fs-1 fa-brands fa-google mt-1"></i>
                     </button>

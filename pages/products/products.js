@@ -12,7 +12,6 @@ import Beverages from '@/components/products/Beverages';
 import GiftCards from '@/components/products/GiftCards';
 import Form from '@/components/products/Form';
 import NewItems from '@/components/products/NewItems';
-
 // chart imports
 import MonthlyChart from '@/components/charts/MonthlyChart';
 import HourlyChart from '@/components/charts/HourlyChart';

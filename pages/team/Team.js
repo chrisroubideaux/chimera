@@ -1,5 +1,4 @@
 // Team page
-// Team page
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Head from 'next/head';
