@@ -70,16 +70,7 @@ const Login = () => {
   return (
     <div>
       <div className="text-center py-5">
-        <Link href="/" className="nav-item">
-          {/*
-          <img
-            className="mb-4"
-            src="https://pngimg.com/uploads/house/house_PNG55.png"
-            alt="Dakota Realtors Logo"
-            width="72"
-            height="57"
-          />
-          */}
+        <Link href="/" className="nav-item ">
           Back to menu
         </Link>
         <h2 className="fw-bold">Login to Your Account</h2>
