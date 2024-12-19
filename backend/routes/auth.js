@@ -50,10 +50,10 @@ authRoutes.get(
   '/facebook/callback',
   passport.authenticate('facebook', { failureRedirect: '/' }),
   (req, res) => {
-    console.log('Authenticated user:', req.user); // Debug log
+    console.log('Authenticated user:', req.user);
     if (req.user) {
       const { role, id } = req.user;
-      console.log(`Role: ${role}, ID: ${id}`); // Debug log
+      console.log(`Role: ${role}, ID: ${id}`);
 
       if (role === 'admin') {
         res.redirect(`https://chimera-green.vercel.app/admins/${id}`);

@@ -39,11 +39,11 @@ const Login = () => {
 
         // Redirect based on role
         if (user.role === 'admin') {
-          window.location.href = `http://localhost:3000/admins/${user._id}`;
+          window.location.href = `https://chimera-green.vercel.app/admins/${user._id}`;
         } else if (user.role === 'agent') {
-          window.location.href = `http://localhost:3000/employes/${user._id}`;
+          window.location.href = `https://chimera-green.vercel.app/employes/${user._id}`;
         } else {
-          window.location.href = `http://localhost:3000/users/${user._id}`;
+          window.location.href = `https://chimera-green.vercel.app/users/${user._id}`;
         }
       } else {
         setError(response.data.message || 'Login failed');
