@@ -4,7 +4,7 @@ import Head from 'next/head';
 import Navbar from '@/components/Nav/Navbar';
 //import Footer from '@/components/Misc/Footer';
 
-export default function about() {
+export default function About() {
   return (
     <>
       <Head>
