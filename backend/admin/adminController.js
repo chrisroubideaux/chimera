@@ -60,12 +60,10 @@ const getAdminById = async (req, res) => {
   try {
     const { id } = req.params;
 
-    // Check if `id` is a valid ObjectId
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(400).json({ message: 'Invalid admin ID' });
     }
 
-    // Convert the string `id` to a MongoDB ObjectId
     const objectId = new mongoose.Types.ObjectId(id);
 
     const admin = await Admin.findById(objectId);
