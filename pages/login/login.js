@@ -57,7 +57,8 @@ const Login = () => {
 
   // Google OAuth
   const handleGoogleLogin = () => {
-    window.location.href = 'http://localhost:3001/auth/google/login';
+    window.location.href =
+      'https://chimera-h56c.onrender.com/auth/google/login';
   };
 
   // Facebook OAuth
