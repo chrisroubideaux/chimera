@@ -79,6 +79,8 @@ const sessionMiddleware = session({
   resave: false,
   saveUninitialized: true,
 });
+*/
+}
 
 app.use(
   session({
@@ -87,22 +89,6 @@ app.use(
     saveUninitialized: true,
     cookie: {
       secure: false,
-    },
-  })
-);
-*/
-}
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: true,
-    store: MongoStore.create({
-      mongoUrl: process.env.MONGO_URI,
-      ttl: 14 * 24 * 60 * 60, // 14 days
-    }),
-    cookie: {
-      secure: process.env.NODE_ENV === 'production', // Secure cookies in production
     },
   })
 );
