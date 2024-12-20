@@ -21,7 +21,6 @@ export default function Tab({ setActiveComponent, users }) {
           </div>
 
           <div className="col-auto">
-            {/*
             <div className="d-none d-lg-block">
               <a
                 className="btn btn-soft-light btn-sm m-1"
@@ -75,9 +74,8 @@ export default function Tab({ setActiveComponent, users }) {
                 Calendar
                 <i className=" m-1 fa-solid fa-calendar-plus"></i>
               </a>
-              */}
+            </div>
           </div>
-
           <button
             className="navbar-toggler d-lg-none"
             type="button"
