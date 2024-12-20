@@ -72,8 +72,7 @@ app.use(
 );
 
 // Session setup with connect-mongo
-{
-  /*
+
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -84,9 +83,6 @@ app.use(
     },
   })
 );
-
-*/
-}
 
 const sessionMiddleware = session({
   secret: process.env.SESSION_SECRET,
