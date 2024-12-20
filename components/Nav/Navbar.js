@@ -75,6 +75,12 @@ export default function Navbar() {
                   </Link>
                 </li>
                 <li className="nav-item d-flex align-items-center">
+                  <i className="social-icons fs-5 fa-solid fa-layer-group"></i>
+                  <Link className="nav-link" href="/menu/menu">
+                    Menu
+                  </Link>
+                </li>
+                <li className="nav-item d-flex align-items-center">
                   <i className="social-icons fs-5 fa-solid fa-folder-tree me-3"></i>
                   <Link className="nav-link" href="/menu/menu">
                     Menu
@@ -101,12 +107,7 @@ export default function Navbar() {
                     About
                   </Link>
                 </li>
-                <li className="nav-item d-flex align-items-center">
-                  <i className="social-icons fs-5 fa-solid fa-person-walking me-3"></i>
-                  <Link className="nav-link" href="/register/Register">
-                    Register
-                  </Link>
-                </li>
+
                 <li className="nav-item d-flex align-items-center">
                   <i className="social-icons fa-solid fa-person-walking-arrow-loop-left fs-5 me-3"></i>
                   <Link className="nav-link" href="/login/login/">
