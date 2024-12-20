@@ -9,7 +9,6 @@ const MongoStore = require('connect-mongo');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const cors = require('cors');
 const passport = require('passport');
-
 // auth routes
 const employeeRoutes = require('./employees/employees');
 const adminRoutes = require('./admin/admins');
@@ -22,7 +21,6 @@ const starterRoutes = require('./starters/starters');
 const entreeRoutes = require('./entrees/entrees');
 const dessertRoutes = require('./desserts/desserts');
 const beverageRoutes = require('./beverages/beverages');
-
 // inventory routes
 const produceRoutes = require('./produce/produce');
 const dairyRoutes = require('./dairy/dairy');
@@ -60,9 +58,6 @@ mongoose
   .catch((error) => {
     console.error('Error connecting to MongoDB:', error);
   });
-
-
-
 */
 }
 
@@ -77,14 +72,13 @@ app.use(
 );
 
 // Session setup with connect-mongo
-
+{
+  /*
 const sessionMiddleware = session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
 });
-
-app.use(sessionMiddleware);
 
 app.use(
   session({
@@ -96,11 +90,28 @@ app.use(
     },
   })
 );
+*/
+}
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGO_URI,
+      ttl: 14 * 24 * 60 * 60, // 14 days
+    }),
+    cookie: {
+      secure: process.env.NODE_ENV === 'production', // Secure cookies in production
+    },
+  })
+);
+
+app.use(sessionMiddleware);
 
 // Body parsing middleware
 app.use(json());
 app.use(urlencoded({ extended: true }));
-
 // Passport initialization
 app.use(passport.initialize());
 app.use(passport.session());
