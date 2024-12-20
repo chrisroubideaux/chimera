@@ -74,14 +74,6 @@ app.use(
 // Session setup with connect-mongo
 {
   /*
-const sessionMiddleware = session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: true,
-});
-*/
-}
-
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -92,6 +84,15 @@ app.use(
     },
   })
 );
+
+*/
+}
+
+const sessionMiddleware = session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true,
+});
 
 app.use(sessionMiddleware);
 
