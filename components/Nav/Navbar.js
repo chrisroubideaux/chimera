@@ -80,6 +80,11 @@ export default function Navbar() {
                     Menu
                   </Link>
                 </li>
+                <li className="nav-item d-flex align-items-center">
+                  <Link className="nav-link" href="/sales/sales">
+                    <i className="fs-6 fa-solid fa-money-bill"></i> Sales
+                  </Link>
+                </li>
 
                 <li className=" nav-item d-flex align-items-center">
                   <Link className="nav-link" href="/products/products">
