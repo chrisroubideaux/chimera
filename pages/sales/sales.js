@@ -4,8 +4,8 @@ import { useRouter } from 'next/router';
 import axios from 'axios';
 import Head from 'next/head';
 import Navbar from '@/components/Nav/Navbar';
-import Tab from '@/components/user/Tab';
-import Sidebar from '@/components/user/Sidebar';
+import Tab from '@/components/sales/Tab';
+import Sidebar from '@/components/admin/Sidebar';
 // overall revenue imports
 import TopSelling from '@/components/sales/TopSelling';
 import HourlyChart from '@/components/sales/HourlyChart';
@@ -35,13 +35,13 @@ import BeverageMonthlyChart from '@/components/sales/beverages/BeverageMonthlyCh
 
 export default function Sales() {
   const [activeComponent, setActiveComponent] = useState('Sales');
-  const [users, setUsers] = useState([]);
+  const [admins, setAdmins] = useState([]);
 
   useEffect(() => {
     axios
-      .get('https://chimera-h56c.onrender.com/users')
+      .get('https://chimera-h56c.onrender.com/admins')
       .then((response) => {
-        setUsers(response.data);
+        setAdmins(response.data);
       })
       .catch((error) => {
         console.error('Error fetching admins:', error);
@@ -129,21 +129,21 @@ export default function Sales() {
       </Head>
       <div className="layout h-100">
         <Navbar />
-        {users.map((users) => (
+        {admins.map((admins) => (
           <Tab
             setActiveComponent={setActiveComponent}
-            key={users.id}
-            users={users}
+            key={admins.id}
+            admins={admins}
           />
         ))}
         <div className="container-fluid py-3">
           <div className="row mt-4">
             <div className="col-lg-4 col-xxl-3">
-              {users.map((users) => (
+              {admins.map((admins) => (
                 <Sidebar
                   setActiveComponent={setActiveComponent}
-                  key={users.id}
-                  users={users}
+                  key={admins.id}
+                  admins={admins}
                 />
               ))}
             </div>

@@ -81,8 +81,13 @@ export default function Navbar() {
                   </Link>
                 </li>
                 <li className="nav-item d-flex align-items-center">
-                  <Link className="nav-link" href="/sales/sales">
+                  <Link className="nav-link" href="/dashboard/dashboard">
                     <i className="fs-6 fa-solid fa-money-bill"></i> Sales
+                  </Link>
+                </li>
+                <li className="nav-item d-flex align-items-center ">
+                  <Link className="nav-link" href="/inventory/inventory">
+                    <i className="fs-6 fa-solid fa-list-check"></i> Inventory
                   </Link>
                 </li>
 
@@ -91,26 +96,10 @@ export default function Navbar() {
                     <i className="fs-6 fa-solid fa-shop"></i> Products
                   </Link>
                 </li>
-                <li className="nav-item d-flex align-items-center ">
-                  <Link className="nav-link" href="/orders/orders">
-                    <i className="fs-6 fa-solid fa-clipboard-list"></i> Orders
-                  </Link>
-                </li>
-                <li className="nav-item d-flex align-items-center ">
-                  <Link className="nav-link" href="/inventory/inventory">
-                    <i className="fs-6 fa-solid fa-list-check"></i> Inventory
-                  </Link>
-                </li>
-                <li className="nav-item d-flex align-items-center">
-                  <i className="social-icons fs-5 fa-solid fa-globe me-3"></i>
-                  <Link className="nav-link" href="/about/about/">
-                    About
-                  </Link>
-                </li>
 
                 <li className="nav-item d-flex align-items-center">
-                  <i className="social-icons fa-solid fa-person-walking-arrow-loop-left fs-5 me-3"></i>
                   <Link className="nav-link" href="/login/login/">
+                    <i className=" fa-solid fa-person-walking-arrow-loop-left fs-5 "></i>
                     Login
                   </Link>
                 </li>

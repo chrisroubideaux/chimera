@@ -149,12 +149,6 @@ export default function Tab({ setActiveComponent, admins }) {
             <i className="m-1 fa-solid fa-chart-column"></i>
           </Link>
         </li>
-        <li className="nav-item me-2">
-          <Link className="btn btn-sm" href={`/admins/${admins._id}`}>
-            Admin
-            <i className="m-1 fa-solid fa-person"></i>
-          </Link>
-        </li>
       </ul>
     </div>
   );
