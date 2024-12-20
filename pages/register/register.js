@@ -86,7 +86,7 @@ const Register = () => {
 
   const handleFacebookRegister = () => {
     const facebookOAuthURL =
-      'https://chimera-green.vercel.app/auth/facebook/register';
+      'https://chimera-h56c.onrender.com/auth/facebook/register';
 
     window.open(
       facebookOAuthURL,
@@ -97,7 +97,8 @@ const Register = () => {
   };
   // Google registration function
   const handleGoogleRegister = () => {
-    const googleOAuthURL = 'https://chimera-green.vercel.app/auth/google/login';
+    const googleOAuthURL =
+      'https://chimera-h56c.onrender.com/auth/google/login';
     window.open(
       googleOAuthURL,
       'Google OAuth',
