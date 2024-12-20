@@ -41,4 +41,23 @@ passport.use(
     }
   )
 );
+
+// Serialize user to session
+passport.serializeUser((user, done) => {
+  console.log('Serializing user:', user);
+  done(null, user.id);
+});
+
+// Deserialize user from session
+passport.deserializeUser(async (id, done) => {
+  try {
+    const user = await Admin.findById(id);
+    console.log('Deserializing user with ID:', id, 'Found:', user);
+    done(null, user);
+  } catch (err) {
+    console.error('Error deserializing user:', err);
+    done(err, null);
+  }
+});
+
 module.exports = passport;
