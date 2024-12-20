@@ -17,7 +17,7 @@ authRoutes.get(
     console.log('req.user:', req.user);
     if (req.user) {
       const id = req.user.id;
-      res.redirect(`https://chimera-green.vercel.app/admins/${id}`);
+      res.redirect(`http://localhost:3001/admins/${id}`);
     } else {
       res.redirect('/');
     }
@@ -35,7 +35,7 @@ authRoutes.get('/logout', (req, res, next) => {
 
     res.status(200).json({ message: 'Logged out successfully' });
 
-    res.redirect('https://chimera-green.vercel.app/login');
+    res.redirect('http://localhost:3001/login');
   });
 });
 
@@ -56,11 +56,11 @@ authRoutes.get(
       console.log(`Role: ${role}, ID: ${id}`);
 
       if (role === 'admin') {
-        res.redirect(`https://chimera-green.vercel.app/admins/${id}`);
+        res.redirect(`http://localhost:3000/admins/${id}`);
       } else if (role === 'agent') {
-        res.redirect(`https://chimera-green.vercel.app/agents/${id}`);
+        res.redirect(`http://localhost:3001/agents/${id}`);
       } else if (role === 'user') {
-        res.redirect(`https://chimera-green.vercel.app/users/${id}`);
+        res.redirect(`http://localhost:3001/users/${id}`);
       } else {
         res.redirect('/login');
       }

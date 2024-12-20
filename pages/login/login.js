@@ -26,7 +26,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        'https://chimera-h56c.onrender.com/users/login',
+        'http://localhost:3001/users/login',
         formData
       );
 
@@ -39,11 +39,11 @@ const Login = () => {
 
         // Redirect based on role
         if (user.role === 'admin') {
-          window.location.href = `https://chimera-green.vercel.app/admins/${user._id}`;
+          window.location.href = `http://localhost:3001/admins/${user._id}`;
         } else if (user.role === 'agent') {
-          window.location.href = `https://chimera-green.vercel.app/employes/${user._id}`;
+          window.location.href = `http://localhost:3001/employes/${user._id}`;
         } else {
-          window.location.href = `https://chimera-green.vercel.app/users/${user._id}`;
+          window.location.href = `http://localhost:3001/users/${user._id}`;
         }
       } else {
         setError(response.data.message || 'Login failed');
@@ -56,8 +56,7 @@ const Login = () => {
 
   // Google OAuth
   const handleGoogleLogin = () => {
-    window.location.href =
-      'https://chimera-h56c.onrender.com/auth/google/login';
+    window.location.href = 'http://localhost:3001/auth/google/login';
   };
 
   // Facebook OAuth
@@ -119,7 +118,7 @@ const Login = () => {
           </ul>
           {error && <p style={{ color: 'red' }}>{error}</p>}
           <p className="pt-1 fw-bold">{"Don't have an account?"}</p>
-          <Link className="btn btn-lg w-75" href="/register">
+          <Link className="btn btn-lg w-75" href="/register/register">
             Register
           </Link>
           <p className="mt-1 mb-3 text-muted">&copy; Chimera AI, 2024</p>
