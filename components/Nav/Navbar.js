@@ -80,12 +80,7 @@ export default function Navbar() {
                     Menu
                   </Link>
                 </li>
-                <li className="nav-item d-flex align-items-center">
-                  <i className="social-icons fs-5 fa-solid fa-folder-tree me-3"></i>
-                  <Link className="nav-link" href="/menu/menu">
-                    Menu
-                  </Link>
-                </li>
+
                 <li className=" nav-item d-flex align-items-center">
                   <Link className="nav-link" href="/products/products">
                     <i className="fs-6 fa-solid fa-shop"></i> Products
