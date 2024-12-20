@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Head from 'next/head';
 import Navbar from '@/components/Nav/Navbar';
 import Header from '@/components/menu/Header';
-import Footer from '@/components/Misc/Footer';
+//import Footer from '@/components/Misc/Footer';
 
 export default function menu() {
   return (
@@ -25,7 +25,6 @@ export default function menu() {
       <div className="layout h-100">
         <Navbar />
         <Header />
-        <Footer />
       </div>
     </>
   );
