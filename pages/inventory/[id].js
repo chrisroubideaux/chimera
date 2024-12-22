@@ -12,7 +12,7 @@ import Dry from '@/components/inventory/Dry';
 import Paper from '@/components/inventory/Paper';
 import Linens from '@/components/inventory/Linens';
 import Details from '@/components/inventory/inventoryDetails/Details';
-import Footer from '@/components/Misc/Footer';
+
 // data imports
 export default function Inventory() {
   const router = useRouter();
