@@ -21,7 +21,8 @@ const Login = () => {
       [name]: value,
     });
   };
-
+  {
+    /*
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -41,10 +42,46 @@ const Login = () => {
         // Redirect based on role
         if (user.role === 'admin') {
           window.location.href = `https://chimera-green.vercel.app/admins/${user._id}`;
-        } else if (user.role === 'agent') {
-          window.location.href = `https://chimera-green.vercel.app/${user._id}`;
+
+        } else if (user.role === 'employee') {
+          window.location.href = `https://chimera-green.vercel.app/employees/${user._id}`;
+
         } else {
           window.location.href = `https://chimera-green.vercel.app/users/${user._id}`;
+        }
+      } else {
+        setError(response.data.message || 'Login failed');
+      }
+    } catch (err) {
+      console.error(err);
+      setError('Internal server error');
+    }
+  };
+*/
+  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post(
+        'https://chimera-h56c.onrender.com/admins/login',
+        formData
+      );
+
+      if (response.status === 200) {
+        const { token, user } = response.data;
+
+        localStorage.setItem('authToken', token);
+        localStorage.setItem('userId', user._id);
+        localStorage.setItem('userRole', user.role);
+
+        // Redirect based on role
+        if (user.role === 'admin') {
+          window.location.href = `https://chimera-green.vercel.app/admins/${user._id}`;
+        } else if (user.role === 'employee') {
+          window.location.href = `https://chimera-green.vercel.app/employees/${user._id}`;
+        } else {
+          setError('Invalid user role');
         }
       } else {
         setError(response.data.message || 'Login failed');

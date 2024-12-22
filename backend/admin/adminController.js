@@ -232,13 +232,14 @@ const updateRequestStatus = async (req, res) => {
   }
 };
 // Login an existing user
+
 const login = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const admin = await Admin.findOne({ email });
+    const user = await Admin.findOne({ email });
 
-    if (!admin) {
+    if (!user) {
       return res.status(401).json({ message: 'Invalid email or password' });
     }
 
@@ -248,7 +249,7 @@ const login = async (req, res) => {
       return res.status(401).json({ message: 'Invalid email or password' });
     }
     const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
-    const redirectTo = `https://chimera-green.vercel.app/admin/${user._id}`;
+    const redirectTo = `https://chimera-green.vercel.app/user/${user._id}`;
     console.log('Generated Token:', token);
 
     res
