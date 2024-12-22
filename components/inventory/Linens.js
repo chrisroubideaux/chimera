@@ -2,7 +2,6 @@
 import { useState, useEffect } from 'react';
 import { faker } from '@faker-js/faker';
 import { format } from 'date-fns';
-//import linens from '@/data/inventory/linens';
 
 const generateSalesData = (data, minSales, maxSales) => {
   const updatedData = data.map((item) => {
@@ -11,7 +10,6 @@ const generateSalesData = (data, minSales, maxSales) => {
     const projected = item.count;
     const actual = sold;
 
-    // Generate random weekly and monthly sales data
     const WeeklySales = {};
     const MonthlySales = {};
 
@@ -28,7 +26,6 @@ const generateSalesData = (data, minSales, maxSales) => {
       });
     }
 
-    // Get the current date in MM/DD/YYYY format
     const currentDate = format(new Date(), 'MM/dd/yyyy');
 
     return {
@@ -55,12 +52,10 @@ export default function Linens({ linens }) {
     setSalesData(updatedLinens);
   }, []);
 
-  // Calculate the index of the first and last items to display on the current page
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = salesData.slice(indexOfFirstItem, indexOfLastItem);
 
-  // Handle pagination
   const handleNextPage = () => {
     if (currentPage < Math.ceil(salesData.length / itemsPerPage)) {
       setCurrentPage(currentPage + 1);
@@ -78,6 +73,47 @@ export default function Linens({ linens }) {
   };
 
   const totalPages = Math.ceil(salesData.length / itemsPerPage);
+  const handleExportCSV = () => {
+    const headers = [
+      'Item',
+      'Category',
+      'Price',
+      'Unit',
+      'Count',
+      'Sold',
+      'Par',
+      'Projected',
+      'Actual',
+      'Date',
+    ];
+    const rows = salesData.map((item) => [
+      item.name,
+      item.category,
+      item.price,
+      item.unit,
+      item.count,
+      item.sold,
+      item.par || 'N/A',
+      item.projected,
+      item.actual,
+      item.date,
+    ]);
+
+    const csvContent = [
+      headers.join(','),
+      ...rows.map((row) => row.join(',')),
+    ].join('\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', 'linen_inventory.csv');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <div>
@@ -89,7 +125,11 @@ export default function Linens({ linens }) {
             </div>
             <div className="col-md-6 col-xl-8">
               <div className="text-sm-end d-flex justify-content-end">
-                <button type="button" className="btn btn-sm me-2">
+                <button
+                  type="button"
+                  className="btn btn-sm me-2"
+                  onClick={handleExportCSV}
+                >
                   <i className="fa-solid fa-download"></i> Export
                 </button>
               </div>

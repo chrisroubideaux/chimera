@@ -105,7 +105,7 @@ const Tab = ({ setActiveComponent, admins }) => {
               </ul>
             </div>
           </li>
-
+          {/*
           <li className="nav-item me-2">
             <div className="dropdown me-2">
               <button
@@ -156,6 +156,8 @@ const Tab = ({ setActiveComponent, admins }) => {
               </ul>
             </div>
           </li>
+
+          */}
           {/*
           <li className="nav-item me-2">
             <Link className="btn btn-sm" href="/products/products">
