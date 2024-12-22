@@ -27,7 +27,7 @@ export default function Inventory() {
   // admins
   useEffect(() => {
     axios
-      .get('http://localhost:3001/admins')
+      .get('https://chimera-h56c.onrender.com/admins')
       .then((response) => {
         setAdmins(response.data);
       })
@@ -39,7 +39,7 @@ export default function Inventory() {
   // produce
   useEffect(() => {
     axios
-      .get('http://localhost:3001/produce')
+      .get('https://chimera-h56c.onrender.com/produce')
       .then((response) => {
         setProduce(response.data);
       })
@@ -51,7 +51,7 @@ export default function Inventory() {
   // dairy inventory
   useEffect(() => {
     axios
-      .get('http://localhost:3001/dairy')
+      .get('https://chimera-h56c.onrender.com/dairy')
       .then((response) => {
         setDairy(response.data);
       })
@@ -63,7 +63,7 @@ export default function Inventory() {
   // protein inventory
   useEffect(() => {
     axios
-      .get('http://localhost:3001/proteins')
+      .get('https://chimera-h56c.onrender.com/proteins')
       .then((response) => {
         setProteins(response.data);
       })
@@ -74,7 +74,7 @@ export default function Inventory() {
   // linen inventory
   useEffect(() => {
     axios
-      .get('http://localhost:3001/linens')
+      .get('https://chimera-h56c.onrender.com/linens')
       .then((response) => {
         setLinens(response.data);
       })
@@ -85,7 +85,7 @@ export default function Inventory() {
   // beverage inventory
   useEffect(() => {
     axios
-      .get('http://localhost:3001/drinks')
+      .get('https://chimera-h56c.onrender.com/drinks')
       .then((response) => {
         setDrinks(response.data);
       })
@@ -96,7 +96,7 @@ export default function Inventory() {
   // dry goods inventory
   useEffect(() => {
     axios
-      .get('http://localhost:3001/dryGoods')
+      .get('https://chimera-h56c.onrender.com/dryGoods')
       .then((response) => {
         setDryGoods(response.data);
       })
@@ -107,7 +107,7 @@ export default function Inventory() {
   // paper products inventory
   useEffect(() => {
     axios
-      .get('http://localhost:3001/paperProducts')
+      .get('https://chimera-h56c.onrender.com/paperProducts')
       .then((response) => {
         setPaperProducts(response.data);
       })

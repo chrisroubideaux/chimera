@@ -11,8 +11,6 @@ import Proteins from '@/components/inventory/Proteins';
 import Dry from '@/components/inventory/Dry';
 import Paper from '@/components/inventory/Paper';
 import Linens from '@/components/inventory/Linens';
-//import BevDetails from '@/components/inventory/drinks/BevDetails';
-//import Sales from '@/components/inventory/Sales';
 import Details from '@/components/inventory/inventoryDetails/Details';
 import Footer from '@/components/Misc/Footer';
 // data imports
@@ -172,8 +170,6 @@ export default function Inventory() {
             </div>
           </div>
         </div>
-
-        <Footer />
       </div>
     </>
   );
