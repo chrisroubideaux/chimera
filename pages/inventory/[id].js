@@ -14,7 +14,7 @@ import Linens from '@/components/inventory/Linens';
 //import BevDetails from '@/components/inventory/drinks/BevDetails';
 //import Sales from '@/components/inventory/Sales';
 import Details from '@/components/inventory/inventoryDetails/Details';
-//import Footer from '@/components/misc/Footer';
+import Footer from '@/components/Misc/Footer';
 // data imports
 export default function Inventory() {
   const router = useRouter();
