@@ -27,7 +27,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        'https://chimera-green.vercel.app/admins/login',
+        'https://chimera-h56c.onrender.com/admins/login',
         formData
       );
 
