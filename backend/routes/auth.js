@@ -58,7 +58,7 @@ authRoutes.get(
       if (role === 'admin') {
         res.redirect(`https://chimera-green.vercel.app/admins/${id}`);
       } else if (role === 'agent') {
-        res.redirect(`https://chimera-green.vercel.app/agents/${id}`);
+        res.redirect(`https://chimera-green.vercel.app/employees/${id}`);
       } else if (role === 'user') {
         res.redirect(`https://chimera-green.vercel.app/users/${id}`);
       } else {
