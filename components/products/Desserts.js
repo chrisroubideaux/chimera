@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { format } from 'date-fns';
 import { faker } from '@faker-js/faker';
 
-const Desserts = ({ setActiveComponent, desserts }) => {
+const Desserts = ({ setActiveComponent, desserts, setSelectedDessert }) => {
   const [dailySales, setDailySales] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
@@ -67,6 +67,38 @@ const Desserts = ({ setActiveComponent, desserts }) => {
 
   const totalPages = Math.ceil(desserts.length / itemsPerPage);
 
+  const handleEdit = (dessert) => {
+    setActiveComponent('EditDessert');
+    setSelectedDessert(dessert);
+  };
+
+  //
+
+  const handleExportCSV = () => {
+    const csvHeaders = ['Name', 'Category', 'Price', 'Count', 'Par', 'Sales'];
+    const csvRows = desserts.map((dessert) => [
+      dessert.name,
+      dessert.category,
+      dessert.price,
+      dessert.count,
+      dessert.par,
+      dailySales.find((sale) => sale.id === dessert.id)?.sales.toFixed(2),
+    ]);
+
+    const csvContent = [
+      csvHeaders.join(','),
+      ...csvRows.map((row) => row.join(',')),
+    ].join('\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.setAttribute('download', 'desserts.csv');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div>
       <div className="container-fluid p-0 mt-3">
@@ -78,7 +110,11 @@ const Desserts = ({ setActiveComponent, desserts }) => {
               </div>
               <div className="col-md-6 col-xl-8">
                 <div className="text-sm-end ">
-                  <button type="button" className="btn btn-sm me-2">
+                  <button
+                    type="button"
+                    className="btn btn-sm me-2"
+                    onClick={handleExportCSV}
+                  >
                     <i className="fa-solid fa-download"></i> Export
                   </button>
 
@@ -144,9 +180,14 @@ const Desserts = ({ setActiveComponent, desserts }) => {
                       <td>{currentDateTime.date}</td>
                       <td>{currentDateTime.time}</td>
                       <td>${dailySales[index]?.sales?.toFixed(2)}</td>
+
                       <td className="text-end">
-                        <button type="button" className="btn btn-light">
-                          View
+                        <button
+                          type="button"
+                          className="btn btn-sm"
+                          onClick={() => handleEdit(dessert)}
+                        >
+                          Edit
                         </button>
                       </td>
                     </tr>

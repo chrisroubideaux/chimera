@@ -27,7 +27,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        'https://chimera-h56c.onrender.com/users/login',
+        'http://localhost:3001/users/login',
         formData
       );
 
@@ -40,9 +40,9 @@ const Login = () => {
 
         // Redirect based on role
         if (user.role === 'admin') {
-          window.location.href = `https://chimera-green.vercel.app/admins/${user._id}`;
+          window.location.href = `http://localhost:3000/admins/${user._id}`;
         } else if (user.role === 'agent') {
-          window.location.href = `https://chimera-green.vercel.app/employes/${user._id}`;
+          window.location.href = `http://localhost:3001/employes/${user._id}`;
         } else {
           window.location.href = `https://chimera-green.vercel.app/users/${user._id}`;
         }

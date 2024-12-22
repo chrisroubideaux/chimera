@@ -188,7 +188,7 @@ app.get(
   '/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
   (req, res) => {
-    res.redirect(`https://chimera-green.vercel.app/admins/${userId}`);
+    res.redirect(`http://localhost:3000/admins/${userId}`);
   }
 );
 

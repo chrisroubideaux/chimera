@@ -11,6 +11,10 @@ import Desserts from '@/components/products/Desserts';
 import Beverages from '@/components/products/Beverages';
 import GiftCards from '@/components/products/GiftCards';
 import Form from '@/components/products/Form';
+import EditForms from '@/components/products/EditForms';
+import EditBev from '@/components/products/EditBev';
+import EditEntree from '@/components/products/EditEntree';
+import EditDessert from '@/components/products/EditDessert';
 import NewItems from '@/components/products/NewItems';
 // chart imports
 import MonthlyChart from '@/components/charts/MonthlyChart';
@@ -25,11 +29,15 @@ export default function Products() {
   const [entrees, setEntrees] = useState([]);
   const [desserts, setDesserts] = useState([]);
   const [beverages, setBeverages] = useState([]);
+  const [selectedStarter, setSelectedStarter] = useState(null);
+  const [selectedBevereage, setSelectedBevereage] = useState(null);
+  const [selectedEntree, setSelectedEntree] = useState(null);
+  const [selectedDessert, setSelectedDessert] = useState(null);
 
   // admins
   useEffect(() => {
     axios
-      .get('https://chimera-h56c.onrender.com/admins')
+      .get('http://localhost:3001/admins')
       .then((response) => {
         setAdmins(response.data);
       })
@@ -40,7 +48,7 @@ export default function Products() {
   // starters
   useEffect(() => {
     axios
-      .get('https://chimera-h56c.onrender.com/starters')
+      .get('http://localhost:3001/starters')
       .then((response) => {
         setStarters(response.data);
       })
@@ -51,7 +59,7 @@ export default function Products() {
   // entrees
   useEffect(() => {
     axios
-      .get('https://chimera-h56c.onrender.com/entrees')
+      .get('http://localhost:3001/entrees')
       .then((response) => {
         setEntrees(response.data);
       })
@@ -62,7 +70,7 @@ export default function Products() {
   // desserts
   useEffect(() => {
     axios
-      .get('https://chimera-h56c.onrender.com/desserts')
+      .get('http://localhost:3001/desserts')
       .then((response) => {
         setDesserts(response.data);
       })
@@ -73,7 +81,7 @@ export default function Products() {
   // beverages
   useEffect(() => {
     axios
-      .get('https://chimera-h56c.onrender.com/beverages')
+      .get('http://localhost:3001/beverages')
       .then((response) => {
         setBeverages(response.data);
       })
@@ -86,13 +94,18 @@ export default function Products() {
     switch (activeComponent) {
       case 'Entrees':
         return (
-          <Entrees setActiveComponent={setActiveComponent} entrees={entrees} />
+          <Entrees
+            setActiveComponent={setActiveComponent}
+            entrees={entrees}
+            setSelectedEntree={setSelectedEntree}
+          />
         );
       case 'Desserts':
         return (
           <Desserts
             setActiveComponent={setActiveComponent}
             desserts={desserts}
+            setSelectedDessert={setSelectedDessert}
           />
         );
       case 'Beverages':
@@ -100,12 +113,45 @@ export default function Products() {
           <Beverages
             setActiveComponent={setActiveComponent}
             beverages={beverages}
+            setSelectedBevereage={setSelectedBevereage}
           />
         );
       case 'GiftCards':
         return <GiftCards setActiveComponent={setActiveComponent} />;
       case 'Form':
         return <Form setActiveComponent={setActiveComponent} />;
+      case 'EditForms':
+        return (
+          <EditForms
+            setActiveComponent={setActiveComponent}
+            starters={starters}
+            selectedStarter={selectedStarter}
+          />
+        );
+      case 'EditBev':
+        return (
+          <EditBev
+            setActiveComponent={setActiveComponent}
+            beverages={beverages}
+            selectedBevereage={selectedBevereage}
+          />
+        );
+      case 'EditEntree':
+        return (
+          <EditEntree
+            setActiveComponent={setActiveComponent}
+            entrees={entrees}
+            selectedEntree={selectedEntree}
+          />
+        );
+      case 'EditDessert':
+        return (
+          <EditDessert
+            setActiveComponent={setActiveComponent}
+            desserts={desserts}
+            selectedDessert={selectedDessert}
+          />
+        );
       case 'NewItems':
         return <NewItems setActiveComponent={setActiveComponent} />;
       // chart analytics
@@ -122,6 +168,7 @@ export default function Products() {
           <Starters
             setActiveComponent={setActiveComponent}
             starters={starters}
+            setSelectedStarter={setSelectedStarter}
           />
         );
     }

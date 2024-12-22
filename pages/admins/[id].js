@@ -29,7 +29,7 @@ export default function Admin({}) {
       const fetchAdminData = async () => {
         try {
           const response = await axios.get(
-            `https://chimera-h56c.onrender.com/admins/${id}`
+            `http://localhost:3001/admins/${id}`
           );
           console.log('Admin data:', response.data);
           setAdmin(response.data);
@@ -45,9 +45,7 @@ export default function Admin({}) {
   useEffect(() => {
     const fetchEmployeeData = async () => {
       try {
-        const response = await axios.get(
-          'https://chimera-h56c.onrender.com/employees'
-        );
+        const response = await axios.get('http://localhost:3001/employees');
         if (response.data.length > 0) {
           setEmployeeId(response.data[0]._id);
         }
@@ -59,12 +57,14 @@ export default function Admin({}) {
   }, []);
 
   // Fetch message data
+  {
+    /*
   useEffect(() => {
     if (id) {
       const fetchMessageData = async () => {
         try {
           const response = await axios.get(
-            `https://chimera-h56c.onrender.com/messages/${id}`
+            `http://localhost:3001/messages/${id}`
           );
           console.log('Message data:', response.data);
           setMessage(response.data);
@@ -80,11 +80,12 @@ export default function Admin({}) {
       fetchMessageData();
     }
   }, [id]);
-
+*/
+  }
   // Fetch meetings
   useEffect(() => {
     axios
-      .get('https://chimera-h56c.onrender.com/meetings')
+      .get('http://localhost:3001/meetings')
       .then((response) => {
         setMeetings(response.data);
       })
@@ -98,9 +99,7 @@ export default function Admin({}) {
   useEffect(() => {
     const fetchTimeOffRequests = async () => {
       try {
-        const response = await axios.get(
-          'https://chimera-h56c.onrender.com/timeOff'
-        );
+        const response = await axios.get('http://localhost:3001/timeOff');
         setTimeOffRequests(response.data);
         console.log('Time-off data:', response.data);
       } catch (error) {
