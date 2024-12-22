@@ -246,6 +246,7 @@ const logout = async (req, res) => {
       .json({ message: 'Internal server error during logout.' });
   }
 };
+
 module.exports = {
   createUser,
   getAllUsers,

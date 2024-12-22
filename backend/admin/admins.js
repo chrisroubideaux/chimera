@@ -11,8 +11,15 @@ const {
   deleteAdminById,
   getPendingRequests,
   updateRequestStatus,
+  login,
+  logout,
 } = require('./adminController');
 
+// Login user
+adminRoutes.post('/login', login);
+
+// Logout user
+adminRoutes.get('/logout', logout);
 // Create a new admin
 adminRoutes.post('/', createAdmin);
 

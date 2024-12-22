@@ -231,6 +231,61 @@ const updateRequestStatus = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+// Login an existing user
+const login = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const admin = await Admin.findOne({ email });
+
+    if (!admin) {
+      return res.status(401).json({ message: 'Invalid email or password' });
+    }
+
+    const passwordMatch = await bcrypt.compare(password, user.password);
+
+    if (!passwordMatch) {
+      return res.status(401).json({ message: 'Invalid email or password' });
+    }
+    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
+    const redirectTo = `https://chimera-green.vercel.app/admin/${user._id}`;
+    console.log('Generated Token:', token);
+
+    res
+      .status(200)
+      .json({ message: 'Login successful', user, token, redirectTo });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
+// Logout a user
+const logout = async (req, res) => {
+  try {
+    if (req.user?.oauthProvider) {
+      const redirectUrl = getOAuthLogoutUrl(req.user.oauthProvider);
+
+      res.clearCookie('token');
+
+      return res.status(200).json({
+        message: 'Logged out successfully via OAuth.',
+        redirectTo: redirectUrl,
+      });
+    }
+
+    res.clearCookie('token');
+    return res.status(200).json({
+      message: 'Logged out successfully.',
+      redirectTo: 'https://chimera-green.vercel.app/login',
+    });
+  } catch (error) {
+    console.error('Error during logout:', error);
+    return res
+      .status(500)
+      .json({ message: 'Internal server error during logout.' });
+  }
+};
 
 module.exports = {
   createAdmin,
@@ -240,4 +295,6 @@ module.exports = {
   deleteAdminById,
   updateRequestStatus,
   getPendingRequests,
+  login,
+  logout,
 };
