@@ -231,30 +231,30 @@ const updateRequestStatus = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
-// Login an existing user
+// Login an existing
 
 const login = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const user = await Admin.findOne({ email });
+    const admin = await Admin.findOne({ email });
 
-    if (!user) {
+    if (!admin) {
       return res.status(401).json({ message: 'Invalid email or password' });
     }
 
-    const passwordMatch = await bcrypt.compare(password, user.password);
+    const passwordMatch = await bcrypt.compare(password, admin.password);
 
     if (!passwordMatch) {
       return res.status(401).json({ message: 'Invalid email or password' });
     }
-    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
-    const redirectTo = `https://chimera-green.vercel.app/user/${user._id}`;
+    const token = jwt.sign({ _id: admin._id }, process.env.JWT_SECRET);
+    const redirectTo = `https://chimera-green.vercel.app/admins/${admin._id}`;
     console.log('Generated Token:', token);
 
     res
       .status(200)
-      .json({ message: 'Login successful', user, token, redirectTo });
+      .json({ message: 'Login successful', admin, token, redirectTo });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Internal server error' });

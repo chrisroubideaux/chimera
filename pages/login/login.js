@@ -69,15 +69,15 @@ const Login = () => {
       );
 
       if (response.status === 200) {
-        const { token, user } = response.data;
+        const { token, user, admin } = response.data;
 
         localStorage.setItem('authToken', token);
-        localStorage.setItem('userId', user._id);
+        localStorage.setItem('adminId', admin._id);
         localStorage.setItem('userRole', user.role);
 
         // Redirect based on role
-        if (user.role === 'admin') {
-          window.location.href = `https://chimera-green.vercel.app/admins/${user._id}`;
+        if (admin.role === 'admin') {
+          window.location.href = `https://chimera-green.vercel.app/admins/${admin._id}`;
         } else if (user.role === 'employee') {
           window.location.href = `https://chimera-green.vercel.app/employees/${user._id}`;
         } else {
