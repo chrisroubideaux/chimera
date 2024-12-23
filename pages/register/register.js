@@ -83,7 +83,7 @@ const Register = () => {
       setErrorMessage('Internal server error');
     }
   };
-
+  // Facebook registeration
   const handleFacebookRegister = () => {
     const facebookOAuthURL =
       'https://chimera-h56c.onrender.com/auth/facebook/register';
@@ -95,7 +95,7 @@ const Register = () => {
       'width=300,height=300'
     );
   };
-  // Google registration function
+  // Google registration
   const handleGoogleRegister = () => {
     const googleOAuthURL =
       'https://chimera-h56c.onrender.com/auth/google/login';
