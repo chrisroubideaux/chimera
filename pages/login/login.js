@@ -21,14 +21,13 @@ const Login = () => {
       [name]: value,
     });
   };
-  {
-    /*
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       const response = await axios.post(
-        'https://chimera-h56c.onrender.com/admins/login',
+        'https://chimera-h56c.onrender.com/users/login',
         formData
       );
 
@@ -46,40 +45,6 @@ const Login = () => {
           window.location.href = `https://chimera-green.vercel.app/employees/${user._id}`;
         } else {
           window.location.href = `https://chimera-green.vercel.app/users/${user._id}`;
-        }
-      } else {
-        setError(response.data.message || 'Login failed');
-      }
-    } catch (err) {
-      console.error(err);
-      setError('Internal server error');
-    }
-  };
-*/
-  }
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      const response = await axios.post(
-        'https://chimera-h56c.onrender.com/admins/login',
-        formData
-      );
-
-      if (response.status === 200) {
-        const { token, admin } = response.data; // Changed from user to admin
-
-        localStorage.setItem('authToken', token);
-        localStorage.setItem('adminId', admin._id); // Changed key from userId to adminId
-        localStorage.setItem('adminRole', admin.role); // Changed key from userRole to adminRole
-
-        // Redirect based on role
-        if (admin.role === 'admin') {
-          window.location.href = `https://chimera-green.vercel.app/admins/${admin._id}`;
-        } else if (admin.role === 'employee') {
-          window.location.href = `https://chimera-green.vercel.app/employees/${admin._id}`;
-        } else {
-          setError('Invalid role'); // Handle unsupported roles
         }
       } else {
         setError(response.data.message || 'Login failed');

@@ -62,7 +62,7 @@ const Register = () => {
 
     try {
       const response = await axios.post(
-        'https://chimera-h56c.onrender.com/admins',
+        'https://chimera-h56c.onrender.com/users',
         formData
       );
 

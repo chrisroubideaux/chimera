@@ -232,36 +232,6 @@ const updateRequestStatus = async (req, res) => {
   }
 };
 
-// Login an existing admin
-const login = async (req, res) => {
-  const { email, password } = req.body;
-
-  try {
-    const admin = await Admin.findOne({ email }); // Changed from User to Admin
-
-    if (!admin) {
-      return res.status(401).json({ message: 'Invalid email or password' });
-    }
-
-    const passwordMatch = await bcrypt.compare(password, admin.password);
-
-    if (!passwordMatch) {
-      return res.status(401).json({ message: 'Invalid email or password' });
-    }
-
-    const token = jwt.sign({ _id: admin._id }, process.env.JWT_SECRET);
-    const redirectTo = `https://chimera-green.vercel.app/admins/${admin._id}`;
-    console.log('Generated Token:', token);
-
-    res
-      .status(200)
-      .json({ message: 'Login successful', admin, token, redirectTo });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Internal server error' });
-  }
-};
-
 // Logout a user
 const logout = async (req, res) => {
   try {
