@@ -54,10 +54,10 @@ export default function Navbar() {
           >
             <div className="offcanvas-header">
               <h5 className="fw-bold" id="offcanvasNavbarLabel">
-                Chimera
+                Chimera AI
               </h5>
               <button
-                className="btn-close mt-1"
+                className="btn-close mt-1 "
                 type="button"
                 data-bs-dismiss="offcanvas"
                 aria-label="Close"
@@ -69,37 +69,43 @@ export default function Navbar() {
             <div className="offcanvas-body">
               <ul className="navbar-nav justify-content-end flex-grow-1 pe-3 fw-semi-bold">
                 <li className="nav-item d-flex align-items-center">
-                  <i className="social-icons fs-5 fa-solid fa-house me-3"></i>
+                  <i className="social-icons fs-5 fa-solid fa-house me-2"></i>
                   <Link className="nav-link" href="/">
                     Home
                   </Link>
                 </li>
                 <li className="nav-item d-flex align-items-center">
-                  <i className="social-icons fs-5 fa-solid fa-layer-group"></i>
                   <Link className="nav-link" href="/menu/menu">
-                    Menu
+                    <i className=" fs-5 fa-solid fa-layer-group me-2"></i>Menu
                   </Link>
                 </li>
                 <li className="nav-item d-flex align-items-center">
                   <Link className="nav-link" href="/dashboard/dashboard">
-                    <i className="fs-6 fa-solid fa-money-bill"></i> Sales
+                    <i className="fs-5 fa-solid fa-money-bill me-2"></i> Sales
                   </Link>
                 </li>
                 <li className="nav-item d-flex align-items-center ">
-                  <Link className="nav-link" href="/inventory/inventory">
-                    <i className="fs-6 fa-solid fa-list-check"></i> Inventory
+                  <Link
+                    className="nav-link"
+                    href="/InventoryDashboard/InventoryDashboard"
+                  >
+                    <i className="fs-5 fa-solid fa-list-check me-2"></i>{' '}
+                    Inventory
                   </Link>
                 </li>
 
                 <li className=" nav-item d-flex align-items-center">
-                  <Link className="nav-link" href="/products/products">
-                    <i className="fs-6 fa-solid fa-shop"></i> Products
+                  <Link
+                    className="nav-link"
+                    href="/ProductDashboard/ProductDashboard"
+                  >
+                    <i className="fs-5 fa-solid fa-shop me-2"></i> Products
                   </Link>
                 </li>
 
                 <li className="nav-item d-flex align-items-center">
                   <Link className="nav-link" href="/login/login/">
-                    <i className=" fa-solid fa-person-walking-arrow-loop-left fs-5 "></i>
+                    <i className=" fa-solid fa-person-walking-arrow-loop-left fs-5 me-2 "></i>
                     Login
                   </Link>
                 </li>

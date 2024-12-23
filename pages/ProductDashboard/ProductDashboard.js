@@ -16,13 +16,14 @@ import EditBev from '@/components/products/EditBev';
 import EditEntree from '@/components/products/EditEntree';
 import EditDessert from '@/components/products/EditDessert';
 import NewItems from '@/components/products/NewItems';
+import Totals from '@/components/charts/Totals';
 // chart imports
 import MonthlyChart from '@/components/charts/MonthlyChart';
 import HourlyChart from '@/components/charts/HourlyChart';
 import DailyChart from '@/components/charts/DailyChart';
 import WeeklyChart from '@/components/charts/WeeklyChart';
 
-export default function Products() {
+export default function ProductDashboard() {
   const [activeComponent, setActiveComponent] = useState('Products');
   const [admins, setAdmins] = useState([]);
   const [starters, setStarters] = useState([]);
@@ -34,22 +35,10 @@ export default function Products() {
   const [selectedEntree, setSelectedEntree] = useState(null);
   const [selectedDessert, setSelectedDessert] = useState(null);
 
-  // admins
-  useEffect(() => {
-    axios
-      .get('https://chimera-h56c.onrender.com/admins')
-      .then((response) => {
-        setAdmins(response.data);
-      })
-      .catch((error) => {
-        console.error('Error fetching admins:', error);
-      });
-  }, []);
-
   // starters
   useEffect(() => {
     axios
-      .get('https://chimera-h56c.onrender.com/starters')
+      .get('http://localhost:3001/starters')
       .then((response) => {
         setStarters(response.data);
       })
@@ -60,7 +49,7 @@ export default function Products() {
   // entrees
   useEffect(() => {
     axios
-      .get('https://chimera-h56c.onrender.com/entrees')
+      .get('http://localhost:3001/entrees')
       .then((response) => {
         setEntrees(response.data);
       })
@@ -71,7 +60,7 @@ export default function Products() {
   // desserts
   useEffect(() => {
     axios
-      .get('https://chimera-h56c.onrender.com/desserts')
+      .get('http://localhost:3001/desserts')
       .then((response) => {
         setDesserts(response.data);
       })
@@ -82,7 +71,7 @@ export default function Products() {
   // beverages
   useEffect(() => {
     axios
-      .get('https://chimera-h56c.onrender.com/beverages')
+      .get('http://localhost:3001/beverages')
       .then((response) => {
         setBeverages(response.data);
       })
@@ -193,6 +182,7 @@ export default function Products() {
       </Head>
       <div className="layout h-100">
         <Navbar />
+        {/*
         {admins.map((admins) => (
           <Tab
             setActiveComponent={setActiveComponent}
@@ -200,16 +190,14 @@ export default function Products() {
             admins={admins}
           />
         ))}
+          */}
+        <Tab setActiveComponent={setActiveComponent} />
         <div className="container-fluid">
           <div className="row">
             <div className="col-lg-4 col-xxl-3">
-              {admins.map((admins) => (
-                <Sidebar
-                  setActiveComponent={setActiveComponent}
-                  key={admins.id}
-                  admins={admins}
-                />
-              ))}
+              <div className="pt-4">
+                <Totals />
+              </div>
             </div>
             <div className="col-lg-8 col-xxl-9">{renderComponent()}</div>
           </div>
