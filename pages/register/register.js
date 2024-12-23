@@ -124,22 +124,46 @@ const Register = () => {
         />
       </Head>
       <div className=" h-100">
-        <div className="mt-5 h-100">
-          <div className="container d-flex flex-wrap justify-content-center justify-content-lg-start mt-5">
-            <div className=" pt-1 pt-md-4 pb-4">
+        <div className="mt-4 h-100">
+          <div className="container d-flex flex-wrap justify-content-center justify-content-lg-start mt-1">
+            <div className=" pt-1 ">
               <div className=" justify-content-center">
                 <Link className="text-center nav-link text-underlined" href="/">
                   back to menu
                 </Link>
-                <h1 className="text-center">Register</h1>
+
+                <h1 className="text-center fs-4">Register</h1>
                 <p className="text-center  pb-3 mb-3">
                   Already have an account?{' '}
                   <Link className="text-dark" href="/login/login">
                     <small>login here</small>
                   </Link>
                 </p>
-                <hr className="my-4" />
-                <ul className="nav justify-content-center list-unstyled d-flex pt-1 mt-3 h-100">
+                <hr className="my-3" />
+
+                <ul className="nav justify-content-center list-unstyled d-flex ">
+                  <ul
+                    className=" text-muted  justify-content-center "
+                    style={{
+                      fontSize: '0.85rem',
+                      lineHeight: '1.4rem',
+
+                      paddingLeft: '1.5rem',
+                    }}
+                  >
+                    <li>
+                      Password must contain at least{' '}
+                      <strong>10 characters</strong>.
+                    </li>
+                    <li>
+                      At least <strong>1 special character</strong> (e.g.,{' '}
+                      <code>@</code>, <code>#</code>, <code>$</code>).
+                    </li>
+                    <li>
+                      At least <strong>1 number</strong> (e.g., <code>1</code>,{' '}
+                      <code>2</code>, <code>3</code>).
+                    </li>
+                  </ul>
                   <form className="form text-center" onSubmit={handleSubmit}>
                     <input
                       className="form-control m-2 fw-bold"
@@ -159,6 +183,7 @@ const Register = () => {
                       onChange={handleChange}
                       placeholder="Enter Email"
                     />
+
                     <input
                       className={`form-control m-2 fw-bold ${
                         passwordError ? 'is-invalid' : ''
@@ -184,16 +209,24 @@ const Register = () => {
                     {passwordError && (
                       <p className="text-danger fw-bold">{passwordError}</p>
                     )}
-                    <div className="container">
-                      <button className="w-100 btn btn-md" type="submit">
-                        Register
-                      </button>
-                      <h6 className="text-muted pt-3">or register with</h6>
-
+                    <button className="w-100 btn bt-sm" type="submit">
+                      Register
+                    </button>
+                    {/** */}
+                    {passwordError && (
+                      <p className="text-danger fw-bold">{passwordError}</p>
+                    )}
+                    <div className="">
+                      <h6 className="text-muted text-center pt-3">
+                        or register with
+                      </h6>
                       <ul className="nav justify-content-center list-unstyled d-flex pt-2 ">
                         <li className="ms-3">
-                          <button className="text-muted bg-transparent border-0">
-                            <i className="social-icons fs-1 fa-brands fa-facebook mt-1"></i>
+                          <button
+                            className="text-muted bg-transparent border-0"
+                            onClick={handleFacebookRegister}
+                          >
+                            <i className="social-icons fs-2 fa-brands fa-facebook mt-1"></i>
                           </button>
                         </li>
                         <li className="ms-3">
@@ -201,12 +234,11 @@ const Register = () => {
                             className="text-muted bg-transparent border-0"
                             onClick={handleGoogleRegister}
                           >
-                            <i className="social-icons fs-1 fa-brands fa-google mt-1"></i>
+                            <i className="social-icons fs-2 fa-brands fa-google mt-1"></i>
                           </button>
                         </li>
                       </ul>
                     </div>
-
                     {errorMessage && (
                       <p className="text-danger">{errorMessage}</p>
                     )}
@@ -214,35 +246,21 @@ const Register = () => {
                       <p className="text-success">{successMessage}</p>
                     )}
                   </form>
-
-                  <li className="ms-3">
-                    <button className="text-muted bg-transparent border-0">
-                      <i className="social-icons fs-1 fa-brands fa-facebook mt-1"></i>
-                    </button>
-                  </li>
-                  <li className="ms-3">
-                    <button
-                      className="text-muted bg-transparent border-0"
-                      onClick={handleFacebookRegister}
-                    >
-                      <i className="social-icons fs-1 fa-brands fa-google mt-1"></i>
-                    </button>
-                  </li>
                 </ul>
               </div>
-            </div>
-            <div className="w-100 align-self-end">
-              <p className="nav d-block fs-xs text-center text-xl-start pb-2 mb-0">
-                &copy;2024, All rights reserved.
-                <Link
-                  className="nav-link d-inline-block p-0"
-                  href="/"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  Chimera
-                </Link>
-              </p>
+              <div className="w-100 text-xl-start ">
+                <p className=" text-center pb-2 mb-0">
+                  &copy;2025, All rights reserved.
+                  <Link
+                    className="nav-link d-inline-block p-0 text-center"
+                    href="/"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    Chimera AI
+                  </Link>
+                </p>
+              </div>
             </div>
           </div>
 

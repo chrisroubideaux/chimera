@@ -138,7 +138,7 @@ const Login = () => {
           <Link className="btn btn-lg w-75" href="/register/register">
             Register
           </Link>
-          <p className="mt-1 mb-3 text-muted">&copy; Chimera AI, 2024</p>
+          <p className="mt-1 mb-3 text-muted">&copy; Chimera AI, 2025</p>
         </form>
       </div>
     </>

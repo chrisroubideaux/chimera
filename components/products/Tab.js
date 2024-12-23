@@ -85,13 +85,6 @@ export default function Tab({ setActiveComponent, admins }) {
             </ul>
           </div>
         </li>
-
-        <li className="nav-item me-2">
-          <Link className="btn btn-sm" href="/orders/orders">
-            Orders
-            <i className="m-1 fa-solid fa-clipboard-list"></i>
-          </Link>
-        </li>
       </ul>
     </div>
   );
