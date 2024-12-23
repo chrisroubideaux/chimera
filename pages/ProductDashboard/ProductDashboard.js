@@ -38,7 +38,7 @@ export default function ProductDashboard() {
   // starters
   useEffect(() => {
     axios
-      .get('http://localhost:3001/starters')
+      .get('https://chimera-h56c.onrender.com/starters')
       .then((response) => {
         setStarters(response.data);
       })
@@ -49,7 +49,7 @@ export default function ProductDashboard() {
   // entrees
   useEffect(() => {
     axios
-      .get('http://localhost:3001/entrees')
+      .get('https://chimera-h56c.onrender.com/entrees')
       .then((response) => {
         setEntrees(response.data);
       })
@@ -60,7 +60,7 @@ export default function ProductDashboard() {
   // desserts
   useEffect(() => {
     axios
-      .get('http://localhost:3001/desserts')
+      .get('https://chimera-h56c.onrender.com/desserts')
       .then((response) => {
         setDesserts(response.data);
       })
@@ -71,7 +71,7 @@ export default function ProductDashboard() {
   // beverages
   useEffect(() => {
     axios
-      .get('http://localhost:3001/beverages')
+      .get('https://chimera-h56c.onrender.com/beverages')
       .then((response) => {
         setBeverages(response.data);
       })

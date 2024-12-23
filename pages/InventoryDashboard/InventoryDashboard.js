@@ -29,7 +29,7 @@ export default function InventoryDashboard() {
   // produce
   useEffect(() => {
     axios
-      .get('http://localhost:3001/produce')
+      .get('https://chimera-h56c.onrender.com/produce')
       .then((response) => {
         setProduce(response.data);
       })
@@ -41,7 +41,7 @@ export default function InventoryDashboard() {
   // dairy inventory
   useEffect(() => {
     axios
-      .get('http://localhost:3001/dairy')
+      .get('https://chimera-h56c.onrender.com/dairy')
       .then((response) => {
         setDairy(response.data);
       })
@@ -53,7 +53,7 @@ export default function InventoryDashboard() {
   // protein inventory
   useEffect(() => {
     axios
-      .get('http://localhost:3001/proteins')
+      .get('https://chimera-h56c.onrender.com/proteins')
       .then((response) => {
         setProteins(response.data);
       })
@@ -64,7 +64,7 @@ export default function InventoryDashboard() {
   // linen inventory
   useEffect(() => {
     axios
-      .get('http://localhost:3001/linens')
+      .get('https://chimera-h56c.onrender.com/linens')
       .then((response) => {
         setLinens(response.data);
       })
@@ -75,7 +75,7 @@ export default function InventoryDashboard() {
   // beverage inventory
   useEffect(() => {
     axios
-      .get('http://localhost:3001/drinks')
+      .get('https://chimera-h56c.onrender.com/drinks')
       .then((response) => {
         setDrinks(response.data);
       })
@@ -86,7 +86,7 @@ export default function InventoryDashboard() {
   // dry goods inventory
   useEffect(() => {
     axios
-      .get('http://localhost:3001/dryGoods')
+      .get('https://chimera-h56c.onrender.com/dryGoods')
       .then((response) => {
         setDryGoods(response.data);
       })
@@ -97,7 +97,7 @@ export default function InventoryDashboard() {
   // paper products inventory
   useEffect(() => {
     axios
-      .get('http://localhost:3001/paperProducts')
+      .get('https://chimera-h56c.onrender.com/paperProducts')
       .then((response) => {
         setPaperProducts(response.data);
       })
