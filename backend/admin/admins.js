@@ -16,7 +16,7 @@ const {
 } = require('./adminController');
 
 // Login user
-adminRoutes.post('/login', login);
+//adminRoutes.post('/login', login);
 
 // Logout user
 adminRoutes.get('/logout', logout);

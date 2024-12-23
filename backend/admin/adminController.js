@@ -267,6 +267,5 @@ module.exports = {
   deleteAdminById,
   updateRequestStatus,
   getPendingRequests,
-  login,
   logout,
 };
