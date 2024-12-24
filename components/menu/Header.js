@@ -26,7 +26,7 @@ export default function Header() {
               <div className="col-xl-5 col-lg-7 col-12 " data-cue="zoomIn">
                 <div className="text-center text-lg-start">
                   <div className="mb-4 text-white-stable">
-                    <h1 className="mb-3 display-3 mt-3 fw-bold text-light">
+                    <h2 className="mb-3 display-3 mt-3 fw-bold text-light">
                       <Typewriter
                         options={{
                           strings: ['  Wecome to Chimera AI.'],
@@ -34,7 +34,7 @@ export default function Header() {
                           loop: true,
                         }}
                       />
-                    </h1>
+                    </h2>
                     <p className="lead text-light mb-0">
                       cutting-edge application designed to streamline business
                       operations by tracking sales and automating inventory

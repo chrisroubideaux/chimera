@@ -2,20 +2,24 @@
 
 export default function Industries() {
   return (
-    <div className="container mt-5 pt-5 d-flex justify-content-center">
+    <div className="container mt-5 pt-5 d-flex">
       <div>
         <div className="row mb-90 pt-5">
           <div className="col-lg-6 offset-lg-3 text-center px-lg-50 pt-2">
             <h2 className="mb-25 px-lg-10" data-show="startbox">
-              Our industries
+              Industries
             </h2>
-            <p className="m-0 mt-3" data-show="startbox" data-show-delay="100">
-              Waters his moveth seasons over Created appear greater dry air.
-              Cattle set it night let i fruitful make our appear.
-            </p>
+            <p
+              className="m-0 mt-3 fs-5"
+              data-show="startbox"
+              data-show-delay="100"
+            >
+              Chimera AI designed to streamline business operations by tracking
+              sales and automating inventory management.
+            </p>{' '}
           </div>
         </div>
-        <div className="row gy-30 justify-content-center p-5 ">
+        <div className="row gy-30 justify-content-center p-5 mt-3 ">
           <div className="col-12 col-md-6 col-lg-4" data-show="startbox">
             <div className="d-flex align-items-center lift position-relative rounded-3 service-line-sm">
               <div className="service-line-icon text-accent-1 me-3">
