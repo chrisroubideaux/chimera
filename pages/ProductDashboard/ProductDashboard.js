@@ -202,6 +202,7 @@ export default function ProductDashboard() {
             <div className="col-lg-8 col-xxl-9">{renderComponent()}</div>
           </div>
         </div>
+        <Footer />
       </div>
     </>
   );

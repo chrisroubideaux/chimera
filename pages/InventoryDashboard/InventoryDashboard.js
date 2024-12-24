@@ -13,6 +13,7 @@ import Beverages from '@/components/inventory/Beverages';
 import Dry from '@/components/inventory/Dry';
 import Paper from '@/components/inventory/Paper';
 import Linens from '@/components/inventory/Linens';
+import Footer from '@/components/Nav/Footer';
 
 // data imports
 export default function InventoryDashboard() {
@@ -183,6 +184,7 @@ export default function InventoryDashboard() {
             </div>
           </div>
         </div>
+        <Footer />
       </div>
     </>
   );

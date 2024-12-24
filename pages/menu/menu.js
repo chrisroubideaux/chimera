@@ -1,5 +1,4 @@
 // menu page
-import Link from 'next/link';
 import Head from 'next/head';
 import Navbar from '@/components/Nav/Navbar';
 import Header from '@/components/menu/Header';

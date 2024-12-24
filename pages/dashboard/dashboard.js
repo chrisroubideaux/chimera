@@ -30,6 +30,7 @@ import BeverageDailyChart from '@/components/sales/beverages/BeverageDailyChart'
 import BeverageHourlyChart from '@/components/sales/beverages/BeverageHourlyChart';
 import BeverageWeeklyChart from '@/components/sales/beverages/BeverageWeeklyChart';
 import BeverageMonthlyChart from '@/components/sales/beverages/BeverageMonthlyChart';
+import Footer from '@/components/Nav/Footer';
 
 //import Activity from '@/components/messages/Activity';
 
@@ -132,23 +133,9 @@ export default function dashboard() {
             </div>
           </div>
 
-          <div className=" py-5">
-            <div className="row">
-              <div className="col-lg-8 d-flex flex-column justify-content-center">
-                Test
-              </div>
-              <div className="col-lg-4 d-flex flex-column justify-content-center">
-                <div className="">Test</div>
-              </div>
-            </div>
-          </div>
-
-          <div className="row">
-            <div className="col-xl-6 col-lg-12 order-lg-2 order-xl-1">Test</div>
-            <div className="col-xl-3 col-lg-6 order-lg-1"></div>
-            <div className="col-xl-3 col-lg-6 order-lg-1">test</div>
-          </div>
+          <div className=" py-5"></div>
         </div>
+        <Footer />
       </div>
     </>
   );
