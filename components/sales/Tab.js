@@ -109,7 +109,7 @@ export default function Tab({ setActiveComponent, admins }) {
                   href="#"
                   onClick={() => setActiveComponent('StarterDailyChart')}
                 >
-                  Starters
+                  Appeitizers
                 </a>
               </li>
               <li>

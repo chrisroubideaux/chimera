@@ -218,7 +218,7 @@ export default function StartersHourlyChart({ setActiveComponent }) {
           <div className="row mb-3">
             <div className="col-md-6 col-xl-4 mb-2 mb-md-0">
               <div className="d-flex align-items-center">
-                <h5 className="mb-0 me-2">Starters:</h5>
+                <h5 className="mt-1 me-2 fs-6">Appeitizers:</h5>
                 <p className="mb-0">{currentDateTime}</p>
               </div>
             </div>

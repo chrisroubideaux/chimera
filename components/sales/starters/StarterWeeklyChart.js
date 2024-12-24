@@ -32,9 +32,7 @@ const generateWeeklySalesData = (min, max) => {
   );
 };
 
-// Function to reset weekly data
 const resetWeeklyData = () => {
-  // Define ranges for sales
   const min = 1500;
   const max = 2000;
   return {
@@ -65,14 +63,13 @@ const lineChartOptions = {
     y: {
       ticks: {
         callback: function (value) {
-          return `$${value / 1000}k`; // Convert value to thousands
+          return `$${value / 1000}k`;
         },
       },
     },
   },
 };
 
-// Labels for the chart
 const labels = [
   'Monday',
   'Tuesday',
@@ -96,7 +93,6 @@ export default function StarterWeeklyChart({ setActiveComponent }) {
     const formattedEnd = format(end, 'MM/dd/yyyy');
     setCurrentWeek(`${formattedStart} - ${formattedEnd}`);
 
-    // Generate and set sales data
     const {
       currentWeekData: newCurrentWeekData,
       previousWeekData: newPreviousWeekData,
@@ -104,13 +100,12 @@ export default function StarterWeeklyChart({ setActiveComponent }) {
     setCurrentWeekData(newCurrentWeekData);
     setPreviousWeekData(newPreviousWeekData);
 
-    // Calculate average sales for the chart
     const average = (data) =>
       data.reduce((acc, val) => acc + val, 0) / data.length;
     setAverageData(
       Array(labels.length).fill(average(newCurrentWeekData).toFixed(1))
     );
-  }, []); // Empty dependency array means this effect runs only once, on component mount
+  }, []);
 
   const lineChartData = {
     labels,
@@ -147,26 +142,22 @@ export default function StarterWeeklyChart({ setActiveComponent }) {
     ];
     const rows = labels.map((day, index) => [
       day,
-      `${(currentWeekData[index] / 1000).toFixed(1)}k`, // Current Week
-      `${(previousWeekData[index] / 1000).toFixed(1)}k`, // Previous Week
-      `${(averageData[index] / 1000).toFixed(1)}k`, // Average
+      `${(currentWeekData[index] / 1000).toFixed(1)}k`,
+      `${(previousWeekData[index] / 1000).toFixed(1)}k`,
+      `${(averageData[index] / 1000).toFixed(1)}k`,
     ]);
 
-    // Join the headers and rows into CSV format
     const csvContent = [
       headers.join(','),
       ...rows.map((row) => row.join(',')),
     ].join('\n');
 
-    // Create a Blob from the CSV content
     const blob = new Blob([csvContent], { type: 'text/csv' });
 
-    // Create a link to download the CSV file
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
     link.download = `weekly_sales_${new Date().toISOString()}.csv`;
 
-    // Programmatically click the link to trigger the download
     link.click();
   };
 
@@ -177,8 +168,8 @@ export default function StarterWeeklyChart({ setActiveComponent }) {
           <div className="row mb-3">
             <div className="col-md-6 col-xl-4 mb-2 mb-md-0">
               <div className="d-flex">
-                <h5 className="mb-0 me-1">Starters:</h5>
-                <p className="mb-0">{currentWeek}</p>
+                <h5 className="d-inline me-2 fs-6 span">Appetizers:</h5>
+                <h6 className=""> {currentWeek}</h6>
               </div>
             </div>
             <div className="col-md-6 col-xl-8">
@@ -236,9 +227,7 @@ const generateWeeklySalesData = (min, max) => {
   );
 };
 
-// Function to reset weekly data
 const resetWeeklyData = () => {
-  // Define ranges for sales
   const min = 1500;
   const max = 2000;
   return {
@@ -269,14 +258,13 @@ const lineChartOptions = {
     y: {
       ticks: {
         callback: function (value) {
-          return `$${value / 1000}k`; // Convert value to thousands
+          return `$${value / 1000}k`;
         },
       },
     },
   },
 };
 
-// Labels for the chart
 const labels = [
   'Monday',
   'Tuesday',
@@ -285,7 +273,6 @@ const labels = [
   'Friday',
   'Saturday',
 ];
-// Function to generate CSV from weekly sales data
 
 export default function StarterWeeklyChart({ setActiveComponent }) {
   const [currentWeek, setCurrentWeek] = useState('');
@@ -301,7 +288,6 @@ export default function StarterWeeklyChart({ setActiveComponent }) {
     const formattedEnd = format(end, 'MM/dd/yyyy');
     setCurrentWeek(`${formattedStart} - ${formattedEnd}`);
 
-    // Generate and set sales data
     const {
       currentWeekData: newCurrentWeekData,
       previousWeekData: newPreviousWeekData,
@@ -309,13 +295,12 @@ export default function StarterWeeklyChart({ setActiveComponent }) {
     setCurrentWeekData(newCurrentWeekData);
     setPreviousWeekData(newPreviousWeekData);
 
-    // Calculate average sales for the chart
     const average = (data) =>
       data.reduce((acc, val) => acc + val, 0) / data.length;
     setAverageData(
       Array(labels.length).fill(average(newCurrentWeekData).toFixed(1))
     );
-  }, []); // Empty dependency array means this effect runs only once, on component mount
+  }, []);
 
   const lineChartData = {
     labels,
@@ -342,6 +327,35 @@ export default function StarterWeeklyChart({ setActiveComponent }) {
     ],
   };
 
+  // Function to generate CSV from weekly sales data
+  const generateCSV = () => {
+    const headers = [
+      'Day',
+      'Current Week Sales',
+      'Previous Week Sales',
+      'Average Sales',
+    ];
+    const rows = labels.map((day, index) => [
+      day,
+      `${(currentWeekData[index] / 1000).toFixed(1)}k`,
+      `${(previousWeekData[index] / 1000).toFixed(1)}k`,
+      `${(averageData[index] / 1000).toFixed(1)}k`,
+    ]);
+
+    const csvContent = [
+      headers.join(','),
+      ...rows.map((row) => row.join(',')),
+    ].join('\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = `weekly_sales_${new Date().toISOString()}.csv`;
+
+    link.click();
+  };
+
   return (
     <div className="container-fluid">
       <div className="card">
@@ -349,12 +363,15 @@ export default function StarterWeeklyChart({ setActiveComponent }) {
           <div className="row mb-3">
             <div className="col-md-6 col-xl-4 mb-2 mb-md-0">
               <div className="d-flex">
-                <h5 className="mb-0 me-1">Starters:</h5>
-                <p className="mb-0">{currentWeek}</p>
+                <h5 className="mt-1 me-2 fs-6">Appeitizers:</h5>
+                <p className="">{currentWeek}</p>
               </div>
             </div>
             <div className="col-md-6 col-xl-8">
               <div className="d-flex justify-content-end">
+                <button onClick={generateCSV} className="btn btn-sm me-2">
+                  Export CSV
+                </button>
                 <Nav setActiveComponent={setActiveComponent} />
               </div>
             </div>
