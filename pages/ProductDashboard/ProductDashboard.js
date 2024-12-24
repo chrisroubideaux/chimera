@@ -22,6 +22,7 @@ import MonthlyChart from '@/components/charts/MonthlyChart';
 import HourlyChart from '@/components/charts/HourlyChart';
 import DailyChart from '@/components/charts/DailyChart';
 import WeeklyChart from '@/components/charts/WeeklyChart';
+import Footer from '@/components/Nav/Footer';
 
 export default function ProductDashboard() {
   const [activeComponent, setActiveComponent] = useState('Products');
