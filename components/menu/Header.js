@@ -21,9 +21,9 @@ export default function Header() {
         }}
       >
         <div className="position-absolute start-0 end-0">
-          <div className="container pt-5">
+          <div className="container pt-5 mt-5">
             <div className="row">
-              <div className="col-xl-5 col-lg-7 col-12" data-cue="zoomIn">
+              <div className="col-xl-5 col-lg-7 col-12 " data-cue="zoomIn">
                 <div className="text-center text-lg-start">
                   <div className="mb-4 text-white-stable">
                     <h1 className="mb-3 display-3 mt-3 fw-bold text-light">

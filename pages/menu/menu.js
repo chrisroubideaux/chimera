@@ -4,6 +4,10 @@ import Head from 'next/head';
 import Navbar from '@/components/Nav/Navbar';
 import Header from '@/components/menu/Header';
 import Footer from '@/components/Nav/Footer';
+import Tech from '@/components/menu/Tech';
+import Details from '@/components/menu/Details';
+import Industries from '@/components/menu/Industries';
+import Banner from '@/components/menu/Banner';
 
 export default function menu() {
   return (
@@ -25,8 +29,19 @@ export default function menu() {
       <div className="layout h-100">
         <Navbar />
         <Header />
-
-        <div className="pt-5">
+        <div className=" pt-5">
+          <Industries />
+        </div>
+        <div className=" pt-5">
+          <Tech />
+        </div>
+        <div className=" pt-5">
+          <Details />
+        </div>
+        <div className=" pt-5">
+          <Banner />
+        </div>
+        <div className="pt-5 mt-5">
           <Footer />
         </div>
       </div>
