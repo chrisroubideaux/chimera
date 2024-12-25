@@ -14,7 +14,7 @@ import Dry from '@/components/inventory/Dry';
 import Paper from '@/components/inventory/Paper';
 import Linens from '@/components/inventory/Linens';
 import Footer from '@/components/Nav/Footer';
-
+import ProduceDetails from '@/components/inventory/produceDetails/ProduceDetails';
 // data imports
 export default function InventoryDashboard() {
   const [activeComponent, setActiveComponent] = useState('Inventory');
@@ -26,11 +26,12 @@ export default function InventoryDashboard() {
   const [drinks, setDrinks] = useState([]);
   const [dryGoods, setDryGoods] = useState([]);
   const [paperProducts, setPaperProducts] = useState([]);
+  const [selectedProduce, setSelectedProduce] = useState(null);
 
   // produce
   useEffect(() => {
     axios
-      .get('https://chimera-h56c.onrender.com/produce')
+      .get('http://localhost:3001/produce')
       .then((response) => {
         setProduce(response.data);
       })
@@ -42,7 +43,7 @@ export default function InventoryDashboard() {
   // dairy inventory
   useEffect(() => {
     axios
-      .get('https://chimera-h56c.onrender.com/dairy')
+      .get('http://localhost:3001/dairy')
       .then((response) => {
         setDairy(response.data);
       })
@@ -54,7 +55,7 @@ export default function InventoryDashboard() {
   // protein inventory
   useEffect(() => {
     axios
-      .get('https://chimera-h56c.onrender.com/proteins')
+      .get('http://localhost:3001/proteins')
       .then((response) => {
         setProteins(response.data);
       })
@@ -62,10 +63,11 @@ export default function InventoryDashboard() {
         console.error('Error fetching protein items:', error);
       });
   }, []);
+
   // linen inventory
   useEffect(() => {
     axios
-      .get('https://chimera-h56c.onrender.com/linens')
+      .get('http://localhost:3001/linens')
       .then((response) => {
         setLinens(response.data);
       })
@@ -76,7 +78,7 @@ export default function InventoryDashboard() {
   // beverage inventory
   useEffect(() => {
     axios
-      .get('https://chimera-h56c.onrender.com/drinks')
+      .get('http://localhost:3001/drinks')
       .then((response) => {
         setDrinks(response.data);
       })
@@ -87,7 +89,7 @@ export default function InventoryDashboard() {
   // dry goods inventory
   useEffect(() => {
     axios
-      .get('https://chimera-h56c.onrender.com/dryGoods')
+      .get('http://localhost:3001/dryGoods')
       .then((response) => {
         setDryGoods(response.data);
       })
@@ -98,7 +100,7 @@ export default function InventoryDashboard() {
   // paper products inventory
   useEffect(() => {
     axios
-      .get('https://chimera-h56c.onrender.com/paperProducts')
+      .get('http://localhost:3001/paperProducts')
       .then((response) => {
         setPaperProducts(response.data);
       })
@@ -137,10 +139,21 @@ export default function InventoryDashboard() {
         return (
           <Linens setActiveComponent={setActiveComponent} linens={linens} />
         );
-
+      case 'ProduceDetails':
+        return (
+          <ProduceDetails
+            setActiveComponent={setActiveComponent}
+            produce={produce}
+            selectedProduce={selectedProduce}
+          />
+        );
       default:
         return (
-          <Produce setActiveComponent={setActiveComponent} produce={produce} />
+          <Produce
+            setActiveComponent={setActiveComponent}
+            produce={produce}
+            setSelectedProduce={setSelectedProduce}
+          />
         );
     }
   };
@@ -175,12 +188,23 @@ export default function InventoryDashboard() {
         <div className="container-fluid ">
           <div className="row">
             <div className="col-lg-4 col-xxl-3">
-              <div className="pt-4">
-                <Totals />
-              </div>
+              {activeComponent !== 'ProduceDetails' && (
+                <div className="pt-4">
+                  <Totals />
+                </div>
+              )}
             </div>
+            {/*
             <div className="col-lg-8 col-xxl-9">
               <div className="mt-4">{renderComponent()}</div>
+            </div>
+            */}
+            <div
+              className={`col-lg-${
+                activeComponent === 'ProduceDetails' ? '12' : '8'
+              } col-xxl-${activeComponent === 'ProduceDetails' ? '5' : '6'}`}
+            >
+              {renderComponent()}
             </div>
           </div>
         </div>

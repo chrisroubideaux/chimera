@@ -4,7 +4,11 @@ import Link from 'next/link';
 import { faker } from '@faker-js/faker';
 import { format } from 'date-fns';
 
-export default function Produce({ produce }) {
+export default function Produce({
+  setActiveComponent,
+  produce,
+  setSelectedProduce,
+}) {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
   const [salesData, setSalesData] = useState([]);
@@ -97,6 +101,10 @@ export default function Produce({ produce }) {
     link.click();
     document.body.removeChild(link);
   };
+  const handleEdit = (item) => {
+    setActiveComponent('ProduceDetails');
+    setSelectedProduce(item);
+  };
 
   return (
     <div>
@@ -149,12 +157,13 @@ export default function Produce({ produce }) {
                         <td>{item.actual}</td>
                         <td>{item.date}</td>
                         <td className="text-end">
-                          <Link
+                          <button
+                            type="button"
                             className="btn btn-sm"
-                            href={`/inventory/${item._id}`}
+                            onClick={() => handleEdit(item)}
                           >
-                            View
-                          </Link>
+                            view
+                          </button>
                         </td>
                       </tr>
                     ))}

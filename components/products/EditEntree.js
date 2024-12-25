@@ -1,5 +1,4 @@
 // Edit entree form
-
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -7,7 +6,7 @@ export default function EditForms({ setActiveComponent, selectedEntree }) {
   const [isEditing, setIsEditing] = useState(false);
   const [entree, setEntree] = useState(selectedEntree);
 
-  // Update the state if selected item changes
+  // Update the state if selected item change
   useEffect(() => {
     if (selectedEntree) {
       setEntree(selectedEntree);

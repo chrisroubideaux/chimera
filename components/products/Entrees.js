@@ -6,6 +6,7 @@ import { faker } from '@faker-js/faker';
 const Entrees = ({ setActiveComponent, entrees, setSelectedEntree }) => {
   const [dailySales, setDailySales] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+
   const itemsPerPage = 5;
   const [currentDateTime, setCurrentDateTime] = useState({
     date: '',
@@ -14,15 +15,15 @@ const Entrees = ({ setActiveComponent, entrees, setSelectedEntree }) => {
 
   // Function to generate random daily sales data
   const generateDailySalesData = () => {
-    const averageDailySales = 7500; // Total daily sales target
+    const averageDailySales = 7500;
     const totalItems = entrees.length;
-    const salesAllocation = averageDailySales / totalItems; // Approximate sales per item
+    const salesAllocation = averageDailySales / totalItems;
 
     return entrees.map((entree) => ({
       ...entree,
       sold: faker.datatype.float({
-        min: salesAllocation * 0.5, // 50% of average
-        max: salesAllocation * 1.5, // 150% of average
+        min: salesAllocation * 0.5,
+        max: salesAllocation * 1.5,
         precision: 0.01,
       }),
     }));
