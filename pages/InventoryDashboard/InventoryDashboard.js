@@ -2,7 +2,6 @@
 import Head from 'next/head';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import Head from 'next/head';
 import Navbar from '@/components/Nav/Navbar';
 import Tab from '@/components/inventory/Tab';
 //import Sidebar from '@/components/admin/Sidebar';
