@@ -11,6 +11,8 @@ const paperProductSchema = new mongoose.Schema(
     price: String,
     count: String,
     sold: String,
+    perUnit: String,
+    weight: String,
     par: String,
     projected: String,
     actual: String,

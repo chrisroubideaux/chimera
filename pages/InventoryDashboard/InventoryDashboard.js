@@ -15,6 +15,7 @@ import Paper from '@/components/inventory/Paper';
 import Linens from '@/components/inventory/Linens';
 import Footer from '@/components/Nav/Footer';
 import ProduceDetails from '@/components/inventory/produceDetails/ProduceDetails';
+
 // data imports
 export default function InventoryDashboard() {
   const [activeComponent, setActiveComponent] = useState('Inventory');
@@ -184,7 +185,9 @@ export default function InventoryDashboard() {
           />
         ))}
           */}
-        <Tab setActiveComponent={setActiveComponent} />
+        {activeComponent !== 'ProduceDetails' && (
+          <Tab setActiveComponent={setActiveComponent} />
+        )}
         <div className="container-fluid ">
           <div className="row">
             <div className="col-lg-4 col-xxl-3">
@@ -204,7 +207,7 @@ export default function InventoryDashboard() {
                 activeComponent === 'ProduceDetails' ? '12' : '8'
               } col-xxl-${activeComponent === 'ProduceDetails' ? '5' : '6'}`}
             >
-              {renderComponent()}
+              <div className="mt-4">{renderComponent()}</div>
             </div>
           </div>
         </div>

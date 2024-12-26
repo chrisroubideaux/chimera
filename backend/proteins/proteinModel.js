@@ -10,6 +10,8 @@ const proteinSchema = new mongoose.Schema(
     description: String,
     price: String,
     unit: String,
+    perUnit: String,
+    weight: String,
     count: String,
     sold: String,
     par: String,

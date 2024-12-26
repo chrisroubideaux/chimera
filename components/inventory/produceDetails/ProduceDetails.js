@@ -64,7 +64,9 @@ export default function ProduceDetails({
             <nav aria-label="breadcrumb">
               <ol className="breadcrumb mb-0">
                 <li class="breadcrumb-item">
-                  <a href="#">Inventory</a>
+                  <a href="#" onClick={() => setActiveComponent('Produce')}>
+                    Inventory
+                  </a>
                 </li>
                 <li className="breadcrumb-item">
                   <a href="#">Produce</a>
@@ -79,7 +81,7 @@ export default function ProduceDetails({
       </div>
       {/*section*/}
       <section className="mt-8">
-        <div className="container pt-5">
+        <div className="container-fluid pt-5">
           <div className="row">
             <div className="col-md-5 col-xl-6">
               <div
@@ -169,16 +171,16 @@ export default function ProduceDetails({
                 </div>
                 <hr className="my-6" />
                 <div className="mb-5">
-                  <button type="button" className="btn btn-sm me-2 ">
-                    250g
+                  <button type="button" className="btn btn-md me-2 ">
+                    <i className="fa-solid fa-carrot"></i>
                   </button>
 
-                  <button type="button" className="btn btn-sm me-2">
-                    500g
+                  <button type="button" className="btn btn-md me-2">
+                    <i className="fa-solid fa-truck-fast"></i>
                   </button>
 
-                  <button type="button" className="btn btn-sm">
-                    1kg
+                  <button type="button" className="btn btn-md">
+                    <i className="fa-solid fa-calendar-days"></i>
                   </button>
                 </div>
 
@@ -271,9 +273,27 @@ export default function ProduceDetails({
                         <td className="bg-transparent">In Stock</td>
                       </tr>
                       <tr>
-                        <td className="bg-transparent">Type:</td>
+                        <td className="bg-transparent">Category:</td>
                         <td className="bg-transparent">
                           {produce ? produce.category : 'Loading...'}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="bg-transparent">Unit:</td>
+                        <td className="bg-transparent">
+                          {produce ? produce.unit : 'Loading...'}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="bg-transparent">Items per:</td>
+                        <td className="bg-transparent">
+                          {produce ? produce.perUnit : 'Loading...'}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="bg-transparent">Weight:</td>
+                        <td className="bg-transparent">
+                          {produce ? produce.weight : 'Loading...'}
                         </td>
                       </tr>
                       <tr>
@@ -296,31 +316,9 @@ export default function ProduceDetails({
           </div>
         </div>
       </section>
+      {/*** */}
 
       {/*section*/}
     </div>
   );
-}
-
-{
-  /*
-
- <p>Category:{produce ? produce.category : 'Loading...'} </p>
-  <img
-                  src={produce.image || ''}
-                  alt={produce.name || 'Produce'}
-                />
-
-                {produce.images &&
-                    produce.images.map((img, index) => (
-                      <div className="col-3" key={index}>
-                        <div className="thumbnails-img">
-                          <img src={img} alt={`Thumbnail ${index + 1}`} />
-                        </div>
-                      </div>
-                    ))}
-
-                       value={produce.name}
-
-*/
 }
