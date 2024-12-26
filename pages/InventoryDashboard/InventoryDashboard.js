@@ -15,7 +15,7 @@ import Paper from '@/components/inventory/Paper';
 import Linens from '@/components/inventory/Linens';
 import Footer from '@/components/Nav/Footer';
 import ProduceDetails from '@/components/inventory/produceDetails/ProduceDetails';
-import Carts from '@/components/inventory/cart/Carts';
+import Carts from '@/components/inventory/Cart/Carts';
 // data imports
 export default function InventoryDashboard() {
   const [activeComponent, setActiveComponent] = useState('Inventory');
