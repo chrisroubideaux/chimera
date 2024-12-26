@@ -9,6 +9,7 @@ export default function ProduceDetails({
 }) {
   const [isEditing, setIsEditing] = useState(false);
   const [produce, setProduce] = useState(selectedProduce);
+  const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
     if (selectedProduce) {
@@ -56,8 +57,30 @@ export default function ProduceDetails({
     setActiveComponent(null);
   };
 
+  const handleAddToCart = () => {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const existingItem = cart.find((item) => item._id === produce._id);
+    if (existingItem) {
+      existingItem.quantity += quantity;
+    } else {
+      cart.push({ ...produce, quantity });
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    alert('Item added to cart');
+  };
+
+  const handleQuantityChange = (operation) => {
+    if (operation === 'increase') {
+      setQuantity((prevQuantity) => prevQuantity + 1);
+    } else if (operation === 'decrease' && quantity > 1) {
+      setQuantity((prevQuantity) => prevQuantity - 1);
+    }
+  };
+  // Calculate total price
+  const totalPrice = (produce ? produce.price : 0) * quantity;
   return (
     <div className="mt-4">
+      {/*
       <div className="container">
         <div className="row">
           <div className="col-12">
@@ -76,8 +99,54 @@ export default function ProduceDetails({
                 </li>
               </ol>
             </nav>
+
           </div>
         </div>
+      </div>
+      */}
+
+      <div className="d-flex justify-content-between align-items-center mt-3 me-4">
+        <div className="row align-items-center">
+          <div className="col">
+            <div className="d-none d-lg-block">
+              <h3 className="fw-normal">Inventory</h3>
+            </div>
+            <nav aria-label="breadcrumb">
+              <ol className="breadcrumb mb-0">
+                <li class="breadcrumb-item">
+                  <a href="/InventoryDashboard/InventoryDashboard">Inventory</a>
+                </li>
+                <li className="breadcrumb-item">
+                  <a href="#">Produce</a>
+                </li>
+                <li className="breadcrumb-item">
+                  <a href="#">Add to cart</a>
+                </li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+        <ul className="nav">
+          <li className="nav-item">
+            <a
+              href="#"
+              className="btn btn-md bg-transparent custom-tooltip"
+              type="button"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              data-bs-custom-class="custom-tooltip"
+              title="View Cart"
+            >
+              <i className="fs-5 social-icon fa-solid fa-cart-shopping"></i>
+            </a>
+          </li>
+
+          <li className="nav-item">
+            <button className="btn btn-md bg-transparent" type="button">
+              <i className="fs-5 social-icon fa-solid fa-square-poll-horizontal"></i>
+            </button>
+          </li>
+        </ul>
       </div>
       {/*section*/}
       <section className="mt-8">
@@ -160,7 +229,7 @@ export default function ProduceDetails({
                 </div>
                 <div className="fs-4">
                   <span className="fw-bold text-dark">
-                    ${produce ? produce.price : 'Loading...'}
+                    ${totalPrice.toFixed(2)}
                   </span>
                   <span className="text-decoration-line-through text-muted">
                     $
@@ -215,26 +284,33 @@ export default function ProduceDetails({
                       value="-"
                       className="button-minus btn btn-sm"
                       data-field="quantity"
+                      onClick={() => handleQuantityChange('decrease')}
                     />
                     <input
                       type="number"
                       step="1"
                       max="999"
-                      value="1"
+                      value={quantity}
                       name="quantity"
                       className="quantity-input"
+                      readOnly
                     />
                     <input
                       type="button"
                       value="+"
                       className="button-plus btn btn-sm"
                       data-field="quantity"
+                      onClick={() => handleQuantityChange('increase')}
                     />
                   </div>
                 </div>
                 <div className="mt-3 row justify-content-start g-2 align-items-center">
                   <div className="col-xxl-4 col-lg-4 col-md-5 col-5 d-grid">
-                    <button className="btn btn-sm" type="button">
+                    <button
+                      className="btn btn-sm"
+                      type="button"
+                      onClick={handleAddToCart}
+                    >
                       Add to cart
                       <i className="fs-6 m-1 social-icon fa-solid fa-cart-shopping"></i>
                     </button>

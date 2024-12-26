@@ -58,7 +58,7 @@ h6 {
   transform: scale(1.07);
   background-color:  #b1bcff;
 }
-      
+
 .card-link {
   text-decoration: none;
 }
@@ -121,7 +121,6 @@ h6 {
   position: absolute;
 }
 
-
 .tech-card {
   transition: transform 0.3s, box-shadow 0.3s;
 }
@@ -129,10 +128,6 @@ h6 {
   transform: scale(1.05);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
-
-
-
-
 
 /* footer */
 
