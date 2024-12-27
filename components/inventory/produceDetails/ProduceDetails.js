@@ -99,31 +99,6 @@ export default function ProduceDetails({
   const totalPrice = (produce ? produce.price : 0) * quantity;
   return (
     <div className="mt-4">
-      {/*
-      <div className="container">
-        <div className="row">
-          <div className="col-12">
-            <nav aria-label="breadcrumb">
-              <ol className="breadcrumb mb-0">
-                <li class="breadcrumb-item">
-                  <a href="#" onClick={() => setActiveComponent('Produce')}>
-                    Inventory
-                  </a>
-                </li>
-                <li className="breadcrumb-item">
-                  <a href="#">Produce</a>
-                </li>
-                <li className="breadcrumb-item">
-                  <a href="#">Add to cart</a>
-                </li>
-              </ol>
-            </nav>
-
-          </div>
-        </div>
-      </div>
-      */}
-
       <div className="d-flex justify-content-between align-items-center mt-3 me-4">
         <div className="row align-items-center">
           <div className="col">
@@ -149,7 +124,7 @@ export default function ProduceDetails({
           <li className="nav-item">
             <a
               href="#"
-              className="btn btn-md custom-tooltip"
+              className="btn btn-md custom-tooltip bg-transparent"
               type="button"
               data-bs-toggle="tooltip"
               data-bs-placement="top"
@@ -159,7 +134,7 @@ export default function ProduceDetails({
             >
               <i className="fs-5 social-icon fa-solid fa-cart-shopping"></i>
               {cartCount > 0 && (
-                <span className="badge bg-soft-dark text-grey rounded-pill nav-link-badge">
+                <span className="badge bg-soft-dark text-dark fs-6 rounded-pill nav-link-badge">
                   {cartCount}
                 </span>
               )}

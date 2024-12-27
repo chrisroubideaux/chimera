@@ -170,10 +170,15 @@ export default function Carts({ setActiveComponent, selectedProduce }) {
                     </div>
                     <div className="col-4 col-md-5">
                       <a href="shop-single.html" className="text-inherit">
-                        <h6 className="mb-0">NutriChoice Digestive </h6>
+                        <h6 className="mb-0">
+                          {produce ? produce.name : 'Loading...'}
+                        </h6>
                       </a>
                       <span>
-                        <small className="text-muted">250g</small>
+                        <small className="text-muted">
+                          {' '}
+                          {produce ? produce.weight : 'Loading...'}
+                        </small>
                       </span>
 
                       <div className="mt-2 small lh-1">
@@ -196,12 +201,13 @@ export default function Carts({ setActiveComponent, selectedProduce }) {
                           value="-"
                           className="button-minus btn btn-sm"
                           data-field="quantity"
+                          onClick={() => handleQuantityChange('decrease')}
                         />
                         <input
                           type="number"
                           step="1"
                           max="999"
-                          value="1"
+                          value={quantity}
                           name="quantity"
                           className="quantity-input"
                           readOnly
@@ -211,12 +217,15 @@ export default function Carts({ setActiveComponent, selectedProduce }) {
                           value="+"
                           className="button-plus btn btn-sm"
                           data-field="quantity"
+                          onClick={() => handleQuantityChange('increase')}
                         />
                       </div>
                     </div>
 
                     <div className="col-2 text-lg-end text-start text-md-end col-md-2">
-                      <span className="fw-bold text-danger">$20.00</span>
+                      <span className="fw-bold text-danger">
+                        ${totalPrice.toFixed(2)}
+                      </span>
                       <div className="text-decoration-line-through text-muted small">
                         $26.00
                       </div>
@@ -226,7 +235,11 @@ export default function Carts({ setActiveComponent, selectedProduce }) {
               </ul>
 
               <div className="d-flex justify-content-between mt-4">
-                <a href="#!" className="btn btn-sm">
+                <a
+                  href="#!"
+                  className="btn btn-sm"
+                  onClick={() => setActiveComponent('Produce')}
+                >
                   Continue Shopping
                 </a>
               </div>
@@ -237,13 +250,14 @@ export default function Carts({ setActiveComponent, selectedProduce }) {
             <div className="mb-5 card mt-6 mt-3">
               <div className="card-body p-6">
                 <h2 className="h5 mb-4">Summary</h2>
+
                 <div className="card mb-2">
                   <ul className="list-group list-group-flush">
                     <li className="list-group-item d-flex justify-content-between align-items-start">
                       <div className="me-auto">
                         <div>Item Subtotal</div>
                       </div>
-                      <span>$70.00</span>
+                      <span>${totalPrice.toFixed(2)}</span>
                     </li>
 
                     <li className="list-group-item d-flex justify-content-between align-items-start">
@@ -257,7 +271,7 @@ export default function Carts({ setActiveComponent, selectedProduce }) {
                       <div className="me-auto">
                         <div className="fw-bold">Subtotal</div>
                       </div>
-                      <span className="fw-bold">$67.00</span>
+                      <span className="fw-bold">${totalPrice.toFixed(2)}</span>
                     </li>
                   </ul>
                 </div>
@@ -266,7 +280,8 @@ export default function Carts({ setActiveComponent, selectedProduce }) {
                     className="btn btn-md d-flex justify-content-between align-items-center"
                     type="submit"
                   >
-                    Go to Checkout <span className="fw-bold">$67.00</span>
+                    Go to Checkout{' '}
+                    <span className="fw-bold">${totalPrice.toFixed(2)}</span>
                   </button>
                 </div>
 
