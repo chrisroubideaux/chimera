@@ -16,6 +16,7 @@ import Linens from '@/components/inventory/Linens';
 import Footer from '@/components/Nav/Footer';
 import ProduceDetails from '@/components/inventory/produceDetails/ProduceDetails';
 import Carts from '@/components/inventory/Cart/Carts';
+
 // data imports
 export default function InventoryDashboard() {
   const [activeComponent, setActiveComponent] = useState('Inventory');
@@ -156,6 +157,7 @@ export default function InventoryDashboard() {
             selectedProduce={selectedProduce}
           />
         );
+
       default:
         return (
           <Produce
@@ -184,39 +186,50 @@ export default function InventoryDashboard() {
       </Head>
       <div className="layout h-100">
         <Navbar />
-        {/*
-        {admins.map((admins) => (
-          <Tab
-            setActiveComponent={setActiveComponent}
-            key={admins.id}
-            admins={admins}
-          />
-        ))}
-          */}
 
-        {activeComponent !== 'ProduceDetails' && (
+        {activeComponent !== 'ProduceDetails' && activeComponent !== 'Cart' && (
           <Tab setActiveComponent={setActiveComponent} />
         )}
 
         <div className="container-fluid ">
           <div className="row">
             <div className="col-lg-4 col-xxl-3">
+              {/*
               {activeComponent !== 'ProduceDetails' && (
                 <div className="pt-4">
                   <Totals />
                 </div>
               )}
+                */}
+              {activeComponent !== 'ProduceDetails' &&
+                activeComponent !== 'Cart' && (
+                  <div className="pt-4">
+                    <Totals />
+                  </div>
+                )}
             </div>
-            {/*
-            <div className="col-lg-8 col-xxl-9">
-              <div className="mt-4">{renderComponent()}</div>
-            </div>
-            */}
 
+            {/*
             <div
               className={`col-lg-${
                 activeComponent === 'ProduceDetails' ? '12' : '8'
               } col-xxl-${activeComponent === 'ProduceDetails' ? '5' : '6'}`}
+            >
+              <div className="mt-4">{renderComponent()}</div>
+            </div>
+            */}
+            <div
+              className={`col-lg-${
+                activeComponent === 'ProduceDetails' ||
+                activeComponent === 'Cart'
+                  ? '12'
+                  : '8'
+              } col-xxl-${
+                activeComponent === 'ProduceDetails' ||
+                activeComponent === 'Cart'
+                  ? '5'
+                  : '6'
+              }`}
             >
               <div className="mt-4">{renderComponent()}</div>
             </div>

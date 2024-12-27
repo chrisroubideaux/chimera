@@ -10,6 +10,7 @@ export default function ProduceDetails({
   const [isEditing, setIsEditing] = useState(false);
   const [produce, setProduce] = useState(selectedProduce);
   const [quantity, setQuantity] = useState(1);
+  const [cartCount, setCartCount] = useState(0);
 
   useEffect(() => {
     if (selectedProduce) {
@@ -57,6 +58,31 @@ export default function ProduceDetails({
     setActiveComponent(null);
   };
 
+  const handleQuantityChange = (operation) => {
+    let updatedQuantity = quantity;
+    if (operation === 'increase') {
+      updatedQuantity = quantity + 1;
+    } else if (operation === 'decrease' && quantity > 1) {
+      updatedQuantity = quantity - 1;
+    }
+    setQuantity(updatedQuantity);
+
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const existingItem = cart.find((item) => item._id === produce._id);
+    if (existingItem) {
+      existingItem.quantity = updatedQuantity;
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+
+    updateCartCount();
+  };
+
+  const updateCartCount = () => {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
+    setCartCount(totalItems);
+  };
+
   const handleAddToCart = () => {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     const existingItem = cart.find((item) => item._id === produce._id);
@@ -66,16 +92,10 @@ export default function ProduceDetails({
       cart.push({ ...produce, quantity });
     }
     localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartCount();
     alert('Item added to cart');
   };
 
-  const handleQuantityChange = (operation) => {
-    if (operation === 'increase') {
-      setQuantity((prevQuantity) => prevQuantity + 1);
-    } else if (operation === 'decrease' && quantity > 1) {
-      setQuantity((prevQuantity) => prevQuantity - 1);
-    }
-  };
   // Calculate total price
   const totalPrice = (produce ? produce.price : 0) * quantity;
   return (
@@ -130,14 +150,20 @@ export default function ProduceDetails({
           <li className="nav-item">
             <a
               href="#"
-              className="btn btn-md bg-transparent custom-tooltip"
+              className="btn btn-md custom-tooltip"
               type="button"
               data-bs-toggle="tooltip"
               data-bs-placement="top"
               data-bs-custom-class="custom-tooltip"
               title="View Cart"
+              onClick={() => setActiveComponent('Cart')}
             >
               <i className="fs-5 social-icon fa-solid fa-cart-shopping"></i>
+              {cartCount > 0 && (
+                <span className="badge bg-soft-dark text-grey rounded-pill nav-link-badge">
+                  {cartCount}
+                </span>
+              )}
             </a>
           </li>
 
@@ -148,6 +174,7 @@ export default function ProduceDetails({
           </li>
         </ul>
       </div>
+
       {/*section*/}
       <section className="mt-8">
         <div className="container-fluid pt-5">
@@ -254,30 +281,6 @@ export default function ProduceDetails({
                 </div>
 
                 <div>
-                  {/*
-                  <div class="input-group input-spinner">
-                    <input
-                      type="button"
-                      value="-"
-                      class="button-minus btn btn-lg "
-                      data-field="quantity"
-                    />
-                    <input
-                      type="number"
-                      step="1"
-                      max="10"
-                      value="1"
-                      name="quantity"
-                      class=" "
-                    />
-                    <input
-                      type="button"
-                      value="+"
-                      class="button-plus btn btn-lg"
-                      data-field="quantity"
-                    />
-                  </div>
-                  */}
                   <div className="input-group input-spinner">
                     <input
                       type="button"
