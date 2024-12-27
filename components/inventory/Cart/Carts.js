@@ -225,18 +225,13 @@ export default function Carts({ setActiveComponent, selectedProduce }) {
                             />
                           </div>
                         </div>
+
                         <div className="col-2 text-lg-end text-start text-md-end col-md-2">
                           <span className="fw-bold text-danger">
-                            $ $
-                            {item.originalPrice
-                              ? item.originalPrice.toFixed(2)
-                              : 'N/A'}
+                            ${calculateTotalPrice().toFixed(2)}
                           </span>
                           <div className="text-decoration-line-through text-muted small">
-                            $ $
-                            {item.originalPrice
-                              ? item.originalPrice.toFixed(2)
-                              : 'N/A'}
+                            ${calculateTotalPrice().toFixed(2)}
                           </div>
                         </div>
                       </div>
