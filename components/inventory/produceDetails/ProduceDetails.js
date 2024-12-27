@@ -292,6 +292,16 @@ export default function ProduceDetails({
                       <i className="fs-6 m-1 social-icon fa-solid fa-cart-shopping"></i>
                     </button>
                   </div>
+                  <div className="col-xxl-4 col-lg-4 col-md-5 col-5 d-grid">
+                    <button
+                      className="btn btn-sm"
+                      type="button"
+                      onClick={() => setActiveComponent('Cart')}
+                    >
+                      View Cart
+                      <i className="fs-6 m-1 social-icon fa-solid fa-cart-shopping"></i>
+                    </button>
+                  </div>
                   <div className="col-md-4 col-4">
                     <a
                       className="btn btn-sm me-1"
