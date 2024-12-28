@@ -1,6 +1,7 @@
 // Order details component
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import Image from 'next/image';
 
 export default function OrderDetails({ setActiveComponent, selectedProduce }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -98,84 +99,111 @@ export default function OrderDetails({ setActiveComponent, selectedProduce }) {
     0
   );
   return (
-    <div>
-      <ul className="list-group list-group-flush ">
-        {cartItems.length > 0 ? (
-          cartItems.map((item) => (
-            <li
-              key={item._id}
-              className="list-group-item py-3 py-lg-0 px-0 card"
-            >
-              <div className="row align-items-center">
-                <div className="col-3 col-md-2">
-                  <img
-                    src={
-                      item.image ||
-                      '../../assets/images/products/product-img-2.jpg'
-                    }
-                    alt={item.name}
-                    className="img-fluid"
-                  />
-                </div>
-                <div className="col-4 col-md-5">
-                  <a href="shop-single.html" className="text-inherit">
-                    <h6 className="mb-0">{item.name}</h6>
-                  </a>
-                  <span>
-                    <small className="text-muted">{item.weight}</small>
-                  </span>
-                  <div className="mt-2 small lh-1">
+    <div className="">
+      <div className="card shadow-sm">
+        <h5 className="px-4 py-3 mb-0 border-bottom">Order Details</h5>
+        <ul className=" card-body bg-transparent list-group list-group-flush">
+          {cartItems.length > 0 ? (
+            cartItems.map((item) => (
+              <li key={item._id} className="list-group-item px-4 py-3">
+                <div className="row align-items-center g-2">
+                  {/* Product Details */}
+                  <div className="col-6 col-md-5">
+                    <a
+                      href="shop-single.html"
+                      className="text-inherit text-truncate"
+                    >
+                      <h6 className="mb-1">{item.name}</h6>
+                    </a>
+                    <small className="text-muted d-block">{item.weight}</small>
                     <a
                       href="#!"
-                      className="text-decoration-none text-inherit"
+                      className="text-decoration-none small mt-1 d-block"
                       onClick={() => handleRemove(item._id)}
                     >
-                      <span className="me-1 align-text-bottom">
-                        <i className="fs-6 fa-solid fa-trash"></i>
-                      </span>
-                      <span className="text-muted">Remove</span>
+                      <i className="fa-solid fa-trash me-1"></i> Remove
                     </a>
                   </div>
-                </div>
-                <div className="col-3 col-md-3 col-lg-2">
-                  <div className="input-group input-spinner">
-                    <input
-                      type="button"
-                      value="-"
-                      className="button-minus btn btn-sm"
-                      onClick={() => handleQuantityChange(item._id, 'decrease')}
-                    />
-                    <input
-                      type="number"
-                      step="1"
-                      max="999"
-                      value={item.quantity}
-                      className="quantity-input"
-                      readOnly
-                    />
-                    <input
-                      type="button"
-                      value="+"
-                      className="button-plus btn btn-sm"
-                      onClick={() => handleQuantityChange(item._id, 'increase')}
-                    />
+
+                  {/* Quantity Controls */}
+                  <div className="col-4 col-md-4 d-flex justify-content-center">
+                    <div
+                      className="input-group input-spinner"
+                      style={{ maxWidth: '120px' }}
+                    >
+                      <button
+                        type="button"
+                        className="btn btn-outline-secondary btn-sm"
+                        onClick={() =>
+                          handleQuantityChange(item._id, 'decrease')
+                        }
+                      >
+                        -
+                      </button>
+                      <input
+                        type="number"
+                        step="1"
+                        max="999"
+                        value={item.quantity}
+                        className="form-control text-center px-0"
+                        style={{ width: '50px' }}
+                        readOnly
+                      />
+                      <button
+                        type="button"
+                        className="btn btn-outline-secondary btn-sm"
+                        onClick={() =>
+                          handleQuantityChange(item._id, 'increase')
+                        }
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Price */}
+                  <div className="col-2 col-md-3 text-end">
+                    <span className="fw-bold text-danger">
+                      ${calculateTotalPrice().toFixed(2)}
+                    </span>
+                    <div className="text-decoration-line-through text-muted small">
+                      ${calculateTotalPrice().toFixed(2)}
+                    </div>
                   </div>
                 </div>
-                <div className="col-2 text-lg-end text-start text-md-end col-md-2">
-                  <span className="fw-bold text-danger">
-                    ${calculateTotalPrice().toFixed(2)}
-                  </span>
-                  <div className="text-decoration-line-through text-muted small">
-                    ${calculateTotalPrice().toFixed(2)}
+
+                <li class="list-group-item px-4 py-3">
+                  <div class="d-flex align-items-center justify-content-between mb-2">
+                    <div>Item Subtotal</div>
+                    <div class="fw-bold">
+                      ${calculateTotalPrice().toFixed(2)}
+                    </div>
                   </div>
-                </div>
-              </div>
-            </li>
-          ))
-        ) : (
-          <li className="list-group-item">Your cart is empty.</li>
-        )}
-      </ul>
+                  <div class="d-flex align-items-center justify-content-between">
+                    <div>
+                      Service Fee
+                      <i
+                        class="feather-icon icon-info text-muted"
+                        data-bs-toggle="tooltip"
+                        title="Default tooltip"
+                      ></i>
+                    </div>
+                    <div class="fw-bold">$3.00 Fee waved!</div>
+                  </div>
+                </li>
+                <li class="list-group-item px-4 py-3">
+                  <div class="d-flex align-items-center justify-content-between fw-bold">
+                    <div>Subtotal</div>
+                    <div>${calculateTotalPrice().toFixed(2)}</div>
+                  </div>
+                </li>
+              </li>
+            ))
+          ) : (
+            <li className="list-group-item">Your cart is empty.</li>
+          )}
+        </ul>
+      </div>
     </div>
   );
 }
