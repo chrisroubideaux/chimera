@@ -159,7 +159,7 @@ export default function Carts({ setActiveComponent, selectedProduce }) {
                   checkout now!
                 </a>
               </div>
-              <ul className="list-group list-group-flush px-2 mx-2">
+              <ul className="list-group list-group-flush ">
                 {cartItems.length > 0 ? (
                   cartItems.map((item) => (
                     <li
@@ -225,7 +225,6 @@ export default function Carts({ setActiveComponent, selectedProduce }) {
                             />
                           </div>
                         </div>
-
                         <div className="col-2 text-lg-end text-start text-md-end col-md-2">
                           <span className="fw-bold text-danger">
                             ${calculateTotalPrice().toFixed(2)}
@@ -287,6 +286,7 @@ export default function Carts({ setActiveComponent, selectedProduce }) {
                   <button
                     className="btn btn-md d-flex justify-content-between align-items-center"
                     type="submit"
+                    onClick={() => setActiveComponent('Checkout')}
                   >
                     Go to Checkout{' '}
                     <span className="fw-bold">${totalPrice.toFixed(2)}</span>
