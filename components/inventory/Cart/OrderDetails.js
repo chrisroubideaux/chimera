@@ -102,103 +102,111 @@ export default function OrderDetails({ setActiveComponent, selectedProduce }) {
     <div className="">
       <div className="card shadow-sm">
         <h5 className="px-4 py-3 mb-0 border-bottom">Order Details</h5>
-        <ul className=" card-body bg-transparent list-group list-group-flush">
+        <ul className="list-group">
           {cartItems.length > 0 ? (
-            cartItems.map((item) => (
-              <li key={item._id} className="list-group-item px-4 py-3">
-                <div className="row align-items-center g-2">
-                  {/* Product Details */}
-                  <div className="col-6 col-md-5">
-                    <a
-                      href="shop-single.html"
-                      className="text-inherit text-truncate"
-                    >
-                      <h6 className="mb-1">{item.name}</h6>
-                    </a>
-                    <small className="text-muted d-block">{item.weight}</small>
-                    <a
-                      href="#!"
-                      className="text-decoration-none small mt-1 d-block"
-                      onClick={() => handleRemove(item._id)}
-                    >
-                      <i className="fa-solid fa-trash me-1"></i> Remove
-                    </a>
-                  </div>
+            <>
+              {cartItems.map((item) => (
+                <li key={item._id} className="list-group-item px-4 py-3">
+                  <div className="row align-items-center g-2">
+                    {/* Product Details */}
+                    <div className="col-6 col-md-5">
+                      <a
+                        href="shop-single.html"
+                        className="text-inherit text-truncate"
+                      >
+                        <h6 className="mb-1">{item.name}</h6>
+                      </a>
+                      <small className="text-muted d-block">
+                        {item.weight}
+                      </small>
+                      <a
+                        href="#!"
+                        className="text-decoration-none small mt-1 d-block"
+                        onClick={() => handleRemove(item._id)}
+                      >
+                        <i className="fa-solid fa-trash me-1"></i> Remove
+                      </a>
+                    </div>
 
-                  {/* Quantity Controls */}
-                  <div className="col-4 col-md-4 d-flex justify-content-center">
-                    <div
-                      className="input-group input-spinner"
-                      style={{ maxWidth: '120px' }}
-                    >
-                      <button
-                        type="button"
-                        className="btn btn-outline-secondary btn-sm"
-                        onClick={() =>
-                          handleQuantityChange(item._id, 'decrease')
-                        }
+                    {/* Quantity Controls */}
+                    <div className="col-4 col-md-4 d-flex justify-content-center">
+                      <div
+                        className="input-group input-spinner"
+                        style={{ maxWidth: '120px' }}
                       >
-                        -
-                      </button>
-                      <input
-                        type="number"
-                        step="1"
-                        max="999"
-                        value={item.quantity}
-                        className="form-control text-center px-0"
-                        style={{ width: '50px' }}
-                        readOnly
-                      />
-                      <button
-                        type="button"
-                        className="btn btn-outline-secondary btn-sm"
-                        onClick={() =>
-                          handleQuantityChange(item._id, 'increase')
-                        }
-                      >
-                        +
-                      </button>
+                        <button
+                          type="button"
+                          className="btn btn-outline-secondary btn-sm"
+                          onClick={() =>
+                            handleQuantityChange(item._id, 'decrease')
+                          }
+                        >
+                          -
+                        </button>
+                        <input
+                          type="number"
+                          step="1"
+                          max="999"
+                          value={item.quantity}
+                          className="form-control text-center px-0"
+                          style={{ width: '50px' }}
+                          readOnly
+                        />
+                        <button
+                          type="button"
+                          className="btn btn-outline-secondary btn-sm"
+                          onClick={() =>
+                            handleQuantityChange(item._id, 'increase')
+                          }
+                        >
+                          +
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Price */}
+                    <div className="col-2 col-md-3 text-end">
+                      <span className="fw-bold text-danger">
+                        ${(item.price * item.quantity).toFixed(2)}
+                      </span>
+                      {item.originalPrice &&
+                        item.originalPrice > item.price && (
+                          <div className="text-decoration-line-through text-muted small">
+                            ${item.originalPrice.toFixed(2)}
+                          </div>
+                        )}
                     </div>
                   </div>
+                </li>
+              ))}
 
-                  {/* Price */}
-                  <div className="col-2 col-md-3 text-end">
-                    <span className="fw-bold text-danger">
-                      ${calculateTotalPrice().toFixed(2)}
-                    </span>
-                    <div className="text-decoration-line-through text-muted small">
-                      ${calculateTotalPrice().toFixed(2)}
-                    </div>
+              {/* Subtotals and Fees */}
+              <li className="list-group-item px-4 py-3">
+                <div className="d-flex align-items-center justify-content-between mb-2">
+                  <div>Item Subtotal</div>
+                  <div className="fw-bold">
+                    ${calculateTotalPrice().toFixed(2)}
                   </div>
                 </div>
-
-                <li class="list-group-item px-4 py-3">
-                  <div class="d-flex align-items-center justify-content-between mb-2">
-                    <div>Item Subtotal</div>
-                    <div class="fw-bold">
-                      ${calculateTotalPrice().toFixed(2)}
-                    </div>
+                <div className="d-flex align-items-center justify-content-between">
+                  <div>
+                    Service Fee
+                    <i
+                      className="feather-icon icon-info text-muted"
+                      data-bs-toggle="tooltip"
+                      title="Default tooltip"
+                    ></i>
                   </div>
-                  <div class="d-flex align-items-center justify-content-between">
-                    <div>
-                      Service Fee
-                      <i
-                        class="feather-icon icon-info text-muted"
-                        data-bs-toggle="tooltip"
-                        title="Default tooltip"
-                      ></i>
-                    </div>
-                    <div class="fw-bold">$3.00 Fee waved!</div>
-                  </div>
-                </li>
-                <li class="list-group-item px-4 py-3">
-                  <div class="d-flex align-items-center justify-content-between fw-bold">
-                    <div>Subtotal</div>
-                    <div>${calculateTotalPrice().toFixed(2)}</div>
-                  </div>
-                </li>
+                  <div className="fw-bold">$3.00 Fee waved!</div>
+                </div>
               </li>
-            ))
+              <li className="list-group-item px-4 py-3">
+                <div className="d-flex align-items-center justify-content-between fw-bold">
+                  <div>Subtotal</div>
+                  <div>${calculateTotalPrice().toFixed(2)}</div>
+                </div>
+              </li>
+            </>
           ) : (
             <li className="list-group-item">Your cart is empty.</li>
           )}
