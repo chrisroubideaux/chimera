@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Success = ({ cartItems = [], totalPrice, paymentIntentId }) => {
   const today = new Date();
   const formattedDate = today.toLocaleDateString();
@@ -33,8 +31,10 @@ const Success = ({ cartItems = [], totalPrice, paymentIntentId }) => {
                 <tr key={index}>
                   <td>{item.name}</td>
                   <td>{item.quantity}</td>
-                  <td>${item.price.toFixed(2)}</td>
-                  <td>${(item.quantity * item.price).toFixed(2)}</td>
+                  <td>${parseFloat(item.price || 0).toFixed(2)}</td>
+                  <td>
+                    ${parseFloat(item.quantity * (item.price || 0)).toFixed(2)}
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -44,7 +44,7 @@ const Success = ({ cartItems = [], totalPrice, paymentIntentId }) => {
                   <strong>Grand Total</strong>
                 </td>
                 <td>
-                  <strong>${totalPrice.toFixed(2)}</strong>
+                  <strong>${parseFloat(totalPrice || 0).toFixed(2)}</strong>
                 </td>
               </tr>
             </tfoot>

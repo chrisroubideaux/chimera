@@ -1,12 +1,12 @@
-// Payment component
 import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
 import { useState } from 'react';
+import Success from './Success'; // Import the Success component
 
 export default function Payments({ cartItems = [] }) {
   const stripe = useStripe();
   const elements = useElements();
   const [isProcessing, setIsProcessing] = useState(false);
-  const [paymentSuccess, setPaymentSuccess] = useState(false);
+  const [activeComponent, setActiveComponent] = useState('Payment'); // State to manage active component
 
   const calculateTotalPrice = () => {
     if (!cartItems || cartItems.length === 0) return 0;
@@ -47,11 +47,15 @@ export default function Payments({ cartItems = [] }) {
       alert(paymentMethodRequest.error.message);
     } else {
       if (paymentMethodRequest.paymentIntent.status === 'succeeded') {
-        setPaymentSuccess(true);
         setIsProcessing(false);
+        setActiveComponent('Success'); // Switch to Success component on success
       }
     }
   };
+
+  if (activeComponent === 'Success') {
+    return <Success cartItems={cartItems} totalPrice={totalPrice.toFixed(2)} />;
+  }
 
   return (
     <div className="container mt-3">
@@ -132,7 +136,7 @@ export default function Payments({ cartItems = [] }) {
             type="submit"
             className="btn btn-primary ms-2"
             onClick={handlePayment}
-            disabled={isProcessing || paymentSuccess}
+            disabled={isProcessing}
           >
             {isProcessing ? 'Processing...' : 'PAY'}
           </button>
@@ -142,12 +146,6 @@ export default function Payments({ cartItems = [] }) {
           {/* This should show the correct total */}
         </div>
       </div>
-
-      {paymentSuccess && (
-        <div className="alert alert-success mt-3" role="alert">
-          Payment was successful! Thank you for your purchase.
-        </div>
-      )}
     </div>
   );
 }

@@ -19,6 +19,7 @@ import Carts from '@/components/inventory/Cart/Carts';
 import Checkout from '@/components/inventory/Cart/Checkout';
 import OrderDetails from '@/components/inventory/Cart/OrderDetails';
 import Payments from '@/components/inventory/Cart/Payments';
+import Success from '@/components/inventory/Cart/Success';
 
 // data imports
 export default function InventoryDashboard() {
@@ -179,6 +180,14 @@ export default function InventoryDashboard() {
       case 'Payments':
         return (
           <Payments
+            setActiveComponent={setActiveComponent}
+            produce={produce}
+            selectedProduce={selectedProduce}
+          />
+        );
+      case 'Success':
+        return (
+          <Success
             setActiveComponent={setActiveComponent}
             produce={produce}
             selectedProduce={selectedProduce}
