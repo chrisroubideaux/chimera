@@ -18,6 +18,7 @@ import ProduceDetails from '@/components/inventory/produceDetails/ProduceDetails
 import Carts from '@/components/inventory/Cart/Carts';
 import Checkout from '@/components/inventory/Cart/Checkout';
 import OrderDetails from '@/components/inventory/Cart/OrderDetails';
+import Payments from '@/components/inventory/Cart/Payments';
 
 // data imports
 export default function InventoryDashboard() {
@@ -175,6 +176,14 @@ export default function InventoryDashboard() {
             selectedProduce={selectedProduce}
           />
         );
+      case 'Payments':
+        return (
+          <Payments
+            setActiveComponent={setActiveComponent}
+            produce={produce}
+            selectedProduce={selectedProduce}
+          />
+        );
 
       default:
         return (
@@ -204,68 +213,42 @@ export default function InventoryDashboard() {
       </Head>
       <div className="layout h-100">
         <Navbar />
-        {/*
-        {activeComponent !== 'ProduceDetails' && activeComponent !== 'Cart' && (
-          <Tab setActiveComponent={setActiveComponent} />
-        )}
-          */}
+
         {activeComponent !== 'ProduceDetails' &&
           activeComponent !== 'Cart' &&
-          activeComponent !== 'Checkout' && (
+          activeComponent !== 'Checkout' &&
+          activeComponent !== 'Payments' && (
             <Tab setActiveComponent={setActiveComponent} />
           )}
 
         <div className="container-fluid ">
           <div className="row">
             <div className="col-lg-4 col-xxl-3">
-              {/*}
-              {activeComponent !== 'ProduceDetails' &&
-                activeComponent !== 'Cart' && (
-                  <div className="pt-4">
-                    <Totals />
-                  </div>
-                )}
-                  */}
               {activeComponent !== 'ProduceDetails' &&
                 activeComponent !== 'Cart' &&
-                activeComponent !== 'Checkout' && (
+                activeComponent !== 'Checkout' &&
+                activeComponent !== 'Payments' && (
                   <div className="pt-4">
                     <Totals />
                   </div>
                 )}
             </div>
-            {/*
-            <div
-              className={`col-lg-${
-                activeComponent === 'ProduceDetails' ||
-                activeComponent === 'Cart' ||
-                activeComponent === 'Checkout'
-                  ? '12'
-                  : '8'
-              } col-xxl-${
-                activeComponent === 'ProduceDetails' ||
-                activeComponent === 'Cart' ||
-                activeComponent === 'Checkout'
-                  ? '5'
-                  : '6'
-              }`}
-            >
-              <div className="mt-4">{renderComponent()}</div>
-            </div>
-            */}
+
             <div
               className={`col-lg-${
                 activeComponent === 'ProduceDetails' ||
                 activeComponent === 'Cart' ||
                 activeComponent === 'Checkout' ||
-                activeComponent === 'OrderDetails'
+                activeComponent === 'OrderDetails' ||
+                activeComponent === 'Payments'
                   ? '12'
                   : '8'
               } col-xxl-${
                 activeComponent === 'ProduceDetails' ||
                 activeComponent === 'Cart' ||
                 activeComponent === 'Checkout' ||
-                activeComponent === 'OrderDetails'
+                activeComponent === 'OrderDetails' ||
+                activeComponent === 'Payments'
                   ? '5'
                   : '6'
               }`}

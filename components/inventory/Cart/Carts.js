@@ -335,6 +335,7 @@ export default function Carts({ setActiveComponent, selectedProduce }) {
     </div>
   );
 }
+
 {
   /*
 import { useState, useEffect } from 'react';

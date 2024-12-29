@@ -9,6 +9,7 @@ const MongoStore = require('connect-mongo');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const cors = require('cors');
 const passport = require('passport');
+
 // auth routes
 const employeeRoutes = require('./employees/employees');
 const adminRoutes = require('./admin/admins');
@@ -29,6 +30,8 @@ const drinkRoutes = require('./drinks/drinks');
 const linenRoutes = require('./linens/linens');
 const dryGoodRoutes = require('./dryGoods/dryGoods');
 const paperProductRoutes = require('./paperProducts/paperProducts');
+// Import payments route
+const paymentsRoute = require('./stripe/payments');
 
 require('./routes/facebookConfig');
 require('dotenv').config();
@@ -154,6 +157,8 @@ app.use('/meetings', meetingRoutes);
 app.use('/timeOff', timeOffRoutes);
 app.use('/users', userRoutes);
 app.use('/auth', authRoutes);
+// Mount payments route
+app.use('/payments', paymentsRoute);
 
 app.get('/admins/:id', (req, res) => {
   const { id } = req.params;
@@ -198,7 +203,7 @@ app.get(
   passport.authenticate('facebook', { scope: ['email'] })
 );
 
-// Facebook OAuth callback route (Updated to handle dynamic redirect)
+// Facebook OAuth callback route
 app.get(
   '/auth/facebook/callback',
   passport.authenticate('facebook', { failureRedirect: '/' }),
