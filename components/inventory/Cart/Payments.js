@@ -1,12 +1,12 @@
 import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
 import { useState } from 'react';
-import Success from './Success'; // Import the Success component
+import Success from './Success';
 
 export default function Payments({ cartItems = [] }) {
   const stripe = useStripe();
   const elements = useElements();
   const [isProcessing, setIsProcessing] = useState(false);
-  const [activeComponent, setActiveComponent] = useState('Payment'); // State to manage active component
+  const [activeComponent, setActiveComponent] = useState('Payment');
 
   const calculateTotalPrice = () => {
     if (!cartItems || cartItems.length === 0) return 0;
@@ -48,13 +48,19 @@ export default function Payments({ cartItems = [] }) {
     } else {
       if (paymentMethodRequest.paymentIntent.status === 'succeeded') {
         setIsProcessing(false);
-        setActiveComponent('Success'); // Switch to Success component on success
+        setActiveComponent('Success');
       }
     }
   };
 
   if (activeComponent === 'Success') {
-    return <Success cartItems={cartItems} totalPrice={totalPrice.toFixed(2)} />;
+    return (
+      <Success
+        setActiveComponent
+        cartItems={cartItems}
+        totalPrice={totalPrice.toFixed(2)}
+      />
+    );
   }
 
   return (

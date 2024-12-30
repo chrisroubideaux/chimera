@@ -1,6 +1,7 @@
 // Produce details component
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import Image from 'next/image';
 
 export default function ProduceDetails({
   setActiveComponent,
@@ -172,32 +173,40 @@ export default function ProduceDetails({
                   <div className="thumbnails row g-3" id="productThumbnails">
                     <div className="col-3">
                       <div className="thumbnail">
-                        <img
+                        <Image
                           src={produce.image || ''}
+                          weight={20}
+                          height={20}
                           alt={produce.name || 'Produce'}
                         />
                       </div>
                     </div>
                     <div className="col-3">
                       <div className="thumbnail">
-                        <img
+                        <Image
                           src={produce.image || ''}
+                          weight={20}
+                          height={20}
                           alt={produce.name || 'Produce'}
                         />
                       </div>
                     </div>
                     <div className="col-3">
                       <div className="thumbnail">
-                        <img
+                        <Image
                           src={produce.image || ''}
+                          weight={20}
+                          height={20}
                           alt={produce.name || 'Produce'}
                         />
                       </div>
                     </div>
                     <div className="col-3">
                       <div className="thumbnail">
-                        <img
+                        <Image
                           src={produce.image || ''}
+                          weight={20}
+                          height={20}
                           alt={produce.name || 'Produce'}
                         />
                       </div>
@@ -296,12 +305,24 @@ export default function ProduceDetails({
                     <button
                       className="btn btn-sm"
                       type="button"
+                      onClick={() => setActiveComponent('Produce')}
+                    >
+                      Inventory
+                      <i className="fs-6 m-1 social-icon fa-solid fa-chart-simple"></i>
+                    </button>
+                  </div>
+
+                  <div className="col-xxl-4 col-lg-4 col-md-5 col-5 d-grid">
+                    <button
+                      className="btn btn-sm"
+                      type="button"
                       onClick={() => setActiveComponent('Cart')}
                     >
                       View Cart
                       <i className="fs-6 m-1 social-icon fa-solid fa-cart-shopping"></i>
                     </button>
                   </div>
+                  {/*
                   <div className="col-md-4 col-4">
                     <a
                       className="btn btn-sm me-1"
@@ -322,6 +343,7 @@ export default function ProduceDetails({
                       <i class="fa-solid fa-heart"></i>
                     </a>
                   </div>
+                  */}
                 </div>
                 <hr className="my-6" />
                 <div>

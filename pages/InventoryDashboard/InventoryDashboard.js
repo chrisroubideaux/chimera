@@ -236,7 +236,8 @@ export default function InventoryDashboard() {
               {activeComponent !== 'ProduceDetails' &&
                 activeComponent !== 'Cart' &&
                 activeComponent !== 'Checkout' &&
-                activeComponent !== 'Payments' && (
+                activeComponent !== 'Payments' &&
+                activeComponent !== 'Success' && (
                   <div className="pt-4">
                     <Totals />
                   </div>
@@ -249,7 +250,8 @@ export default function InventoryDashboard() {
                 activeComponent === 'Cart' ||
                 activeComponent === 'Checkout' ||
                 activeComponent === 'OrderDetails' ||
-                activeComponent === 'Payments'
+                activeComponent === 'Payments' ||
+                activeComponent === 'Success'
                   ? '12'
                   : '8'
               } col-xxl-${
@@ -257,7 +259,8 @@ export default function InventoryDashboard() {
                 activeComponent === 'Cart' ||
                 activeComponent === 'Checkout' ||
                 activeComponent === 'OrderDetails' ||
-                activeComponent === 'Payments'
+                activeComponent === 'Payments' ||
+                activeComponent === 'Success'
                   ? '5'
                   : '6'
               }`}

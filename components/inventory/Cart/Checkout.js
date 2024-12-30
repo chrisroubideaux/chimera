@@ -187,13 +187,13 @@ export default function Checkout({ setActiveComponent, selectedProduce }) {
                   </label>
                 </div>
                 <address>
-                  <strong>Jitu Chauhan</strong>
+                  <strong>Admin Name</strong>
                   <br />
-                  4450 North Avenue Oakland,
+                  87209 Galaxy Lane,
                   <br />
-                  Nebraska, United States,
+                  Mid West, United States,
                   <br />
-                  <abbr title="Phone">P: 402-776-1106</abbr>
+                  <abbr title="Phone">P: 555-555-5555</abbr>
                 </address>
                 <span className="text-danger">Default address</span>
               </div>

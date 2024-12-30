@@ -121,7 +121,7 @@ export default function OrderDetails({ setActiveComponent, selectedProduce }) {
                     </div>
 
                     <div className="col-2 col-md-3 text-end">
-                      <span className="fw-bold text-danger">
+                      <span className="fw-bold">
                         ${(item.price * item.quantity).toFixed(2)}
                       </span>
                       {item.originalPrice &&
