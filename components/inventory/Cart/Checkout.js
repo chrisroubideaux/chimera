@@ -9,8 +9,12 @@ export default function Checkout({ setActiveComponent, selectedProduce }) {
   const [produce, setProduce] = useState(selectedProduce);
   const [quantity, setQuantity] = useState(1);
   const [cartCount, setCartCount] = useState(0);
-  const [cartItems, setCartItems] = useState([]);
+  // const [cartItems, setCartItems] = useState([]);
   const [paymentCompleted, setPaymentCompleted] = useState(false);
+
+  const [cartItems, setCartItems] = useState(
+    JSON.parse(localStorage.getItem('cart')) || []
+  );
 
   useEffect(() => {
     const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -140,6 +144,14 @@ export default function Checkout({ setActiveComponent, selectedProduce }) {
               title="View Cart"
               onClick={() => setActiveComponent('Cart')}
             >
+              {/*
+              <i className="fs-5 social-icon fa-solid fa-cart-shopping"></i>
+              {cartCount > 0 && (
+                <span className="badge bg-soft-dark text-dark rounded-pill nav-link-badge">
+                  {cartCount}
+                </span>
+              )}
+                */}
               <i className="fs-5 social-icon fa-solid fa-cart-shopping"></i>
               {cartCount > 0 && (
                 <span className="badge bg-soft-dark text-dark rounded-pill nav-link-badge">
@@ -214,7 +226,11 @@ export default function Checkout({ setActiveComponent, selectedProduce }) {
           </div>
 
           <div className="col-md-12 offset-xl-1 col-xl-4 col-lg-6">
-            <OrderDetails setActiveComponent={setActiveComponent} />
+            <OrderDetails
+              setActiveComponent={setActiveComponent}
+              cartItems={cartItems}
+              setCartItems={setCartItems}
+            />
           </div>
 
           <div className="mt-5">
@@ -222,6 +238,7 @@ export default function Checkout({ setActiveComponent, selectedProduce }) {
               totalPrice={totalPrice}
               handlePaymentSuccess={handlePaymentSuccess}
               cartItems={cartItems}
+              setCartItems={setCartItems}
             />
           </div>
         </div>

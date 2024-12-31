@@ -10,9 +10,9 @@ import '@/styles/modal.css';
 import '@/styles/avatar.css';
 
 import { ParallaxProvider } from 'react-scroll-parallax';
-
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
+
 const stripePromise = loadStripe(
   'pk_test_51Qb82oDLzhvS0Smdn5yKUj8lhVkiauO93UntG4cQ1BK13Xnsb4x187XXIkuvgKQ3ATkNliEPlSgVEyGCzYKKazJ400QOYzqhYH'
 );

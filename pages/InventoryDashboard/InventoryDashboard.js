@@ -21,7 +21,6 @@ import OrderDetails from '@/components/inventory/Cart/OrderDetails';
 import Payments from '@/components/inventory/Cart/Payments';
 import Success from '@/components/inventory/Cart/Success';
 
-// data imports
 export default function InventoryDashboard() {
   const [activeComponent, setActiveComponent] = useState('Inventory');
   // const [admins, setAdmins] = useState([]);
@@ -81,6 +80,7 @@ export default function InventoryDashboard() {
         console.error('Error fetching linens items:', error);
       });
   }, []);
+
   // beverage inventory
   useEffect(() => {
     axios
@@ -92,6 +92,7 @@ export default function InventoryDashboard() {
         console.error('Error fetching beverage items:', error);
       });
   }, []);
+
   // dry goods inventory
   useEffect(() => {
     axios
@@ -103,6 +104,7 @@ export default function InventoryDashboard() {
         console.error('Error fetching dry good items:', error);
       });
   }, []);
+
   // paper products inventory
   useEffect(() => {
     axios
@@ -229,7 +231,6 @@ export default function InventoryDashboard() {
           activeComponent !== 'Payments' && (
             <Tab setActiveComponent={setActiveComponent} />
           )}
-
         <div className="container-fluid ">
           <div className="row">
             <div className="col-lg-4 col-xxl-3">
@@ -243,7 +244,6 @@ export default function InventoryDashboard() {
                   </div>
                 )}
             </div>
-
             <div
               className={`col-lg-${
                 activeComponent === 'ProduceDetails' ||
