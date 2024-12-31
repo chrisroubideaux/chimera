@@ -82,7 +82,8 @@ export default function ProduceDetails({
     const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
     setCartCount(totalItems);
   };
-
+  {
+    /*
   const handleAddToCart = () => {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     const existingItem = cart.find((item) => item._id === produce._id);
@@ -94,6 +95,45 @@ export default function ProduceDetails({
     localStorage.setItem('cart', JSON.stringify(cart));
     updateCartCount();
     alert('Item added to cart');
+  };
+*/
+  }
+  const handleAddToCart = (e) => {
+    e.preventDefault();
+
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const existingItem = cart.find((item) => item._id === produce._id);
+    if (existingItem) {
+      existingItem.quantity += quantity;
+    } else {
+      cart.push({ ...produce, quantity });
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartCount();
+
+    // Create a Bootstrap alert
+    const alertDiv = document.createElement('div');
+    alertDiv.className = 'alert alert-success alert-dismissible fade show';
+    alertDiv.role = 'alert';
+    alertDiv.innerText = 'Item added to the cart successfully!';
+
+    // Add close button to alert
+    const closeButton = document.createElement('button');
+    closeButton.type = 'button';
+    closeButton.className = 'btn-close';
+    closeButton.setAttribute('data-bs-dismiss', 'alert');
+    closeButton.setAttribute('aria-label', 'Close');
+    alertDiv.appendChild(closeButton);
+
+    // Append alert to the body or a specific container
+    const alertContainer =
+      document.getElementById('alert-container') || document.body;
+    alertContainer.appendChild(alertDiv);
+
+    // Automatically remove alert after 3 seconds
+    setTimeout(() => {
+      alertDiv.remove();
+    }, 3000);
   };
 
   // Calculate total price
@@ -310,6 +350,7 @@ export default function ProduceDetails({
                       Inventory
                       <i className="fs-6 m-1 social-icon fa-solid fa-chart-simple"></i>
                     </button>
+                    <div id="alert-container"></div>
                   </div>
 
                   <div className="col-xxl-4 col-lg-4 col-md-5 col-5 d-grid">
