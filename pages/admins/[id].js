@@ -113,6 +113,9 @@ export default function Admin({}) {
 
     fetchTimeOffRequests();
   }, []);
+
+  // Render componets
+
   const renderComponent = () => {
     console.log('Admin data for Bio:', admin);
     switch (activeComponent) {

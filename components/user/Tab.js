@@ -1,5 +1,7 @@
 // Breadcrumb component
 
+import Link from 'next/link';
+
 export default function Tab({ setActiveComponent, users }) {
   return (
     <div className="mt-2">
@@ -19,9 +21,16 @@ export default function Tab({ setActiveComponent, users }) {
               </ol>
             </nav>
           </div>
-
           <div className="col-auto">
             <div className="d-none d-lg-block">
+              <a
+                className="btn btn-soft-light btn-sm m-1"
+                href="#"
+                onClick={() => setActiveComponent('TimeOff')}
+              >
+                Time off
+                <i className=" m-1 fa-solid fa-book"></i>
+              </a>
               <a
                 className="btn btn-soft-light btn-sm m-1"
                 href="#"
@@ -33,15 +42,16 @@ export default function Tab({ setActiveComponent, users }) {
                   1
                 </span>
               </a>
-
+              {/*
               <a
                 className="btn btn-soft-light btn-sm m-1"
                 href="#"
                 onClick={() => setActiveComponent('Messages')}
               >
                 Messages
-                <i className="m-1 fa-solid fa-message fs-sm"></i>
+                <i className=" m-1 fa-solid fa-message"></i>
               </a>
+              */}
               <a
                 className="btn btn-soft-light btn-sm m-1"
                 href="#"
@@ -52,22 +62,6 @@ export default function Tab({ setActiveComponent, users }) {
               </a>
             </div>
           </div>
-          <button
-            className="navbar-toggler d-lg-none"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#sidebarNav"
-            aria-controls="sidebarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-default">
-              <i className="fs-6 fa-solid fa-list"></i>
-            </span>
-            <span className="navbar-toggler-toggled">
-              <i className="fs-6 fa-solid fa-x"></i>
-            </span>
-          </button>
         </div>
       </div>
     </div>

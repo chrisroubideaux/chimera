@@ -46,7 +46,27 @@ export default function Sidebar({ setActiveComponent, users }) {
                   <i className="fs-6 fa-solid fa-person"></i> Bio
                 </a>
               </li>
-              <li className="nav-item"></li>
+              <li className="nav-item">
+                <Link className="nav-link" href="/dashboard/dashboard">
+                  <i className="fs-6 fa-solid fa-money-bill"></i> Sales
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  className="nav-link"
+                  href="/ProductDashboard/ProductDashboard"
+                >
+                  <i className="fs-6 fa-solid fa-shop"></i> Products
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  className="nav-link"
+                  href="/InventoryDashboard/InventoryDashboard"
+                >
+                  <i className="fs-6 fa-solid fa-list-check "></i> Inventory
+                </Link>
+              </li>
               <li className="nav-item">
                 <a
                   className="nav-link"
@@ -56,7 +76,7 @@ export default function Sidebar({ setActiveComponent, users }) {
                   <i className="fs-6 fa-solid fa-shield"></i> Security
                 </a>
               </li>
-              <li className="nav-item"></li>
+
               <li className="nav-item">
                 <Link className="nav-link" href="/" onClick={handleLogout}>
                   <i className="fs-6 fa-solid fa-person-walking"></i> Log out

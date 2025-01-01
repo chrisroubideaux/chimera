@@ -8,12 +8,6 @@ import Photo from '@/components/team/Photo';
 import Bio from '@/components/team/Bio';
 import Nav from '@/components/team/Nav';
 import Footer from '@/components/Nav/Footer';
-//import Hosts from '@/components/team/Hosts';
-//import Servers from '@/components/team/Servers';
-//import Bar from '@/components/team/Bar';
-//import Dish from '@/components/team/Dish';
-//import Kitchen from '@/components/team/Kitchen';
-//import Managers from '@/components/team/Managers';
 
 export default function Team() {
   const router = useRouter();

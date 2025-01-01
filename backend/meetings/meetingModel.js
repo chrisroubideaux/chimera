@@ -16,12 +16,12 @@ const meetingSchema = new mongoose.Schema({
   senderModel: {
     type: String,
     required: true,
-    enum: ['Admin', 'Employee'],
+    enum: ['Admin', 'Employee', 'User'],
   },
   recipientModel: {
     type: String,
     required: true,
-    enum: ['Admin', 'Employee'],
+    enum: ['Admin', 'Employee', 'User'],
   },
 
   meetingType: {

@@ -203,21 +203,32 @@ const updateMessageStatus = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
-
-// Function to delete a message
-const deleteMessageById = async (req, res) => {
+// Delete message by id
+const deleteMessage = async (req, res) => {
   try {
     const { messageId } = req.params;
 
-    const deletedMessage = await Message.findByIdAndRemove(messageId);
+    // Validate ObjectId
+    if (!mongoose.Types.ObjectId.isValid(messageId)) {
+      console.error('Invalid ObjectId:', messageId);
+      return res.status(400).json({ error: 'Invalid Message ID' });
+    }
+
+    console.log('Attempting to delete message with ID:', messageId);
+
+    const deletedMessage = await Message.findOneAndDelete({ _id: messageId });
 
     if (!deletedMessage) {
+      console.log('Message not found for ID:', messageId);
       return res.status(404).json({ error: 'Message not found' });
     }
 
+    console.log('Message deleted successfully:', deletedMessage);
+
     res.status(200).json({ message: 'Message deleted successfully' });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    console.error('Error deleting message:', err);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 };
 
@@ -226,7 +237,7 @@ module.exports = {
   getAllMessages,
   getMessagesForUser,
   updateMessageStatus,
-  deleteMessageById,
+  deleteMessage,
 };
 
 {

@@ -43,9 +43,12 @@ export default function Carts({ setActiveComponent, selectedProduce }) {
     e.preventDefault();
     try {
       const id = produce._id;
-      await axios.put(`http://localhost:3001/produce/${id}`, produce);
+      await axios.put(
+        `https://chimera-h56c.onrender.com/produce/${id}`,
+        produce
+      );
       const updatedProduce = await axios.get(
-        `http://localhost:3001/produce/${id}`
+        `https://chimera-h56c.onrender.com/produce/${id}`
       );
       setProduce(updatedProduce.data);
       setIsEditing(false);

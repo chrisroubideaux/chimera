@@ -1,4 +1,5 @@
 // Payment component
+
 import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
 import { useState } from 'react';
 import Success from './Success';
@@ -23,7 +24,7 @@ export default function Payments({ cartItems = [] }) {
     setIsProcessing(true);
 
     const response = await fetch(
-      'http://localhost:3001/payments/create-payment-intent',
+      'https://chimera-h56c.onrender.com/payments/create-payment-intent',
       {
         method: 'POST',
         headers: {
@@ -71,6 +72,7 @@ export default function Payments({ cartItems = [] }) {
       <div className=" container mt-3">
         <h1>Payment method</h1>
         <h6>For demo purposes only</h6>
+        Enter test cc # 4242 4242 4242 4242 for Exp: 55555
         <div class="card card-bordered shadow-none mb-2 mt-2">
           <div class="card-body p-6">
             <div class="d-flex">
@@ -93,7 +95,6 @@ export default function Payments({ cartItems = [] }) {
             </div>
           </div>
         </div>
-
         <div class="card card-bordered shadow-none mb-2">
           <div class="card-body p-6">
             <div class="d-flex mb-4">

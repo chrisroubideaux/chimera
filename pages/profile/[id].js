@@ -97,7 +97,7 @@ export default function Profile() {
 
   useEffect(() => {
     axios
-      .get('http://localhost:3001/meetings')
+      .get('https://chimera-h56c.onrender.com/meetings')
       .then((response) => {
         setMeeting(response.data);
       })
@@ -111,7 +111,7 @@ export default function Profile() {
       const fetchTimeOffRequests = async () => {
         try {
           const response = await axios.get(
-            `http://localhost:3001/timeOff/${id}`
+            `https://chimera-h56c.onrender.com/timeOff/${id}`
           );
           setTimeOffRequests(response.data);
           console.log('Time-off data:', response.data);

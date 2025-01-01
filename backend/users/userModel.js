@@ -1,6 +1,19 @@
 // user schema
 const mongoose = require('mongoose');
 
+const timeOffRequestSchema = new mongoose.Schema({
+  employeeId: { type: mongoose.Schema.Types.ObjectId, ref: 'Employee' },
+  startDate: Date,
+  endDate: Date,
+  reason: String,
+  status: {
+    type: String,
+    enum: ['pending', 'approved', 'denied'],
+    default: 'pending',
+  },
+  requestDate: { type: Date, default: Date.now },
+});
+
 const userSchema = new mongoose.Schema(
   {
     googleId: String,
@@ -26,6 +39,7 @@ const userSchema = new mongoose.Schema(
     wage: Number,
     emergencyContact1: String,
     emergencyContact2: String,
+    timeOffRequests: [timeOffRequestSchema],
   },
   {
     timestamps: true,

@@ -1,6 +1,6 @@
 // Order details component
 import { useState, useEffect } from 'react';
-import Success from './Success';
+
 export default function OrderDetails({ setActiveComponent, selectedProduce }) {
   const [cartItems, setCartItems] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);

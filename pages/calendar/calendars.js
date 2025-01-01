@@ -37,6 +37,8 @@ export default function Calendars() {
       });
   }, []);
 
+  ///
+
   const renderComponent = () => {
     switch (activeComponent) {
       case 'Week':
@@ -74,7 +76,9 @@ export default function Calendars() {
         );
     }
   };
+  //
 
+  //
   return (
     <>
       <Head>

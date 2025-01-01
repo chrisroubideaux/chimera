@@ -23,8 +23,8 @@ export default function CreateEvent({ meetings }) {
 
   const handleSubmit = async () => {
     const newMeeting = {
-      senderId: '66feb2d7bfdb4d747e58bcb9',
-      senderModel: 'Admin',
+      senderId: '6755d87bd989d108bb273b59',
+      senderModel: 'User',
       recipientIds: [invitee],
       recipientModel: 'Employee',
       isVideo: true,

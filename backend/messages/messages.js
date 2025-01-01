@@ -7,7 +7,7 @@ const {
   getAllMessages,
   getMessagesForUser,
   updateMessageStatus,
-  deleteMessageById,
+  deleteMessage,
 } = require('./messageController');
 
 // Create a new message
@@ -20,6 +20,6 @@ messageRoutes.get('/:userId', getMessagesForUser);
 messageRoutes.put('/:id', updateMessageStatus);
 
 // Delete an existing message by ID
-messageRoutes.delete('/:id', deleteMessageById);
+messageRoutes.delete('/:id', deleteMessage);
 
 module.exports = messageRoutes;
