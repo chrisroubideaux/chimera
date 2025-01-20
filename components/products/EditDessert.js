@@ -33,11 +33,14 @@ export default function EditForms({ setActiveComponent, selectedDessert }) {
     e.preventDefault();
     try {
       const id = dessert._id;
-      await axios.put(`http://localhost:3001/desserts/${id}`, dessert);
+      await axios.put(
+        `https://chimera-h56c.onrender.com/desserts/${id}`,
+        dessert
+      );
       console.log(' data updated successfully');
 
       const updatedDessert = await axios.get(
-        `http://localhost:3001/desserts/${id}`
+        `https://chimera-h56c.onrender.com/desserts/${id}`
       );
       setDessert(updatedDessert.data);
       setIsEditing(false);

@@ -33,11 +33,14 @@ export default function EditForms({ setActiveComponent, selectedStarter }) {
     e.preventDefault();
     try {
       const id = starter._id;
-      await axios.put(`http://localhost:3001/starters/${id}`, starter);
+      await axios.put(
+        `https://chimera-h56c.onrender.com/starters/${id}`,
+        starter
+      );
       console.log('Appetizer data updated successfully');
 
       const updatedStarter = await axios.get(
-        `http://localhost:3001/starters/${id}`
+        `https://chimera-h56c.onrender.com/starters/${id}`
       );
       setStarter(updatedStarter.data);
       setIsEditing(false);
